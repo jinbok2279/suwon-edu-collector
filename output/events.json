@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-11 22:19:21",
+ "updated_at": "2026-10-12 06:32:36",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -16,21 +16,6 @@
    "src": "swcf",
    "link": "https://www.swcf.or.kr/?p=29_view&idx=2970&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
    "book": ""
-  },
-  {
-   "id": "KPF298624",
-   "title": "겨울 이야기 [수원]",
-   "start": "2026-10-11",
-   "end": "2026-10-11",
-   "place": "수원청소년문화센터",
-   "time": "",
-   "grade": "아동공연",
-   "price": "",
-   "free": false,
-   "kind": "뮤지컬",
-   "src": "kopis",
-   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298624",
-   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF298624_260818_105112.jpg"
   },
   {
    "id": "S3043",
@@ -61,21 +46,6 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299059",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299059_260821_130659.jpg"
-  },
-  {
-   "id": "KPF298938",
-   "title": "베베핀, 두근두근 새친구 [수원]",
-   "start": "2026-10-10",
-   "end": "2026-10-11",
-   "place": "수원SK아트리움",
-   "time": "",
-   "grade": "아동공연",
-   "price": "",
-   "free": false,
-   "kind": "뮤지컬",
-   "src": "kopis",
-   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298938",
-   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF298938_260820_124549.gif"
   },
   {
    "id": "S3011",
@@ -151,21 +121,6 @@
    "src": "swcf",
    "link": "https://www.swcf.or.kr/?p=29_view&idx=2932&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
    "book": ""
-  },
-  {
-   "id": "S3054",
-   "title": "제63회 수원화성문화제",
-   "start": "2026-10-04",
-   "end": "2026-10-11",
-   "place": "수원화성 일원",
-   "time": "상세참조",
-   "grade": "",
-   "price": "무료(일부 공연 및 프로그램 유료)",
-   "free": true,
-   "kind": "축제",
-   "src": "swcf",
-   "link": "https://www.swcf.or.kr/?p=29_view&idx=3054&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
-   "book": "https://www.shfestival.com/89/?idx=5"
   },
   {
    "id": "S2963",
