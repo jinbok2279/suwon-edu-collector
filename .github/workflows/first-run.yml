@@ -20,6 +20,8 @@ jobs:
       KINDER_KEY: ${{ secrets.KINDER_KEY }}
       CULTURE_KEY: ${{ secrets.CULTURE_KEY }}
       LIB_KEY: ${{ secrets.LIB_KEY }}
+      KOPIS_KEY: ${{ secrets.KOPIS_KEY }}
+      TOUR_KEY: ${{ secrets.TOUR_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

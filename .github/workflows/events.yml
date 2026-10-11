@@ -23,6 +23,8 @@ jobs:
       - run: python events.py
         env:
           CULTURE_KEY: ${{ secrets.CULTURE_KEY }}
+          KOPIS_KEY: ${{ secrets.KOPIS_KEY }}
+          TOUR_KEY: ${{ secrets.TOUR_KEY }}
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
