@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#5161F7">
 <meta name="description" content="수원시 학교 일정·급식·도서관·유치원·학원·행사 정보를 한곳에서">
+<meta name="apple-mobile-web-app-title" content="아이랑수원">
 <title>아이랑 수원</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -51,12 +52,12 @@ h1,h2,h3{margin:0;letter-spacing:-.4px}
 .sec-head{display:flex;justify-content:space-between;align-items:baseline}
 .sec-head h2{font-size:19px;font-weight:800}
 .sec-head a,.sec-head button{font-size:13px;font-weight:700;color:var(--indigo);background:none;border:none;cursor:pointer;padding:6px 0}
-.hero{position:relative;overflow:hidden;border-radius:30px;padding:24px;min-height:200px;color:#fff;background:linear-gradient(140deg,#5161F7,#6B55E8 55%,#8A5BE6);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 26px 40px -18px rgba(75,91,240,.7)}
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:20px 22px;min-height:150px;color:#fff;background:linear-gradient(140deg,#5161F7,#6B55E8 55%,#8A5BE6);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 26px 40px -18px rgba(75,91,240,.7)}
 .hero .glow{position:absolute;left:-60px;top:-80px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 65%)}
 .hero .date{font-size:12px;opacity:.85;font-weight:500}
-.hero h1{font-size:23px;font-weight:800;line-height:1.38;margin-top:8px;max-width:72%;white-space:pre-line}
+.hero h1{font-size:21px;font-weight:800;line-height:1.35;margin-top:6px;max-width:72%;white-space:pre-line}
 .hero .next{margin:6px 0 0;font-size:15px;font-weight:500;opacity:.92;max-width:62%;line-height:1.5}
-.hero .cta{margin-top:14px;height:38px;padding:0 16px;border-radius:19px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);color:#fff;font-size:13px;font-weight:700;cursor:pointer}
+.hero .cta{margin-top:12px;height:36px;padding:0 16px;border-radius:19px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);color:#fff;font-size:13px;font-weight:700;cursor:pointer}
 .hero .deco{position:absolute;right:20px;top:20px}
 .hero .dday{position:absolute;right:18px;bottom:20px;text-align:center;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:10px 14px;min-width:84px}
 .hero .dday b{display:block;font-size:26px;font-weight:800;line-height:1.1}
@@ -236,7 +237,7 @@ const KID_TILES = ["t-indigo", "t-coral", "t-mint", "t-sun", "t-lilac"];
 const KID_PILLS = [["#3442C9", "#ECEEFF"], ["#C93D22", "#FFE9E2"], ["#13795F", "#E2F6F0"], ["#8A5300", "#FFF1CC"], ["#6436BE", "#F1E8FF"]];
 const ORD = ["첫째", "둘째", "셋째", "넷째", "다섯째"];
 const MAX_KIDS = 5;
-let homeKid = "all";
+let homeKid = "all", homeAllEv = false;
 let kidForm = null;
 function saveKids(list) { store(KEY_KIDS, JSON.stringify(list)); }
 function kids() {
@@ -301,7 +302,7 @@ const icon = {
 };
 
 function footer() {
-  return `<div class="foot">데이터 · ${esc(DATA.source || "나이스 교육정보 개방포털")}<br>업데이트 ${esc(DATA.updated_at)} · 하루 3번 자동 갱신</div>`;
+  return `<div class="foot">데이터 · ${esc(DATA.source || "나이스 교육정보 개방포털")}<br>업데이트 ${esc(DATA.updated_at)} · 하루 3번 자동 갱신<br>아이랑 수원 · by 송골랩</div>`;
 }
 
 // ---------- 화면: 홈 ----------
@@ -323,17 +324,17 @@ function viewHome() {
       <div class="date">${dateStr}</div>
       <h1>${esc(title)}</h1>
       <p class="next">${esc(nextTxt)}</p>
-      ${cta}
       ${next ? `<div class="dday"><b>${ddayText(dday(next.date))}</b><span>${mdw(next.date)}</span></div>` : `<div class="deco fl"><div class="orb-sun" style="width:56px;height:56px"></div></div>`}
     </section>`;
     const chip = (id, label, extra = "") => `<button class="btn ${homeKid === id ? "btn-3d" : "btn-soft"}" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickKid('${id}')">${extra}${esc(label)}</button>`;
     const chips = ks.length > 1 ? `<div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px">${chip("all", "전체")}${ks.map(k => chip(k.id, k.name, `<span class="tile ${KID_TILES[k.color % 5]}" style="width:18px;height:18px;border-radius:6px"></span>`)).join("")}</div>` : "";
-    const list = evs.slice(0, 8);
+    const list = evs.slice(0, homeAllEv ? 8 : 3);
     const ownCount = ks.filter(k => homeKid === "all" || k.id === homeKid).reduce((n, k) => n + (((kidSchool(k) || {}).events || []).length), 0);
     mine = `<section class="section"><div class="sec-head"><h2>우리 아이 다가오는 일정</h2>${ks.length < MAX_KIDS ? `<button onclick="go('kid/new')">+ 아이 추가</button>` : ""}</div>
       ${chips}
       <div class="lift card-pad">${list.map(g => g.kid ? evRow(g, `${g.school} · ${g.end !== g.date ? mdw(g.date) + " ~ " + md(g.end) : mdw(g.date)}`, ks.length > 1 ? kidPill(g.kid) : "") : evRow(g)).join("")}
-      ${ownCount ? "" : `<div class="empty">학교가 아직 나이스에 학사일정을 많이 등록하지 않았어요. 등록되면 자동으로 여기에 나타나요.</div>`}</div></section>`;
+      ${ownCount ? "" : `<div class="empty">학교가 아직 나이스에 학사일정을 많이 등록하지 않았어요. 등록되면 자동으로 여기에 나타나요.</div>`}
+      ${evs.length > 3 ? `<button onclick="homeAllEv=!homeAllEv;render()" style="width:100%;border:0;background:none;padding:12px 0 4px;font:inherit;font-size:13px;font-weight:700;color:var(--indigo);cursor:pointer">${homeAllEv ? "접기 ▲" : `일정 더보기 (${Math.min(evs.length, 8) - 3}개 더) ▼`}</button>` : ""}</div></section>`;
   } else {
     hero = `<section class="hero"><div class="glow"></div>
       <div class="date">${dateStr}</div>
@@ -345,9 +346,16 @@ function viewHome() {
   }
 
   const install = installEvt ? `<button class="btn btn-soft" style="height:40px;font-size:12px" onclick="doInstall()">앱으로 설치</button>` : "";
-  $view.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <button class="chip glass" onclick="go('region')">${icon.pin} ${esc(regionLabel())} · ${levelLabel()} ▾</button>${install}</div>
-    ${hero}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${homeNews()}${mine}${homeInstall()}${homeEvents()}${homeLibrary()}${homeBooks()}${footer()}`;
+  const kidSc = ks.map(kidSchool).find(Boolean);
+  const Q = [["🍚", "급식", "t-sun", kidSc ? `school/${kidSc.code}` : "schools"], ["🏫", "학교 일정", "t-lilac", kidSc ? `school/${kidSc.code}` : "schools"], ["📚", "도서관", "t-mint", "library"],
+    ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "행사", "t-coral", "events"]];
+  const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="tile ${t}" style="width:44px;height:44px;font-size:20px;border-radius:14px">${e}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
+  const notice = homeNews() || homeInstall();
+  $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
+      <img src="icon-192.png" alt="송골랩 로고" width="32" height="32" style="border-radius:9px;box-shadow:0 2px 8px rgba(30,40,90,.12);flex:0 0 auto">
+      <div style="min-width:0;flex:1;line-height:1.15"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px">아이랑 수원</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px">by 송골랩 · 개인이 만든 서비스</div></div>
+      <button class="chip glass" style="flex:0 0 auto;font-size:12px;padding:0 12px;height:34px" onclick="go('region')">${icon.pin} ${esc(regionLabel().replace("수원시 전체", "수원").replace("수원 ", ""))} · ${levelLabel()} ▾</button></div>
+    ${hero}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${footer()}`;
 }
 
 // ---------- 급식 ----------
@@ -451,7 +459,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.1 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.20 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>유튜브 · 송골랩</span><a class="val" href="https://www.youtube.com/@songgollab" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">@songgollab ›</a></div>
@@ -598,7 +606,7 @@ function homeBooks() {
 function homeLibrary() {
   if (!SEATS) return "";
   const { g, list } = libList();
-  const open = list.filter(l => !closedToday(l)).slice(0, 3);
+  const open = list.filter(l => !closedToday(l)).slice(0, 2);
   if (!open.length) return "";
   return `<section class="section"><div class="sec-head"><h2>오늘 여는 ${esc(g || "수원")} 도서관</h2><button onclick="go('library')">전체보기</button></div>
     <div class="lift list">${open.map(libCard).join("")}</div></section>`;
@@ -637,9 +645,8 @@ function homeEvents() {
   if (!EVENTS) return "";
   const c = cityEvents(), l = libEvents().filter(e => e.status === "접수중");
   if (!c.length && !l.length) return "";
-  const rows = [...c.slice(0, 3).map(cityRow), ...l.slice(0, 3).map(libRow)].join("");
+  const nl = Math.min(l.length, c.length >= 2 ? 1 : 3 - c.length); const rows = [...c.slice(0, 3 - nl).map(cityRow), ...l.slice(0, nl).map(libRow)].join("");
   return `<section class="section"><div class="sec-head"><h2>아이와 함께 가요</h2><button onclick="go('events')">전체보기</button></div>
-    <p style="font-size:12px;color:var(--muted);margin:-4px 0 10px">수원에서 열리는 가족·어린이 공연·전시·축제</p>
     <div class="lift card-pad">${rows}</div></section>`;
 }
 function pickEvTab(t) { evTab = t; render(); }
@@ -1154,7 +1161,7 @@ function viewElite() {
 // ---------- 이용 안내 · 개인정보 ----------
 // ---------- 업데이트 소식 (날짜별) ----------
 const NEWS = [
-  { d: "2026-10-11", v: "1.0.0", t: "아이랑 수원 시범 운영을 시작했어요", items: [
+  { d: "2026-10-11", v: "1.0.20", t: "아이랑 수원 시범 운영을 시작했어요", items: [
     "🏫 수원 초·중·고 <b>학교 일정과 급식</b>을 우리 아이 기준으로 모아 보여 드려요.",
     "📚 수원시 공공도서관 <b>운영시간·휴관일</b>과 수원 아이들이 많이 빌린 <b>인기 도서</b>를 볼 수 있어요.",
     "🧸 유치원 빈자리, ✏️ 학원 찾기·수강료 비교, 🎪 아이와 갈 공연·축제, 🎓 특목·자사고, 💼 엄마 일자리를 한곳에서 볼 수 있어요.",
