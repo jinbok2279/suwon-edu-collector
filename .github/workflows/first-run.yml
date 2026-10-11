@@ -1,0 +1,54 @@
+name: first-run (처음 한 번 전체 수집)
+
+# 저장소를 처음 만든 뒤 Actions 탭에서 이 워크플로를 한 번 실행하면
+# 모든 수집기를 순서대로 돌려 docs/data 를 채운다. (학교 목록 → 학원 → 유치원 → 나머지)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: first-run
+  cancel-in-progress: false
+
+jobs:
+  all:
+    runs-on: ubuntu-latest
+    env:
+      NEIS_KEY: ${{ secrets.NEIS_KEY }}
+      KINDER_KEY: ${{ secrets.KINDER_KEY }}
+      CULTURE_KEY: ${{ secrets.CULTURE_KEY }}
+      LIB_KEY: ${{ secrets.LIB_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 학교·학사일정
+        run: python collect.py
+      - name: 학원
+        run: python academies.py || echo "학원 실패 (계속 진행)"
+      - name: 유치원
+        run: python kinder.py || echo "유치원 실패 (KINDER_KEY 확인)"
+      - name: 급식
+        run: python meals.py || echo "급식 실패 (계속 진행)"
+      - name: 도서관 목록
+        run: python libs.py || echo "도서관 목록 실패 (LIB_KEY 확인)"
+      - name: 인기 도서
+        run: python books.py || echo "인기 도서 실패 (LIB_KEY 확인)"
+      - name: 행사
+        run: python events.py || echo "행사 실패 (CULTURE_KEY 확인)"
+      - name: 일자리
+        run: python jobs.py || echo "일자리 실패 (계속 진행)"
+      - name: 특목·자사고
+        run: python elite.py || echo "특목고 실패 (계속 진행)"
+      - name: 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p docs/data && cp output/*.json docs/data/
+          git add output docs/data
+          git diff --cached --quiet && exit 0
+          git commit -m "처음 전체 수집"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
