@@ -451,7 +451,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.0 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.1 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>유튜브 · 송골랩</span><a class="val" href="https://www.youtube.com/@songgollab" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">@songgollab ›</a></div>
@@ -687,7 +687,7 @@ function viewKid(arg, pre) {
         <button class="btn btn-soft" style="height:34px;padding:0 12px;font-size:12px" onclick="removeAca('${esc(a.id)}')" aria-label="${esc(a.n)} 빼기">빼기</button></div>${acaTimeBox(a, i)}`).join("")}</div>` : ""}
       ${kidForm.acas.length < 10 ? `<label class="search lift">${icon.search}<input id="aq" placeholder="학원 이름 검색 (예: 수학, 태권도)" value="${esc(kidForm.aq)}" aria-label="학원 이름 검색"></label>
       <div class="lift list" id="ares"></div>` : ""}
-      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 수원시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.<br>앞으로 동의한 분들의 학원 정보만 <b>이름 없이</b> 모아 "우리 동네 인기 학원"을 보여 드릴 예정이에요.</p></section>
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 수원시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.</p></section>
     <button class="btn btn-3d" style="width:100%;height:54px;margin-top:24px;font-size:15px" onclick="saveKid('${editing ? editing.id : ""}')">${editing ? "저장하기" : "등록하기"}</button>
     ${editing ? `<button class="btn btn-soft" style="width:100%;height:46px;margin-top:12px;color:var(--coral-ink)" onclick="deleteKid('${editing.id}')">${kidForm.arm ? "한 번 더 누르면 삭제돼요" : "이 아이 삭제"}</button>` : ""}`;
   document.getElementById("kname").addEventListener("input", e => { kidForm.name = e.target.value; });
@@ -775,10 +775,6 @@ function viewAca(id) {
     <section class="section"><div class="sec-head"><h2>수강료</h2><span style="font-size:12px;color:var(--muted)">1인 월 기준 (교육청 신고)</span></div>
       ${a.f && a.f.length ? `<div class="lift card-pad">${a.f.slice(0, 20).map(([k, v]) => row(esc(k), `<b>${won(v)}</b>`)).join("")}</div>` : `<div class="lift empty">공개된 수강료 정보가 없어요.</div>`}</section>
     <a class="btn btn-soft" style="width:100%;height:48px;margin-top:18px;font-size:14px" href="${map}" target="_blank" rel="noopener">네이버 지도에서 보기 ↗</a>
-    <section class="section"><div class="lift" style="padding:18px;display:flex;gap:14px;align-items:center">
-      <span class="tile t-sun" style="width:44px;height:44px">${icon.star}</span>
-      <div><div style="font-weight:800">우리 동네 인기 학원 <span class="pill pill-gray" style="margin-left:4px">준비 중</span></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">같은 학교·동네 아이들이 많이 다니는 학원을 익명 통계로 보여 드릴 예정이에요.</div></div></div></section>
     <div class="foot">데이터 · 나이스 교육정보 개방포털 학원교습소정보<br>교육청에 등록된 정보라 실제와 다를 수 있어요.</div>`;
 }
 function kidResults() {
@@ -1032,7 +1028,6 @@ function viewPremium() {
       ${cheap.length ? `<div class="lift list" style="margin-top:12px"><div style="padding:14px 18px 4px;font-weight:800">수강료가 낮은 곳 (공개 기준)</div>${cheap.map(({ a, m }) => `<button class="school" onclick="go('aca/${esc(a.id)}')"><div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.dong || a.gu)} · ${esc(acaKind(a))}</div></div><b style="color:var(--indigo);white-space:nowrap">${won(m)}~</b></button>`).join("")}</div>` : ""}
     </section>
     <section class="section"><div class="sec-head"><h2>곧 열려요</h2></div>
-      ${wantCard("rank", "관심-인기학원", "동네 인기 학원 순위", "같은 학교·학년 아이들이 많이 다니는 학원을 이름 없이 통계로 보여 드려요.", "🏆")}
       ${wantCard("alert", "관심-알림", "알림 (휴업일 · 유치원 빈자리)", "아이 학교 휴업일 전날, 관심 유치원에 빈자리가 생기면 휴대폰으로 알려 드려요.", "🔔")}
     </section>
     <div class="foot">수강료는 학원이 교육청에 신고한 금액(나이스 학원교습소정보) 기준이에요.<br>공개한 학원만 계산해서 실제 시세와 다를 수 있어요.</div>`;
@@ -1342,7 +1337,7 @@ function viewAdmin() {
   const hits = (A.hits || {}).hits || [];
   const pages = hits.filter(h => !h.event), events = hits.filter(h => h.event);
   const list = (rows, label) => rows.length ? `<div class="lift card-pad">${rows.map(([k, v]) => `<div class="row"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(k)}</span><span class="val"><b>${v.toLocaleString()}</b></span></div>`).join("")}</div>` : `<div class="lift empty">${label}</div>`;
-  const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-인기학원": "★ 인기 학원 순위 알림 신청", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기" };
+  const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기" };
   $view.innerHTML = `${head}
     ${A.warn ? `<div class="lift empty" style="margin:10px 0">일부 통계를 못 불러왔어요: ${esc(A.warn)}</div>` : ""}
     <p style="font-size:12px;color:var(--muted);margin:6px 0 14px">방문자 수 기준 · ${A.at.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })} 불러옴 · <a href="#admin" onclick="ADMIN=null;adminMonths=null;render();return false">새로고침</a></p>
