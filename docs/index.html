@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#5161F7">
-<meta name="description" content="수원시 학교 일정·급식·도서관·유치원·학원·행사 정보를 한곳에서">
+<meta name="description" content="수원 아이 키우는 집을 위한 급식·학교 일정·도서관·유치원·학원·행사 정보 모음">
 <meta name="apple-mobile-web-app-title" content="아이랑수원">
 <title>아이랑 수원</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -351,11 +351,12 @@ function viewHome() {
     ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "행사", "t-coral", "events"]];
   const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="tile ${t}" style="width:44px;height:44px;font-size:20px;border-radius:14px">${e}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
   const notice = homeNews() || homeInstall();
+  const addrNote = "";  // 수원은 주소 변경 안내 없음
   $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
       <img src="icon-192.png" alt="송골랩 로고" width="32" height="32" style="border-radius:9px;box-shadow:0 2px 8px rgba(30,40,90,.12);flex:0 0 auto">
       <div style="min-width:0;flex:1;line-height:1.15"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px">아이랑 수원</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px">by 송골랩 · 개인이 만든 서비스</div></div>
       <button class="chip glass" style="flex:0 0 auto;font-size:12px;padding:0 12px;height:34px" onclick="go('region')">${icon.pin} ${esc(regionLabel().replace("수원시 전체", "수원").replace("수원 ", ""))} · ${levelLabel()} ▾</button></div>
-    ${hero}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${footer()}`;
+    ${addrNote}${hero}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${footer()}`;
 }
 
 // ---------- 급식 ----------
@@ -459,7 +460,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.20 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.1 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>유튜브 · 송골랩</span><a class="val" href="https://www.youtube.com/@songgollab" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">@songgollab ›</a></div>
@@ -616,7 +617,7 @@ function homeLibrary() {
 function isoToday() { const d = today(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
 function cityEvents() { const t = isoToday(); return ((EVENTS && EVENTS.city) || []).filter(e => (e.end || e.start) >= t); }
 function libEvents() { const t = isoToday(); return ((EVENTS && EVENTS.lib) || []).filter(e => !e.applyEnd || e.applyEnd >= t || e.status === "접수전"); }
-function evOpen(e) { trackEvent("행사-" + (e.src === "lib" ? "도서관" : "시청")); }
+function evOpen(e) { trackEvent("행사-" + (e.src === "lib" ? "체험교육" : "공연축제")); }
 function cityRow(e) {
   const t = isoToday(), going = e.start <= t;
   const d = parseDate(going ? t : e.start);
@@ -656,16 +657,16 @@ function viewEvents() {
   if (!EVENTS) { $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">행사 정보를 불러오는 중이에요…</div>`; return; }
   const c = cityEvents(), l = libEvents();
   if (evTab === "city" && !c.length && l.length) evTab = "lib";
-  const seg = !l.length ? `<div style="height:14px"></div>` : `<div class="seg" role="tablist"><button class="${evTab === "city" ? "on" : ""}" role="tab" onclick="pickEvTab('city')">공연·축제 ${c.length}</button><button class="${evTab === "lib" ? "on" : ""}" role="tab" onclick="pickEvTab('lib')">도서관 프로그램 ${l.length}</button></div>`;
+  const seg = !l.length ? `<div style="height:14px"></div>` : `<div class="seg" role="tablist"><button class="${evTab === "city" ? "on" : ""}" role="tab" onclick="pickEvTab('city')">공연·축제 ${c.length}</button><button class="${evTab === "lib" ? "on" : ""}" role="tab" onclick="pickEvTab('lib')">체험·교육 ${l.length}</button></div>`;
   let body;
   if (evTab === "city") body = c.length ? `<div class="lift card-pad">${c.map(cityRow).join("")}</div>` : `<div class="lift empty">앞으로 두 달 안에 열리는 가족 행사가 아직 없어요.</div>`;
   else {
     const o = l.filter(e => e.status === "접수중"), r = l.filter(e => e.status !== "접수중");
     body = (o.length ? `<section class="section" style="margin-top:0"><div class="sec-head"><h2>지금 신청할 수 있어요</h2></div><div class="lift card-pad">${o.map(libRow).join("")}</div></section>` : "")
       + (r.length ? `<section class="section"><div class="sec-head"><h2>곧 접수 시작</h2></div><div class="lift card-pad">${r.map(libRow).join("")}</div></section>` : "")
-      || `<div class="lift empty">지금 접수 중인 어린이·가족 프로그램이 없어요.</div>`;
+      || `<div class="lift empty">지금 접수 중인 어린이·가족 체험·교육이 없어요.</div>`;
   }
-  $view.innerHTML = back + seg + body + `<div class="foot">누르면 공연·행사 안내 페이지에서 자세한 내용과 예매 방법을 볼 수 있어요.<br>데이터 · 문화체육관광부 문화예술공연 정보 (하루 한 번 갱신${EVENTS.updated_at ? " · " + esc(EVENTS.updated_at.slice(0, 10)) + " 기준" : ""})</div>`;
+  $view.innerHTML = back + seg + body + `<div class="foot">누르면 수원문화재단 페이지나 예약 페이지에서 자세한 내용과 신청 방법을 볼 수 있어요.<br>데이터 · 수원문화재단 행사·교육정보 · 경기아트센터 (하루 한 번 갱신${EVENTS.updated_at ? " · " + esc(EVENTS.updated_at.slice(0, 10)) + " 기준" : ""})</div>`;
 }
 
 // ---------- 화면: 아이 추가 / 수정 ----------
@@ -694,7 +695,7 @@ function viewKid(arg, pre) {
         <button class="btn btn-soft" style="height:34px;padding:0 12px;font-size:12px" onclick="removeAca('${esc(a.id)}')" aria-label="${esc(a.n)} 빼기">빼기</button></div>${acaTimeBox(a, i)}`).join("")}</div>` : ""}
       ${kidForm.acas.length < 10 ? `<label class="search lift">${icon.search}<input id="aq" placeholder="학원 이름 검색 (예: 수학, 태권도)" value="${esc(kidForm.aq)}" aria-label="학원 이름 검색"></label>
       <div class="lift list" id="ares"></div>` : ""}
-      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 수원시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.</p></section>
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 수원시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.<br>앞으로 동의한 분들의 학원 정보만 <b>이름 없이</b> 모아 "우리 동네 인기 학원"을 보여 드릴 예정이에요.</p></section>
     <button class="btn btn-3d" style="width:100%;height:54px;margin-top:24px;font-size:15px" onclick="saveKid('${editing ? editing.id : ""}')">${editing ? "저장하기" : "등록하기"}</button>
     ${editing ? `<button class="btn btn-soft" style="width:100%;height:46px;margin-top:12px;color:var(--coral-ink)" onclick="deleteKid('${editing.id}')">${kidForm.arm ? "한 번 더 누르면 삭제돼요" : "이 아이 삭제"}</button>` : ""}`;
   document.getElementById("kname").addEventListener("input", e => { kidForm.name = e.target.value; });
@@ -782,6 +783,10 @@ function viewAca(id) {
     <section class="section"><div class="sec-head"><h2>수강료</h2><span style="font-size:12px;color:var(--muted)">1인 월 기준 (교육청 신고)</span></div>
       ${a.f && a.f.length ? `<div class="lift card-pad">${a.f.slice(0, 20).map(([k, v]) => row(esc(k), `<b>${won(v)}</b>`)).join("")}</div>` : `<div class="lift empty">공개된 수강료 정보가 없어요.</div>`}</section>
     <a class="btn btn-soft" style="width:100%;height:48px;margin-top:18px;font-size:14px" href="${map}" target="_blank" rel="noopener">네이버 지도에서 보기 ↗</a>
+    <section class="section"><div class="lift" style="padding:18px;display:flex;gap:14px;align-items:center">
+      <span class="tile t-sun" style="width:44px;height:44px">${icon.star}</span>
+      <div><div style="font-weight:800">우리 동네 인기 학원 <span class="pill pill-gray" style="margin-left:4px">준비 중</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">같은 학교·동네 아이들이 많이 다니는 학원을 익명 통계로 보여 드릴 예정이에요.</div></div></div></section>
     <div class="foot">데이터 · 나이스 교육정보 개방포털 학원교습소정보<br>교육청에 등록된 정보라 실제와 다를 수 있어요.</div>`;
 }
 function kidResults() {
@@ -1035,6 +1040,7 @@ function viewPremium() {
       ${cheap.length ? `<div class="lift list" style="margin-top:12px"><div style="padding:14px 18px 4px;font-weight:800">수강료가 낮은 곳 (공개 기준)</div>${cheap.map(({ a, m }) => `<button class="school" onclick="go('aca/${esc(a.id)}')"><div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.dong || a.gu)} · ${esc(acaKind(a))}</div></div><b style="color:var(--indigo);white-space:nowrap">${won(m)}~</b></button>`).join("")}</div>` : ""}
     </section>
     <section class="section"><div class="sec-head"><h2>곧 열려요</h2></div>
+      ${wantCard("rank", "관심-인기학원", "동네 인기 학원 순위", "같은 학교·학년 아이들이 많이 다니는 학원을 이름 없이 통계로 보여 드려요.", "🏆")}
       ${wantCard("alert", "관심-알림", "알림 (휴업일 · 유치원 빈자리)", "아이 학교 휴업일 전날, 관심 유치원에 빈자리가 생기면 휴대폰으로 알려 드려요.", "🔔")}
     </section>
     <div class="foot">수강료는 학원이 교육청에 신고한 금액(나이스 학원교습소정보) 기준이에요.<br>공개한 학원만 계산해서 실제 시세와 다를 수 있어요.</div>`;
@@ -1161,7 +1167,7 @@ function viewElite() {
 // ---------- 이용 안내 · 개인정보 ----------
 // ---------- 업데이트 소식 (날짜별) ----------
 const NEWS = [
-  { d: "2026-10-11", v: "1.0.20", t: "아이랑 수원 시범 운영을 시작했어요", items: [
+  { d: "2026-10-11", v: "1.0.0", t: "아이랑 수원 시범 운영을 시작했어요", items: [
     "🏫 수원 초·중·고 <b>학교 일정과 급식</b>을 우리 아이 기준으로 모아 보여 드려요.",
     "📚 수원시 공공도서관 <b>운영시간·휴관일</b>과 수원 아이들이 많이 빌린 <b>인기 도서</b>를 볼 수 있어요.",
     "🧸 유치원 빈자리, ✏️ 학원 찾기·수강료 비교, 🎪 아이와 갈 공연·축제, 🎓 특목·자사고, 💼 엄마 일자리를 한곳에서 볼 수 있어요.",
@@ -1207,7 +1213,7 @@ function viewAbout() {
       <div style="display:grid;grid-template-columns:64px 1fr;gap:4px 10px;font-size:13px"><span style="color:var(--muted)">저장 위치</span><span>${where}</span><span style="color:var(--muted)">쓰는 곳</span><span>${why}</span><span style="color:var(--muted)">보관</span><span>${keep}</span></div></div>`).join("")
       + `<div style="padding-top:10px;font-size:13px">${li(["광고에 쓰지 않아요.", "앱 안의 링크(학교 홈페이지, 공고 원문 등)를 누르면 그 사이트의 개인정보 정책이 적용돼요."])}</div>`)}
     ${sec("정보의 출처와 정확성", li([
-      "나이스 교육정보 개방포털, 유치원 알리미, 도서관 정보나루, 문화체육관광부 공연 정보, 경기도교육청 구인구직, 경기육아종합지원센터 등 <b>공공 자료</b>를 하루에 한두 번 자동으로 가져와요.",
+      "나이스 교육정보 개방포털, 유치원 알리미, 도서관 정보나루, 수원문화재단, 경기아트센터, 경기도교육청 구인구직, 경기육아종합지원센터 등 <b>공공 자료</b>를 하루에 한두 번 자동으로 가져와요.",
       "원래 자료에 늦게 반영되거나 틀린 내용이 있을 수 있어요. 학사일정, 접수 마감, 입학 전형처럼 중요한 내용은 <b>꼭 학교나 기관의 원문</b>을 함께 확인해 주세요.",
       "이 정보를 믿고 생긴 손해에 대해서는 책임지기 어려워요. 각 자료의 저작권은 해당 기관에 있어요."]))}
     ${sec("시범 운영 중이에요", `지금은 테스트 단계라 <b>버그나 틀린 정보가 있을 수 있어요.</b> 너그러이 양해 부탁드려요.<br>불편한 점이나 바라는 기능은 아래 메일로 알려 주시면 빠르게 고칠게요.<div style="margin-top:10px;font-weight:700;color:var(--indigo);user-select:all">songgollab@gmail.com</div>`)}
@@ -1344,7 +1350,7 @@ function viewAdmin() {
   const hits = (A.hits || {}).hits || [];
   const pages = hits.filter(h => !h.event), events = hits.filter(h => h.event);
   const list = (rows, label) => rows.length ? `<div class="lift card-pad">${rows.map(([k, v]) => `<div class="row"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(k)}</span><span class="val"><b>${v.toLocaleString()}</b></span></div>`).join("")}</div>` : `<div class="lift empty">${label}</div>`;
-  const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기" };
+  const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-인기학원": "★ 인기 학원 순위 알림 신청", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기" };
   $view.innerHTML = `${head}
     ${A.warn ? `<div class="lift empty" style="margin:10px 0">일부 통계를 못 불러왔어요: ${esc(A.warn)}</div>` : ""}
     <p style="font-size:12px;color:var(--muted);margin:6px 0 14px">방문자 수 기준 · ${A.at.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })} 불러옴 · <a href="#admin" onclick="ADMIN=null;adminMonths=null;render();return false">새로고침</a></p>
