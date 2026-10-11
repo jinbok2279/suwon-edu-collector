@@ -666,7 +666,7 @@ function viewEvents() {
       + (r.length ? `<section class="section"><div class="sec-head"><h2>곧 접수 시작</h2></div><div class="lift card-pad">${r.map(libRow).join("")}</div></section>` : "")
       || `<div class="lift empty">지금 접수 중인 어린이·가족 체험·교육이 없어요.</div>`;
   }
-  $view.innerHTML = back + seg + body + `<div class="foot">누르면 수원문화재단 페이지나 예약 페이지에서 자세한 내용과 신청 방법을 볼 수 있어요.<br>데이터 · 수원문화재단 행사·교육정보 · 경기아트센터 (하루 한 번 갱신${EVENTS.updated_at ? " · " + esc(EVENTS.updated_at.slice(0, 10)) + " 기준" : ""})</div>`;
+  $view.innerHTML = back + seg + body + `<div class="foot">누르면 수원문화재단 페이지나 예약 페이지에서 자세한 내용과 신청 방법을 볼 수 있어요.<br>데이터 · 수원문화재단 행사·교육정보 · 경기아트센터 · 한국관광공사 · 출처: (재)예술경영지원센터 공연예술통합전산망(www.kopis.or.kr) (하루 한 번 갱신${EVENTS.updated_at ? " · " + esc(EVENTS.updated_at.slice(0, 10)) + " 기준" : ""})</div>`;
 }
 
 // ---------- 화면: 아이 추가 / 수정 ----------
@@ -1213,7 +1213,7 @@ function viewAbout() {
       <div style="display:grid;grid-template-columns:64px 1fr;gap:4px 10px;font-size:13px"><span style="color:var(--muted)">저장 위치</span><span>${where}</span><span style="color:var(--muted)">쓰는 곳</span><span>${why}</span><span style="color:var(--muted)">보관</span><span>${keep}</span></div></div>`).join("")
       + `<div style="padding-top:10px;font-size:13px">${li(["광고에 쓰지 않아요.", "앱 안의 링크(학교 홈페이지, 공고 원문 등)를 누르면 그 사이트의 개인정보 정책이 적용돼요."])}</div>`)}
     ${sec("정보의 출처와 정확성", li([
-      "나이스 교육정보 개방포털, 유치원 알리미, 도서관 정보나루, 수원문화재단, 경기아트센터, 경기도교육청 구인구직, 경기육아종합지원센터 등 <b>공공 자료</b>를 하루에 한두 번 자동으로 가져와요.",
+      "나이스 교육정보 개방포털, 유치원 알리미, 도서관 정보나루, 수원문화재단, 경기아트센터, 공연예술통합전산망(KOPIS), 한국관광공사, 경기도교육청 구인구직, 경기육아종합지원센터 등 <b>공공 자료</b>를 하루에 한두 번 자동으로 가져와요.",
       "원래 자료에 늦게 반영되거나 틀린 내용이 있을 수 있어요. 학사일정, 접수 마감, 입학 전형처럼 중요한 내용은 <b>꼭 학교나 기관의 원문</b>을 함께 확인해 주세요.",
       "이 정보를 믿고 생긴 손해에 대해서는 책임지기 어려워요. 각 자료의 저작권은 해당 기관에 있어요."]))}
     ${sec("시범 운영 중이에요", `지금은 테스트 단계라 <b>버그나 틀린 정보가 있을 수 있어요.</b> 너그러이 양해 부탁드려요.<br>불편한 점이나 바라는 기능은 아래 메일로 알려 주시면 빠르게 고칠게요.<div style="margin-top:10px;font-weight:700;color:var(--indigo);user-select:all">songgollab@gmail.com</div>`)}

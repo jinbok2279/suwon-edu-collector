@@ -304,6 +304,111 @@ def ggac_events(today):
     return out
 
 
+KOPIS_KEY = os.environ.get("KOPIS_KEY", "").strip()
+KOPIS_API = "http://kopis.or.kr/openApi/restful/pblprfr"
+KOPIS_VIEW = "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id="
+TOUR_KEY = os.environ.get("TOUR_KEY", "").strip()
+TOUR_API = "https://apis.data.go.kr/B551011/KorService2/searchFestival2"
+
+
+def xml_items(raw, tag):
+    root = ET.fromstring(raw.encode("utf-8"))
+    return root, [{c.tag: sp(c.text) for c in el} for el in root.iter(tag)]
+
+
+def kopis_events(today):
+    """KOPIS 공연예술통합전산망: 경기도 아동공연(kidstate=Y) 중 수원 공연장"""
+    if not KOPIS_KEY:
+        print("  KOPIS_KEY 없음: 공연예술통합전산망 건너뜀")
+        return []
+    t0, t1 = today.strftime("%Y%m%d"), (today + timedelta(days=HORIZON)).strftime("%Y%m%d")
+    rows, out, seen = [], [], set()
+    # 수원시 코드(4111)로 먼저 받고, 비어 있으면 경기도 전체에서 공연장 이름으로 거른다
+    for sub in ("4111", ""):
+        got = []
+        for page in range(1, 11):
+            q = {"service": KOPIS_KEY, "stdate": t0, "eddate": t1, "cpage": page, "rows": 100,
+                 "signgucode": "41", "kidstate": "Y"}
+            if sub:
+                q["signgucodesub"] = sub
+            try:
+                raw = get(KOPIS_API, q, tries=2, timeout=40)
+                root, items = xml_items(raw, "db")
+            except Exception as e:
+                print("  KOPIS 실패:", str(e).replace(KOPIS_KEY, "***")[:150]); return []
+            if page == 1 and not items:
+                msg = sp(root.findtext(".//returncode") or root.findtext(".//errmsg") or "")
+                if msg:
+                    print("  KOPIS 응답:", msg[:100])
+            got += items
+            if len(items) < 100:
+                break
+            time.sleep(0.3)
+        print(f"  KOPIS {'수원' if sub else '경기 전체'} 아동공연 {len(got)}건")
+        rows = got
+        if got:
+            break
+    for d in rows:
+        pid = d.get("mt20id", "")
+        place = d.get("fcltynm", "")
+        if not pid or pid in seen:
+            continue
+        if not SUWON.search(place + " " + d.get("area", "")) or NOT_SUWON.search(place):
+            continue
+        seen.add(pid)
+        ds = [x.replace(".", "-") for x in (d.get("prfpdfrom", ""), d.get("prfpdto", "")) if x]
+        if not ds:
+            continue
+        poster = d.get("poster", "")
+        out.append({"id": "K" + pid, "title": d.get("prfnm", ""), "start": ds[0], "end": ds[-1], "place": place,
+                    "time": "", "grade": "아동공연", "price": "", "free": False, "kind": d.get("genrenm", ""),
+                    "src": "kopis", "link": KOPIS_VIEW + pid,
+                    "img": poster.replace("http://", "https://") if poster else ""})
+    print(f"  KOPIS 수원 아동공연 {len(out)}건")
+    return out
+
+
+def tour_festivals(today):
+    """한국관광공사 국문 관광정보: 수원에서 열리는 축제·행사"""
+    if not TOUR_KEY:
+        print("  TOUR_KEY 없음: 관광공사 축제 건너뜀")
+        return []
+    t0, t1 = today.strftime("%Y%m%d"), (today + timedelta(days=HORIZON)).strftime("%Y%m%d")
+    key = TOUR_KEY if "%" in TOUR_KEY else urllib.parse.quote(TOUR_KEY, safe="")
+    out, items = [], []
+    for page in range(1, 6):
+        url = (f"{TOUR_API}?serviceKey={key}&MobileOS=ETC&MobileApp=AirangSuwon&_type=json&arrange=A"
+               f"&eventStartDate={(today - timedelta(days=90)).strftime('%Y%m%d')}&areaCode=31&numOfRows=100&pageNo={page}")
+        try:
+            data = json.loads(get(url, tries=2, timeout=40))
+        except Exception as e:
+            print("  관광공사 실패:", str(e).replace(TOUR_KEY, "***")[:150]); break
+        body = (data.get("response") or {}).get("body") or {}
+        got = ((body.get("items") or {}) or {}).get("item") or []
+        if isinstance(got, dict):
+            got = [got]
+        if page == 1 and not got:
+            print("  관광공사 응답:", str(data)[:200].replace(TOUR_KEY, "***"))
+        items += got
+        if len(got) < 100:
+            break
+    for it in items:
+        addr = sp(it.get("addr1"))
+        if "수원" not in addr:
+            continue
+        s, e = str(it.get("eventstartdate") or ""), str(it.get("eventenddate") or "")
+        if not s or (e or s) < t0 or s > t1:
+            continue
+        title = sp(it.get("title"))
+        out.append({"id": "T" + str(it.get("contentid")), "title": title,
+                    "start": f"{s[:4]}-{s[4:6]}-{s[6:8]}", "end": f"{(e or s)[:4]}-{(e or s)[4:6]}-{(e or s)[6:8]}",
+                    "place": addr.replace("경기도 ", ""), "time": "", "grade": "", "price": "", "free": False,
+                    "kind": "축제", "src": "tour", "img": (it.get("firstimage") or "").replace("http://", "https://"),
+                    "link": "https://search.naver.com/search.naver?query=" + urllib.parse.quote(title)})
+    print(f"  관광공사 수원 축제·행사 {len(out)}건")
+    return out
+
+
 def strip_html(s):
     s = re.sub(r"<[^>]+>", " ", s or "")
     s = s.replace("&nbsp;", " ").replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&").replace("&quot;", '"')
@@ -371,11 +476,14 @@ def main():
         city = foundation_events(today)
     except Exception as e:
         print("수원문화재단 행사 실패:", e)
-    norm = lambda s: re.sub(r"\W", "", s)
-    try:
-        city += [e for e in ggac_events(today) if all(norm(e["title"]) != norm(c["title"]) for c in city)]
-    except Exception as e:
-        print("경기아트센터 실패:", e)
+    def norm(s):  # 같은 공연이 출처마다 조금 다르게 적혀도 하나로 보기
+        s = re.sub(r"\[[^\]]*\]|\([^)]*\)|-\s*수원$|수원|가족|뮤지컬|어린이|연극|공연", "", s)
+        return re.sub(r"\W", "", s)[:10]
+    for name, fn in (("KOPIS", kopis_events), ("경기아트센터", ggac_events), ("관광공사", tour_festivals)):
+        try:
+            city += [e for e in fn(today) if all(norm(e["title"]) != norm(c["title"]) for c in city)]
+        except Exception as e:
+            print(f"{name} 실패:", e)
     try:
         city += [e for e in culture_events(today) if all(norm(e["title"]) != norm(c["title"]) for c in city)]
     except Exception as e:

@@ -14,7 +14,7 @@
 | kinder.py | 유치원 (장안·권선·팔달·영통) | 유치원 알리미 | KINDER_KEY | 매주 |
 | libs.py | 수원시 공공도서관 운영시간·휴관일 | 도서관 정보나루 | LIB_KEY | 매주 |
 | books.py | 초등·청소년·전체 인기 도서 (수원 4개 구 합산) | 도서관 정보나루 | LIB_KEY | 매일 |
-| events.py | 수원 가족·어린이 공연·축제 + 체험·교육 | 수원문화재단 행사·교육정보 + 경기아트센터 공연 (보조: 문화체육관광부 공연 API) | (CULTURE_KEY 선택) | 매일 |
+| events.py | 수원 가족·어린이 공연·축제 + 체험·교육 | KOPIS 아동공연 + 관광공사 축제 + 수원문화재단 행사·교육 + 경기아트센터 | KOPIS_KEY, TOUR_KEY (없으면 그 부분만 건너뜀) | 매일 |
 | jobs.py | 학교·유치원·어린이집 채용 | 경기도교육청 · 경기육아종합지원센터 | 없음 | 매일 |
 | elite.py | 전국 특목·자사고 | 나이스 | NEIS_KEY | 매달 |
 
@@ -26,6 +26,8 @@
 1. GitHub에 `suwon-edu-collector` 저장소를 만들고 이 폴더 내용을 올린다.
 2. Settings → Secrets and variables → Actions 에 키를 넣는다.
    - `NEIS_KEY`, `KINDER_KEY`, `CULTURE_KEY`: 용인 저장소와 같은 값
+   - `KOPIS_KEY`: https://www.kopis.or.kr 회원가입 → Open API → 서비스키 신청
+   - `TOUR_KEY`: 공공데이터포털에서 '한국관광공사_국문 관광정보 서비스_GW' 활용신청 → 일반 인증키(Decoding)
    - `LIB_KEY`: https://www.data4library.kr 회원가입 → 마이페이지 → 인증키 신청 (무료, 승인까지 하루쯤 걸릴 수 있음)
 3. Actions 탭 → **first-run (처음 한 번 전체 수집)** → Run workflow
 4. Settings → Pages → Branch `main` / 폴더 `/docs` → Save
