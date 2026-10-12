@@ -51,7 +51,7 @@ def get(url, params=None, tries=3, timeout=40):
         except Exception as e:
             print(f"  다시 시도 {i + 1}/{tries}: {e}")
             time.sleep(4)
-    raise RuntimeError("접속 실패: " + full[:120])
+    raise RuntimeError("접속 실패: " + full.split("?")[0])  # 주소 뒤 키는 기록에 남기지 않음
 
 
 def sp(s):
@@ -305,7 +305,8 @@ def ggac_events(today):
 
 
 KOPIS_KEY = os.environ.get("KOPIS_KEY", "").strip()
-KOPIS_API = "http://kopis.or.kr/openApi/restful/pblprfr"
+KOPIS_API = "https://www.kopis.or.kr/openApi/restful/pblprfr"  # https 우선 (키 보호)
+KOPIS_API_HTTP = "http://kopis.or.kr/openApi/restful/pblprfr"
 KOPIS_VIEW = "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id="
 TOUR_KEY = os.environ.get("TOUR_KEY", "").strip()
 TOUR_API = "https://apis.data.go.kr/B551011/KorService2/searchFestival2"
@@ -332,7 +333,10 @@ def kopis_events(today):
             if sub:
                 q["signgucodesub"] = sub
             try:
-                raw = get(KOPIS_API, q, tries=2, timeout=40)
+                try:
+                    raw = get(KOPIS_API, q, tries=2, timeout=40)
+                except Exception:
+                    raw = get(KOPIS_API_HTTP, q, tries=1, timeout=40)
                 root, items = xml_items(raw, "db")
             except Exception as e:
                 print("  KOPIS 실패:", str(e).replace(KOPIS_KEY, "***")[:150]); return []
