@@ -1308,7 +1308,7 @@ const NEWS = [
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
-const APP_VER = "1.0.33";
+const APP_VER = "1.0.34";
 let UPDATED_FROM = null;
 (function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
 function closeUpdated(go2) { store("edu.appVer", APP_VER); UPDATED_FROM = null; if (go2) go("news"); else render(); }
@@ -1368,6 +1368,7 @@ function viewAbout() {
 }
 
 // ---------- 관리자 (숨은 화면: 마이 > 버전 5번 누르기) ----------
+const GC_LOGIN = "https://www.goatcounter.com/login";
 const GC_SITE = "https://suwon-edu-app.goatcounter.com";
 const KEY_ADMIN = "edu.admin";
 let adminViaTap = false;  // 관리자 화면은 버전 5번 누르기로만 열림 (링크로 받은 #admin 은 홈으로)
@@ -1460,14 +1461,14 @@ function viewAdmin() {
     $view.innerHTML = `${head}
       <p style="font-size:13px;color:var(--muted);margin:6px 0 16px;line-height:1.6">접속 통계를 보려면 이 휴대폰에 GoatCounter API 키를 한 번 넣어 주세요. 키는 이 휴대폰에만 저장되고, 관리자로 등록된 휴대폰의 방문은 통계에서 빠져요.</p>
       <div class="lift" style="padding:18px;font-size:14px;line-height:1.8">
-        <b>키 만드는 법</b><br>1. <a href="${GC_SITE}" target="_blank" rel="noopener">GoatCounter 관리자 화면</a>에 로그인<br>2. 위쪽 메뉴의 내 이름(또는 톱니바퀴) → <b>API</b><br>3. 새 키를 만들 때 <b>Read statistics</b>(통계 읽기)만 체크 → 만들기<br>4. 나온 긴 글자를 복사해서 아래 칸에 붙여 넣기
+        <b>키 만드는 법</b><br>1. <a href="${GC_LOGIN}" target="_blank" rel="noopener">GoatCounter 로그인 화면</a>에서 로그인<br><span style="color:var(--muted)">(수원 통계 사이트가 아직 없으면: 톱니바퀴 → <b>Sites</b> → Code에 <b>suwon-edu-app</b> 넣고 추가)</span><br>2. 위쪽 메뉴의 내 이름(또는 톱니바퀴) → <b>API</b><br>3. 새 키를 만들 때 <b>Read statistics</b>(통계 읽기)만 체크 → 만들기<br>4. 나온 긴 글자를 복사해서 아래 칸에 붙여 넣기
       </div>
       <label class="search lift" style="margin-top:14px"><input id="akey" type="password" autocomplete="off" placeholder="API 키 붙여 넣기" aria-label="GoatCounter API 키"></label>
       <p style="font-size:13px;font-weight:700;margin:18px 0 0">관리자 비밀번호 (숫자 4자리)</p>
       <p style="font-size:12px;color:var(--muted);margin:4px 0 0">다음부터는 이 숫자만 넣으면 통계가 열려요.</p>
       ${pinInput("apin1", "숫자 4자리")}${pinInput("apin2", "한 번 더")}
       <button class="btn btn-3d" style="width:100%;height:52px;margin-top:14px" onclick="adminSaveKey()">이 휴대폰을 관리자로 등록</button>
-      <a class="btn btn-soft" style="width:100%;height:46px;margin-top:10px;font-size:14px" href="${GC_SITE}" target="_blank" rel="noopener">키 없이 전체 통계 사이트 열기 ↗</a>`;
+      <a class="btn btn-soft" style="width:100%;height:46px;margin-top:10px;font-size:14px" href="${GC_LOGIN}" target="_blank" rel="noopener">키 없이 전체 통계 사이트 열기 ↗</a>`;
     return;
   }
   if (!store(KEY_PIN)) {
