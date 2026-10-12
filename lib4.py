@@ -12,7 +12,8 @@ import urllib.parse
 import urllib.request
 
 KEY = os.environ.get("LIB_KEY", "").strip()
-API = "http://data4library.kr/api/"
+API = "https://data4library.kr/api/"  # 키가 평문으로 오가지 않게 https 우선
+API_HTTP = "http://data4library.kr/api/"  # https가 막히면 예비
 REGION = 31  # 경기도
 # 수원시 4개 구 (행정구역 코드 = 정보나루 세부지역 코드)
 GU = {"장안구": 41111, "권선구": 41113, "팔달구": 41115, "영통구": 41117}
@@ -22,9 +23,9 @@ UA = {"User-Agent": "Mozilla/5.0 (suwon-edu-collector)"}
 def call(name, **params):
     """정보나루 API 호출 → response 딕셔너리. 오류면 RuntimeError."""
     q = dict(params, authKey=KEY, format="json")
-    url = API + name + "?" + urllib.parse.urlencode(q)
     last = None
     for i in range(3):
+        url = (API if i < 2 else API_HTTP) + name + "?" + urllib.parse.urlencode(q)
         try:
             req = urllib.request.Request(url, headers=UA)
             with urllib.request.urlopen(req, timeout=60) as res:
