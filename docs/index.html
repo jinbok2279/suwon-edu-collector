@@ -572,7 +572,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.27 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.28 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>블로그 · 송골랩</span><a class="val" href="https://songgollab.blogspot.com/" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab.blogspot.com ›</a></div>
@@ -1492,6 +1492,7 @@ function viewAdmin() {
       ${list(pages.slice(0, 12).map(h => [pathName(h.path), h.count]), "아직 기록이 없어요.")}</section>
     <section class="section"><div class="sec-head"><h2>사용자 행동</h2><span style="font-size:12px;color:var(--muted)">최근 7일</span></div>
       ${list(events.map(h => [evName[h.path] || h.path, h.count]), "아직 아이 등록·학원 추가 같은 행동 기록이 없어요.")}</section>
+    ${adminAdHtml(A)}
     ${adminAcaHtml(A)}
     <section class="section"><div class="sec-head"><h2>어디서 들어왔나</h2><span style="font-size:12px;color:var(--muted)">최근 30일</span></div>
       ${list((A.refs.stats || []).map(x => [x.name || "(직접 입력·앱)", x.count]), "아직 기록이 없어요.")}</section>
@@ -1500,6 +1501,20 @@ function viewAdmin() {
     <a class="btn btn-3d" style="width:100%;height:50px;margin-top:20px;font-size:14px" href="${GC_SITE}" target="_blank" rel="noopener">전체 통계 사이트 열기 ↗</a>
     <button class="btn btn-soft" style="width:100%;height:46px;margin-top:10px;color:var(--coral-ink)" onclick="adminLogout()">이 휴대폰 관리자 해제</button>
     <div class="foot">관리자로 등록된 이 휴대폰의 방문은 통계에 들어가지 않아요.</div>`;
+}
+
+// 관리자 광고 성과: 광고 카드·가게 정보 버튼 클릭 (최근 30일, 관리자 휴대폰 제외)
+function adminAdHtml(A) {
+  if (typeof AD === "undefined" || !AD) return "";
+  const rows = (A.hits30 || []).filter(h => h.event && h.path.startsWith("광고-" + AD.id + "-"));
+  const cnt = k => rows.filter(h => h.path === "광고-" + AD.id + "-" + k).reduce((x, h) => x + h.count, 0);
+  const kinds = [["book", "네이버 예약"], ["tel", "전화 문의"], ["info", "가게 정보 보기"], ["map", "길찾기"], ["site", "홈페이지"]];
+  const total = kinds.reduce((x, [k]) => x + cnt(k), 0);
+  const shares = rows.filter(h => h.event && h.path === "지인-공유").reduce((x, h) => x + h.count, 0);
+  return `<section class="section"><div class="sec-head"><h2>광고 성과 · ${esc(AD.name)}</h2><span style="font-size:12px;color:var(--muted)">최근 30일</span></div>
+    <div class="lift card-pad">${kinds.map(([k, l]) => `<div class="row"><span>${l}</span><span class="val"><b>${cnt(k).toLocaleString()}</b>회</span></div>`).join("")}
+      <div class="row" style="font-weight:800"><span>합계</span><span class="val"><b>${total.toLocaleString()}</b>회</span></div></div>
+    <p style="font-size:11.5px;color:var(--muted);margin:8px 2px 0;line-height:1.6">관리자로 등록된 휴대폰에서 누른 건 세지 않아요. 통계 반영까지 몇 분 걸릴 수 있어요.${shares ? ` · 지인에게 알려주기 ${shares.toLocaleString()}회` : ""}</p></section>`;
 }
 
 // 관리자 학원 분석: 아이 등록 때 고른 학원(익명 집계) + 학원 상세 조회 (최근 30일)
