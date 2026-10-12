@@ -38,7 +38,7 @@ def main():
                 "addr": " ".join(str(r.get("address") or "").split()), "tel": (r.get("tel") or "").strip(),
                 "hours": " ".join(str(r.get("operatingTime") or "").split()),
                 "closed": " ".join(str(r.get("closed") or "").split()),
-                "books": int(str(r.get("BookCount") or "0").replace(",", "") or 0),
+                "books": int(re.sub(r"\D", "", str(r.get("BookCount") or "")) or 0),  # "-" 같은 값은 0
                 "lat": r.get("latitude") or "", "lng": r.get("longitude") or "",
             })
     if not libs:
