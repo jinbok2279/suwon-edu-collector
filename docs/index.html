@@ -356,7 +356,7 @@ function viewHome() {
   const install = "";
   const kidSc = ks.map(kidSchool).find(Boolean);
   const Q = [["🍚", "급식", "t-sun", kidSc ? `school/${kidSc.code}` : "schools"], ["🏫", "학교 일정", "t-lilac", kidSc ? `school/${kidSc.code}` : "schools"], ["📚", "도서관", "t-mint", "library"],
-    ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "행사", "t-coral", "events"]];
+    ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "문화생활", "t-coral", "events"]];
   const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="ic3d" style="width:46px;height:46px">${e3d(e, 42)}${r === "events" && newEvCount() ? `<b style="position:absolute;top:-5px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E5533D;color:#fff;font-size:10.5px;line-height:18px;font-weight:800;box-shadow:0 0 0 2px #fff;z-index:2">${newEvCount()}</b>` : ""}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
   const notice = homeNews() + homeInstall();  // 앱처럼 쓰기 카드는 소식과 상관없이 항상 (닫기 전까지)
   const addrNote = "";  // 수원은 주소 변경 안내 없음
@@ -564,7 +564,7 @@ function viewMy() {
   const kidRows = ks.map(k => { const sc = kidSchool(k);
     return `<button class="school" onclick="go('kid/${jsq(k.id)}')"><span class="tile ${KID_TILES[k.color % 5]}" style="width:42px;height:42px;font-weight:800">${esc(k.name[0] || "?")}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(k.name)}</div><div class="ad">${sc ? esc((kidGradeText(k, sc) ? levelShort(sc).replace("등", "") + " " + kidGradeText(k, sc) : levelShort(sc)) + " · " + sc.name) : "학교 정보 없음"}${k.acas && k.acas.length ? ` · 학원 ${k.acas.length}곳` : ""}${sc && !k.grade ? ` · <b style="color:var(--coral-ink)">학년을 넣어 주세요</b>` : ""}</div></div><span style="font-size:13px;color:var(--indigo);font-weight:700">수정</span></button>`; }).join("");
-  const M = [["events", "🎪", "t-coral", "아이와<br>함께 가요"], ["elite", "🎓", "t-indigo", "특목·<br>자사고", 1], ["jobs", "💼", "t-mint", "엄마<br>일자리", 1], ["premium", "📊", "t-sun", "수강료<br>비교", 1],
+  const M = [["events", "🎪", "t-coral", "아이랑<br>문화생활"], ["elite", "🎓", "t-indigo", "특목·<br>자사고", 1], ["jobs", "💼", "t-mint", "엄마<br>일자리", 1], ["premium", "📊", "t-sun", "수강료<br>비교", 1],
     ["schools", "🏫", "t-lilac", "학교<br>일정"], ["library", "📚", "t-mint", "도서관<br>찾기"], ["books", "📖", "t-coral", "대출<br>베스트"], ["acas", "✏️", "t-indigo", "학원<br>찾기"],
     ["kinders", "🧸", "t-sun", "유치원"], ["region", "📍", "t-lilac", "관심<br>지역"]];
   $view.innerHTML = `<h1 style="font-size:27px;font-weight:800;margin-bottom:16px">전체</h1>
@@ -768,7 +768,7 @@ function homeEvents() {
   const c = cityEvents(), l = libEvents().filter(e => e.status === "접수중");
   if (!c.length && !l.length) return "";
   const nl = Math.min(l.length, c.length >= 2 ? 1 : 3 - c.length); const rows = [...c.slice(0, 3 - nl).map(cityRow), ...l.slice(0, nl).map(libRow)].join("");
-  return `<section class="section"><div class="sec-head"><h2>아이와 함께 가요</h2><button onclick="go('events')">전체보기</button></div>
+  return `<section class="section"><div class="sec-head"><h2>아이랑 문화생활</h2><button onclick="go('events')">전체보기</button></div>
     <div class="lift card-pad">${rows}</div></section>`;
 }
 function pickEvTab(t) { evTab = t; render(); }
@@ -780,7 +780,7 @@ function viewEvents() {
     markEvSeen(); evVisit = true;
   }
   const back = `<button class="back glass" onclick="history.back()" aria-label="뒤로">${icon.back}</button>
-    <h1 style="font-size:25px;font-weight:800;margin-top:14px">아이와 함께 가요</h1>`;
+    <h1 style="font-size:25px;font-weight:800;margin-top:14px">아이랑 문화생활</h1>`;
   if (!EVENTS) { $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">행사 정보를 불러오는 중이에요…</div>`; return; }
   const c = cityEvents(), l = libEvents();
   if (evTab === "city" && !c.length && l.length) evTab = "lib";
@@ -1308,7 +1308,7 @@ const NEWS = [
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
-const APP_VER = "1.0.31";
+const APP_VER = "1.0.32";
 let UPDATED_FROM = null;
 (function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
 function closeUpdated(go2) { store("edu.appVer", APP_VER); UPDATED_FROM = null; if (go2) go("news"); else render(); }
@@ -1396,7 +1396,7 @@ const PATH_NAMES = { "/premium": "수강료 비교", "/kinders": "유치원 찾�
   "/kid/new": "아이 추가 화면", "/kid/edit": "아이 수정 화면", "/admin": "관리자" };
 function pathName(p) {
   if (PATH_NAMES[p]) return PATH_NAMES[p];
-  const more = { "/events": "아이와 함께 가요 (행사)", "/jobs": "엄마 일자리", "/ad": "가게 정보 (광고)", "/news": "업데이트 소식", "/books": "인기 도서", "/elite": "특목·자사고", "/premium": "학원 리포트", "/about": "이용 안내", "/admin": "관리자" };
+  const more = { "/events": "아이랑 문화생활 (행사)", "/jobs": "엄마 일자리", "/ad": "가게 정보 (광고)", "/news": "업데이트 소식", "/books": "인기 도서", "/elite": "특목·자사고", "/premium": "학원 리포트", "/about": "이용 안내", "/admin": "관리자" };
   if (more[p]) return more[p];
   if (p.startsWith("/school/")) { const sc = DATA.schools.find(s => s.code === p.slice(8)); return "학교: " + (sc ? sc.name : p.slice(8)); }
   if (p.startsWith("/library/")) return "도서관: " + decodeURIComponent(p.slice(9));
