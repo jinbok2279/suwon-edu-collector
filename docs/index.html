@@ -308,6 +308,42 @@ function schoolEvents(s) {
   return upcoming(group([...(s.events || []), ...pub]));
 }
 
+// ---------- 아이랑 운동교실 (시에서 운영하는 체육센터 강좌) ----------
+let SPORTS = null, spLoading = null, spTab = "kid", spCat = "전체", spOpen = false;
+function loadSports() { if (!spLoading) spLoading = dataFetch("sports.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { SPORTS = j; if (location.hash === "#sports") render(); }).catch(() => { SPORTS = { centers: [], programs: [], err: 1 }; if (location.hash === "#sports") render(); }); return spLoading; }
+const SP_ICON = { "수영": "🏊", "헬스": "🏋️", "요가·필라테스": "🧘", "댄스·에어로빅": "💃", "사우나": "♨️" };
+function pickSp(t, c) { if (t) { spTab = t; spCat = "전체"; } if (c === "open") spOpen = !spOpen; else if (c) spCat = c; render(); }
+function viewSports() {
+  const back = `<button class="back glass" onclick="history.back()" aria-label="뒤로">${icon.back}</button>
+    <h1 style="font-size:25px;font-weight:800;margin-top:14px">아이랑 운동교실</h1>
+    <p style="font-size:13px;color:var(--muted);margin-top:4px">시에서 운영하는 체육센터 강좌예요. 민간보다 저렴해요.</p>`;
+  if (!SPORTS) { loadSports(); $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">강좌 정보를 불러오는 중이에요…</div>`; return; }
+  const C = Object.fromEntries((SPORTS.centers || []).map(c => [c.id, c]));
+  const all = (SPORTS.programs || []).filter(p => (spTab === "kid" ? p.kid : !p.kid) && !/불가/.test(p.name) && !/^0원/.test(p.price || ""));
+  const cats = ["전체", ...Object.keys(SP_ICON).filter(k => all.some(p => p.cat === k))];
+  const left = p => p.cap ? Math.max(0, p.cap - (p.applied || 0)) : null;
+  const list = all.filter(p => (spCat === "전체" || p.cat === spCat) && (!spOpen || left(p) !== 0)).sort((a, b) => (left(a) === 0) - (left(b) === 0));
+  const seg = `<div class="seg" role="tablist"><button class="${spTab === "kid" ? "on" : ""}" onclick="pickSp('kid')">🧒 아이 강좌</button><button class="${spTab === "mom" ? "on" : ""}" onclick="pickSp('mom')">👩 엄마·가족 강좌</button></div>`;
+  const chips = `<div style="display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;margin:-4px 0 6px">${cats.map(k => `<button class="btn ${spCat === k ? "btn-3d" : "btn-soft"}" style="height:36px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickSp('', '${k}')">${k === "전체" ? "전체" : (SP_ICON[k] ? e3d(SP_ICON[k], 18) + " " : "") + k}</button>`).join("")}${SPORTS.live ? `<button class="btn ${spOpen ? "btn-3d" : "btn-soft"}" style="height:36px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickSp('', 'open')">🟢 자리 있는 반만</button>` : ""}</div>${SPORTS.live ? `<p style="font-size:12.5px;color:var(--muted);margin:0 2px 10px">${list.length}개 반 · 남은 자리 있는 반 ${list.filter(p => left(p) !== 0).length}개</p>` : ""}`;
+  const card = p => { const c = C[p.c] || {};
+    return `<div class="lift" style="padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;gap:12px;align-items:flex-start">${ico3d(SP_ICON[p.cat] || "🏊", 46, 38)}
+        <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:15.5px">${esc(p.name)}${p.month ? ` <span style="font-size:11.5px;font-weight:700;color:var(--muted)">${p.month}월 반</span>` : ""}</div>
+          <div style="font-size:12.5px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.name || "")} · ${esc(c.area || "")}</div></div></div>
+      <div style="font-size:13px;margin-top:10px;line-height:1.7;padding:10px 12px;background:#F4F6FB;border-radius:14px">🗓️ ${esc(p.days)}${p.times ? ` · <b>${esc(p.times)}</b>` : ""}<br>👤 ${esc(p.who)}<br>💳 <b style="color:var(--indigo)">${p.cap ? "" : "월 "}${esc(p.price)}</b>${p.cap ? `<br>${left(p) === 0 ? `<b style="color:var(--coral-ink)">⛔ 마감 (${p.cap}명 모두 신청)</b>` : `<b style="color:#12946F">🟢 ${left(p)}자리 남음</b> <span style="color:var(--muted)">(${p.applied || 0}/${p.cap}명)</span>`}` : ""}</div>
+      <div style="display:flex;gap:8px;margin-top:12px">${c.apply ? `<a class="btn btn-3d" style="flex:1;height:40px;font-size:13px" href="${esc(c.apply)}" target="_blank" rel="noopener" onclick="trackEvent('운동-수강신청')">수강신청 바로가기 ›</a>` : `<span class="btn btn-soft" style="flex:1;height:40px;font-size:13px">${esc(c.visit || "센터에 문의")}</span>`}
+        <a class="btn btn-soft" style="flex:0 0 auto;height:40px;font-size:13px;padding:0 14px" href="tel:${esc(c.tel || "")}">📞 전화</a></div></div>`; };
+  const centers = (SPORTS.centers || []).map(c => `<div class="lift" style="padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><b style="font-size:15px">${esc(c.name)}</b><span style="font-size:12px;color:var(--muted);flex:0 0 auto">${esc(c.area)}</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px">${c.tags.map(t => `<span style="font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:10px;background:${t === "수영" ? "#E3F1FF" : t === "사우나" ? "#FFEBDD" : "#EEF0F6"};color:var(--ink)">${esc(t)}</span>`).join("")}</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6">${esc(c.hours)}${c.closed ? " · " + esc(c.closed) : ""}<br>${esc(c.addr)}</div>
+      <div style="display:flex;gap:8px;margin-top:10px"><a class="btn btn-soft" style="flex:1;height:38px;font-size:12.5px" href="${esc(c.web)}" target="_blank" rel="noopener">홈페이지</a><a class="btn btn-soft" style="flex:1;height:38px;font-size:12.5px" href="https://map.naver.com/p/search/${encodeURIComponent(c.name)}" target="_blank" rel="noopener">길찾기</a><a class="btn btn-soft" style="flex:1;height:38px;font-size:12.5px" href="tel:${esc(c.tel)}">전화</a></div></div>`).join("");
+  $view.innerHTML = back + seg + chips +
+    (list.length ? list.map(card).join("") : `<div class="lift empty">이 종목은 아직 강좌 정보가 없어요.</div>`) +
+    `<p style="font-size:12px;color:var(--muted);margin:2px 4px 0;line-height:1.6">${SPORTS.live ? "남은 자리는 하루 여러 번 새로 받아요. 신청은 수원도시공사 강좌 예약 사이트에서 해요." : "요금은 한 달 기준 (월·수·금 / 화·목). 접수 일정과 남은 자리는 센터 홈페이지에서 확인해 주세요."}</p>
+    <section class="section"><div class="sec-head"><h2>시 체육센터 ${(SPORTS.centers || []).length}곳</h2></div>${centers}</section>
+    <div class="foot">정보 · ${SPORTS.city === "수원" ? "수원도시공사 강좌 예약 사이트" : "용인도시공사와 각 체육센터 홈페이지"} (${esc(SPORTS.updated || "")} 기준)</div>`;
+}
 function evRow(g, sub, tag) {
   const n = dday(g.date);
   const range = g.end !== g.date ? `${mdw(g.date)} ~ ${md(g.end)}` : mdw(g.date);
@@ -385,8 +421,8 @@ function viewHome() {
   const install = "";
   const kidSc = ks.map(kidSchool).find(Boolean);
   const Q = [["🍚", "급식", "t-sun", kidSc ? `school/${kidSc.code}` : "schools"], ["🏫", "학교 일정", "t-lilac", kidSc ? `school/${kidSc.code}` : "schools"], ["📚", "도서관", "t-mint", "library"],
-    ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "문화생활", "t-coral", "events"]];
-  const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="ic3d" style="width:46px;height:46px">${e3d(e, 42)}${r === "events" && newEvCount() ? `<b style="position:absolute;top:-5px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E5533D;color:#fff;font-size:10.5px;line-height:18px;font-weight:800;box-shadow:0 0 0 2px #fff;z-index:2">${newEvCount()}</b>` : ""}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
+    ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "문화생활", "t-coral", "events"], ["🏊", "운동교실", "t-mint", "sports"], ["🧩", "전체", "t-lilac", "my"]];
+  const quick = `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px 4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="ic3d" style="width:46px;height:46px">${e3d(e, 42)}${r === "events" && newEvCount() ? `<b style="position:absolute;top:-5px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E5533D;color:#fff;font-size:10.5px;line-height:18px;font-weight:800;box-shadow:0 0 0 2px #fff;z-index:2">${newEvCount()}</b>` : ""}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
   const notice = homeNews() + homeInstall();  // 앱처럼 쓰기 카드는 소식과 상관없이 항상 (닫기 전까지)
   const addrNote = "";  // 수원은 주소 변경 안내 없음
   $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
@@ -447,8 +483,10 @@ function viewAdInfo() {
 const F3D_BASE = "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/";
 const F3D = { "🎪": ["Circus tent", "circus_tent"], "🎓": ["Graduation cap", "graduation_cap"], "💼": ["Briefcase", "briefcase"], "📊": ["Bar chart", "bar_chart"], "🏫": ["School", "school"],
   "📚": ["Books", "books"], "📖": ["Open book", "open_book"], "✏️": ["Pencil", "pencil"], "🧸": ["Teddy bear", "teddy_bear"], "📍": ["Round pushpin", "round_pushpin"],
-  "🍚": ["Cooked rice", "cooked_rice"], "☀️": ["Sun", "sun"], "🌤️": ["Sun behind small cloud", "sun_behind_small_cloud"], "☁️": ["Cloud", "cloud"], "🌧️": ["Cloud with rain", "cloud_with_rain"] };
-function e3d(e, px) { const f = F3D[e]; if (!f) return e; return `<img src="${F3D_BASE}${encodeURIComponent(f[0])}/3D/${f[1]}_3d.png" alt="" width="${px}" height="${px}" loading="lazy" decoding="async" style="width:${px}px;height:${px}px" onerror="this.replaceWith(document.createTextNode('${e}'))">`; }
+  "🍚": ["Cooked rice", "cooked_rice"], "☀️": ["Sun", "sun"], "🌤️": ["Sun behind small cloud", "sun_behind_small_cloud"], "☁️": ["Cloud", "cloud"], "🌧️": ["Cloud with rain", "cloud_with_rain"],
+  "🏊": ["Person swimming/Default", "", "person_swimming_3d_default.png"], "🧘": ["Person in lotus position/Default", "", "person_in_lotus_position_3d_default.png"],
+  "🏋️": ["Person lifting weights/Default", "", "person_lifting_weights_3d_default.png"], "💃": ["Woman dancing/Default", "", "woman_dancing_3d_default.png"], "♨️": ["Hot springs", "hot_springs"], "🧩": ["Puzzle piece", "puzzle_piece"] };
+function e3d(e, px) { const f = F3D[e]; if (!f) return e; return `<img src="${F3D_BASE}${f[0].split("/").map(encodeURIComponent).join("/")}/3D/${f[2] || f[1] + "_3d.png"}" alt="" width="${px}" height="${px}" loading="lazy" decoding="async" style="width:${px}px;height:${px}px" onerror="this.replaceWith(document.createTextNode('${e}'))">`; }
 function ico3d(e, box, px) { return `<span class="ic3d" style="width:${box}px;height:${box}px">${e3d(e, px)}</span>`; }
 
 // ---------- 내 일정 추가·수정 화면 ----------
@@ -629,7 +667,7 @@ function viewMy() {
   const kidRows = ks.map(k => { const sc = kidSchool(k);
     return `<button class="school" onclick="go('kid/${jsq(k.id)}')"><span class="tile ${KID_TILES[k.color % 5]}" style="width:42px;height:42px;font-weight:800">${esc(k.name[0] || "?")}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(k.name)}</div><div class="ad">${sc ? esc((kidGradeText(k, sc) ? levelShort(sc).replace("등", "") + " " + kidGradeText(k, sc) : levelShort(sc)) + " · " + sc.name) : "학교 정보 없음"}${k.acas && k.acas.length ? ` · 학원 ${k.acas.length}곳` : ""}${sc && !k.grade ? ` · <b style="color:var(--coral-ink)">학년을 넣어 주세요</b>` : ""}</div></div><span style="font-size:13px;color:var(--indigo);font-weight:700">수정</span></button>`; }).join("");
-  const M = [["events", "🎪", "t-coral", "아이랑<br>문화생활"], ["elite", "🎓", "t-indigo", "특목·<br>자사고", 1], ["jobs", "💼", "t-mint", "엄마<br>일자리", 1], ["premium", "📊", "t-sun", "수강료<br>비교", 1],
+  const M = [["events", "🎪", "t-coral", "아이랑<br>문화생활"], ["sports", "🏊", "t-mint", "아이랑<br>운동교실"], ["elite", "🎓", "t-indigo", "특목·<br>자사고", 1], ["jobs", "💼", "t-mint", "엄마<br>일자리", 1], ["premium", "📊", "t-sun", "수강료<br>비교", 1],
     ["schools", "🏫", "t-lilac", "학교<br>일정"], ["library", "📚", "t-mint", "도서관<br>찾기"], ["books", "📖", "t-coral", "대출<br>베스트"], ["acas", "✏️", "t-indigo", "학원<br>찾기"],
     ["kinders", "🧸", "t-sun", "유치원"], ["region", "📍", "t-lilac", "관심<br>지역"]];
   $view.innerHTML = `<h1 style="font-size:27px;font-weight:800;margin-bottom:16px">전체</h1>
@@ -1358,6 +1396,11 @@ function viewElite() {
 // ---------- 이용 안내 · 개인정보 ----------
 // ---------- 업데이트 소식 (날짜별) ----------
 const NEWS = [
+  { d: "2026-10-12", v: "1.0.39", t: "시 체육센터 강좌를 한눈에 볼 수 있어요", items: [
+    "🏊 <b>아이랑 운동교실</b>이 생겼어요. 시에서 운영하는 체육센터의 수영·헬스·요가·필라테스·댄스·사우나 강좌를 모아 보여 드려요.",
+    "🧒 <b>아이 강좌</b>와 <b>엄마·가족 강좌</b>로 나눠 보고, 종목 버튼으로 골라 볼 수 있어요.",
+    "📞 강좌마다 요일·시간, 대상, 한 달 요금과 <b>수강신청 바로가기</b>, 전화 버튼이 있어요.",
+    "🟢 강좌마다 <b>남은 자리</b>를 보여 드려요. 하루 세 번 새로 받아요."] },
   { d: "2026-10-12", v: "1.0.37", t: "아이 일정을 직접 넣을 수 있어요", items: [
     "📝 홈 아이 일정 아래 <b>+ 내 일정 추가</b>로 준비물, 병원, 생일, 상담 같은 일정을 직접 넣을 수 있어요.",
     "🔁 매주 있는 일(예: 화요일 체육복)이나 매년 있는 일(생일)은 한 번만 넣으면 계속 보여 드려요.",
@@ -1381,7 +1424,7 @@ const NEWS = [
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
-const APP_VER = "1.0.38";
+const APP_VER = "1.0.39";
 let UPDATED_FROM = null;
 (function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
 function closeUpdated(go2) { store("edu.appVer", APP_VER); UPDATED_FROM = null; if (go2) go("news"); else render(); }
@@ -1470,7 +1513,7 @@ const PATH_NAMES = { "/premium": "수강료 비교", "/kinders": "유치원 찾�
   "/kid/new": "아이 추가 화면", "/kid/edit": "아이 수정 화면", "/admin": "관리자" };
 function pathName(p) {
   if (PATH_NAMES[p]) return PATH_NAMES[p];
-  const more = { "/events": "아이랑 문화생활 (행사)", "/jobs": "엄마 일자리", "/ad": "가게 정보 (광고)", "/news": "업데이트 소식", "/books": "인기 도서", "/elite": "특목·자사고", "/premium": "학원 리포트", "/about": "이용 안내", "/admin": "관리자" };
+  const more = { "/events": "아이랑 문화생활 (행사)", "/sports": "아이랑 운동교실", "/jobs": "엄마 일자리", "/ad": "가게 정보 (광고)", "/news": "업데이트 소식", "/books": "인기 도서", "/elite": "특목·자사고", "/premium": "학원 리포트", "/about": "이용 안내", "/admin": "관리자" };
   if (more[p]) return more[p];
   if (p.startsWith("/school/")) { const sc = DATA.schools.find(s => s.code === p.slice(8)); return "학교: " + (sc ? sc.name : p.slice(8)); }
   if (p.startsWith("/library/")) return "도서관: " + decodeURIComponent(p.slice(9));
@@ -1581,7 +1624,7 @@ function viewAdmin() {
   const list = (rows, label) => rows.length ? `<div class="lift card-pad">${rows.map(([k, v]) => `<div class="row"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(k)}</span><span class="val"><b>${v.toLocaleString()}</b></span></div>`).join("")}</div>` : `<div class="lift empty">${label}</div>`;
   const adK = { book: "네이버 예약", tel: "전화 문의", info: "가게 정보", map: "길찾기", site: "홈페이지" };
   const evLabel = k => evName[k] || (k.startsWith("광고-") ? "광고 · " + (adK[k.split("-").pop()] || k) : { "행사-시청": "행사 원문 보기 (시청)", "행사-도서관": "행사 원문 보기 (도서관)", "행사-공연축제": "행사 원문 보기 (공연·축제)", "행사-체험교육": "행사 원문 보기 (체험·교육)", "앱설치-크롬열기": "앱 설치: 크롬으로 열기" }[k] || k);
-  const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-인기학원": "★ 인기 학원 순위 알림 신청", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기", "내일정-추가": "내 일정 추가", "내일정-수정": "내 일정 수정" , "지인-공유": "지인에게 알려주기" };
+  const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-인기학원": "★ 인기 학원 순위 알림 신청", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기", "내일정-추가": "내 일정 추가", "내일정-수정": "내 일정 수정" , "지인-공유": "지인에게 알려주기", "운동-수강신청": "운동교실 수강신청 바로가기" };
   $view.innerHTML = `${head}
     ${A.warn ? `<div class="lift empty" style="margin:10px 0">일부 통계를 못 불러왔어요: ${esc(A.warn)}</div>` : ""}
     <p style="font-size:12px;color:var(--muted);margin:6px 0 14px">방문 횟수와 실제 사람 수 · ${A.at.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })} 불러옴 · <a href="#admin" onclick="ADMIN=null;adminMonths=null;render();return false">새로고침</a></p>
@@ -1745,6 +1788,7 @@ function render() {
   else if (r === "library") viewLibrary();
   else if (r === "books") viewBooks();
   else if (r === "events") viewEvents();
+  else if (r === "sports") viewSports();
   else if (r === "jobs") viewJobs();
   else if (r === "elite") viewElite();
   else if (r === "about") viewAbout();
