@@ -133,6 +133,7 @@ a.ev{color:inherit;text-decoration:none}
 .dots i{display:block;aspect-ratio:1;border-radius:3px;border:1.5px solid var(--dot);background:#fff}
 .dots i.u{background:var(--dot);border-color:var(--dot-ink)}
 .loading{padding:60px 0;text-align:center;color:var(--muted);font-size:14px}
+.tbox input{border:1px solid var(--line)}.tbox input:invalid{border:1.5px dashed #9AA6F5;color:transparent}.tbox input:invalid::-webkit-datetime-edit{opacity:0}.tbox .ph{position:absolute;left:12px;top:0;line-height:44px;font-size:14px;font-weight:700;color:#6C78E0;pointer-events:none}.tbox input:valid+.ph{display:none}
 </style>
 <script data-goatcounter="https://suwon-edu-app.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -355,7 +356,7 @@ function viewHome() {
   const kidSc = ks.map(kidSchool).find(Boolean);
   const Q = [["🍚", "급식", "t-sun", kidSc ? `school/${kidSc.code}` : "schools"], ["🏫", "학교 일정", "t-lilac", kidSc ? `school/${kidSc.code}` : "schools"], ["📚", "도서관", "t-mint", "library"],
     ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "행사", "t-coral", "events"]];
-  const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="tile ${t}" style="width:44px;height:44px;font-size:20px;border-radius:14px">${e}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
+  const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="tile ${t}" style="width:44px;height:44px;font-size:20px;border-radius:14px;position:relative">${e}${r === "events" && newEvCount() ? `<b style="position:absolute;top:-5px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E5533D;color:#fff;font-size:10.5px;line-height:18px;font-weight:800;box-shadow:0 0 0 2px #fff">${newEvCount()}</b>` : ""}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
   const notice = homeNews() + homeInstall();  // 앱처럼 쓰기 카드는 소식과 상관없이 항상 (닫기 전까지)
   const addrNote = "";  // 수원은 주소 변경 안내 없음
   $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
@@ -363,7 +364,7 @@ function viewHome() {
       <div style="min-width:0;flex:1;line-height:1.15"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px;white-space:nowrap">아이랑 수원</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by 송골랩 · 개인이 만든 서비스</div></div>
       <button class="chip glass" aria-label="지인에게 알려주기" title="지인에게 알려주기" style="flex:0 0 auto;width:34px;height:34px;padding:0;justify-content:center;color:var(--indigo)" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
       <button class="chip glass" style="flex:0 0 auto;font-size:12px;padding:0 12px;height:34px" onclick="go('region')">${icon.pin} ${esc(regionLabel().replace("수원시 전체", "수원").replace("수원 ", ""))} · ${levelLabel()} ▾</button></div>
-    ${addrNote}${hero}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${homeAd()}${footer()}`;
+    ${addrNote}${hero}${homeToday(ks)}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${homeAd()}${footer()}`;
 }
 
 // ---------- 광고 칸 (홈 맨 아래, "광고" 표시) ----------
@@ -410,6 +411,64 @@ function viewAdInfo() {
       ${row("홈페이지", `<a href="${AD.site}" target="_blank" rel="noopener sponsored" onclick="adOpen('site')" style="color:var(--indigo);font-weight:700;text-decoration:none">lagrills.co.kr ›</a>`)}</div></section>
     <section class="section"><div class="sec-head"><h2>이용 안내</h2></div><div class="lift card-pad">${li(AD.notes)}</div></section>
     <div class="foot">광고 · 가게에서 안내한 정보를 옮겼어요. 가시기 전에 가게에 한 번 더 확인해 주세요.</div>`;
+}
+
+// ---------- 오늘 아침 체크 (날씨·급식·학원·학교·마감) ----------
+let WEATHER = null;
+const KEY_SEEN_EV = "edu.seenEv";
+function evAll() { return EVENTS ? [...(EVENTS.city || []), ...(EVENTS.lib || [])] : []; }
+function newEvCount() {
+  if (!EVENTS) return 0;
+  let seen = null; try { seen = JSON.parse(store(KEY_SEEN_EV) || "null"); } catch (e) {}
+  const ids = evAll().map(e => e.id);
+  if (!seen) { store(KEY_SEEN_EV, JSON.stringify(ids)); return 0; }   // 처음 쓰는 분은 지금 것을 기준으로
+  const set = new Set(seen); return ids.filter(id => !set.has(id)).length;
+}
+async function loadWeather() { try { const r = await dataFetch("weather.json"); if (!r.ok) return; WEATHER = await r.json(); if (DATA) render(); } catch (e) {} }
+function markEvSeen() { if (EVENTS) store(KEY_SEEN_EV, JSON.stringify(evAll().map(e => e.id))); }
+function shortTitle(x) { x = x.replace(/^\[[^\]]*\]\s*/, "").replace(/\s*\(.*$/, "").replace(/[「」<>]/g, "").trim(); return x.length > 16 ? x.slice(0, 16) + "…" : x; }
+function weatherTip(w) {
+  const t = [];
+  if (w.pop >= 60) t.push("☔ 비 소식이 있어요. 우산 챙기세요");
+  if (w.air && /나쁨/.test((w.air.pm10 || "") + (w.air.pm25 || ""))) t.push("😷 미세먼지가 나빠요. 마스크 챙기세요");
+  if (w.lo <= 5) t.push("🧥 아침이 추워요. 두꺼운 겉옷 입혀 보내세요");
+  else if (w.hi - w.lo >= 10) t.push("🧥 일교차가 커요. 얇은 겉옷 챙기세요");
+  return t[0] || "😊 나들이하기 좋은 날씨예요";
+}
+function homeToday(ks) {
+  const now = new Date(), wd = (now.getDay() + 6) % 7, t = todayYmd();
+  const rows = [];
+  const row = (ic, label, body, act) => `<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);${act ? "cursor:pointer" : ""}" ${act ? `onclick="${act}"` : ""}>
+      <span style="flex:0 0 22px;font-size:17px;line-height:20px;text-align:center">${ic}</span>
+      <div style="flex:1;min-width:0"><div style="font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:2px">${label}</div><div style="font-size:13.5px;line-height:1.5">${body}</div></div>${act ? `<span style="color:var(--muted);font-size:13px;line-height:20px">›</span>` : ""}</div>`;
+  if (WEATHER && WEATHER.now) {
+    const w = WEATHER.now;
+    rows.push(row(w.icon || "🌤️", "날씨 · 미세먼지", `<b>${esc(w.sky)}</b> ${w.lo}° / ${w.hi}°${w.pop ? ` · 비 ${w.pop}%` : ""}${WEATHER.air ? ` · 미세먼지 <b>${esc(WEATHER.air.pm10)}</b>` : ""}<div style="color:var(--indigo);font-weight:700;margin-top:2px">${esc(weatherTip({ ...w, air: WEATHER.air }))}</div>`));
+  }
+  if (ks.length && MEALS) {
+    const seen = new Set(), lines = [];
+    ks.forEach(k => { const sc = kidSchool(k); if (!sc || seen.has(sc.code)) return; seen.add(sc.code);
+      const day = schoolMeals(sc.code).filter(m => m[0] === t); const m = day.find(x => x[1] === "중식") || day[0];
+      lines.push(`${ks.length > 1 ? `<b>${esc(k.name)}</b> ` : ""}${m ? esc(m[2].slice(0, 2).map(d => d[0].replace(/\(.*?\)/g, "")).join(", ")) + (m[2].length > 2 ? " 외" : "") : `<span style="color:var(--muted)">오늘은 급식이 없어요</span>`}`); });
+    if (lines.length) rows.push(row("🍚", "오늘 급식", lines.join("<br>"), ks.length === 1 && kidSchool(ks[0]) ? `go('school/${kidSchool(ks[0]).code}')` : ""));
+  }
+  if (ks.length) {
+    const ac = [];
+    ks.forEach(k => (k.acas || []).forEach(a => { if ((a.days || []).includes(wd)) ac.push({ k, a }); }));
+    ac.sort((x, y) => (x.a.s || "99").localeCompare(y.a.s || "99"));
+    const hasTimes = ks.some(k => (k.acas || []).some(a => (a.days || []).length));
+    if (ac.length) rows.push(row("✏️", `오늘 학원 (${WD[now.getDay()]}요일)`, ac.slice(0, 4).map(({ k, a }) => `${a.s ? `<b>${esc(a.s)}</b> ` : ""}${ks.length > 1 ? esc(k.name) + " · " : ""}${esc(a.n)}`).join("<br>") + (ac.length > 4 ? `<br><span style="color:var(--muted)">외 ${ac.length - 4}곳</span>` : "")));
+    else if (hasTimes) rows.push(row("✏️", "오늘 학원", `<span style="color:var(--muted)">오늘은 학원이 없는 날이에요</span>`));
+    const soon = kidEvents("all").filter(g => !g.pub && dday(g.date) <= 1).slice(0, 3);
+    if (soon.length) rows.push(row("🏫", "학교 일정", soon.map(g => `<b>${dday(g.date) === 0 ? "오늘" : "내일"}</b> ${ks.length > 1 && g.kid ? esc(g.kid.name) + " · " : ""}${esc(g.name)}`).join("<br>")));
+  }
+  if (EVENTS) {
+    const due = evAll().filter(e => e.applyEnd === t);
+    const nw = newEvCount();
+    if (due.length || nw) rows.push(row("🎪", "행사 · 프로그램", [due.length ? `<b style="color:#C93D22">오늘 신청 마감 ${due.length}건</b> · ${esc(shortTitle(due[0].title))}${due.length > 1 ? " 외" : ""}` : "", nw ? `새로 올라온 행사 <b>${nw}개</b>` : ""].filter(Boolean).join("<br>"), "go('events')"));
+  }
+  if (!rows.length) return "";
+  return `<section class="lift" style="padding:4px 16px 4px;margin:14px 0 2px"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 8px"><b style="font-size:15px">☀️ 오늘 아침 체크</b><span style="font-size:11.5px;color:var(--muted)">등원 전에 한 번에</span></div>${rows.join("").replace('border-top:1px solid var(--line);', '')}</section>`;
 }
 
 // ---------- 급식 ----------
@@ -513,7 +572,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.26 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.27 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>블로그 · 송골랩</span><a class="val" href="https://songgollab.blogspot.com/" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab.blogspot.com ›</a></div>
@@ -680,7 +739,7 @@ function cityRow(e) {
     e.grade ? `<span class="pill pill-gray">${esc(e.grade.length > 12 ? e.grade.slice(0, 12) + "…" : e.grade)}</span>` : ""].join("");
   return `<a class="ev" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener" onclick='evOpen({src:"city"})'>
     <div class="datebox city"><b>${d.getDate()}</b><span>${d.getMonth() + 1}월 ${WD[d.getDay()]}</span></div>
-    <div class="ev-body"><div class="ev-name">${esc(e.title)}</div><div class="ev-sub">${esc(when)}${e.place ? " · " + esc(e.place) : ""}${e.time ? " · " + esc(e.time) : ""}</div><div class="ev-tags">${tags}</div></div></a>`;
+    <div class="ev-body"><div class="ev-name">${EV_NEW.has(e.id) ? `<span style="display:inline-block;margin-right:5px;padding:1px 6px;border-radius:6px;background:#E5533D;color:#fff;font-size:10.5px;font-weight:800;vertical-align:2px">NEW</span>` : ""}${esc(e.title)}</div><div class="ev-sub">${esc(when)}${e.place ? " · " + esc(e.place) : ""}${e.time ? " · " + esc(e.time) : ""}</div><div class="ev-tags">${tags}</div></div></a>`;
 }
 function libRow(e) {
   const d = e.start ? parseDate(e.start) : null;
@@ -693,7 +752,7 @@ function libRow(e) {
   const apply = e.applyEnd ? (open ? `접수 ~${md(e.applyEnd)}` : e.applyStart ? `접수 ${md(e.applyStart)}부터` : "") : "";
   return `<a class="ev" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener" onclick='evOpen({src:"lib"})'>
     <div class="datebox"><b>${d ? d.getDate() : "-"}</b><span>${d ? `${d.getMonth() + 1}월 ${WD[d.getDay()]}` : ""}</span></div>
-    <div class="ev-body"><div class="ev-name">${esc(e.title)}</div><div class="ev-sub">${esc(e.lib || "")}${apply ? " · " + esc(apply) : ""}</div><div class="ev-tags">${tags}</div></div></a>`;
+    <div class="ev-body"><div class="ev-name">${EV_NEW.has(e.id) ? `<span style="display:inline-block;margin-right:5px;padding:1px 6px;border-radius:6px;background:#E5533D;color:#fff;font-size:10.5px;font-weight:800;vertical-align:2px">NEW</span>` : ""}${esc(e.title)}</div><div class="ev-sub">${esc(e.lib || "")}${apply ? " · " + esc(apply) : ""}</div><div class="ev-tags">${tags}</div></div></a>`;
 }
 function homeEvents() {
   if (!EVENTS) return "";
@@ -704,7 +763,13 @@ function homeEvents() {
     <div class="lift card-pad">${rows}</div></section>`;
 }
 function pickEvTab(t) { evTab = t; render(); }
+let EV_NEW = new Set(), evVisit = false;
 function viewEvents() {
+  if (!evVisit && EVENTS) {   // 들어올 때 한 번: 새 행사 표시해 두고, 본 것으로 기록
+    let seen = null; try { seen = JSON.parse(store(KEY_SEEN_EV) || "null"); } catch (e) {}
+    const set = new Set(seen || evAll().map(x => x.id)); EV_NEW = new Set(evAll().map(x => x.id).filter(id => !set.has(id)));
+    markEvSeen(); evVisit = true;
+  }
   const back = `<button class="back glass" onclick="history.back()" aria-label="뒤로">${icon.back}</button>
     <h1 style="font-size:25px;font-weight:800;margin-top:14px">아이와 함께 가요</h1>`;
   if (!EVENTS) { $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">행사 정보를 불러오는 중이에요…</div>`; return; }
@@ -775,13 +840,16 @@ function acaResults() {
 const WEEK = [["월", "MO"], ["화", "TU"], ["수", "WE"], ["목", "TH"], ["금", "FR"], ["토", "SA"], ["일", "SU"]];
 function acaTimeBox(a, i) {
   const days = a.days || [];
-  return `<div style="padding:4px 16px 16px;border-bottom:1px solid var(--line)">
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px">${WEEK.map(([d], j) => `<button class="btn ${days.includes(j) ? "btn-3d" : "btn-soft"}" style="height:34px;padding:0;font-size:13px" onclick="toggleAcaDay(${i},${j})">${d}</button>`).join("")}</div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)">
-      <input type="time" data-at="s" data-i="${i}" value="${esc(a.s || "")}" aria-label="수업 시작 시간" style="flex:1;min-width:0;height:40px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font:inherit;font-size:14px;background:#fff;color:var(--ink)">
-      <span>~</span>
-      <input type="time" data-at="e" data-i="${i}" value="${esc(a.e || "")}" aria-label="수업 끝나는 시간" style="flex:1;min-width:0;height:40px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font:inherit;font-size:14px;background:#fff;color:var(--ink)"></div>
-    <button class="btn btn-soft" style="width:100%;height:42px;margin-top:8px;font-size:13px;color:var(--indigo)" onclick="acaToCalendar(${i})">📅 휴대폰 캘린더에 추가 (시작·끝 10분 전 알림)</button>
+  const tin = (k, label) => `<label class="tbox" style="flex:1;min-width:0;display:block"><span style="display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin:0 0 4px 2px">${label}</span>
+      <span style="position:relative;display:block"><input type="time" required data-at="${k}" data-i="${i}" value="${esc(a[k] || "")}" aria-label="수업 ${label} 시간" style="width:100%;height:44px;border-radius:12px;padding:0 10px;font:inherit;font-size:15px;font-weight:700;background:#fff;color:var(--ink)"><span class="ph">눌러서 선택</span></span></label>`;
+  const empty = !days.length && !a.s;
+  return `<div style="margin:0 12px 14px;padding:12px;border-radius:16px;background:${empty ? "#FFF6E8" : "#F3F5FF"};border:1px solid ${empty ? "#FFD9A8" : "#E1E6FF"}">
+    ${empty ? `<div style="font-size:12.5px;font-weight:700;color:#8A5300;margin-bottom:10px">⏰ 요일·시간을 넣으면 홈 '오늘 학원'에 떠요</div>` : ""}
+    <div style="font-size:12px;font-weight:800;margin:0 0 6px 2px">📅 수업 요일 <span style="font-weight:600;color:var(--muted)">(여러 개 고를 수 있어요)</span></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px">${WEEK.map(([d], j) => `<button class="btn ${days.includes(j) ? "btn-3d" : "btn-soft"}" style="height:36px;padding:0;font-size:13px" onclick="toggleAcaDay(${i},${j})">${d}</button>`).join("")}</div>
+    <div style="font-size:12px;font-weight:800;margin:12px 0 6px 2px">⏰ 수업 시간</div>
+    <div style="display:flex;gap:8px;align-items:flex-end">${tin("s", "시작")}<span style="padding-bottom:12px;color:var(--muted)">~</span>${tin("e", "끝")}</div>
+    <button class="btn btn-soft" style="width:100%;height:42px;margin-top:10px;font-size:13px;color:var(--indigo)" onclick="acaToCalendar(${i})">📅 휴대폰 캘린더에도 넣기 (10분 전 알림)</button>
   </div>`;
 }
 function toggleAcaDay(i, j) { const a = kidForm.acas[i]; if (!a) return; const y = window.scrollY; a.days = a.days || []; a.days = a.days.includes(j) ? a.days.filter(x => x !== j) : [...a.days, j].sort(); render(); window.scrollTo(0, y); }
@@ -1216,6 +1284,10 @@ function viewElite() {
 // ---------- 이용 안내 · 개인정보 ----------
 // ---------- 업데이트 소식 (날짜별) ----------
 const NEWS = [
+  { d: "2026-10-12", v: "1.0.27", t: "아침마다 '오늘 아침 체크'를 볼 수 있어요", items: [
+    "☀️ 홈에 <b>오늘 아침 체크</b>가 생겼어요. 아이 오늘 급식, 오늘 갈 학원, 오늘·내일 학교 일정, 오늘 신청 마감 행사를 한 번에 보여 드려요.",
+    "🎪 새로 올라온 행사에 <b>NEW</b> 표시가 붙고, 바로가기 행사 아이콘에 새 행사 수가 떠요.",
+    "✏️ 아이 학원에 <b>수업 요일·시간</b>을 넣는 칸을 더 잘 보이게 바꿨어요. 시간을 넣으면 '오늘 학원'에 나와요."] },
   { d: "2026-10-12", v: "1.0.26", t: "친구에게 바로 알려 줄 수 있어요", items: [
     "홈 맨 위 <b>공유 버튼(↑)</b>을 누르면 카카오톡·문자로 아이랑 수원을 바로 보낼 수 있어요.",
     "공유창이 뜨지 않는 휴대폰에서는 소개 글과 주소가 복사돼요. 대화창에 붙여 넣어 주세요."] },
@@ -1530,6 +1602,7 @@ function render() {
   const tab = r.startsWith("school") ? "home" : r.startsWith("library") || r === "books" ? "library" : r === "acas" || r.startsWith("aca/") ? "acas" : r === "kinders" || r.startsWith("kinder/") ? "kinders" : r === "my" || r === "region" || r === "admin" || r === "premium" || r === "jobs" || r === "elite" || r === "about" || r === "news" || r.startsWith("kid/") ? "my" : "home";
   document.querySelectorAll(".navi").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
   if (r !== "admin") { adminOpen = false; ADMIN = null; adminMonths = null; adminViaTap = false; }
+  if (r !== "events") evVisit = false;
   if (r.startsWith("kid/")) { const p = r.split("/"); if (p[1] === "new") viewKid("", p[2] || ""); else viewKid(p[1]); }
   else if (r === "region") viewRegion();
   else if (r === "admin") {
@@ -1698,7 +1771,7 @@ async function loadEvents() {
   if (DATA) render();
 }
 async function load() {
-  loadSeats(); loadBooks(); loadEvents(); loadMeals();
+  loadSeats(); loadBooks(); loadEvents(); loadMeals(); loadWeather();
   try {
     const res = await dataFetch(DATA_URL);
     if (!res.ok) throw new Error(res.status);
