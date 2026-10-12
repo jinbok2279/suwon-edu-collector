@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-12 06:32:36",
+ "updated_at": "2026-10-13 06:34:14",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -316,6 +316,21 @@
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF292356_260527_140226.gif"
   },
   {
+   "id": "KPF302885",
+   "title": "도란도란 이야기보따리 [수원]",
+   "start": "2026-11-14",
+   "end": "2026-11-14",
+   "place": "수원SK아트리움",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "복합",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF302885",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF302885_261012_111835.png"
+  },
+  {
    "id": "GSM000191",
    "title": "송승환의 가족뮤지컬 〈더 스토리 오브 언더더씨〉",
    "start": "2026-11-14",
@@ -463,6 +478,21 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF301870",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF301870_260928_163327.png"
+  },
+  {
+   "id": "KPF302701",
+   "title": "메리크리스마스 산타할아버지 [수원]",
+   "start": "2026-12-12",
+   "end": "2026-12-13",
+   "place": "장안구민회관 한누리아트홀",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF302701",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF302701_261007_132204.jpg"
   }
  ],
  "lib": [
