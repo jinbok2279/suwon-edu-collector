@@ -364,7 +364,7 @@ function viewHome() {
       <div style="min-width:0;flex:1;line-height:1.15"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px;white-space:nowrap">아이랑 수원</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by 송골랩 · 개인이 만든 서비스</div></div>
       <button class="chip glass" aria-label="지인에게 알려주기" title="지인에게 알려주기" style="flex:0 0 auto;width:34px;height:34px;padding:0;justify-content:center;color:var(--indigo)" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
       <button class="chip glass" style="flex:0 0 auto;font-size:12px;padding:0 12px;height:34px" onclick="go('region')">${icon.pin} ${esc(regionLabel().replace("수원시 전체", "수원").replace("수원 ", ""))} · ${levelLabel()} ▾</button></div>
-    ${addrNote}${hero}${homeToday(ks)}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${homeAd()}${footer()}`;
+    ${addrNote}${homeUpdated()}${hero}${homeToday(ks)}${quick}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${homeAd()}${footer()}`;
 }
 
 // ---------- 광고 칸 (홈 맨 아래, "광고" 표시) ----------
@@ -572,7 +572,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.29 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">${APP_VER} (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>블로그 · 송골랩</span><a class="val" href="https://songgollab.blogspot.com/" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab.blogspot.com ›</a></div>
@@ -1298,6 +1298,19 @@ const NEWS = [
     "회원가입 없이 무료로 쓸 수 있어요."] },
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
+// 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
+const APP_VER = "1.0.30";
+let UPDATED_FROM = null;
+(function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
+function closeUpdated(go2) { store("edu.appVer", APP_VER); UPDATED_FROM = null; if (go2) go("news"); else render(); }
+function homeUpdated() {
+  if (!UPDATED_FROM) return "";
+  const fresh = newsUnseen();
+  return `<div class="lift" style="padding:11px 12px 11px 14px;margin:0 0 12px;display:flex;gap:10px;align-items:center;border:1px solid #C9D0FF;background:#F1F3FF">
+    <span style="font-size:18px">✨</span>
+    <div style="flex:1;min-width:0;font-size:13px;line-height:1.45;${fresh ? "cursor:pointer" : ""}" ${fresh ? `onclick="closeUpdated(true)"` : ""}><b>새 버전으로 업데이트됐어요</b> <span style="color:var(--muted)">· ${esc(APP_VER)}</span>${fresh ? `<br><span style="color:var(--indigo);font-weight:700">바뀐 점 보기 ›</span>` : ""}</div>
+    <button onclick="closeUpdated(false)" aria-label="닫기" style="border:0;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:0 4px">×</button></div>`;
+}
 function newsUnseen() { return store("edu.newsSeen") !== NEWS[0].v; }
 function homeNews() {
   if (!newsUnseen()) return "";
@@ -1309,6 +1322,7 @@ function homeNews() {
     <button onclick="store('edu.newsSeen',NEWS[0].v);render()" aria-label="닫기" style="border:0;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px 6px">×</button></div></section>`;
 }
 function viewNews() {
+  if (UPDATED_FROM) { store("edu.appVer", APP_VER); UPDATED_FROM = null; }
   store("edu.newsSeen", NEWS[0].v);
   const byDay = [];
   NEWS.forEach(n => { let g = byDay.find(x => x.d === n.d); if (!g) byDay.push(g = { d: n.d, list: [] }); g.list.push(n); });
