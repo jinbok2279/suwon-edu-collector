@@ -34,14 +34,16 @@ CENTERS = [
 ]
 
 KID = re.compile(r"초등|어린이|유아|아동|키즈|주니어|생존수영")
-SKIP = re.compile(r"출근부|강사|대관|탁구|배드민턴|농구|골프|테니스|풋살|축구|문화강좌")
+SKIP = re.compile(r"출근부|강사|대관|탁구|배드민턴|농구|골프|테니스|풋살|축구|문화|체험|사회적약자|다목적체육관|일일|미술|음악|어학|공예|서예|노래|악기|컴퓨터|요리|바둑")
+START = time.time()
+BUDGET = 15 * 60   # 최대 15분만 돌고, 받은 데까지 저장
 
 
 def http(url, data=None, ctype=None):
     req = urllib.request.Request(url, data=data, headers={"User-Agent": UA, **({"Content-Type": ctype} if ctype else {})})
-    for i in range(3):
+    for i in range(2):
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, timeout=20) as r:
                 return json.loads(r.read().decode("utf-8", errors="replace"))
         except Exception as e:
             print("  다시 시도:", url.split("/")[-1], e)
@@ -85,6 +87,8 @@ def main():
     now = datetime.now(KST)
     this_m = now.strftime("%Y%m")
     nxt = (now.replace(day=1) + timedelta(days=32)).strftime("%Y%m")
+    months = (nxt, this_m) if now.day >= 20 else (this_m,)   # 다음 달 반은 보통 20일 이후에 열림
+    print("조회 달:", months, flush=True)
     programs, status = [], {}
     for c in CENTERS:
         a, got = c["id"], 0
@@ -93,10 +97,12 @@ def main():
                 if SKIP.search(n1):
                     continue
                 time.sleep(0.4)
-                for c2, n2 in codes(a, c1):
-                    if SKIP.search(n2):
+                subs = codes(a, c1)
+                print(f" {c['name']} · {n1}: 세부 {len(subs)}개", flush=True)
+                for c2, n2 in subs:
+                    if SKIP.search(n2) or time.time() - START > BUDGET:
                         continue
-                    for ym in (nxt, this_m):
+                    for ym in months:
                         time.sleep(0.4)
                         for d in courses(a, c1, c2, ym):
                             names = [d.get(k, "") for k in ("skname1", "skname2", "skname3", "skname4")]
@@ -117,7 +123,7 @@ def main():
         except Exception as e:
             print(f" {c['name']} 실패: {e}")
             status[a] = "fail"
-        print(f" {c['name']}: {got}개")
+        print(f" {c['name']}: {got}개 ({int(time.time() - START)}초)", flush=True)
     # 같은 강좌가 두 달에 다 있으면 다음 달 것만 남김
     seen, uniq = set(), []
     for p in sorted(programs, key=lambda p: p["ym"], reverse=True):
