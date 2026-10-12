@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#5161F7">
 <meta name="description" content="수원 아이 키우는 집을 위한 급식·학교 일정·도서관·유치원·학원·행사 정보 모음">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https://raw.githubusercontent.com https://*.goatcounter.com https://gc.zgo.at; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="apple-mobile-web-app-title" content="아이랑수원">
 <title>아이랑 수원</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -198,6 +200,10 @@ let DATA = null;
 let installEvt = null;
 
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+// 바깥에서 받아 온 링크는 http(s) 주소만 통과 (javascript: 같은 위험한 주소 차단)
+function safeUrl(u) { u = String(u ?? "").trim(); return /^https?:\/\//i.test(u) ? u : "#"; }
+// onclick="go('...')" 처럼 HTML 속성 안의 자바스크립트 문자열에 값을 넣을 때 쓰는 안전 처리
+function jsq(v) { return esc(String(v ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/[\r\n]/g, " ")); }
 function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
 function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); }
 
@@ -319,14 +325,14 @@ function viewHome() {
     const oneSchool = one && kidSchool(one);
     const title = one ? `${one.name}\n${oneSchool ? oneSchool.name : "학교 정보 없음"}` : `우리 아이 ${ks.length}명\n다가오는 일정`;
     const nextTxt = next ? `다음 일정 · ${one ? "" : next.kid.name + " "}${next.name}` : "예정된 학교 일정이 없어요";
-    const cta = one && oneSchool ? `<button class="cta" onclick="go('school/${oneSchool.code}')">학교 일정 전체 보기 →</button>` : `<button class="cta" onclick="go('my')">아이 관리 →</button>`;
+    const cta = one && oneSchool ? `<button class="cta" onclick="go('school/${jsq(oneSchool.code)}')">학교 일정 전체 보기 →</button>` : `<button class="cta" onclick="go('my')">아이 관리 →</button>`;
     hero = `<section class="hero"><div class="glow"></div>
       <div class="date">${dateStr}</div>
       <h1>${esc(title)}</h1>
       <p class="next">${esc(nextTxt)}</p>
       ${next ? `<div class="dday"><b>${ddayText(dday(next.date))}</b><span>${mdw(next.date)}</span></div>` : `<div class="deco fl"><div class="orb-sun" style="width:56px;height:56px"></div></div>`}
     </section>`;
-    const chip = (id, label, extra = "") => `<button class="btn ${homeKid === id ? "btn-3d" : "btn-soft"}" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickKid('${id}')">${extra}${esc(label)}</button>`;
+    const chip = (id, label, extra = "") => `<button class="btn ${homeKid === id ? "btn-3d" : "btn-soft"}" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickKid('${jsq(id)}')">${extra}${esc(label)}</button>`;
     const chips = ks.length > 1 ? `<div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px">${chip("all", "전체")}${ks.map(k => chip(k.id, k.name, `<span class="tile ${KID_TILES[k.color % 5]}" style="width:18px;height:18px;border-radius:6px"></span>`)).join("")}</div>` : "";
     const list = evs.slice(0, homeAllEv ? 8 : 3);
     const ownCount = ks.filter(k => homeKid === "all" || k.id === homeKid).reduce((n, k) => n + (((kidSchool(k) || {}).events || []).length), 0);
@@ -345,12 +351,12 @@ function viewHome() {
     </section>`;
   }
 
-  const install = installEvt ? `<button class="btn btn-soft" style="height:40px;font-size:12px" onclick="doInstall()">앱으로 설치</button>` : "";
+  const install = "";
   const kidSc = ks.map(kidSchool).find(Boolean);
   const Q = [["🍚", "급식", "t-sun", kidSc ? `school/${kidSc.code}` : "schools"], ["🏫", "학교 일정", "t-lilac", kidSc ? `school/${kidSc.code}` : "schools"], ["📚", "도서관", "t-mint", "library"],
     ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "행사", "t-coral", "events"]];
   const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="tile ${t}" style="width:44px;height:44px;font-size:20px;border-radius:14px">${e}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
-  const notice = homeNews() || homeInstall();
+  const notice = homeNews() + homeInstall();  // 앱처럼 쓰기 카드는 소식과 상관없이 항상 (닫기 전까지)
   const addrNote = "";  // 수원은 주소 변경 안내 없음
   $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
       <img src="icon-192.png" alt="송골랩 로고" width="32" height="32" style="border-radius:9px;box-shadow:0 2px 8px rgba(30,40,90,.12);flex:0 0 auto">
@@ -373,7 +379,7 @@ function homeMeals(ks) {
     const sc = kidSchool(k); if (!sc || seen.has(sc.code)) continue; seen.add(sc.code);
     const nl = nextLunch(sc.code);
     const who = ks.filter(x => x.code === sc.code).map(kidPill).join("");
-    cards.push(`<div style="padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="go('school/${sc.code}')">
+    cards.push(`<div style="padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="go('school/${jsq(sc.code)}')">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><div style="min-width:0">${ks.length > 1 ? who : ""}<b style="font-size:14px">${esc(sc.name)}</b></div>
       <span style="font-size:12px;color:var(--muted);white-space:nowrap">${nl ? esc(dayLabel(nl.day)) + (nl.meal[3] ? " · " + esc(nl.meal[3]) + "kcal" : "") : ""} ›</span></div>
       ${nl ? dishList(nl.meal[2]) : `<div style="font-size:13px;color:var(--muted)">이번 주 등록된 급식이 없어요 (방학이거나 아직 올라오지 않았어요)</div>`}</div>`);
@@ -404,7 +410,7 @@ function viewSchools(q = "") {
     const next = upcoming(group(s.events || []))[0];
     const mineS = kidCodes.has(s.code);
     const tile = mineS ? `<span class="tile t-sun" style="width:40px;height:40px">${icon.star}</span>` : `<span class="tile ${tileCls[s.gu] || "t-lilac"}" style="width:40px;height:40px;font-weight:800">${esc(s.name.replace("수원", "")[0])}</span>`;
-    return `<button class="school ${mineS ? "mine" : ""}" onclick="go('school/${s.code}')">${tile}
+    return `<button class="school ${mineS ? "mine" : ""}" onclick="go('school/${jsq(s.code)}')">${tile}
       <div style="flex:1;min-width:0"><div class="nm">${esc(s.name)}</div><div class="ad">${esc(s.gu || "")}${s.dong ? " " + esc(s.dong) : ""} · ${next ? esc(mdw(next.date) + " " + next.name) : "등록된 일정 없음"}</div></div>
       <span style="color:#8A91A5">›</span></button>`;
   }).join("");
@@ -430,7 +436,7 @@ function viewSchool(code) {
       <h1 style="font-size:23px;font-weight:800">${esc(s.name)}</h1>
       <p style="margin:6px 0 16px;font-size:13px;color:var(--muted)">${levelShort(s)} · ${esc(s.address)}</p>
       ${here.length ? `<div style="margin-bottom:12px">${here.map(kidPill).join("")}<span style="font-size:13px;color:var(--muted)">의 학교예요</span></div>` : ""}
-      ${kids().length < MAX_KIDS ? `<button class="btn ${here.length ? "btn-soft" : "btn-3d"}" onclick="go('kid/new/${s.code}')">${icon.star} 이 학교로 아이 추가</button>` : ""}
+      ${kids().length < MAX_KIDS ? `<button class="btn ${here.length ? "btn-soft" : "btn-3d"}" onclick="go('kid/new/${jsq(s.code)}')">${icon.star} 이 학교로 아이 추가</button>` : ""}
     </div>
     <section class="section"><div class="sec-head"><h2>다가오는 일정</h2></div>
       <div class="lift card-pad">${list.map(g => evRow(g)).join("")}
@@ -441,7 +447,7 @@ function viewSchool(code) {
 function viewMy() {
   const ks = kids();
   const kidRows = ks.map(k => { const sc = kidSchool(k);
-    return `<button class="school" onclick="go('kid/${k.id}')"><span class="tile ${KID_TILES[k.color % 5]}" style="width:42px;height:42px;font-weight:800">${esc(k.name[0] || "?")}</span>
+    return `<button class="school" onclick="go('kid/${jsq(k.id)}')"><span class="tile ${KID_TILES[k.color % 5]}" style="width:42px;height:42px;font-weight:800">${esc(k.name[0] || "?")}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(k.name)}</div><div class="ad">${sc ? esc((kidGradeText(k, sc) ? levelShort(sc).replace("등", "") + " " + kidGradeText(k, sc) : levelShort(sc)) + " · " + sc.name) : "학교 정보 없음"}${k.acas && k.acas.length ? ` · 학원 ${k.acas.length}곳` : ""}${sc && !k.grade ? ` · <b style="color:var(--coral-ink)">학년을 넣어 주세요</b>` : ""}</div></div><span style="font-size:13px;color:var(--indigo);font-weight:700">수정</span></button>`; }).join("");
   const M = [["events", "🎪", "t-coral", "아이와<br>함께 가요"], ["elite", "🎓", "t-indigo", "특목·<br>자사고", 1], ["jobs", "💼", "t-mint", "엄마<br>일자리", 1], ["premium", "📊", "t-sun", "수강료<br>비교", 1],
     ["schools", "🏫", "t-lilac", "학교<br>일정"], ["library", "📚", "t-mint", "도서관<br>찾기"], ["books", "📖", "t-coral", "대출<br>베스트"], ["acas", "✏️", "t-indigo", "학원<br>찾기"],
@@ -460,7 +466,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.1 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.2 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>유튜브 · 송골랩</span><a class="val" href="https://www.youtube.com/@songgollab" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">@songgollab ›</a></div>
@@ -483,7 +489,7 @@ function viewRegion() {
     const map = {};
     levelSchools().filter(s => s.gu === r.gu).forEach(s => { map[dongOf(s)] = (map[dongOf(s)] || 0) + 1; });
     const names = Object.keys(map).sort((a, b) => (a === "기타") - (b === "기타") || a.localeCompare(b, "ko"));
-    const chip = (d, label, n) => `<button class="btn ${(r.dong || "") === d ? "btn-3d" : "btn-soft"}" style="height:40px;font-size:13px;padding:0 14px" onclick="pickDong('${d}')">${esc(label)} <span style="font-weight:500;opacity:.8">${n}</span></button>`;
+    const chip = (d, label, n) => `<button class="btn ${(r.dong || "") === d ? "btn-3d" : "btn-soft"}" style="height:40px;font-size:13px;padding:0 14px" onclick="pickDong('${jsq(d)}')">${esc(label)} <span style="font-weight:500;opacity:.8">${n}</span></button>`;
     dongs = `<section class="section"><div class="sec-head"><h2>동</h2></div>
       <div style="display:flex;flex-wrap:wrap;gap:10px 8px">${chip("", r.gu + " 전체", cnt(r.gu))}${names.map(d => chip(d, d, map[d])).join("")}</div></section>`;
   }
@@ -528,7 +534,7 @@ function closedToday(l, d = new Date()) {
 function libHours(h) { return (h || "").replace(/\s*\/\s*/g, " · "); }
 function libCard(l) {
   const off = closedToday(l);
-  return `<button class="school" onclick="go('library/${libKey(l)}')"><span class="tile ${off ? "t-lilac" : "t-mint"}" style="width:40px;height:40px">${icon.book}</span>
+  return `<button class="school" onclick="go('library/${jsq(libKey(l))}')"><span class="tile ${off ? "t-lilac" : "t-mint"}" style="width:40px;height:40px">${icon.book}</span>
     <div style="flex:1;min-width:0"><div class="nm">${esc(l.name)}</div><div class="ad">${esc(l.gu)}${l.closed ? " · 휴관 " + esc(l.closed.length > 22 ? l.closed.slice(0, 22) + "…" : l.closed) : ""}</div></div>
     <span class="pill ${off ? "pill-gray" : "pill-mint"}" style="white-space:nowrap">${off ? "오늘 휴관일" : "오늘 운영"}</span></button>`;
 }
@@ -548,8 +554,8 @@ function viewLibraryDetail(key) {
       ${row("운영시간", esc(libHours(l.hours)))}${row("휴관일", esc(l.closed))}${row("주소", esc(l.addr))}
       ${row("전화", l.tel ? `<a href="tel:${esc(l.tel)}" style="color:var(--indigo);font-weight:700;text-decoration:none">${esc(l.tel)}</a>` : "")}
       ${row("장서", l.books ? l.books.toLocaleString() + "권" : "")}</div>
-    <a class="btn btn-soft" style="width:100%;height:48px;margin-top:18px;font-size:14px" href="${esc(map)}" target="_blank" rel="noopener">지도에서 보기 ↗</a>
-    ${l.home ? `<a class="btn btn-soft" style="width:100%;height:48px;margin-top:12px;font-size:14px" href="${esc(l.home)}" target="_blank" rel="noopener">도서관 홈페이지 ↗</a>` : ""}
+    <a class="btn btn-soft" style="width:100%;height:48px;margin-top:18px;font-size:14px" href="${esc(safeUrl(map))}" target="_blank" rel="noopener">지도에서 보기 ↗</a>
+    ${l.home ? `<a class="btn btn-soft" style="width:100%;height:48px;margin-top:12px;font-size:14px" href="${esc(safeUrl(l.home))}" target="_blank" rel="noopener">도서관 홈페이지 ↗</a>` : ""}
     <div class="foot">오늘 운영 여부는 휴관일 안내 문구로 계산한 것이라 공휴일·임시 휴관은 반영되지 않을 수 있어요.<br>열람실 좌석은 도서관 홈페이지에서 확인해 주세요.</div>`;
 }
 function libHead(tab) {
@@ -579,11 +585,11 @@ function defaultBookKey() {
 }
 function bookLists() { return (BOOKS && BOOKS.lists || []).filter(l => l.books && l.books.length); }
 function currentBookList() { const ls = bookLists(); const k = bookKey || defaultBookKey(); return ls.find(l => l.key === k) || ls[0]; }
-function coverImg(b, cls) { return b.cover ? `<img class="${cls}" src="${esc(b.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : `<span class="${cls}" style="display:block"></span>`; }
+function coverImg(b, cls) { return b.cover ? `<img class="${cls}" src="${esc(safeUrl(b.cover))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : `<span class="${cls}" style="display:block"></span>`; }
 function bookRow(b) {
   const inner = `<span class="rk">${b.rank}</span>${coverImg(b, "cv")}
     <div style="flex:1;min-width:0"><div class="tt">${esc(b.title)}</div><div class="au">${b.series > 1 ? `<b style="color:var(--indigo)">시리즈 ${b.series}권</b> · ` : ""}${esc([b.author, b.publisher].filter(Boolean).join(" · "))}</div></div>`;
-  return b.link ? `<a class="book" href="${esc(b.link)}" target="_blank" rel="noopener" onclick="trackEvent('책-클릭')">${inner}<span style="color:var(--muted)">↗</span></a>` : `<div class="book">${inner}</div>`;
+  return b.link ? `<a class="book" href="${esc(safeUrl(b.link))}" target="_blank" rel="noopener" onclick="trackEvent('책-클릭')">${inner}<span style="color:var(--muted)">↗</span></a>` : `<div class="book">${inner}</div>`;
 }
 function viewBooks() {
   const cur = currentBookList();
@@ -600,7 +606,7 @@ function pickBooks(k) { bookKey = k; render(); }
 function homeBooks() {
   const cur = currentBookList();
   if (!cur) return "";
-  const items = cur.books.slice(0, 8).map(b => `<a href="${esc(b.link || "#")}" ${b.link ? 'target="_blank" rel="noopener"' : ""}>${b.cover ? `<img src="${esc(b.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : `<span class="ph"></span>`}<span class="no">${b.rank}</span><div class="tt">${esc(b.title)}</div></a>`).join("");
+  const items = cur.books.slice(0, 8).map(b => `<a href="${esc(safeUrl(b.link || "#"))}" ${b.link ? 'target="_blank" rel="noopener"' : ""}>${b.cover ? `<img src="${esc(safeUrl(b.cover))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : `<span class="ph"></span>`}<span class="no">${b.rank}</span><div class="tt">${esc(b.title)}</div></a>`).join("");
   return `<section class="section"><div class="sec-head"><h2>${esc(cur.title)}</h2><button onclick="go('books')">전체보기</button></div>
     <div class="shelf">${items}</div></section>`;
 }
@@ -625,7 +631,7 @@ function cityRow(e) {
   const tags = [e.free ? `<span class="pill pill-mint">무료</span>` : e.price ? `<span class="pill pill-gray">${esc(e.price.length > 14 ? "유료" : e.price)}</span>` : "",
     going ? `<span class="pill pill-indigo">진행 중</span>` : `<span class="pill ${dday(e.start) <= 7 ? "pill-indigo" : "pill-gray"}">${ddayText(dday(e.start))}</span>`,
     e.grade ? `<span class="pill pill-gray">${esc(e.grade.length > 12 ? e.grade.slice(0, 12) + "…" : e.grade)}</span>` : ""].join("");
-  return `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener" onclick='evOpen({src:"city"})'>
+  return `<a class="ev" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener" onclick='evOpen({src:"city"})'>
     <div class="datebox city"><b>${d.getDate()}</b><span>${d.getMonth() + 1}월 ${WD[d.getDay()]}</span></div>
     <div class="ev-body"><div class="ev-name">${esc(e.title)}</div><div class="ev-sub">${esc(when)}${e.place ? " · " + esc(e.place) : ""}${e.time ? " · " + esc(e.time) : ""}</div><div class="ev-tags">${tags}</div></div></a>`;
 }
@@ -638,7 +644,7 @@ function libRow(e) {
     e.target ? `<span class="pill pill-gray">${esc(e.target.length > 14 ? e.target.slice(0, 14) + "…" : e.target)}</span>` : "",
     left ? `<span class="pill pill-gray">신청 ${left[1]}/${left[2]}</span>` : ""].join("");
   const apply = e.applyEnd ? (open ? `접수 ~${md(e.applyEnd)}` : e.applyStart ? `접수 ${md(e.applyStart)}부터` : "") : "";
-  return `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener" onclick='evOpen({src:"lib"})'>
+  return `<a class="ev" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener" onclick='evOpen({src:"lib"})'>
     <div class="datebox"><b>${d ? d.getDate() : "-"}</b><span>${d ? `${d.getMonth() + 1}월 ${WD[d.getDay()]}` : ""}</span></div>
     <div class="ev-body"><div class="ev-name">${esc(e.title)}</div><div class="ev-sub">${esc(e.lib || "")}${apply ? " · " + esc(apply) : ""}</div><div class="ev-tags">${tags}</div></div></a>`;
 }
@@ -691,13 +697,13 @@ function viewKid(arg, pre) {
       <p style="font-size:12px;color:var(--muted);margin-top:8px">매년 3월에 자동으로 한 학년씩 올라가요.</p></section>` : ""}
     <section class="section"><div class="sec-head"><h2>다니는 학원 <span style="font-size:12px;color:var(--muted);font-weight:600">선택</span></h2><span style="font-size:12px;color:var(--muted)">${kidForm.acas.length}/10곳</span></div>
       ${kidForm.acas.length ? `<div class="lift list">${kidForm.acas.map((a, i) => `<div class="school" style="border-bottom:0"><span class="tile t-coral" style="width:40px;height:40px;font-weight:800">${esc((a.n || "학")[0])}</span>
-        <div style="flex:1;min-width:0;cursor:pointer" onclick="go('aca/${esc(a.id)}')"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.r || "")} · 정보 보기 ›</div></div>
-        <button class="btn btn-soft" style="height:34px;padding:0 12px;font-size:12px" onclick="removeAca('${esc(a.id)}')" aria-label="${esc(a.n)} 빼기">빼기</button></div>${acaTimeBox(a, i)}`).join("")}</div>` : ""}
+        <div style="flex:1;min-width:0;cursor:pointer" onclick="go('aca/${jsq(a.id)}')"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.r || "")} · 정보 보기 ›</div></div>
+        <button class="btn btn-soft" style="height:34px;padding:0 12px;font-size:12px" onclick="removeAca('${jsq(a.id)}')" aria-label="${esc(a.n)} 빼기">빼기</button></div>${acaTimeBox(a, i)}`).join("")}</div>` : ""}
       ${kidForm.acas.length < 10 ? `<label class="search lift">${icon.search}<input id="aq" placeholder="학원 이름 검색 (예: 수학, 태권도)" value="${esc(kidForm.aq)}" aria-label="학원 이름 검색"></label>
       <div class="lift list" id="ares"></div>` : ""}
       <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 수원시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.<br>앞으로 동의한 분들의 학원 정보만 <b>이름 없이</b> 모아 "우리 동네 인기 학원"을 보여 드릴 예정이에요.</p></section>
-    <button class="btn btn-3d" style="width:100%;height:54px;margin-top:24px;font-size:15px" onclick="saveKid('${editing ? editing.id : ""}')">${editing ? "저장하기" : "등록하기"}</button>
-    ${editing ? `<button class="btn btn-soft" style="width:100%;height:46px;margin-top:12px;color:var(--coral-ink)" onclick="deleteKid('${editing.id}')">${kidForm.arm ? "한 번 더 누르면 삭제돼요" : "이 아이 삭제"}</button>` : ""}`;
+    <button class="btn btn-3d" style="width:100%;height:54px;margin-top:24px;font-size:15px" onclick="saveKid('${jsq(editing ? editing.id : "")}')">${editing ? "저장하기" : "등록하기"}</button>
+    ${editing ? `<button class="btn btn-soft" style="width:100%;height:46px;margin-top:12px;color:var(--coral-ink)" onclick="deleteKid('${jsq(editing.id)}')">${kidForm.arm ? "한 번 더 누르면 삭제돼요" : "이 아이 삭제"}</button>` : ""}`;
   document.getElementById("kname").addEventListener("input", e => { kidForm.name = e.target.value; });
   document.getElementById("kq").addEventListener("input", e => { kidForm.q = e.target.value; kidResults(); });
   const aq = document.getElementById("aq");
@@ -715,7 +721,7 @@ function acaResults() {
   const picked = new Set(kidForm.acas.map(a => a.id));
   const res = ACAS.academies.filter(a => !picked.has(a.id) && a.n.replace(/\s/g, "").includes(q))
     .sort((x, y) => (sc ? (y.dong === sc.dong) - (x.dong === sc.dong) || (y.gu === sc.gu) - (x.gu === sc.gu) : 0) || x.n.localeCompare(y.n)).slice(0, 20);
-  box.innerHTML = res.map(a => `<button class="school" onclick="pickAca('${esc(a.id)}')"><span class="pill pill-gray">${esc(a.t || "학원")}</span>
+  box.innerHTML = res.map(a => `<button class="school" onclick="pickAca('${jsq(a.id)}')"><span class="pill pill-gray">${esc(a.t || "학원")}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(acaKind(a))} · ${esc(a.gu)} ${esc(a.dong)}</div></div><span style="font-size:13px;color:var(--indigo);font-weight:700">추가</span></button>`).join("") || `<div class="empty">검색 결과가 없어요. 이름 일부만 넣어 보세요.</div>`;
 }
 // ---------- 학원 시간 → 휴대폰 캘린더 (.ics) ----------
@@ -795,7 +801,7 @@ function kidResults() {
   if (!q) { box.style.display = "none"; return; }
   box.style.display = "";
   const res = DATA.schools.filter(s => s.name.includes(q)).slice(0, 20);
-  box.innerHTML = res.map(s => `<button class="school ${s.code === kidForm.code ? "mine" : ""}" onclick="pickKidSchool('${s.code}')">
+  box.innerHTML = res.map(s => `<button class="school ${s.code === kidForm.code ? "mine" : ""}" onclick="pickKidSchool('${jsq(s.code)}')">
       <span class="pill pill-gray">${levelShort(s)}</span><div style="flex:1;min-width:0"><div class="nm">${esc(s.name)}</div><div class="ad">${esc(s.gu || "")} ${esc(s.dong || "")}</div></div></button>`).join("") || `<div class="empty">검색 결과가 없어요.</div>`;
 }
 function pickKidSchool(code) { const sc = DATA.schools.find(s => s.code === code); kidForm.code = code; kidForm.q = ""; if (sc && kidForm.grade > maxGrade(sc)) kidForm.grade = 0; render(); }
@@ -853,11 +859,11 @@ function viewAcaList() {
   const myAcas = kids().flatMap(k => (k.acas || []).map(a => ({ ...a, kid: k.name })));
   const area = (f.dong || f.gu || "수원시") + (f.cat === "전체" ? "" : " " + f.cat);
   const feeRange = a => { const v = (a.f || []).map(x => x[1]).filter(x => x >= 30000); return v.length ? (Math.min(...v) === Math.max(...v) ? won(v[0]) : won(Math.min(...v)) + "~" + won(Math.max(...v))) : ""; };
-  const rows = list.slice(0, acaShow).map(a => `<button class="school" onclick="go('aca/${esc(a.id)}')"><span class="pill pill-gray" style="min-width:52px;text-align:center">${esc(a.t || "학원")}</span>
+  const rows = list.slice(0, acaShow).map(a => `<button class="school" onclick="go('aca/${jsq(a.id)}')"><span class="pill pill-gray" style="min-width:52px;text-align:center">${esc(a.t || "학원")}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(acaKind(a))} · ${esc(a.dong || a.gu)}${feeRange(a) ? ` · <b style="color:var(--indigo)">${feeRange(a)}</b>` : ""}</div></div><span style="color:var(--muted)">›</span></button>`).join("");
   $view.innerHTML = `${head}
     <p style="font-size:13px;color:var(--muted);margin:6px 0 14px">교육청에 등록된 수원시 학원·교습소 ${ACAS.count.toLocaleString()}곳</p>
-    ${myAcas.length ? `<section class="section" style="margin-top:0"><div class="sec-head"><h2>우리 아이 학원</h2></div><div class="shelf" style="gap:8px">${myAcas.map(a => `<button class="btn btn-soft" style="height:40px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="go('aca/${esc(a.id)}')">${esc(a.kid)} · ${esc(a.n)}</button>`).join("")}</div></section>` : ""}
+    ${myAcas.length ? `<section class="section" style="margin-top:0"><div class="sec-head"><h2>우리 아이 학원</h2></div><div class="shelf" style="gap:8px">${myAcas.map(a => `<button class="btn btn-soft" style="height:40px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="go('aca/${jsq(a.id)}')">${esc(a.kid)} · ${esc(a.n)}</button>`).join("")}</div></section>` : ""}
     <label class="search lift">${icon.search}<input id="acaq" placeholder="학원 이름·과목 검색 (예: 수학, 피아노)" value="${esc(f.q)}" aria-label="학원 검색"></label>
     <div style="display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px">${chip("수원 전체", !f.gu, "pickAcaGu('')")}${GUS.map(g => chip(g, f.gu === g, `pickAcaGu('${g}')`)).join("")}</div>
     ${f.gu ? `<div style="padding:6px 2px 4px"><select id="acadong" class="lift" style="width:100%;height:44px;border:0;border-radius:14px;padding:0 14px;font:inherit;font-size:14px;background:#fff" aria-label="동·읍·면 선택"><option value="">${esc(f.gu)} 전체 동·읍·면</option>${dongs.map(d => `<option value="${esc(d)}" ${d === f.dong ? "selected" : ""}>${esc(d)}</option>`).join("")}</select></div>` : ""}
@@ -918,7 +924,7 @@ function viewKinders() {
     const left = kLeft(k, f.age), c = kCap(k, f.age);
     const pct = c ? Math.round((c - left) / c * 100) : 0;
     const badge = [k.bus && k.bus.yn === "Y" ? "통학버스" : "", k.after && k.after.cls ? "방과후" : ""].filter(Boolean).map(b => `<span class="pill pill-gray" style="font-size:10px;padding:2px 7px">${b}</span>`).join(" ");
-    return `<button class="school" onclick="go('kinder/${encodeURIComponent(k.id)}')"><span class="pill ${kPublic(k) ? "pill-mint" : "pill-gray"}" style="min-width:44px;text-align:center">${kPublic(k) ? "공립" : "사립"}</span>
+    return `<button class="school" onclick="go('kinder/${jsq(encodeURIComponent(k.id))}')"><span class="pill ${kPublic(k) ? "pill-mint" : "pill-gray"}" style="min-width:44px;text-align:center">${kPublic(k) ? "공립" : "사립"}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(k.n)}</div><div class="ad">${esc(k.dong || k.gu)} · ${ageLabel ? ageLabel + " " : ""}정원 ${c} · <b style="color:${left ? "var(--mint-ink,#13795F)" : "var(--coral-ink)"}">빈자리 ${left}</b> ${badge}</div>
       <div class="seatbar" style="margin-top:6px;height:6px"><i style="width:${pct}%;background:${pct >= 90 ? "#FF7A59" : pct >= 70 ? "#FFC53D" : "#2FC4A4"}"></i></div></div><span style="color:var(--muted)">›</span></button>`;
   }).join("");
@@ -970,7 +976,7 @@ function viewKinder(id) {
     </div>
     <div style="display:flex;gap:10px;margin-top:16px">
       <a class="btn btn-soft" style="flex:1;height:46px;font-size:14px" href="${map}" target="_blank" rel="noopener">지도 ↗</a>
-      ${hp ? `<a class="btn btn-soft" style="flex:1;height:46px;font-size:14px" href="${esc(hp)}" target="_blank" rel="noopener">홈페이지 ↗</a>` : ""}
+      ${hp ? `<a class="btn btn-soft" style="flex:1;height:46px;font-size:14px" href="${esc(safeUrl(hp))}" target="_blank" rel="noopener">홈페이지 ↗</a>` : ""}
     </div>
     <a class="btn btn-3d" style="width:100%;height:50px;margin-top:10px;font-size:14px" href="https://www.go-firstschool.go.kr" target="_blank" rel="noopener">입학 신청 · 처음학교로 ↗</a>
     <div class="foot">데이터 · 유치원 알리미 ${esc(kTerm(k.term))}<br>원비(교육비)는 유치원 알리미에서 확인해 주세요.</div>`;
@@ -1037,7 +1043,7 @@ function viewPremium() {
           <div style="font-size:11px;color:var(--muted);margin-top:3px">${x.s ? `공개 ${x.s.n}곳 · 보통 ${won(x.s.lo)}~${won(x.s.hi)}` : "공개 정보 없음"}</div></div>`).join("")}</div>
       ${bandCnt.length ? `<div class="lift" style="padding:16px 18px;margin-top:12px"><div style="font-weight:800;margin-bottom:10px">${esc(main.label)} 가격대 분포</div>
         ${bandCnt.map(([l, c]) => `<div style="display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px"><span style="width:70px;color:var(--muted)">${l}</span><div class="seatbar" style="flex:1;height:12px"><i style="width:${Math.round(c / bandMax * 100)}%;background:#2FC4A4"></i></div><b style="width:28px;text-align:right">${c}</b></div>`).join("")}</div>` : ""}
-      ${cheap.length ? `<div class="lift list" style="margin-top:12px"><div style="padding:14px 18px 4px;font-weight:800">수강료가 낮은 곳 (공개 기준)</div>${cheap.map(({ a, m }) => `<button class="school" onclick="go('aca/${esc(a.id)}')"><div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.dong || a.gu)} · ${esc(acaKind(a))}</div></div><b style="color:var(--indigo);white-space:nowrap">${won(m)}~</b></button>`).join("")}</div>` : ""}
+      ${cheap.length ? `<div class="lift list" style="margin-top:12px"><div style="padding:14px 18px 4px;font-weight:800">수강료가 낮은 곳 (공개 기준)</div>${cheap.map(({ a, m }) => `<button class="school" onclick="go('aca/${jsq(a.id)}')"><div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.dong || a.gu)} · ${esc(acaKind(a))}</div></div><b style="color:var(--indigo);white-space:nowrap">${won(m)}~</b></button>`).join("")}</div>` : ""}
     </section>
     <div class="foot">수강료는 학원이 교육청에 신고한 금액(나이스 학원교습소정보) 기준이에요.<br>공개한 학원만 계산해서 실제 시세와 다를 수 있어요.</div>`;
   const ds = document.getElementById("premdong");
@@ -1071,7 +1077,7 @@ function jobRow(j, care) {
   const sub = care
     ? [j.org, where, j.qual].filter(Boolean).join(" · ")
     : [j.org, where, j.workStart ? `근무 ${md(j.workStart)}~${j.workEnd ? md(j.workEnd) : ""}` : "", j.pay].filter(Boolean).join(" · ");
-  return `<a class="ev" href="${esc(j.link)}" target="_blank" rel="noopener" onclick="trackEvent('일자리-${care ? "어린이집" : "학교"}')">
+  return `<a class="ev" href="${esc(safeUrl(j.link))}" target="_blank" rel="noopener" onclick="trackEvent('일자리-${care ? "어린이집" : "학교"}')">
     <div class="ev-body"><div class="ev-name">${esc(j.title)}</div><div class="ev-sub">${esc(sub)}</div><div class="ev-tags">${tags}</div></div></a>`;
 }
 function homeJobs() {
@@ -1151,7 +1157,7 @@ function viewElite() {
   const row = s => {
     const link = /^https?:/.test(s.hp) ? s.hp : (s.hp ? "http://" + s.hp : "https://search.naver.com/search.naver?query=" + encodeURIComponent(s.n));
     const sub = [s.sido + (s.sigungu && s.sigungu !== s.sido ? "" : ""), (s.addr.match(/^\S+\s+(\S+[시군구])/) || [])[1] || "", s.fond, s.coedu].filter(Boolean).join(" · ");
-    return `<a class="ev" href="${esc(link)}" target="_blank" rel="noopener" onclick="trackEvent('특목-학교')"><div class="ev-body"><div class="ev-name">${esc(s.short)}${s.n.includes("수원") || s.addr.includes("수원") ? ' <span class="pill pill-mint" style="font-size:11px;padding:3px 8px">수원</span>' : ""}</div><div class="ev-sub">${esc(sub)}</div></div></a>`; };
+    return `<a class="ev" href="${esc(safeUrl(link))}" target="_blank" rel="noopener" onclick="trackEvent('특목-학교')"><div class="ev-body"><div class="ev-name">${esc(s.short)}${s.n.includes("수원") || s.addr.includes("수원") ? ' <span class="pill pill-mint" style="font-size:11px;padding:3px 8px">수원</span>' : ""}</div><div class="ev-sub">${esc(sub)}</div></div></a>`; };
   $view.innerHTML = back + mineHtml + cal
     + `<section class="section"><div class="sec-head"><h2>학교 목록</h2><button onclick="pickElite('near', ${!eliteF.near})">${eliteF.near ? "전국 보기" : "수원에서 지원 가능만"}</button></div>
       <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px">${eliteF.near ? "수원 학생이 지원할 수 있는 곳: 영재학교·전국 자사고 + 경기도 과학고·외고·국제고" : "전국 모든 특목고·자사고"}</p>
@@ -1219,6 +1225,7 @@ function viewAbout() {
 // ---------- 관리자 (숨은 화면: 마이 > 버전 5번 누르기) ----------
 const GC_SITE = "https://suwon-edu-app.goatcounter.com";
 const KEY_ADMIN = "edu.admin";
+let adminViaTap = false;  // 관리자 화면은 버전 5번 누르기로만 열림 (링크로 받은 #admin 은 홈으로)
 let adminTaps = 0, adminTapTimer = null, ADMIN = null, adminBusy = false, adminOpen = false, pinFails = 0, pinWait = 0;
 const KEY_PIN = "edu.adminPin";
 async function pinHash(pin) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("edu-pin:" + pin + ":" + (store(KEY_ADMIN) || ""))); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); }
@@ -1238,7 +1245,7 @@ async function adminSetPin() {
 }
 function adminTap() {
   adminTaps++; clearTimeout(adminTapTimer); adminTapTimer = setTimeout(() => adminTaps = 0, 1500);
-  if (adminTaps >= 5) { adminTaps = 0; go("admin"); }
+  if (adminTaps >= 5) { adminTaps = 0; adminViaTap = true; go("admin"); }
 }
 const PATH_NAMES = { "/premium": "수강료 비교", "/kinders": "유치원 찾기", "/acas": "학원 찾기", "/home": "홈", "/schools": "학교 일정", "/library": "도서관 좌석", "/books": "인기 도서", "/my": "마이", "/region": "지역 설정",
   "/kid/new": "아이 추가 화면", "/kid/edit": "아이 수정 화면", "/admin": "관리자" };
@@ -1472,10 +1479,14 @@ function render() {
   const r = (location.hash || "#home").slice(1);
   const tab = r.startsWith("school") ? "home" : r.startsWith("library") || r === "books" ? "library" : r === "acas" || r.startsWith("aca/") ? "acas" : r === "kinders" || r.startsWith("kinder/") ? "kinders" : r === "my" || r === "region" || r === "admin" || r === "premium" || r === "jobs" || r === "elite" || r === "about" || r === "news" || r.startsWith("kid/") ? "my" : "home";
   document.querySelectorAll(".navi").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
-  if (r !== "admin") { adminOpen = false; ADMIN = null; adminMonths = null; }
+  if (r !== "admin") { adminOpen = false; ADMIN = null; adminMonths = null; adminViaTap = false; }
   if (r.startsWith("kid/")) { const p = r.split("/"); if (p[1] === "new") viewKid("", p[2] || ""); else viewKid(p[1]); }
   else if (r === "region") viewRegion();
-  else if (r === "admin") viewAdmin();
+  else if (r === "admin") {
+    // 이 휴대폰에 관리자 등록이 안 돼 있으면, 주소(#admin)로 바로 들어와도 관리자 화면을 보여 주지 않음
+    if (!store(KEY_ADMIN) && !adminViaTap) { history.replaceState(null, "", location.pathname + "#home"); viewHome(); }
+    else viewAdmin();
+  }
   else if (r === "premium") viewPremium();
   else if (r.startsWith("aca/")) viewAca(r.slice(4));
   else if (r === "acas") viewAcaList();
@@ -1496,52 +1507,100 @@ function render() {
   trackView(r);
   window.scrollTo(0, 0);
 }
-// ---------- 홈 화면에 추가 안내 (기기별) ----------
+// ---------- 앱처럼 쓰기 (홈 화면에 추가) — 기기·브라우저별로 알맞은 방법 하나만 보여 줌 ----------
 function devInfo() {
   const ua = navigator.userAgent || "";
   const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const inApp = /NAVER\(inapp|KAKAOTALK|DaumApps|Instagram|FBAN|FBAV|Line\/|everytimeApp|BAND\/|Karrot|Daangn/i.test(ua);
+  const android = /Android/i.test(ua);
+  const kakao = /KAKAOTALK/i.test(ua);
+  const inApp = kakao || /NAVER\(inapp|DaumApps|Instagram|FBAN|FBAV|Line\/|everytimeApp|BAND\/|Karrot|Daangn|; wv\)/i.test(ua);
   const samsung = /SamsungBrowser/i.test(ua);
+  const iosChrome = ios && /CriOS/i.test(ua), iosOther = ios && /FxiOS|EdgiOS|Whale/i.test(ua);
   const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
-  return { ios, inApp, samsung, standalone, android: /Android/i.test(ua) };
+  return { ios, android, kakao, inApp, samsung, iosChrome, iosOther, standalone, mobile: ios || android };
 }
+function siteUrl() { return location.origin + location.pathname; }
 function copyLink() {
-  const url = location.origin + location.pathname;
-  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast("주소를 복사했어요. 사파리나 크롬에 붙여 넣어 주세요")).catch(() => toast(url));
+  const url = siteUrl();
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast("주소를 복사했어요")).catch(() => toast(url));
 }
+// 앱 안 브라우저(카톡·네이버 등)에서 기본 브라우저로 바로 열기
+function openExternal(target) {
+  const d = devInfo(), url = siteUrl(), hostPath = url.replace(/^https?:\/\//, "");
+  trackEvent("앱설치-크롬열기");
+  if (target === "safari") { if (d.kakao) location.href = "kakaotalk://web/openExternal?url=" + encodeURIComponent(url); else copyLink(); return; }
+  if (d.ios) { location.href = "googlechromes://" + hostPath; setTimeout(() => toast("크롬 앱이 없으면 앱스토어에서 '크롬'을 설치해 주세요"), 1500); return; }
+  location.href = "intent://" + hostPath + "#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
+}
+const ICON_SHARE = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>`;
+const ICON_PLUS = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-3px"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>`;
+function installSteps() {
+  const d = devInfo();
+  const step = (n, t) => `<div style="display:flex;gap:12px;align-items:flex-start;margin-top:12px"><span style="flex:0 0 26px;height:26px;border-radius:13px;background:var(--indigo);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center">${n}</span><span style="flex:1;font-size:15px;line-height:1.55">${t}</span></div>`;
+  const big = (label, fn) => `<button class="btn btn-3d" style="width:100%;height:54px;margin-top:16px;font-size:16px" onclick="${fn}">${label}</button>`;
+  const small = (label, fn) => `<button class="btn btn-soft" style="width:100%;height:44px;margin-top:10px;font-size:13px" onclick="${fn}">${label}</button>`;
+  const chromeBtn = big("크롬으로 열기", "openExternal()") + `<p style="font-size:13px;color:var(--muted);margin-top:10px;text-align:center">크롬에서 열리면 다시 <b>앱처럼 쓰기</b>를 눌러 주세요</p>`;
+  const chromeIos = step(1, `주소창 오른쪽 <b>공유 ${ICON_SHARE}</b> 버튼을 눌러요`) + step(2, `목록에서 <b>홈 화면에 추가 ${ICON_PLUS}</b>를 눌러요`) + step(3, `오른쪽 위 <b>추가</b>를 누르면 끝!`);
+  const chromeAnd = step(1, `오른쪽 위 <b>⋮ 메뉴</b>를 눌러요`) + step(2, `<b>홈 화면에 추가</b> 또는 <b>앱 설치</b>를 눌러요`) + step(3, `<b>설치</b>(또는 <b>추가</b>)를 누르면 끝!`);
+  if (d.standalone) return { title: "이미 앱으로 쓰고 있어요 ✓", body: `<p style="color:var(--muted);line-height:1.6">홈 화면의 <b>아이랑 수원</b> 아이콘으로 바로 열려요.</p>` };
+  // 크롬(안드로이드)에서 바로 설치 가능한 경우: 버튼 한 번
+  if (installEvt && !d.inApp) return { title: "버튼 하나로 설치돼요", body: `<p style="color:var(--muted);line-height:1.6">아래 버튼을 누르고, 뜨는 창에서 <b>설치</b>를 누르면 바탕화면에 아이콘이 생겨요.</p>${big("📲 바탕화면에 설치하기", "doInstall()")}` };
+  // 크롬이 아닌 곳(카톡·네이버·삼성 인터넷·사파리 등) → 먼저 크롬으로
+  if (d.inApp) return { title: "크롬으로 열어 주세요",
+    body: `<p style="color:var(--muted);line-height:1.6">지금은 ${d.kakao ? "카카오톡" : "다른 앱"} 안이라 바탕화면에 추가할 수 없어요. <b>크롬</b>에서 열면 돼요.</p>${chromeBtn}${d.ios && d.kakao ? small("크롬이 없어요 → 사파리로 열기", "openExternal('safari')") : small("주소 복사하기", "copyLink()")}` };
+  if (d.iosChrome) return { title: "크롬에서 3번만 누르면 돼요", body: chromeIos };
+  if (d.android && !d.samsung && !/Chrome/.test(navigator.userAgent)) return { title: "크롬으로 열어 주세요", body: chromeBtn };
+  if (d.samsung) return { title: "크롬으로 열면 더 쉬워요", body: chromeBtn + `<details style="margin-top:14px"><summary style="font-size:13px;color:var(--muted);cursor:pointer">삼성 인터넷에서 그대로 추가하기</summary>${step(1, `화면 아래 <b>≡ 메뉴</b>`)}${step(2, `<b>현재 페이지 추가</b> → <b>홈 화면</b>`)}</details>` };
+  if (d.ios) return { title: "크롬으로 열어 주세요",
+    body: `<p style="color:var(--muted);line-height:1.6">아이폰도 <b>크롬</b>에서 똑같은 방법으로 추가할 수 있어요.</p>${chromeBtn}
+      <details style="margin-top:14px"><summary style="font-size:13px;color:var(--muted);cursor:pointer">크롬이 없어요 · 사파리에서 그대로 추가하기</summary>
+      ${step(1, `화면 맨 아래 <b>공유 ${ICON_SHARE}</b> (안 보이면 <b>⋯</b> 먼저)`)}${step(2, `<b>홈 화면에 추가 ${ICON_PLUS}</b>`)}${step(3, `오른쪽 위 <b>추가</b>`)}</details>` };
+  if (d.android) return { title: "크롬에서 3번만 누르면 돼요", body: chromeAnd };
+  return { title: "휴대폰에서 열어 주세요",
+    body: `<p style="color:var(--muted);line-height:1.6">바탕화면 아이콘은 휴대폰 크롬에서 만들어요. 이 주소를 휴대폰으로 보내 열어 주세요.</p>
+      <div style="margin-top:10px;font-weight:800;color:var(--indigo);user-select:all">${esc(siteUrl())}</div>${small("주소 복사하기", "copyLink()")}` };
+}
+// 앱처럼 쓰기 버튼: 바로 설치되는 기기는 바로 설치, 나머지는 그 기기에 맞는 안내 창
+function openInstall() {
+  trackEvent("앱설치-버튼");
+  if (installEvt && !devInfo().inApp) { doInstall(); return; }
+  const { title, body } = installSteps();
+  closeInstall();
+  const el = document.createElement("div");
+  el.id = "installSheet";
+  el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "앱처럼 쓰기");
+  el.style.cssText = "position:fixed;inset:0;z-index:50;background:rgba(20,26,46,.45);display:flex;align-items:flex-end;justify-content:center";
+  el.innerHTML = `<div style="background:#fff;width:min(560px,100%);border-radius:26px 26px 0 0;padding:22px 20px calc(26px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(20,26,46,.25);max-height:88vh;overflow:auto">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="icon-192.png" alt="" width="44" height="44" style="border-radius:12px;box-shadow:0 3px 10px rgba(30,40,90,.15)">
+        <div style="flex:1;min-width:0"><div style="font-size:12px;color:var(--muted)">아이랑 수원 · 앱처럼 쓰기</div><div style="font-size:18px;font-weight:800;margin-top:2px">${esc(title)}</div></div>
+        <button onclick="closeInstall()" aria-label="닫기" style="border:0;background:#EEF0F6;width:34px;height:34px;border-radius:17px;font-size:18px;color:var(--muted);cursor:pointer">×</button></div>
+      <div style="margin-top:6px">${body}</div>
+      <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6">설치 파일을 받지 않아요. 홈 화면 아이콘은 이 사이트로 바로 가는 바로가기라 용량도 거의 안 차지해요.</div>
+    </div>`;
+  el.addEventListener("click", e => { if (e.target === el) closeInstall(); });
+  document.body.appendChild(el);
+}
+function closeInstall() { const e = document.getElementById("installSheet"); if (e) e.remove(); }
+// 전체 메뉴 안의 안내 칸
 function installGuide() {
   const d = devInfo();
-  const step = (n, t) => `<div style="display:flex;gap:10px;align-items:flex-start;margin-top:10px"><span style="flex:0 0 24px;height:24px;border-radius:12px;background:var(--indigo);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center">${n}</span><span style="flex:1">${t}</span></div>`;
-  const box = inner => `<div class="lift" style="padding:18px;font-size:14px;line-height:1.65">${inner}</div>`;
-  if (d.standalone) return box(`<b>✓ 지금 홈 화면 앱으로 쓰고 있어요.</b><br><span style="color:var(--muted)">홈 화면 아이콘을 누르면 바로 열려요.</span>`);
-  let main;
-  if (d.inApp) main = `<b>지금은 카페·카톡 같은 앱 안에서 열려 있어요.</b><br><span style="color:var(--muted)">앱 안에서는 홈 화면에 추가할 수 없어서, 사파리나 크롬으로 한 번 열어 주세요.</span>
-      ${step(1, `오른쪽 위(또는 아래) <b>⋯ / ⋮ 메뉴</b> → <b>다른 브라우저로 열기</b>`)}
-      ${step(2, d.ios ? `사파리에서 아래쪽 <b>공유 버튼(□↑)</b> → <b>홈 화면에 추가</b>` : `크롬에서 오른쪽 위 <b>⋮</b> → <b>홈 화면에 추가</b> 또는 <b>앱 설치</b>`)}
-      <button class="btn btn-soft" style="width:100%;height:44px;margin-top:14px;font-size:13px" onclick="copyLink()">주소 복사하기</button>`;
-  else if (d.ios) main = `<b>아이폰은 이렇게 추가해요</b> <span style="color:var(--muted)">(사파리 기준)</span>
-      ${step(1, `화면 아래쪽 <b>공유 버튼(□↑)</b>을 눌러요`)}
-      ${step(2, `목록을 내려 <b>홈 화면에 추가</b>를 눌러요`)}
-      ${step(3, `오른쪽 위 <b>추가</b>를 누르면 아이콘이 생겨요`)}`;
-  else if (installEvt) main = `<button class="btn btn-3d" onclick="doInstall()" style="width:100%">홈 화면에 설치하기</button>
-      <div style="color:var(--muted);margin-top:10px">누르고 <b>설치</b>를 고르면 홈 화면에 아이콘이 생겨요.</div>`;
-  else if (d.samsung) main = `<b>삼성 인터넷은 이렇게 추가해요</b>
-      ${step(1, `아래쪽 <b>≡ 메뉴</b>를 눌러요`)}
-      ${step(2, `<b>현재 페이지 추가</b> → <b>홈 화면</b>을 눌러요`)}`;
-  else main = `<b>크롬은 이렇게 추가해요</b>
-      ${step(1, `오른쪽 위 <b>⋮ 메뉴</b>를 눌러요`)}
-      ${step(2, `<b>홈 화면에 추가</b> 또는 <b>앱 설치</b>를 눌러요`)}`;
-  return box(main + `<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6">설치 파일을 받지 않아요. 홈 화면 아이콘은 이 페이지로 바로 가는 바로가기예요.</div>`);
+  if (d.standalone) return `<div class="lift" style="padding:18px;font-size:14px;line-height:1.65"><b>✓ 지금 홈 화면 앱으로 쓰고 있어요.</b><br><span style="color:var(--muted)">홈 화면 아이콘을 누르면 바로 열려요.</span></div>`;
+  return `<div class="lift" style="padding:18px;font-size:14px;line-height:1.65">홈 화면에 아이콘을 만들어 두면 <b>앱처럼 한 번에</b> 열려요.
+    <button class="btn btn-3d" style="width:100%;height:52px;margin-top:12px;font-size:15px" onclick="openInstall()">📲 앱처럼 쓰기</button></div>`;
 }
+// 홈 화면 안내 카드 (누르면 바로 안내 창)
 function homeInstall() {
   const d = devInfo();
   if (d.standalone || store("edu.installHide") === "1") return "";
   return `<section class="section"><div class="lift" style="padding:14px 16px;display:flex;align-items:center;gap:12px">
     <span class="tile t-indigo" style="width:40px;height:40px;font-size:18px">📲</span>
-    <div style="flex:1;min-width:0;cursor:pointer" onclick="go('my');setTimeout(()=>{const e=document.getElementById('install-guide');if(e)e.scrollIntoView({behavior:'smooth'})},80)"><div style="font-weight:800;font-size:14px">홈 화면에 추가하고 앱처럼 쓰기</div><div style="font-size:12px;color:var(--muted);margin-top:2px">${d.inApp ? "카페·카톡 앱 안이라면 먼저 다른 브라우저로 열어 주세요" : d.ios ? "공유 버튼(□↑) → 홈 화면에 추가" : "설치 없이 아이콘 하나로 바로 열려요"} ›</div></div>
-    <button onclick="store('edu.installHide','1');render()" aria-label="닫기" style="border:0;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px 6px">×</button></div></section>`;
+    <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:14px">앱처럼 쓰기</div><div style="font-size:12px;color:var(--muted);margin-top:2px">바탕화면 아이콘 하나로 바로 열려요</div></div>
+    <button class="btn btn-3d" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="openInstall()">${d.inApp ? "크롬으로 열기" : "추가하기"}</button>
+    <button onclick="store('edu.installHide','1');render()" aria-label="닫기" style="border:0;background:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px 2px">×</button></div></section>`;
 }
-async function doInstall() { if (!installEvt) return; installEvt.prompt(); const ch = await installEvt.userChoice; if (ch && ch.outcome === "accepted") trackEvent("앱-설치"); installEvt = null; render(); }
+async function doInstall() { if (!installEvt) return; closeInstall(); installEvt.prompt(); const ch = await installEvt.userChoice; if (ch && ch.outcome === "accepted") { trackEvent("앱-설치"); toast("홈 화면에 추가했어요"); } installEvt = null; render(); }
+window.addEventListener("appinstalled", () => { installEvt = null; closeInstall(); render(); });
 
 document.querySelectorAll(".navi").forEach(b => b.addEventListener("click", () => go(b.dataset.tab)));
 window.addEventListener("hashchange", render);
