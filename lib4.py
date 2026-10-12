@@ -15,8 +15,8 @@ KEY = os.environ.get("LIB_KEY", "").strip()
 API = "https://data4library.kr/api/"  # 키가 평문으로 오가지 않게 https 우선
 API_HTTP = "http://data4library.kr/api/"  # https가 막히면 예비
 REGION = 31  # 경기도
-# 수원시 4개 구 (행정구역 코드 = 정보나루 세부지역 코드)
-GU = {"장안구": 41111, "권선구": 41113, "팔달구": 41115, "영통구": 41117}
+# 수원시 4개 구 (정보나루 세부지역 코드: 행정구역 코드와 다름, 31010=수원시)
+GU = {"장안구": 31011, "권선구": 31012, "팔달구": 31013, "영통구": 31014}
 UA = {"User-Agent": "Mozilla/5.0 (suwon-edu-collector)"}
 
 
