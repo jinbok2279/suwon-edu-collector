@@ -134,6 +134,7 @@ a.ev{color:inherit;text-decoration:none}
 .dots i.u{background:var(--dot);border-color:var(--dot-ink)}
 .loading{padding:60px 0;text-align:center;color:var(--muted);font-size:14px}
 .tbox input{border:1px solid var(--line)}.tbox input:invalid{border:1.5px dashed #9AA6F5;color:transparent}.tbox input:invalid::-webkit-datetime-edit{opacity:0}.tbox .ph{position:absolute;left:12px;top:0;line-height:44px;font-size:14px;font-weight:700;color:#6C78E0;pointer-events:none}.tbox input:valid+.ph{display:none}
+.ic3d{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}.ic3d::after{content:"";position:absolute;bottom:-1px;left:50%;width:62%;height:16%;transform:translateX(-50%);border-radius:50%;background:rgba(40,50,110,.16);filter:blur(3px);z-index:0}.ic3d img{position:relative;z-index:1;filter:drop-shadow(0 5px 5px rgba(30,40,90,.16))}
 </style>
 <script data-goatcounter="https://suwon-edu-app.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -356,7 +357,7 @@ function viewHome() {
   const kidSc = ks.map(kidSchool).find(Boolean);
   const Q = [["🍚", "급식", "t-sun", kidSc ? `school/${kidSc.code}` : "schools"], ["🏫", "학교 일정", "t-lilac", kidSc ? `school/${kidSc.code}` : "schools"], ["📚", "도서관", "t-mint", "library"],
     ["✏️", "학원", "t-indigo", "acas"], ["🧸", "유치원", "t-coral", "kinders"], ["🎪", "행사", "t-coral", "events"]];
-  const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="tile ${t}" style="width:44px;height:44px;font-size:20px;border-radius:14px;position:relative">${e}${r === "events" && newEvCount() ? `<b style="position:absolute;top:-5px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E5533D;color:#fff;font-size:10.5px;line-height:18px;font-weight:800;box-shadow:0 0 0 2px #fff">${newEvCount()}</b>` : ""}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
+  const quick = `<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:14px 0 2px">${Q.map(([e, l, t, r]) => `<button onclick="go('${r}')" style="border:0;background:none;padding:4px 0;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--ink)"><span class="ic3d" style="width:46px;height:46px">${e3d(e, 42)}${r === "events" && newEvCount() ? `<b style="position:absolute;top:-5px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E5533D;color:#fff;font-size:10.5px;line-height:18px;font-weight:800;box-shadow:0 0 0 2px #fff;z-index:2">${newEvCount()}</b>` : ""}</span><span style="font-size:11.5px;font-weight:700;white-space:nowrap">${l}</span></button>`).join("")}</div>`;
   const notice = homeNews() + homeInstall();  // 앱처럼 쓰기 카드는 소식과 상관없이 항상 (닫기 전까지)
   const addrNote = "";  // 수원은 주소 변경 안내 없음
   $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
@@ -413,6 +414,14 @@ function viewAdInfo() {
     <div class="foot">광고 · 가게에서 안내한 정보를 옮겼어요. 가시기 전에 가게에 한 번 더 확인해 주세요.</div>`;
 }
 
+// ---------- 입체 아이콘 (Microsoft Fluent Emoji 3D, MIT) ----------
+const F3D_BASE = "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/";
+const F3D = { "🎪": ["Circus tent", "circus_tent"], "🎓": ["Graduation cap", "graduation_cap"], "💼": ["Briefcase", "briefcase"], "📊": ["Bar chart", "bar_chart"], "🏫": ["School", "school"],
+  "📚": ["Books", "books"], "📖": ["Open book", "open_book"], "✏️": ["Pencil", "pencil"], "🧸": ["Teddy bear", "teddy_bear"], "📍": ["Round pushpin", "round_pushpin"],
+  "🍚": ["Cooked rice", "cooked_rice"], "☀️": ["Sun", "sun"], "🌤️": ["Sun behind small cloud", "sun_behind_small_cloud"], "☁️": ["Cloud", "cloud"], "🌧️": ["Cloud with rain", "cloud_with_rain"] };
+function e3d(e, px) { const f = F3D[e]; if (!f) return e; return `<img src="${F3D_BASE}${encodeURIComponent(f[0])}/3D/${f[1]}_3d.png" alt="" width="${px}" height="${px}" loading="lazy" decoding="async" style="width:${px}px;height:${px}px" onerror="this.replaceWith(document.createTextNode('${e}'))">`; }
+function ico3d(e, box, px) { return `<span class="ic3d" style="width:${box}px;height:${box}px">${e3d(e, px)}</span>`; }
+
 // ---------- 오늘 아침 체크 (날씨·급식·학원·학교·마감) ----------
 let WEATHER = null;
 const KEY_SEEN_EV = "edu.seenEv";
@@ -439,7 +448,7 @@ function homeToday(ks) {
   const now = new Date(), wd = (now.getDay() + 6) % 7, t = todayYmd();
   const rows = [];
   const row = (ic, label, body, act) => `<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);${act ? "cursor:pointer" : ""}" ${act ? `onclick="${act}"` : ""}>
-      <span style="flex:0 0 22px;font-size:17px;line-height:20px;text-align:center">${ic}</span>
+      <span style="flex:0 0 24px;font-size:17px;line-height:20px;text-align:center">${e3d(ic, 22)}</span>
       <div style="flex:1;min-width:0"><div style="font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:2px">${label}</div><div style="font-size:13.5px;line-height:1.5">${body}</div></div>${act ? `<span style="color:var(--muted);font-size:13px;line-height:20px">›</span>` : ""}</div>`;
   if (WEATHER && WEATHER.now) {
     const w = WEATHER.now;
@@ -468,7 +477,7 @@ function homeToday(ks) {
     if (due.length || nw) rows.push(row("🎪", "행사 · 프로그램", [due.length ? `<b style="color:#C93D22">오늘 신청 마감 ${due.length}건</b> · ${esc(shortTitle(due[0].title))}${due.length > 1 ? " 외" : ""}` : "", nw ? `새로 올라온 행사 <b>${nw}개</b>` : ""].filter(Boolean).join("<br>"), "go('events')"));
   }
   if (!rows.length) return "";
-  return `<section class="lift" style="padding:4px 16px 4px;margin:14px 0 2px"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 8px"><b style="font-size:15px">☀️ 오늘 아침 체크</b><span style="font-size:11.5px;color:var(--muted)">등원 전에 한 번에</span></div>${rows.join("").replace('border-top:1px solid var(--line);', '')}</section>`;
+  return `<section class="lift" style="padding:4px 16px 4px;margin:14px 0 2px"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 8px"><b style="font-size:15px;display:flex;align-items:center;gap:6px">${e3d("☀️", 20)} 오늘 아침 체크</b><span style="font-size:11.5px;color:var(--muted)">등원 전에 한 번에</span></div>${rows.join("").replace('border-top:1px solid var(--line);', '')}</section>`;
 }
 
 // ---------- 급식 ----------
@@ -559,7 +568,7 @@ function viewMy() {
     ["schools", "🏫", "t-lilac", "학교<br>일정"], ["library", "📚", "t-mint", "도서관<br>찾기"], ["books", "📖", "t-coral", "대출<br>베스트"], ["acas", "✏️", "t-indigo", "학원<br>찾기"],
     ["kinders", "🧸", "t-sun", "유치원"], ["region", "📍", "t-lilac", "관심<br>지역"]];
   $view.innerHTML = `<h1 style="font-size:27px;font-weight:800;margin-bottom:16px">전체</h1>
-    <div class="lift mgrid">${M.map(([r, e, t, l, p]) => `<button onclick="go('${r}')"><span class="tile ${t}">${e}</span><b>${l}</b></button>`).join("")}</div>
+    <div class="lift mgrid">${M.map(([r, e, t, l, p]) => `<button onclick="go('${r}')">${ico3d(e, 52, 46)}<b>${l}</b></button>`).join("")}</div>
     <section class="section" style="margin-top:0"><div class="sec-head"><h2>우리 아이</h2><span style="font-size:12px;color:var(--muted)">${ks.length}/${MAX_KIDS}명</span></div>
       <div class="lift list">${kidRows || `<div class="empty">아직 등록한 아이가 없어요.</div>`}</div>
       ${ks.length < MAX_KIDS ? `<button class="btn btn-soft" style="width:100%;height:50px" onclick="go('kid/new')">+ 아이 추가</button>` : ""}
@@ -1299,7 +1308,7 @@ const NEWS = [
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
-const APP_VER = "1.0.30";
+const APP_VER = "1.0.31";
 let UPDATED_FROM = null;
 (function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
 function closeUpdated(go2) { store("edu.appVer", APP_VER); UPDATED_FROM = null; if (go2) go("news"); else render(); }
