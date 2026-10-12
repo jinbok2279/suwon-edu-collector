@@ -611,7 +611,9 @@ function homeToday(ks) {
     const seen = new Set(), lines = [];
     ks.forEach(k => { const sc = kidSchool(k); if (!sc || seen.has(sc.code)) return; seen.add(sc.code);
       const day = schoolMeals(sc.code).filter(m => m[0] === t); const m = day.find(x => x[1] === "중식") || day[0];
-      lines.push(`${ks.length > 1 ? `<b>${esc(k.name)}</b> ` : ""}${m ? esc(m[2].slice(0, 2).map(d => d[0].replace(/\(.*?\)/g, "")).join(", ")) + (m[2].length > 2 ? " 외" : "") : `<span style="color:var(--muted)">오늘은 급식이 없어요</span>`}`); });
+      lines.push(`${ks.length > 1 ? `<b>${esc(k.name)}</b> ` : ""}${m ? esc(m[2].slice(0, 2).map(d => d[0].replace(/\(.*?\)/g, "")).join(", ")) + (m[2].length > 2 ? " 외" : "") : `<span style="color:var(--muted)">오늘은 급식이 없어요</span>`}`);
+      const bad = m ? m[2].filter(d => alHit(d[1], k.al).length) : [];
+      if (bad.length) lines.push(`<span style="color:#B42318;font-weight:700">⚠️ ${ks.length > 1 ? esc(k.name) + " · " : ""}${[...new Set(bad.flatMap(d => alHit(d[1], k.al)))].sort((a, b) => a - b).map(n => ALLERGY[n]).join("·")} 든 메뉴: ${esc(bad.map(d => d[0].replace(/\(.*?\)/g, "")).join(", "))}</span>`); });
     if (lines.length) rows.push(row("🍚", "오늘 급식", lines.join("<br>"), ks.length === 1 && kidSchool(ks[0]) ? `go('school/${kidSchool(ks[0]).code}')` : ""));
   }
   if (ks.length) {
@@ -638,7 +640,13 @@ const ALLERGY = ["", "난류", "우유", "메밀", "땅콩", "대두", "밀", "�
 function todayYmd() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
 function schoolMeals(code) { const t = todayYmd(); return ((MEALS && MEALS.schools && MEALS.schools[code]) || []).filter(m => m[0] >= t); }
 function nextLunch(code) { const ms = schoolMeals(code); if (!ms.length) return null; const day = ms[0][0]; const same = ms.filter(m => m[0] === day); return { day, meal: same.find(m => m[1] === "중식") || same[0], all: same }; }
-function dishList(ds, small) { return ds.map(([n, a]) => `<span style="display:inline-block;margin:0 6px 6px 0;padding:5px 10px;border-radius:12px;background:var(--ground, #F4F5FB);font-size:${small ? 12 : 13}px;font-weight:600">${esc(n)}${a ? `<sup style="font-size:9px;color:var(--muted);font-weight:500;margin-left:2px">${esc(a)}</sup>` : ""}</span>`).join(""); }
+function alNames(a) { return String(a || "").split(/[.,\s]+/).map(Number).filter(n => ALLERGY[n]).map(n => ALLERGY[n]); }
+function alHit(a, al) { if (!al || !al.length) return []; return String(a || "").split(/[.,\s]+/).map(Number).filter(n => al.includes(n)); }
+function kidsAl(list) { return [...new Set(list.flatMap(k => k.al || []))]; }
+function dishTap(ev, n, a) { ev.stopPropagation(); const names = alNames(a); toast(names.length ? `${n} · ${names.join(", ")}` : `${n} · 표시된 알레르기 성분 없음`); }
+function dishList(ds, small, al) { return ds.map(([n, a]) => { const hit = alHit(a, al);
+  return `<span onclick="dishTap(event,'${jsq(n)}','${jsq(a || "")}')" style="display:inline-block;margin:0 6px 6px 0;padding:5px 10px;border-radius:12px;cursor:pointer;background:${hit.length ? "#FFECEC" : "var(--ground, #F4F5FB)"};${hit.length ? "box-shadow:inset 0 0 0 1.5px #F2A3A3;color:#B42318;" : ""}font-size:${small ? 12 : 13}px;font-weight:600">${hit.length ? "⚠️ " : ""}${esc(n)}${a ? `<sup style="font-size:9px;color:${hit.length ? "#B42318" : "var(--muted)"};font-weight:${hit.length ? 800 : 500};margin-left:2px">${esc(a)}</sup>` : ""}</span>`; }).join(""); }
+function alLegend(al, kidId) { return `<p style="font-size:11.5px;color:var(--muted);line-height:1.6;margin:8px 0 2px">작은 숫자는 알레르기 성분 번호예요. <b>메뉴를 누르면</b> 성분 이름이 보여요.${al && al.length ? ` <span style="color:#B42318;font-weight:700">⚠️ 표시는 우리 아이 알레르기(${al.map(n => ALLERGY[n]).join("·")})가 든 메뉴예요.</span>` : (kidId ? ` <a href="#kid/${kidId}" onclick="event.stopPropagation()" style="color:var(--indigo);font-weight:700">아이 알레르기 등록하기 ›</a>` : "")}</p>`; }
 function dayLabel(ymd) { const t = todayYmd(); if (ymd === t) return "오늘"; const d = new Date(ymd + "T00:00:00"), n = new Date(t + "T00:00:00"); if ((d - n) / 864e5 === 1) return "내일"; return `${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`; }
 function homeMeals(ks) {
   if (!MEALS) return "";
@@ -650,11 +658,12 @@ function homeMeals(ks) {
     cards.push(`<div style="padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="go('school/${jsq(sc.code)}')">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><div style="min-width:0">${ks.length > 1 ? who : ""}<b style="font-size:14px">${esc(sc.name)}</b></div>
       <span style="font-size:12px;color:var(--muted);white-space:nowrap">${nl ? esc(dayLabel(nl.day)) + (nl.meal[3] ? " · " + esc(nl.meal[3]) + "kcal" : "") : ""} ›</span></div>
-      ${nl ? dishList(nl.meal[2]) : `<div style="font-size:13px;color:var(--muted)">이번 주 등록된 급식이 없어요 (방학이거나 아직 올라오지 않았어요)</div>`}</div>`);
+      ${nl ? dishList(nl.meal[2], false, kidsAl(ks.filter(x => x.code === sc.code))) : `<div style="font-size:13px;color:var(--muted)">이번 주 등록된 급식이 없어요 (방학이거나 아직 올라오지 않았어요)</div>`}</div>`);
     if (cards.length >= 3) break;
   }
   if (!cards.length) return "";
-  return `<section class="section"><div class="sec-head"><h2>🍚 우리 아이 급식</h2></div><div class="lift card-pad" style="padding-top:2px;padding-bottom:2px">${cards.join("")}</div></section>`;
+  const al = kidsAl(ks);
+  return `<section class="section"><div class="sec-head"><h2>🍚 우리 아이 급식</h2></div><div class="lift card-pad" style="padding-top:2px;padding-bottom:10px">${cards.join("")}${alLegend(al, !al.length && ks.length === 1 ? ks[0].id : (!al.length && ks.length ? ks[0].id : ""))}</div></section>`;
 }
 function schoolMealsSection(code) {
   if (!MEALS) return "";
@@ -662,10 +671,10 @@ function schoolMealsSection(code) {
   const days = [...new Set(ms.map(m => m[0]))].slice(0, 5);
   const body = days.length ? days.map(day => { const list = ms.filter(m => m[0] === day);
       return `<div style="padding:12px 0;border-bottom:1px solid var(--line)"><div style="font-weight:800;font-size:14px;margin-bottom:8px">${esc(dayLabel(day))}${dayLabel(day).length < 4 ? ` <span style="font-weight:500;color:var(--muted);font-size:12px">${esc(mdw(day))}</span>` : ""}</div>
-        ${list.map(m => `${list.length > 1 ? `<div style="font-size:12px;color:var(--muted);margin:2px 0 6px">${esc(m[1])}${m[3] ? " · " + esc(m[3]) + "kcal" : ""}</div>` : (m[3] ? `<div style="font-size:12px;color:var(--muted);margin:-4px 0 6px">${esc(m[3])}kcal</div>` : "")}${dishList(m[2], true)}`).join("")}</div>`; }).join("")
+        ${list.map(m => `${list.length > 1 ? `<div style="font-size:12px;color:var(--muted);margin:2px 0 6px">${esc(m[1])}${m[3] ? " · " + esc(m[3]) + "kcal" : ""}</div>` : (m[3] ? `<div style="font-size:12px;color:var(--muted);margin:-4px 0 6px">${esc(m[3])}kcal</div>` : "")}${dishList(m[2], true, kidsAl(kids().filter(k => kidSchool(k) && kidSchool(k).code === code)))}`).join("")}</div>`; }).join("")
     : `<div class="empty">이번 주 등록된 급식이 없어요. 방학이거나 학교가 아직 식단을 올리지 않았어요.</div>`;
   return `<section class="section"><div class="sec-head"><h2>🍚 이번 주 급식</h2></div><div class="lift card-pad" style="padding-top:2px">${body}
-    <p style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px">작은 숫자는 알레르기 유발 식품이에요. ${ALLERGY.slice(1).map((a, i) => `${i + 1} ${a}`).join(" · ")}<br>급식 · 나이스 급식식단정보${MEALS && MEALS.updated_at ? " · " + esc(MEALS.updated_at.slice(5, 16)) + " 갱신" : ""}</p></div></section>`;
+    ${alLegend(kidsAl(kids().filter(k => kidSchool(k) && kidSchool(k).code === code)), "")}<p style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:6px">${ALLERGY.slice(1).map((a, i) => `${i + 1} ${a}`).join(" · ")}<br>급식 · 나이스 급식식단정보${MEALS && MEALS.updated_at ? " · " + esc(MEALS.updated_at.slice(5, 16)) + " 갱신" : ""}</p></div></section>`;
 }
 
 // ---------- 화면: 학교 목록 ----------
@@ -954,7 +963,7 @@ function viewKid(arg, pre) {
   const list = kids();
   const editing = list.find(k => k.id === arg);
   if (!editing && list.length >= MAX_KIDS) { toast(`아이는 ${MAX_KIDS}명까지 등록할 수 있어요`); return go("my"); }
-  if (!kidForm || kidForm.key !== location.hash) kidForm = { key: location.hash, name: editing ? editing.name : (ORD[list.length] || "아이"), code: editing ? editing.code : (pre || ""), q: "", arm: false, acas: editing ? (editing.acas || []).slice() : [], aq: "", grade: editing ? kidGrade(editing) : 0 };
+  if (!kidForm || kidForm.key !== location.hash) kidForm = { key: location.hash, name: editing ? editing.name : (ORD[list.length] || "아이"), code: editing ? editing.code : (pre || ""), q: "", arm: false, acas: editing ? (editing.acas || []).slice() : [], aq: "", grade: editing ? kidGrade(editing) : 0, al: editing ? (editing.al || []).slice() : [] };
   const sc = kidForm.code && DATA.schools.find(s => s.code === kidForm.code);
   $view.innerHTML = `<button class="back glass" onclick="history.back()" aria-label="뒤로">${icon.back}</button>
     <h1 style="font-size:25px;font-weight:800;margin-top:14px">${editing ? "아이 정보 수정" : "아이 추가"}</h1>
@@ -969,6 +978,9 @@ function viewKid(arg, pre) {
     ${sc ? `<section class="section"><div class="sec-head"><h2>학년</h2>${kidForm.grade > maxGrade(sc) ? `<span style="font-size:12px;color:var(--coral-ink)">학교를 바꿔 주세요 (진학)</span>` : ""}</div>
       <div style="display:grid;grid-template-columns:repeat(${maxGrade(sc)},1fr);gap:8px">${Array.from({ length: maxGrade(sc) }, (_, i) => i + 1).map(g => `<button class="btn ${kidForm.grade === g ? "btn-3d" : "btn-soft"}" style="height:44px;font-size:15px;padding:0" onclick="pickGrade(${g})">${g}</button>`).join("")}</div>
       <p style="font-size:12px;color:var(--muted);margin-top:8px">매년 3월에 자동으로 한 학년씩 올라가요.</p></section>` : ""}
+    <section class="section"><div class="sec-head"><h2>알레르기 <span style="font-size:12px;color:var(--muted);font-weight:600">선택</span></h2>${kidForm.al.length ? `<span style="font-size:12px;color:#B42318;font-weight:700">${kidForm.al.length}개 선택</span>` : ""}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${ALLERGY.slice(1).map((a, i) => { const on = kidForm.al.includes(i + 1); return `<button class="btn ${on ? "" : "btn-soft"}" style="height:36px;padding:0 12px;font-size:13px;${on ? "background:#FFECEC;color:#B42318;box-shadow:inset 0 0 0 1.5px #F2A3A3;font-weight:800" : ""}" onclick="pickAl(${i + 1})">${on ? "⚠️ " : ""}${a}</button>`; }).join("")}</div>
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">고르면 급식에서 그 성분이 든 메뉴를 ⚠️로 알려 드려요. 이 휴대폰에만 저장되고 어디에도 보내지 않아요. 정확한 성분은 학교 식단표로 한 번 더 확인해 주세요.</p></section>
     <section class="section"><div class="sec-head"><h2>다니는 학원 <span style="font-size:12px;color:var(--muted);font-weight:600">선택</span></h2><span style="font-size:12px;color:var(--muted)">${kidForm.acas.length}/10곳</span></div>
       ${kidForm.acas.length ? `<div class="lift list">${kidForm.acas.map((a, i) => `<div class="school" style="border-bottom:0"><span class="tile t-coral" style="width:40px;height:40px;font-weight:800">${esc((a.n || "학")[0])}</span>
         <div style="flex:1;min-width:0;cursor:pointer" onclick="go('aca/${jsq(a.id)}')"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(a.r || "")} · 정보 보기 ›</div></div>
@@ -1092,8 +1104,8 @@ function saveKid(id) {
   const k = list.find(x => x.id === id);
   const before = new Set(((k && k.acas) || []).map(a => a.id));
   (kidForm.acas || []).filter(a => !before.has(a.id)).forEach(a => trackEvent("학원등록/" + a.id));
-  if (k) { k.name = name; k.code = kidForm.code; k.acas = kidForm.acas; k.grade = kidForm.grade; k.gy = schoolYear(); }
-  else list.push({ id: "k" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name, code: kidForm.code, acas: kidForm.acas, grade: kidForm.grade, gy: schoolYear(), color: nextColor(list) });
+  if (k) { k.name = name; k.code = kidForm.code; k.acas = kidForm.acas; k.grade = kidForm.grade; k.gy = schoolYear(); k.al = kidForm.al; }
+  else list.push({ id: "k" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name, code: kidForm.code, acas: kidForm.acas, grade: kidForm.grade, gy: schoolYear(), al: kidForm.al, color: nextColor(list) });
   saveKids(list); kidForm = null; homeKid = "all"; trackEvent(k ? "아이-수정" : "아이-등록");
   toast(k ? "저장했어요" : `${name}을(를) 등록했어요`); go("home");
 }
@@ -1101,6 +1113,7 @@ function deleteKid(id) {
   if (!kidForm.arm) { kidForm.arm = true; render(); return; }
   saveKids(kids().filter(k => k.id !== id)); kidForm = null; toast("삭제했어요"); go("my");
 }
+function pickAl(n) { const i = kidForm.al.indexOf(n); if (i >= 0) kidForm.al.splice(i, 1); else kidForm.al.push(n); kidForm.al.sort((a, b) => a - b); const y = scrollY; render(); window.scrollTo(0, y); }
 function pickKid(id) { homeKid = id; render(); }
 
 
@@ -1446,6 +1459,10 @@ function viewElite() {
 // ---------- 이용 안내 · 개인정보 ----------
 // ---------- 업데이트 소식 (날짜별) ----------
 const NEWS = [
+  { d: "2026-10-13", v: "1.0.41", t: "급식 알레르기를 바로 알려 드려요", items: [
+    "🍚 급식 메뉴를 <b>누르면</b> 숫자 대신 <b>알레르기 성분 이름</b>(예: 대두, 밀, 새우)이 보여요.",
+    "⚠️ 아이 정보에서 <b>알레르기</b>를 고르면, 그 성분이 든 메뉴를 빨간색으로 표시하고 <b>오늘 아침 체크</b>에서도 알려 드려요.",
+    "🔒 알레르기 정보는 이 휴대폰에만 저장돼요."] },
   { d: "2026-10-12", v: "1.0.39", t: "시 체육센터 강좌를 한눈에 볼 수 있어요", items: [
     "🏊 <b>아이랑 운동교실</b>이 생겼어요. 시에서 운영하는 체육센터의 수영·헬스·요가·필라테스·댄스·사우나 강좌를 모아 보여 드려요.",
     "🧒 <b>아이 강좌</b>와 <b>엄마·가족 강좌</b>로 나눠 보고, 종목 버튼으로 골라 볼 수 있어요.",
@@ -1474,7 +1491,7 @@ const NEWS = [
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
-const APP_VER = "1.0.40";
+const APP_VER = "1.0.41";
 let UPDATED_FROM = null;
 const IS_NEW_PHONE = !store("edu.appVer");   // 이 휴대폰에서 처음 열었는지 (예전에 쓴 적 있으면 앱 버전이 남아 있음)
 (function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
