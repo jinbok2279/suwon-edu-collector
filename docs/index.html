@@ -572,7 +572,7 @@ function viewMy() {
     <section class="section"><div class="sec-head"><h2>정보</h2></div>
       <div class="lift card-pad">
         <div class="row"><span>마지막 업데이트</span><span class="val">${esc(DATA.updated_at)}</span></div>
-        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.28 (시범 운영)</span></div>
+        <div class="row" onclick="adminTap()" style="cursor:default;user-select:none"><span>버전</span><span class="val">1.0.29 (시범 운영)</span></div>
         <div class="row" onclick="go('news')" style="cursor:pointer"><span>업데이트 소식${newsUnseen() ? ' <span style="display:inline-block;margin-left:4px;padding:1px 6px;border-radius:8px;background:var(--coral, #E5533D);color:#fff;font-size:10px;font-weight:800;vertical-align:2px">NEW</span>' : ""}</span><span class="val" style="color:var(--indigo);font-weight:700">${esc(newsDate(NEWS[0].d))} ›</span></div>
         <div class="row"><span>개발자 이메일</span><a class="val" href="mailto:songgollab@gmail.com" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab@gmail.com</a></div>
         <div class="row"><span>블로그 · 송골랩</span><a class="val" href="https://songgollab.blogspot.com/" target="_blank" rel="noopener" style="color:var(--indigo);font-weight:700;text-decoration:none">songgollab.blogspot.com ›</a></div>
@@ -1373,6 +1373,8 @@ const PATH_NAMES = { "/premium": "수강료 비교", "/kinders": "유치원 찾�
   "/kid/new": "아이 추가 화면", "/kid/edit": "아이 수정 화면", "/admin": "관리자" };
 function pathName(p) {
   if (PATH_NAMES[p]) return PATH_NAMES[p];
+  const more = { "/events": "아이와 함께 가요 (행사)", "/jobs": "엄마 일자리", "/ad": "가게 정보 (광고)", "/news": "업데이트 소식", "/books": "인기 도서", "/elite": "특목·자사고", "/premium": "학원 리포트", "/about": "이용 안내", "/admin": "관리자" };
+  if (more[p]) return more[p];
   if (p.startsWith("/school/")) { const sc = DATA.schools.find(s => s.code === p.slice(8)); return "학교: " + (sc ? sc.name : p.slice(8)); }
   if (p.startsWith("/library/")) return "도서관: " + decodeURIComponent(p.slice(9));
   if (p.startsWith("/aca/")) { const a = ACAS && ACAS.academies.find(x => x.id === p.slice(5)); return "학원: " + (a ? a.n : p.slice(5)); }
@@ -1475,6 +1477,8 @@ function viewAdmin() {
   const hits = (A.hits || {}).hits || [];
   const pages = hits.filter(h => !h.event), events = hits.filter(h => h.event);
   const list = (rows, label) => rows.length ? `<div class="lift card-pad">${rows.map(([k, v]) => `<div class="row"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(k)}</span><span class="val"><b>${v.toLocaleString()}</b></span></div>`).join("")}</div>` : `<div class="lift empty">${label}</div>`;
+  const adK = { book: "네이버 예약", tel: "전화 문의", info: "가게 정보", map: "길찾기", site: "홈페이지" };
+  const evLabel = k => evName[k] || (k.startsWith("광고-") ? "광고 · " + (adK[k.split("-").pop()] || k) : { "행사-시청": "행사 원문 보기 (시청)", "행사-도서관": "행사 원문 보기 (도서관)", "행사-공연축제": "행사 원문 보기 (공연·축제)", "행사-체험교육": "행사 원문 보기 (체험·교육)", "앱설치-크롬열기": "앱 설치: 크롬으로 열기" }[k] || k);
   const evName = { "아이-등록": "아이 등록", "아이-수정": "아이 정보 수정", "학원-추가": "학원 추가", "책-클릭": "인기 도서 클릭", "앱-설치": "홈 화면에 설치", "관심-인기학원": "★ 인기 학원 순위 알림 신청", "관심-알림": "★ 알림 기능 알림 신청", "리포트-보기": "수강료 리포트 보기" , "지인-공유": "지인에게 알려주기" };
   $view.innerHTML = `${head}
     ${A.warn ? `<div class="lift empty" style="margin:10px 0">일부 통계를 못 불러왔어요: ${esc(A.warn)}</div>` : ""}
@@ -1491,7 +1495,7 @@ function viewAdmin() {
     <section class="section"><div class="sec-head"><h2>많이 본 화면</h2><span style="font-size:12px;color:var(--muted)">최근 7일</span></div>
       ${list(pages.slice(0, 12).map(h => [pathName(h.path), h.count]), "아직 기록이 없어요.")}</section>
     <section class="section"><div class="sec-head"><h2>사용자 행동</h2><span style="font-size:12px;color:var(--muted)">최근 7일</span></div>
-      ${list(events.map(h => [evName[h.path] || h.path, h.count]), "아직 아이 등록·학원 추가 같은 행동 기록이 없어요.")}</section>
+      ${list(events.map(h => [evLabel(h.path), h.count]), "아직 아이 등록·학원 추가 같은 행동 기록이 없어요.")}</section>
     ${adminAdHtml(A)}
     ${adminAcaHtml(A)}
     <section class="section"><div class="sec-head"><h2>어디서 들어왔나</h2><span style="font-size:12px;color:var(--muted)">최근 30일</span></div>
