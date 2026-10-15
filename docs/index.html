@@ -186,7 +186,7 @@ function trackOpen() {
   let n = store("edu.openDay") === d ? (+store("edu.openN") || 0) : 0;
   if (n && now - last < 30 * 60e3) return;
   n++; store("edu.openDay", d); store("edu.openN", String(n));
-  if (n <= 20) gc(g => g.count({ path: "방문-열기-" + n, title: "방문-열기", event: true }));
+  if (n <= 50) gc(g => g.count({ path: "방문-열기-" + n, title: "방문-열기", event: true }));
 }
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && lastTracked) trackOpen(); });
 function trackEvent(name) { gc(g => g.count({ path: name, title: name, event: true })); }
@@ -1488,7 +1488,7 @@ const NEWS = [
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
-const APP_VER = "1.0.44";
+const APP_VER = "1.0.45";
 let UPDATED_FROM = null;
 const IS_NEW_PHONE = !store("edu.appVer");   // 이 휴대폰에서 처음 열었는지 (예전에 쓴 적 있으면 앱 버전이 남아 있음)
 (function () { const last = store("edu.appVer"); if (last && last !== APP_VER) UPDATED_FROM = last; if (!last) store("edu.appVer", APP_VER); })();
@@ -1693,7 +1693,7 @@ function viewAdmin() {
   const bars7 = `<div class="lift" style="padding:16px 10px 12px;display:flex;align-items:flex-end;gap:4px;height:178px">${last7.map((x, i) => { const h = Math.max(3, Math.round(x.v / max7 * 112)), nh = x.v ? Math.round(h * Math.min(x.n, x.v) / x.v) : 0;
       return `<div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="font-size:10.5px;font-weight:700;color:var(--ink)">${x.v || ""}</div>
         <div style="width:62%;height:${h}px;border-radius:6px 6px 3px 3px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,#8C97FF,var(--indigo))"><div style="height:${nh}px;background:linear-gradient(180deg,#FFB199,#FF7A59)"></div></div>
-        <div style="font-size:10px;color:${i === 6 ? "var(--coral-ink)" : "var(--muted)"};font-weight:${i === 6 ? 800 : 400}">${i === 6 ? "오늘" : x.l}</div></div>`; }).join("")}</div>
+        <div style="font-size:10px;color:${i === 6 ? "var(--coral-ink)" : "var(--muted)"};font-weight:${i === 6 ? 800 : 400}">${i === 6 ? "오늘" : x.l}</div><div style="font-size:10px;color:var(--indigo);font-weight:700">${x.o ? x.o + "회" : ""}</div></div>`; }).join("")}</div>
     <p style="font-size:12px;color:var(--muted);margin:8px 2px 0;line-height:1.6"><b style="color:#FF7A59">■</b> 새로 온 사람 <b style="color:var(--indigo)">■</b> 다시 온 사람 · 막대 위 숫자는 그날 방문자 수</p>`;
   const per = (a, b) => b ? (Math.round(a / b * 10) / 10).toLocaleString() : "-";
   const uMon = uDays("방문-한달").length ? uDays("방문-한달").filter(x => x.day.slice(0, 7) === mY).reduce((a, x) => a + (x.daily || 0), 0) : ((uRow("방문-한달") || {}).count || 0);
@@ -1705,15 +1705,15 @@ function viewAdmin() {
     ${A.warn ? `<div class="lift empty" style="margin:10px 0">일부 통계를 못 불러왔어요: ${esc(A.warn)}</div>` : ""}
     <p style="font-size:12px;color:var(--muted);margin:6px 0 14px">${A.at.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })} 불러옴 · <a href="#admin" onclick="ADMIN=null;adminMonths=null;render();return false">새로고침</a></p>
     <div class="lift" style="padding:18px 18px 16px;margin-bottom:12px">
-      <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;border-radius:50%;background:#2FC4A4;box-shadow:0 0 0 6px rgba(47,196,164,.18);flex:0 0 auto"></span><span style="font-size:13.5px;color:var(--muted);font-weight:700">오늘 방문자 · 휴대폰 기준</span></div>
-      <div style="font-size:38px;font-weight:800;margin-top:6px;letter-spacing:-.5px">${vT.toLocaleString()}<span style="font-size:16px;color:var(--muted);font-weight:700"> 명</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;border-radius:50%;background:#2FC4A4;box-shadow:0 0 0 6px rgba(47,196,164,.18);flex:0 0 auto"></span><span style="font-size:13.5px;color:var(--muted);font-weight:700">오늘 방문 · 30분 기준</span></div>
+      <div style="font-size:38px;font-weight:800;margin-top:6px;letter-spacing:-.5px">${oT.toLocaleString()}<span style="font-size:16px;color:var(--muted);font-weight:700"> 회</span></div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px">
         <div style="background:#FFF1EC;border-radius:14px;padding:10px 8px;text-align:center"><div style="font-size:11.5px;color:var(--muted)">🆕 새로 온 사람</div><div style="font-size:19px;font-weight:800;margin-top:2px">${nT}</div></div>
         <div style="background:#EEF0FF;border-radius:14px;padding:10px 8px;text-align:center"><div style="font-size:11.5px;color:var(--muted)">🔁 다시 온 사람</div><div style="font-size:19px;font-weight:800;margin-top:2px">${rT}</div></div>
-        <div style="background:#EAF8F2;border-radius:14px;padding:10px 8px;text-align:center"><div style="font-size:11.5px;color:var(--muted)">📱 앱 연 횟수</div><div style="font-size:19px;font-weight:800;margin-top:2px">${oT}</div><div style="font-size:10.5px;color:var(--muted)">1인당 ${per(oT, vT)}번</div></div></div>
-      <p style="font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.6">어느 메뉴를 몇 번 눌러도 같은 휴대폰은 하루 1명이에요. 30분 넘게 쉬었다 다시 열면 '앱 연 횟수'가 1번 늘어요. (새로·다시·연 횟수는 1.0.40부터 집계)</p></div>
-    <div class="stats" style="grid-template-columns:repeat(3,1fr)">${tile("어제 방문자", uDay(yY), "명")}${tile("이번 달 방문자", uMon, "명")}${tile("1인당 본 화면", per(A.today.total, vT), "오늘 평균")}</div>
-    <section class="section"><div class="sec-head"><h2>최근 7일 방문자</h2><span style="font-size:12px;color:var(--muted)">휴대폰 기준</span></div>${bars7}</section>
+        <div style="background:#EAF8F2;border-radius:14px;padding:10px 8px;text-align:center"><div style="font-size:11.5px;color:var(--muted)">📱 사람 수</div><div style="font-size:19px;font-weight:800;margin-top:2px">${vT}명</div><div style="font-size:10.5px;color:var(--muted)">1인당 ${per(oT, vT)}번</div></div></div>
+      <p style="font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.6">같은 휴대폰이라도 30분 넘게 쉬었다 다시 들어오면 방문 1회가 더 늘어요(재방문). 사람 수는 휴대폰마다 하루 1명이에요.</p></div>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">${tile("어제 방문", opensOf(yY), uDay(yY) + "명")}${tile("이번 달 방문자", uMon, "명")}${tile("1인당 본 화면", per(A.today.total, vT), "오늘 평균")}</div>
+    <section class="section"><div class="sec-head"><h2>최근 7일 방문자</h2><span style="font-size:12px;color:var(--muted)">위: 사람 수 · 아래: 방문(30분)</span></div>${bars7}</section>
     <section class="section"><div class="sec-head"><h2>화면 조회수</h2><span style="font-size:12px;color:var(--muted)">본 화면을 다 더한 수</span></div>
     <div class="stats" style="grid-template-columns:repeat(2,1fr)">${tile("오늘", A.today.total)}${tile("어제", A.yest.total)}${tile("최근 7일", A.week.total)}${tile("최근 30일", A.month.total)}</div>
     <p style="font-size:12px;color:var(--muted);margin:8px 2px 0">이번 시간(${new Date(Math.floor(A.at.getTime() / 3600e3) * 3600e3).getHours()}시~) ${((A.now || {}).total ?? 0).toLocaleString()}회</p></section>
