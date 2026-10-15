@@ -1,5 +1,5 @@
-// 아이랑 수원 - 오프라인 지원
-const CACHE = "suwon-app-v33";
+// 아이랑 성남 - 오프라인 지원
+const CACHE = "seongnam-app-v1";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {

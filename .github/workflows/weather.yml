@@ -26,7 +26,7 @@ jobs:
       - run: python weather.py
         env:
           WEATHER_KEY: ${{ secrets.WEATHER_KEY }}
-          CITY: 수원
+          CITY: 성남
       - run: |
           [ -f output/weather.json ] || exit 0
           git config user.name "github-actions[bot]"

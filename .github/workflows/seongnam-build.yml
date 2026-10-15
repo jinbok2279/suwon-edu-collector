@@ -1,0 +1,65 @@
+name: seongnam-build (성남 브랜치 시험 수집)
+
+# 저장소를 처음 만든 뒤 Actions 탭에서 이 워크플로를 한 번 실행하면
+# 모든 수집기를 순서대로 돌려 docs/data 를 채운다. (학교 목록 → 학원 → 유치원 → 나머지)
+on:
+  push:
+    branches: [seongnam]
+    paths: ["build.trigger"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seongnam-build
+  cancel-in-progress: false
+
+jobs:
+  all:
+    runs-on: ubuntu-latest
+    env:
+      NEIS_KEY: ${{ secrets.NEIS_KEY }}
+      KINDER_KEY: ${{ secrets.KINDER_KEY }}
+      CULTURE_KEY: ${{ secrets.CULTURE_KEY }}
+      LIB_KEY: ${{ secrets.LIB_KEY }}
+      KOPIS_KEY: ${{ secrets.KOPIS_KEY }}
+      TOUR_KEY: ${{ secrets.TOUR_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 학교·학사일정
+        run: python -u collect.py > probe/log_collect.txt 2>&1
+      - name: 학원
+        run: python -u academies.py > probe/log_academies.txt 2>&1 || echo "학원 실패 (계속 진행)" >> probe/log_academies.txt
+      - name: 유치원
+        run: python -u kinder.py > probe/log_kinder.txt 2>&1 || echo "유치원 실패 (KINDER_KEY 확인)" >> probe/log_kinder.txt
+      - name: 급식
+        run: python -u meals.py > probe/log_meals.txt 2>&1 || echo "급식 실패 (계속 진행)" >> probe/log_meals.txt
+      - name: 도서관 목록
+        run: python -u libs.py > probe/log_libs.txt 2>&1 || echo "도서관 목록 실패 (LIB_KEY 확인)" >> probe/log_libs.txt
+      - name: 인기 도서
+        run: python -u books.py > probe/log_books.txt 2>&1 || echo "인기 도서 실패 (LIB_KEY 확인)" >> probe/log_books.txt
+      - name: 행사
+        run: python -u events.py > probe/log_events.txt 2>&1 || echo "행사 실패 (CULTURE_KEY 확인)" >> probe/log_events.txt
+      - name: 일자리
+        run: python -u jobs.py > probe/log_jobs.txt 2>&1 || echo "일자리 실패 (계속 진행)" >> probe/log_jobs.txt
+      - name: 특목·자사고
+        run: python -u elite.py > probe/log_elite.txt 2>&1 || echo "특목고 실패 (계속 진행)" >> probe/log_elite.txt
+      - name: 운동교실
+        run: python -u sports.py > probe/log_sports.txt 2>&1 || echo "운동교실 실패 (계속 진행)" >> probe/log_sports.txt
+      - name: 날씨
+        run: python -u weather.py > probe/log_weather.txt 2>&1 || echo "날씨 실패 (WEATHER_KEY 확인)" >> probe/log_weather.txt
+        env:
+          WEATHER_KEY: ${{ secrets.WEATHER_KEY }}
+          CITY: 성남
+      - name: 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p docs/data && cp output/*.json docs/data/
+          git add output docs/data probe
+          git diff --cached --quiet && exit 0
+          git commit -m "성남 시험 수집"
+          for i in 1 2 3; do git pull --rebase origin seongnam && git push origin HEAD:seongnam && break; sleep 5; done

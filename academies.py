@@ -1,6 +1,6 @@
-"""수원시 학원·교습소 목록 수집기 (NEIS 학원교습소정보)
+"""성남시 학원·교습소 목록 수집기 (NEIS 학원교습소정보)
 
-교육청에 등록된 수원시 학원·교습소 중 '개원' 상태인 곳만 모아
+교육청에 등록된 성남시 학원·교습소 중 '개원' 상태인 곳만 모아
 output/academies.json 으로 저장한다. 앱에서 아이의 학원을 고를 때 쓴다.
 """
 
@@ -20,7 +20,7 @@ URL = "https://open.neis.go.kr/hub/acaInsTiInfo"
 
 def fetch_page(page):
     params = {"KEY": KEY, "Type": "json", "pIndex": page, "pSize": 1000,
-              "ATPT_OFCDC_SC_CODE": "J10", "ADMST_ZONE_NM": "수원시"}
+              "ATPT_OFCDC_SC_CODE": "J10", "ADMST_ZONE_NM": "성남시"}
     url = URL + "?" + urllib.parse.urlencode(params)
     for i in range(3):
         try:
@@ -51,9 +51,9 @@ NOT_DONG_EXACT = {"가동", "나동", "다동", "라동", "마동", "바동", "�
 
 def area(addr, detail):
     """주소에서 구·행정 동(읍·면) 이름만 뽑기 — 아파트·상가 '101동', '203호', 건물 이름은 버림"""
-    gm = re.search(r"수원시\s*(\S+구)", addr)
+    gm = re.search(r"성남시\s*(\S+구)", addr)
     gu = gm.group(1) if gm else ""
-    m = re.search(r"수원시\s*(?:\S+구\s+)?([가-힣]+[읍면])\s", addr + " ")   # 읍·면 지역은 읍·면 이름 우선
+    m = re.search(r"성남시\s*(?:\S+구\s+)?([가-힣]+[읍면])\s", addr + " ")   # 읍·면 지역은 읍·면 이름 우선
     dong = m.group(1) if m else ""
     if not dong:   # 도로명 주소 끝 괄호: (망포동, 건물이름) / (이의동1369-2, …)
         for grp in re.findall(r"\(([^()]*)", detail + " " + addr):
@@ -169,7 +169,7 @@ def main():
             "cap": r.get("TOFOR_SMTOT") or 0,
             "tel": clean(r.get("FA_TELNO")),
         }
-    lst = fill_dong(sorted(acas.values(), key=lambda a: a["n"]), "수원")
+    lst = fill_dong(sorted(acas.values(), key=lambda a: a["n"]), "성남")
     os.makedirs("output", exist_ok=True)
     result = {"updated_at": datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S"),
               "source": "NEIS 교육정보 개방 포털 (학원교습소정보)", "count": len(lst), "academies": lst}

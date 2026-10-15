@@ -1,7 +1,7 @@
-"""엄마 일자리 수집기 (수원)
+"""엄마 일자리 수집기 (성남)
 
-1) 경기도교육청 구인구직: 수원시 학교·병설유치원의 기간제/사립교원, 초중등 시간강사(방과후 포함), 교육공무직원
-2) 경기육아종합지원센터 인력뱅크: 수원시 어린이집 구인 (구인중)
+1) 경기도교육청 구인구직: 성남시 학교·병설유치원의 기간제/사립교원, 초중등 시간강사(방과후 포함), 교육공무직원
+2) 경기육아종합지원센터 인력뱅크: 성남시 어린이집 구인 (구인중)
 결과는 output/jobs.json 으로 저장한다. 개인 연락처·이메일·담당자 이름은 저장하지 않는다.
 """
 
@@ -23,7 +23,7 @@ CARE = "https://gyeonggi.childcare.go.kr"
 CARE_LIST = CARE + "/ccef/job/JobOfferSlPL.jsp"
 CARE_VIEW = CARE + "/ccef/job/JobOfferSl.jsp"
 KINDS = {"A": "기간제·사립교원", "B": "시간강사·방과후", "C": "교육공무직"}
-UA = {"User-Agent": "Mozilla/5.0 (suwon-edu-collector)"}
+UA = {"User-Agent": "Mozilla/5.0 (seongnam-edu-collector)"}
 
 
 def http(url, data=None, tries=3):
@@ -72,7 +72,7 @@ def goe_jobs():
     for cd, kind in KINDS.items():
         n = 0
         for page in range(1, 6):
-            form = {"mi": "10500", "currPage": page, "srchEcptDl": "Y", "srchLgnNm": "수원시", "srchOcptCd": cd,
+            form = {"mi": "10500", "currPage": page, "srchEcptDl": "Y", "srchLgnNm": "성남시", "srchOcptCd": cd,
                     "pageIndex": 50, "orderbyType": "", "searchType": "", "searchValue": ""}
             try:
                 html = http(GOE_LIST, form)
@@ -115,7 +115,7 @@ def goe_jobs():
 def care_jobs():
     out = []
     for page in range(0, 6):
-        form = {"flag": "SlPL", "signgu": "41110", "endYn": "N", "offset": page * 50, "limit": 50,
+        form = {"flag": "SlPL", "signgu": "41130", "endYn": "N", "offset": page * 50, "limit": 50,
                 "schCrType": "", "crspec": "", "crpub": "", "schEmpGbCode": "", "crcert": "", "schCrName": "", "dong": ""}
         try:
             html = http(CARE_LIST, form)
@@ -133,9 +133,9 @@ def care_jobs():
         for jo, tds, a in rows:
             g = lambda i: sp(tds[i].all_text())
             area = g(5)
-            if "수원" not in area:
+            if "성남" not in area:
                 continue
-            gu = (re.search(r"(장안구|권선구|팔달구|영통구)", area) or [None, ""])[1]
+            gu = (re.search(r"(수정구|중원구|분당구)", area) or [None, ""])[1]
             out.append({"id": "C" + jo, "type": g(1), "title": sp(a.attrs.get("title") or g(2)), "org": g(3),
                         "job": g(4), "gu": gu, "applyEnd": ymd(g(6)), "reg": ymd(g(7)),
                         "link": CARE_VIEW + "?" + urllib.parse.urlencode({"flag": "Sl", "JOSEQ": jo})})

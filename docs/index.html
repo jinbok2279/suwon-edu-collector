@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#5161F7">
-<meta name="description" content="수원 아이 키우는 집을 위한 급식·학교 일정·도서관·유치원·학원·행사 정보 모음">
+<meta name="description" content="성남 아이 키우는 집을 위한 급식·학교 일정·도서관·유치원·학원·행사 정보 모음">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https://raw.githubusercontent.com https://*.goatcounter.com https://gc.zgo.at; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="apple-mobile-web-app-title" content="아이랑수원">
-<title>아이랑 수원</title>
+<meta name="apple-mobile-web-app-title" content="아이랑성남">
+<title>아이랑 성남</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -138,7 +138,7 @@ a.ev{color:inherit;text-decoration:none}
 .tbox input{border:1px solid var(--line)}.tbox input:invalid{border:1.5px dashed #9AA6F5;color:transparent}.tbox input:invalid::-webkit-datetime-edit{opacity:0}.tbox .ph{position:absolute;left:12px;top:0;line-height:44px;font-size:14px;font-weight:700;color:#6C78E0;pointer-events:none}.tbox input:valid+.ph{display:none}
 .ic3d{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}.ic3d::after{content:"";position:absolute;bottom:-1px;left:50%;width:62%;height:16%;transform:translateX(-50%);border-radius:50%;background:rgba(40,50,110,.16);filter:blur(3px);z-index:0}.ic3d img{position:relative;z-index:1;filter:drop-shadow(0 5px 5px rgba(30,40,90,.16))}
 </style>
-<script data-goatcounter="https://suwon-edu-app.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://seongnam-edu-app.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div class="bg"></div>
@@ -155,8 +155,8 @@ a.ev{color:inherit;text-decoration:none}
 
 <script>
 // 수집 데이터: 이 사이트의 data/ 폴더에서 먼저 받고, 없으면 GitHub 원본에서 받기
-// 저장소를 다른 계정·조직으로 옮기면 아래 한 줄만 바꾸면 돼요 (예: "songgollab/suwon-edu-collector")
-const REPO = "jinbok2279/suwon-edu-collector";
+// 저장소를 다른 계정·조직으로 옮기면 아래 한 줄만 바꾸면 돼요 (예: "songgollab/seongnam-edu-collector")
+const REPO = "jinbok2279/seongnam-edu-collector";
 const RAW = "https://raw.githubusercontent.com/" + REPO + "/main/output/";
 function dataFetch(name) {
   return fetch("./data/" + name, { cache: "no-cache" }).then(r => r.ok ? r : Promise.reject(r.status))
@@ -213,7 +213,7 @@ function loadAcas() {
 }
 const KEY_DATA = "edu.data";
 const KEY_REGION = "edu.region";
-const GUS = ["장안구", "권선구", "팔달구", "영통구"];
+const GUS = ["수정구", "중원구", "분당구"];
 const KEY_LEVEL = "edu.level";
 const LEVELS = [["초등학교", "초등"], ["중학교", "중등"], ["고등학교", "고등"]];
 const IMPORTANT = /휴업|방학|개학|졸업|입학|체험|기념일|운동회|한마당|발표회|축제|상담|공개수업/;
@@ -299,7 +299,7 @@ function level() { const v = store(KEY_LEVEL); return LEVELS.some(l => l[0] === 
 function levelLabel() { return (LEVELS.find(l => l[0] === level()) || LEVELS[0])[1]; }
 function levelSchools() { return DATA.schools.filter(s => levelOf(s) === level()); }
 function inRegion(s) { const r = region(); return levelOf(s) === level() && (!r.gu || s.gu === r.gu) && (!r.dong || dongOf(s) === r.dong); }
-function regionLabel() { const r = region(); return r.gu ? `수원 ${r.gu}${r.dong ? " " + r.dong : ""}` : "수원시 전체"; }
+function regionLabel() { const r = region(); return r.gu ? `성남 ${r.gu}${r.dong ? " " + r.dong : ""}` : "성남시 전체"; }
 function regionSchools() { return DATA.schools.filter(inRegion); }
 
 // ---------- 우리 아이(여러 명) ----------
@@ -394,9 +394,9 @@ function viewSports() {
       <div style="display:flex;gap:8px;margin-top:10px"><a class="btn btn-soft" style="flex:1;height:38px;font-size:12.5px" href="${esc(c.web)}" target="_blank" rel="noopener">홈페이지</a><a class="btn btn-soft" style="flex:1;height:38px;font-size:12.5px" href="https://map.naver.com/p/search/${encodeURIComponent(c.name)}" target="_blank" rel="noopener">길찾기</a><a class="btn btn-soft" style="flex:1;height:38px;font-size:12.5px" href="tel:${esc(c.tel)}">전화</a></div></div>`).join("");
   $view.innerHTML = back + seg + chips +
     (list.length ? list.map(card).join("") : `<div class="lift empty">이 종목은 아직 강좌 정보가 없어요.</div>`) +
-    `<p style="font-size:12px;color:var(--muted);margin:2px 4px 0;line-height:1.6">${SPORTS.live ? "남은 자리는 하루 여러 번 새로 받아요. 신청은 수원도시공사 강좌 예약 사이트에서 해요." : "요금은 한 달 기준 (월·수·금 / 화·목). 접수 일정과 남은 자리는 센터 홈페이지에서 확인해 주세요."}</p>
+    `<p style="font-size:12px;color:var(--muted);margin:2px 4px 0;line-height:1.6">${SPORTS.live ? "남은 자리는 하루 여러 번 새로 받아요. 신청은 성남도시개발공사 체육시설 사이트에서 해요." : "요금은 한 달 기준 (월·수·금 / 화·목). 접수 일정과 남은 자리는 센터 홈페이지에서 확인해 주세요."}</p>
     <section class="section"><div class="sec-head"><h2>시 체육센터 ${(SPORTS.centers || []).length}곳</h2></div>${centers}</section>
-    <div class="foot">정보 · ${SPORTS.city === "수원" ? "수원도시공사 강좌 예약 사이트" : "용인도시공사와 각 체육센터 홈페이지"} (${esc(SPORTS.updated || "")} 기준)</div>`;
+    <div class="foot">정보 · 성남도시개발공사 체육시설 프로그램 안내 (${esc(SPORTS.updated || "")} 기준)</div>`;
 }
 function evRow(g, sub, tag) {
   const n = dday(g.date);
@@ -428,7 +428,7 @@ const icon = {
 };
 
 function footer() {
-  return `<div class="foot">데이터 · ${esc(DATA.source || "나이스 교육정보 개방포털")}<br>업데이트 ${esc(DATA.updated_at)} · 하루 3번 자동 갱신<br>아이랑 수원 · by 송골랩</div>`;
+  return `<div class="foot">데이터 · ${esc(DATA.source || "나이스 교육정보 개방포털")}<br>업데이트 ${esc(DATA.updated_at)} · 하루 3번 자동 갱신<br>아이랑 성남 · by 송골랩</div>`;
 }
 
 // ---------- 화면: 홈 ----------
@@ -474,12 +474,12 @@ function viewHome() {
 
   const install = "";
   const notice = homeNews() + homeInstall();  // 앱처럼 쓰기 카드는 소식과 상관없이 항상 (닫기 전까지)
-  const addrNote = "";  // 수원은 주소 변경 안내 없음
+  const addrNote = "";  // 성남은 주소 변경 안내 없음
   $view.innerHTML = `<div style="display:flex;align-items:center;gap:9px;margin:2px 0 14px">
       <img src="icon-192.png" alt="송골랩 로고" width="32" height="32" style="border-radius:9px;box-shadow:0 2px 8px rgba(30,40,90,.12);flex:0 0 auto">
-      <div style="min-width:0;flex:1;line-height:1.15"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px;white-space:nowrap">아이랑 수원</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by 송골랩</div></div>
+      <div style="min-width:0;flex:1;line-height:1.15"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px;white-space:nowrap">아이랑 성남</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by 송골랩</div></div>
       <button class="chip glass" aria-label="지인에게 알려주기" title="지인에게 알려주기" style="flex:0 0 auto;width:34px;height:34px;padding:0;justify-content:center;color:var(--indigo)" onclick="shareApp()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button>
-      <button class="chip glass" style="flex:0 0 auto;font-size:12px;padding:0 12px;height:34px" onclick="go('region')">${icon.pin} ${esc(regionLabel().replace("수원시 전체", "수원").replace("수원 ", ""))} · ${levelLabel()} ▾</button></div>
+      <button class="chip glass" style="flex:0 0 auto;font-size:12px;padding:0 12px;height:34px" onclick="go('region')">${icon.pin} ${esc(regionLabel().replace("성남시 전체", "성남").replace("성남 ", ""))} · ${levelLabel()} ▾</button></div>
     ${addrNote}${homeUpdated()}${hero}${homeToday(ks)}${ks.length ? homeMeals(homeKid === "all" ? ks : ks.filter(k => k.id === homeKid)) : ""}${mine}${notice}${homeEvents()}${homeLibrary()}${homeBooks()}${homeAd()}${footer()}`;
 }
 
@@ -682,11 +682,11 @@ function viewSchools(q = "") {
   const kidCodes = new Set(kids().map(k => k.code));
   const base = q ? levelSchools() : regionSchools();
   const list = base.filter(s => !q || s.name.includes(q) || s.address.includes(q) || (s.dong || "").includes(q));
-  const tileCls = { "장안구": "t-mint", "권선구": "t-indigo", "팔달구": "t-coral", "영통구": "t-sun" };
+  const tileCls = { "수정구": "t-mint", "중원구": "t-indigo", "분당구": "t-coral" };
   const rows = list.map(s => {
     const next = upcoming(group(s.events || []))[0];
     const mineS = kidCodes.has(s.code);
-    const tile = mineS ? `<span class="tile t-sun" style="width:40px;height:40px">${icon.star}</span>` : `<span class="tile ${tileCls[s.gu] || "t-lilac"}" style="width:40px;height:40px;font-weight:800">${esc(s.name.replace("수원", "")[0])}</span>`;
+    const tile = mineS ? `<span class="tile t-sun" style="width:40px;height:40px">${icon.star}</span>` : `<span class="tile ${tileCls[s.gu] || "t-lilac"}" style="width:40px;height:40px;font-weight:800">${esc(s.name.replace("성남", "")[0])}</span>`;
     return `<button class="school ${mineS ? "mine" : ""}" onclick="go('school/${jsq(s.code)}')">${tile}
       <div style="flex:1;min-width:0"><div class="nm">${esc(s.name)}</div><div class="ad">${esc(s.gu || "")}${s.dong ? " " + esc(s.dong) : ""} · ${next ? esc(mdw(next.date) + " " + next.name) : "등록된 일정 없음"}</div></div>
       <span style="color:#8A91A5">›</span></button>`;
@@ -694,7 +694,7 @@ function viewSchools(q = "") {
   $view.innerHTML = `<button class="back glass" onclick="go('home')" aria-label="홈으로">${icon.back}</button>
     <h1 style="font-size:27px;font-weight:800;margin-top:14px">학교 일정</h1>
     <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0 16px;gap:10px">
-      <span style="font-size:13px;color:var(--muted)">${q ? "수원시 전체에서 검색" : esc(regionLabel())} · ${level()} ${list.length}곳</span>
+      <span style="font-size:13px;color:var(--muted)">${q ? "성남시 전체에서 검색" : esc(regionLabel())} · ${level()} ${list.length}곳</span>
       <button class="btn btn-soft" style="height:36px;font-size:12px;padding:0 12px" onclick="go('region')">지역 변경</button></div>
     <label class="search lift">${icon.search}<input id="q" placeholder="학교 이름 검색" value="${esc(q)}" aria-label="학교 이름 검색"></label>
     <div class="lift list" style="margin-top:16px">${rows || `<div class="empty">검색 결과가 없어요.</div>`}</div>${footer()}`;
@@ -790,7 +790,7 @@ function pickDong(d) { setRegion(region().gu, d); render(); }
 function minsAgo(ts) { if (!ts) return null; const [d, t] = ts.split(" "); const [y, m, dd] = d.split("-").map(Number); const [hh, mi] = t.split(":").map(Number); return Math.max(0, Math.round((Date.now() - new Date(y, m - 1, dd, hh, mi).getTime()) / 60000)); }
 function agoText(n) { return n === null ? "" : n < 1 ? "방금" : n < 60 ? `${n}분 전` : n < 1440 ? `${Math.floor(n / 60)}시간 전` : `${Math.floor(n / 1440)}일 전`; }
 let libGu = null;
-// 수원시 공공도서관 목록 (도서관 정보나루 · libs.json). 수원시는 실시간 좌석을 공개하지 않아 운영 정보만 보여 줘요.
+// 성남시 공공도서관 목록 (도서관 정보나루 · libs.json). 성남시도서관은 좌석 자동 수집을 막아 두어 운영 정보만 보여 줘요.
 function allLibs() { return (SEATS && SEATS.libraries) || []; }
 function libList() { const g = libGu ?? (region().gu || ""); return { g, list: allLibs().filter(l => !g || l.gu === g) }; }
 function libKey(l) { return encodeURIComponent(l.name); }
@@ -824,7 +824,7 @@ function viewLibraryDetail(key) {
   const map = "https://map.naver.com/p/search/" + encodeURIComponent(l.name);
   $view.innerHTML = `${back}
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:14px">
-      <div><h1 style="font-size:26px;font-weight:800">${esc(l.name)}</h1><p style="font-size:13px;color:var(--muted);margin-top:4px">수원 ${esc(l.gu)}</p></div>
+      <div><h1 style="font-size:26px;font-weight:800">${esc(l.name)}</h1><p style="font-size:13px;color:var(--muted);margin-top:4px">성남 ${esc(l.gu)}</p></div>
       <span class="pill ${off ? "pill-gray" : "pill-mint"}">${off ? "오늘 휴관일" : "오늘 운영"}</span></div>
     <div class="lift card-pad" style="margin-top:16px">
       ${row("운영시간", esc(libHours(l.hours)))}${row("휴관일", esc(l.closed))}${row("주소", esc(l.addr))}
@@ -844,11 +844,11 @@ function viewLibrary() {
   const chip = (v, label) => `<button class="btn ${g === v ? "btn-3d" : "btn-soft"}" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickLibGu('${v}')">${label}</button>`;
   const open = list.filter(l => !closedToday(l)), off = list.filter(l => closedToday(l));
   $view.innerHTML = `${libHead("seats")}
-    <p style="font-size:13px;color:var(--muted);margin:0 0 12px">수원시 공공도서관 ${allLibs().length}곳 · 운영시간·휴관일</p>
+    <p style="font-size:13px;color:var(--muted);margin:0 0 12px">성남시 공공도서관 ${allLibs().length}곳 · 운영시간·휴관일</p>
     <div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px">${chip("", "전체")}${GUS.map(x => chip(x, x)).join("")}</div>
     ${open.length ? `<div class="lift list">${open.map(libCard).join("")}</div>` : `<div class="lift empty">이 지역 도서관은 오늘 모두 휴관일이에요.</div>`}
     ${off.length ? `<section class="section"><div class="sec-head"><h2>오늘 휴관일</h2></div><div class="lift list">${off.map(libCard).join("")}</div></section>` : ""}
-    <div class="foot">데이터 · 도서관 정보나루 (국립중앙도서관) · 매주 갱신<br>수원시는 열람실 실시간 좌석을 공개하지 않아 운영 정보만 보여 드려요.</div>`;
+    <div class="foot">데이터 · 도서관 정보나루 (국립중앙도서관) · 매주 갱신<br>성남시도서관은 열람실 좌석을 자동으로 받아 볼 수 없어 운영 정보만 보여 드려요.</div>`;
 }
 function pickLibGu(v) { libGu = v; render(); }
 
@@ -870,13 +870,13 @@ function bookRow(b) {
 function viewBooks() {
   const cur = currentBookList();
   if (!cur) { $view.innerHTML = libHead("books") + `<div class="lift empty">인기 도서를 아직 불러오지 못했어요. 잠시 후 다시 열어 주세요.</div>`; return; }
-  const chip = l => `<button class="btn ${l.key === cur.key ? "btn-3d" : "btn-soft"}" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickBooks('${l.key}')">${esc(l.title.replace(" 인기 도서", "").replace("수원시 대출 베스트", "수원 전체"))}</button>`;
+  const chip = l => `<button class="btn ${l.key === cur.key ? "btn-3d" : "btn-soft"}" style="height:38px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="pickBooks('${l.key}')">${esc(l.title.replace(" 인기 도서", "").replace("성남시 대출 베스트", "성남 전체"))}</button>`;
   $view.innerHTML = `${libHead("books")}
     <div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px">${bookLists().map(chip).join("")}</div>
     <div class="sec-head" style="margin-top:4px"><h2>${esc(cur.title)}</h2></div>
     <p style="font-size:12px;color:var(--muted);margin:-4px 0 12px">${esc(cur.desc)} · ${esc((BOOKS.updated_at || "").slice(0, 10))} 기준</p>
     <div class="lift" style="padding:4px 0">${cur.books.map(bookRow).join("")}</div>
-    <div class="foot">책을 누르면 도서관 정보나루에서 책 소개와 소장 도서관을 볼 수 있어요.<br>데이터 · 도서관 정보나루 수원시 공공도서관 대출 순위 (하루 한 번 갱신)</div>`;
+    <div class="foot">책을 누르면 도서관 정보나루에서 책 소개와 소장 도서관을 볼 수 있어요.<br>데이터 · 도서관 정보나루 성남시 공공도서관 대출 순위 (하루 한 번 갱신)</div>`;
 }
 function pickBooks(k) { bookKey = k; render(); }
 function homeBooks() {
@@ -891,11 +891,11 @@ function homeLibrary() {
   const { g, list } = libList();
   const open = list.filter(l => !closedToday(l)).slice(0, 2);
   if (!open.length) return "";
-  return `<section class="section"><div class="sec-head"><h2>오늘 여는 ${esc(g || "수원")} 도서관</h2><button onclick="go('library')">전체보기</button></div>
+  return `<section class="section"><div class="sec-head"><h2>오늘 여는 ${esc(g || "성남")} 도서관</h2><button onclick="go('library')">전체보기</button></div>
     <div class="lift list">${open.map(libCard).join("")}</div></section>`;
 }
 
-// ---------- 아이와 함께 갈 만한 행사 (문화포털 공연·전시 · 수원) ----------
+// ---------- 아이와 함께 갈 만한 행사 (문화포털 공연·전시 · 성남) ----------
 function isoToday() { const d = today(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
 function cityEvents() { const t = isoToday(); return ((EVENTS && EVENTS.city) || []).filter(e => (e.end || e.start) >= t); }
 function libEvents() { const t = isoToday(); return ((EVENTS && EVENTS.lib) || []).filter(e => !e.applyEnd || e.applyEnd >= t || e.status === "접수전"); }
@@ -954,7 +954,7 @@ function viewEvents() {
       + (r.length ? `<section class="section"><div class="sec-head"><h2>곧 접수 시작</h2></div><div class="lift card-pad">${r.map(libRow).join("")}</div></section>` : "")
       || `<div class="lift empty">지금 접수 중인 어린이·가족 체험·교육이 없어요.</div>`;
   }
-  $view.innerHTML = back + seg + body + `<div class="foot">누르면 수원문화재단 페이지나 예약 페이지에서 자세한 내용과 신청 방법을 볼 수 있어요.<br>데이터 · 수원문화재단 행사·교육정보 · 경기아트센터 · 한국관광공사 · 출처: (재)예술경영지원센터 공연예술통합전산망(www.kopis.or.kr) (하루 한 번 갱신${EVENTS.updated_at ? " · " + esc(EVENTS.updated_at.slice(0, 10)) + " 기준" : ""})</div>`;
+  $view.innerHTML = back + seg + body + `<div class="foot">누르면 공연·행사 페이지에서 자세한 내용과 예매 방법을 볼 수 있어요.<br>데이터 · 공연예술통합전산망(KOPIS) · 한국관광공사 · 문화포털</div>`;
 }
 
 // ---------- 화면: 아이 추가 / 수정 ----------
@@ -972,7 +972,7 @@ function viewKid(arg, pre) {
     <section class="section"><div class="sec-head"><h2>학교</h2></div>
       ${sc ? `<div class="lift" style="padding:16px;display:flex;align-items:center;gap:12px"><span class="tile t-sun" style="width:40px;height:40px">${icon.star}</span>
         <div style="flex:1;min-width:0"><div style="font-weight:700">${esc(sc.name)}</div><div style="font-size:12px;color:var(--muted)">${levelShort(sc)} · ${esc(sc.gu || "")} ${esc(sc.dong || "")}</div></div></div>` : ""}
-      <label class="search lift">${icon.search}<input id="kq" placeholder="${sc ? "다른 학교로 바꾸기 (학교 이름 검색)" : "학교 이름 검색 (예: 매탄, 영통중)"}" value="${esc(kidForm.q)}" aria-label="학교 이름 검색"></label>
+      <label class="search lift">${icon.search}<input id="kq" placeholder="${sc ? "다른 학교로 바꾸기 (학교 이름 검색)" : "학교 이름 검색 (예: 정자, 서현중)"}" value="${esc(kidForm.q)}" aria-label="학교 이름 검색"></label>
       <div class="lift list" id="kres"></div></section>
     ${sc ? `<section class="section"><div class="sec-head"><h2>학년</h2>${kidForm.grade > maxGrade(sc) ? `<span style="font-size:12px;color:var(--coral-ink)">학교를 바꿔 주세요 (진학)</span>` : ""}</div>
       <div style="display:grid;grid-template-columns:repeat(${maxGrade(sc)},1fr);gap:8px">${Array.from({ length: maxGrade(sc) }, (_, i) => i + 1).map(g => `<button class="btn ${kidForm.grade === g ? "btn-3d" : "btn-soft"}" style="height:44px;font-size:15px;padding:0" onclick="pickGrade(${g})">${g}</button>`).join("")}</div>
@@ -986,7 +986,7 @@ function viewKid(arg, pre) {
         <button class="btn btn-soft" style="height:34px;padding:0 12px;font-size:12px" onclick="removeAca('${jsq(a.id)}')" aria-label="${esc(a.n)} 빼기">빼기</button></div>${acaTimeBox(a, i)}`).join("")}</div>` : ""}
       ${kidForm.acas.length < 10 ? `<label class="search lift">${icon.search}<input id="aq" placeholder="학원 이름 검색 (예: 수학, 태권도)" value="${esc(kidForm.aq)}" aria-label="학원 이름 검색"></label>
       <div class="lift list" id="ares"></div>` : ""}
-      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 수원시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.<br>앞으로 동의한 분들의 학원 정보만 <b>이름 없이</b> 모아 "우리 동네 인기 학원"을 보여 드릴 예정이에요.</p></section>
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px">교육청에 등록된 성남시 학원·교습소 목록에서 골라요. 요일·시간을 넣고 <b>📅 캘린더에 추가</b>를 누르면 휴대폰 캘린더가 수업 시작·끝 10분 전에 알려 줘요. 시간이 바뀌면 캘린더에서 예전 일정을 지우고 다시 추가해 주세요.<br>학원 정보는 접속한 본인 휴대폰에만 저장돼요.<br>앞으로 동의한 분들의 학원 정보만 <b>이름 없이</b> 모아 "우리 동네 인기 학원"을 보여 드릴 예정이에요.</p></section>
     <button class="btn btn-3d" style="width:100%;height:54px;margin-top:24px;font-size:15px" onclick="saveKid('${jsq(editing ? editing.id : "")}')">${editing ? "저장하기" : "등록하기"}</button>
     ${editing ? `<button class="btn btn-soft" style="width:100%;height:46px;margin-top:12px;color:var(--coral-ink)" onclick="deleteKid('${jsq(editing.id)}')">${kidForm.arm ? "한 번 더 누르면 삭제돼요" : "이 아이 삭제"}</button>` : ""}`;
   document.getElementById("kname").addEventListener("input", e => { kidForm.name = e.target.value; });
@@ -1042,10 +1042,10 @@ function acaToCalendar(i) {
   const byday = a.days.map(j => WEEK[j][1]).join(",");
   const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
   const uid = (a.id + "-" + kid).replace(/[^\w가-힣-]/g, "");
-  const ev = (key, title, s, e, alarm) => ["BEGIN:VEVENT", `UID:${uid}-${key}@suwon-edu`, `DTSTAMP:${stamp}`, `DTSTART;TZID=Asia/Seoul:${icsTime(first, s)}`, `DTEND;TZID=Asia/Seoul:${icsTime(first, e)}`,
-    `RRULE:FREQ=WEEKLY;BYDAY=${byday}`, `SUMMARY:${icsEsc(title)}`, `DESCRIPTION:${icsEsc("아이랑 수원에서 추가한 일정이에요. 시간이 바뀌면 이 일정을 지우고 다시 추가해 주세요.")}`,
+  const ev = (key, title, s, e, alarm) => ["BEGIN:VEVENT", `UID:${uid}-${key}@seongnam-edu`, `DTSTAMP:${stamp}`, `DTSTART;TZID=Asia/Seoul:${icsTime(first, s)}`, `DTEND;TZID=Asia/Seoul:${icsTime(first, e)}`,
+    `RRULE:FREQ=WEEKLY;BYDAY=${byday}`, `SUMMARY:${icsEsc(title)}`, `DESCRIPTION:${icsEsc("아이랑 성남에서 추가한 일정이에요. 시간이 바뀌면 이 일정을 지우고 다시 추가해 주세요.")}`,
     "BEGIN:VALARM", "ACTION:DISPLAY", `DESCRIPTION:${icsEsc(alarm)}`, "TRIGGER:-PT10M", "END:VALARM", "END:VEVENT"];
-  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//suwon-edu//KO", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//seongnam-edu//KO", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
     "BEGIN:VTIMEZONE", "TZID:Asia/Seoul", "BEGIN:STANDARD", "DTSTART:19700101T000000", "TZOFFSETFROM:+0900", "TZOFFSETTO:+0900", "TZNAME:KST", "END:STANDARD", "END:VTIMEZONE",
     ...ev("class", `${kid} · ${a.n}`, a.s, a.e, `10분 뒤 ${kid} ${a.n} 수업 시작`),
     ...ev("pickup", `${kid} · ${a.n} 끝 (픽업)`, a.e, addMin(a.e, 10), `10분 뒤 ${kid} ${a.n} 수업 끝나요`),
@@ -1067,7 +1067,7 @@ function viewAca(id) {
   const a = ACAS.academies.find(x => x.id === id);
   if (!a) { $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">이 학원은 지금 교육청 목록에 없어요. 휴원·폐원했을 수 있어요.</div>`; return; }
   const row = (k, v) => v ? `<div class="row"><span>${k}</span><span class="val" style="text-align:right;max-width:65%">${v}</span></div>` : "";
-  const map = "https://map.naver.com/p/search/" + encodeURIComponent(a.n + " " + (a.dong || a.gu || "수원"));
+  const map = "https://map.naver.com/p/search/" + encodeURIComponent(a.n + " " + (a.dong || a.gu || "성남"));
   $view.innerHTML = `${back}
     <div style="display:flex;gap:14px;align-items:center;margin-top:14px"><span class="tile t-coral" style="width:54px;height:54px;font-size:22px;font-weight:800">${esc(a.n[0])}</span>
       <div style="min-width:0"><h1 style="font-size:23px;font-weight:800;line-height:1.3">${esc(a.n)}</h1><p style="font-size:13px;color:var(--muted);margin-top:4px">${esc(a.t)} · ${esc(a.gu)} ${esc(a.dong)}</p></div></div>
@@ -1146,15 +1146,15 @@ function viewAcaList() {
   const dongs = [...new Set(ACAS.academies.filter(a => !f.gu || a.gu === f.gu).map(a => a.dong).filter(Boolean))].sort((x, y) => x.localeCompare(y));
   const chip = (label, on, fn) => `<button class="btn ${on ? "btn-3d" : "btn-soft"}" style="height:36px;font-size:13px;padding:0 13px;flex:0 0 auto" onclick="${fn}">${esc(label)}</button>`;
   const myAcas = kids().flatMap(k => (k.acas || []).map(a => ({ ...a, kid: k.name })));
-  const area = (f.dong || f.gu || "수원시") + (f.cat === "전체" ? "" : " " + f.cat);
+  const area = (f.dong || f.gu || "성남시") + (f.cat === "전체" ? "" : " " + f.cat);
   const feeRange = a => { const v = (a.f || []).map(x => x[1]).filter(x => x >= 30000); return v.length ? (Math.min(...v) === Math.max(...v) ? won(v[0]) : won(Math.min(...v)) + "~" + won(Math.max(...v))) : ""; };
   const rows = list.slice(0, acaShow).map(a => `<button class="school" onclick="go('aca/${jsq(a.id)}')"><span class="pill pill-gray" style="min-width:52px;text-align:center">${esc(a.t || "학원")}</span>
       <div style="flex:1;min-width:0"><div class="nm">${esc(a.n)}</div><div class="ad">${esc(acaKind(a))} · ${esc(a.dong || a.gu)}${feeRange(a) ? ` · <b style="color:var(--indigo)">${feeRange(a)}</b>` : ""}</div></div><span style="color:var(--muted)">›</span></button>`).join("");
   $view.innerHTML = `${head}
-    <p style="font-size:13px;color:var(--muted);margin:6px 0 14px">교육청에 등록된 수원시 학원·교습소 ${ACAS.count.toLocaleString()}곳</p>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 14px">교육청에 등록된 성남시 학원·교습소 ${ACAS.count.toLocaleString()}곳</p>
     ${myAcas.length ? `<section class="section" style="margin-top:0"><div class="sec-head"><h2>우리 아이 학원</h2></div><div class="shelf" style="gap:8px">${myAcas.map(a => `<button class="btn btn-soft" style="height:40px;font-size:13px;padding:0 14px;flex:0 0 auto" onclick="go('aca/${jsq(a.id)}')">${esc(a.kid)} · ${esc(a.n)}</button>`).join("")}</div></section>` : ""}
     <label class="search lift">${icon.search}<input id="acaq" placeholder="학원 이름·과목 검색 (예: 수학, 피아노)" value="${esc(f.q)}" aria-label="학원 검색"></label>
-    <div style="display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px">${chip("수원 전체", !f.gu, "pickAcaGu('')")}${GUS.map(g => chip(g, f.gu === g, `pickAcaGu('${g}')`)).join("")}</div>
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px">${chip("성남 전체", !f.gu, "pickAcaGu('')")}${GUS.map(g => chip(g, f.gu === g, `pickAcaGu('${g}')`)).join("")}</div>
     ${f.gu ? `<div style="padding:6px 2px 4px"><select id="acadong" class="lift" style="width:100%;height:44px;border:0;border-radius:14px;padding:0 14px;font:inherit;font-size:14px;background:#fff" aria-label="동·읍·면 선택"><option value="">${esc(f.gu)} 전체 동·읍·면</option>${dongs.map(d => `<option value="${esc(d)}" ${d === f.dong ? "selected" : ""}>${esc(d)}</option>`).join("")}</select></div>` : ""}
     <div style="display:flex;gap:8px;overflow-x:auto;padding:8px 2px 12px">${ACA_CATS.map(([c]) => chip(c, f.cat === c, `pickAcaCat('${c}')`)).join("")}</div>
     <div class="lift" style="padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px">
@@ -1217,12 +1217,12 @@ function viewKinders() {
   }).join("");
   $view.innerHTML = `${head}
     <label class="search lift">${icon.search}<input id="kinq" placeholder="유치원 이름·동 검색" value="${esc(f.q)}" aria-label="유치원 검색"></label>
-    <div style="display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px">${chip("수원 전체", !f.gu, "pickKinGu('')")}${GUS.map(g => chip(g, f.gu === g, `pickKinGu('${g}')`)).join("")}</div>
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px">${chip("성남 전체", !f.gu, "pickKinGu('')")}${GUS.map(g => chip(g, f.gu === g, `pickKinGu('${g}')`)).join("")}</div>
     ${f.gu && dongs.length ? `<div style="padding:6px 2px 4px"><select id="kindong" class="lift" style="width:100%;height:44px;border:0;border-radius:14px;padding:0 14px;font:inherit;font-size:14px;background:#fff" aria-label="동·읍·면 선택"><option value="">${esc(f.gu)} 전체 동·읍·면</option>${dongs.map(d => `<option value="${esc(d)}" ${d === f.dong ? "selected" : ""}>${esc(d)}</option>`).join("")}</select></div>` : ""}
     <div style="display:flex;gap:8px;overflow-x:auto;padding:8px 2px 4px">${["전체", "공립", "사립"].map(t => chip(t, f.type === t, `pickKinType('${t}')`)).join("")}</div>
     <div style="display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px">${chip("모든 나이", !f.age, "pickKinAge('')")}${AGES.slice(0, 3).map(([a, l]) => chip(l + " 빈자리", f.age === a, `pickKinAge('${a}')`)).join("")}</div>
     <div class="lift" style="padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <div><div style="font-size:13px;color:var(--muted)">${esc((f.dong || f.gu || "수원시") + (f.type === "전체" ? "" : " " + f.type))}</div><div style="font-size:24px;font-weight:800">${list.length}<span style="font-size:14px;color:var(--muted);font-weight:600">곳</span></div></div>
+      <div><div style="font-size:13px;color:var(--muted)">${esc((f.dong || f.gu || "성남시") + (f.type === "전체" ? "" : " " + f.type))}</div><div style="font-size:24px;font-weight:800">${list.length}<span style="font-size:14px;color:var(--muted);font-weight:600">곳</span></div></div>
       <div style="text-align:right"><div style="font-size:12px;color:var(--muted)">${ageLabel || "전체"} 정원 ${cap.toLocaleString()} · 현원 ${kids.toLocaleString()}</div><div style="font-size:20px;font-weight:800;color:var(--indigo)">빈자리 ${Math.max(0, cap - kids).toLocaleString()}</div></div></div>
     <div class="lift list" style="margin-top:14px">${rows || `<div class="empty">조건에 맞는 유치원이 없어요.</div>`}</div>
     ${list.length > kinShow ? `<button class="btn btn-soft" style="width:100%;height:46px;margin-top:12px" onclick="kinMore()">더 보기 (${list.length - kinShow}곳 더)</button>` : ""}
@@ -1297,7 +1297,7 @@ function viewPremium() {
   const catFn = (ACA_CATS.find(c => c[0] === f.cat) || [])[1] || (() => true);
   const pick = (scope) => ACAS.academies.filter(a => catFn(a) && (scope === "all" || (scope === "gu" ? a.gu === f.gu : a.gu === f.gu && a.dong === f.dong)))
     .map(a => ({ ...a, f: (a.f || []).filter(x => !f.lv || feeLevel(x[0]) === f.lv || (!feeLevel(x[0]) && (a.f || []).every(y => !feeLevel(y[0])))) }));
-  const scopes = [f.dong && ["dong", f.dong], f.gu && ["gu", f.gu], ["all", "수원시"]].filter(Boolean).map(([k, label]) => ({ label, s: feeStats(pick(k)), list: pick(k) }));
+  const scopes = [f.dong && ["dong", f.dong], f.gu && ["gu", f.gu], ["all", "성남시"]].filter(Boolean).map(([k, label]) => ({ label, s: feeStats(pick(k)), list: pick(k) }));
   const maxMed = Math.max(1, ...scopes.map(x => x.s ? x.s.hi : 0));
   const main = scopes[0];
   const bands = [[0, 150000, "15만 미만"], [150000, 250000, "15~25만"], [250000, 350000, "25~35만"], [350000, 500000, "35~50만"], [500000, 1e9, "50만 이상"]];
@@ -1354,7 +1354,7 @@ function jobSchool(j) {
 function jobDday(d) { if (!d) return ""; const n = dday(d); return n < 0 ? "마감" : n === 0 ? "오늘 마감" : `D-${n}`; }
 function jobRow(j, care) {
   const sc = care ? null : jobSchool(j);
-  const where = care ? [j.gu, j.dong].filter(Boolean).join(" ") : sc ? [sc.gu, sc.dong].filter(Boolean).join(" ") : "수원시";
+  const where = care ? [j.gu, j.dong].filter(Boolean).join(" ") : sc ? [sc.gu, sc.dong].filter(Boolean).join(" ") : "성남시";
   const n = j.applyEnd ? dday(j.applyEnd) : 99;
   const tags = [care ? `<span class="pill pill-indigo">${esc(j.job || "보육교사")}</span>` : `<span class="pill ${j.kinder ? "pill-mint" : "pill-indigo"}">${j.kinder ? "유치원 · " : ""}${esc(j.kind)}</span>`,
     j.applyEnd ? `<span class="pill ${n <= 3 ? "pill-coral" : "pill-gray"}">${jobDday(j.applyEnd)}</span>` : "",
@@ -1373,13 +1373,13 @@ function homeJobs() {
   if (!n) return "";
   return `<section class="section"><button class="lift" onclick="go('jobs')" style="width:100%;border:0;cursor:pointer;text-align:left;padding:16px 18px;display:flex;gap:14px;align-items:center;font:inherit;color:var(--ink)">
     <span class="tile t-mint" style="width:44px;height:44px;font-size:20px">💼</span>
-    <div style="flex:1;min-width:0"><div style="font-weight:800">엄마 일자리</div><div style="font-size:12px;color:var(--muted);margin-top:4px">수원 학교·유치원·어린이집 채용 ${n}건 모집 중</div></div><span style="color:var(--muted)">›</span></button></section>`;
+    <div style="flex:1;min-width:0"><div style="font-weight:800">엄마 일자리</div><div style="font-size:12px;color:var(--muted);margin-top:4px">성남 학교·유치원·어린이집 채용 ${n}건 모집 중</div></div><span style="color:var(--muted)">›</span></button></section>`;
 }
 function pickJob(k, v) { const y = window.scrollY; jobF[k] = v; render(); window.scrollTo(0, y); }
 function viewJobs() {
   const back = `<button class="back glass" onclick="history.back()" aria-label="뒤로">${icon.back}</button>
     <h1 style="font-size:25px;font-weight:800;margin-top:14px">엄마 일자리</h1>
-    <p style="font-size:13px;color:var(--muted);margin:6px 0 0">수원 학교·유치원·어린이집 채용 공고를 매일 모아 드려요.</p>`;
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 0">성남 학교·유치원·어린이집 채용 공고를 매일 모아 드려요.</p>`;
   if (!JOBS) { $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">채용 정보를 불러오는 중이에요…</div>`; loadJobs().then(() => { if (location.hash === "#jobs") render(); }).catch(() => { $view.innerHTML = back + `<div class="lift empty" style="margin-top:16px">채용 정보를 불러오지 못했어요. 잠시 후 다시 열어 주세요.</div>`; }); return; }
   if (!jobF.gu && region().gu) jobF.gu = region().gu;
   const t = isoToday();
@@ -1387,7 +1387,7 @@ function viewJobs() {
   const school = open(JOBS.school), care = open(JOBS.care);
   const seg = `<div class="seg" role="tablist"><button class="${jobF.tab === "school" ? "on" : ""}" role="tab" onclick="pickJob('tab','school')">학교·유치원 ${school.length}</button><button class="${jobF.tab === "care" ? "on" : ""}" role="tab" onclick="pickJob('tab','care')">어린이집 ${care.length}</button></div>`;
   const chip = (label, on, fn) => `<button class="btn ${on ? "btn-3d" : "btn-soft"}" style="height:36px;font-size:13px;padding:0 13px;flex:0 0 auto" onclick="${fn}">${esc(label)}</button>`;
-  const guChips = `<div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px">${chip("수원 전체", !jobF.gu, "pickJob('gu','')")}${GUS.map(g => chip(g, jobF.gu === g, `pickJob('gu','${g}')`)).join("")}</div>`;
+  const guChips = `<div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px">${chip("성남 전체", !jobF.gu, "pickJob('gu','')")}${GUS.map(g => chip(g, jobF.gu === g, `pickJob('gu','${g}')`)).join("")}</div>`;
   let list, extra = "";
   if (jobF.tab === "school") {
     extra = `<div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px">${[["", "전체"], ["B", "시간강사·방과후"], ["A", "기간제"], ["C", "교육공무직"], ["K", "유치원"]].map(([k, l]) => chip(l, jobF.kind === k, `pickJob('kind','${k}')`)).join("")}</div>`;
@@ -1444,10 +1444,10 @@ function viewElite() {
   const row = s => {
     const link = /^https?:/.test(s.hp) ? s.hp : (s.hp ? "http://" + s.hp : "https://search.naver.com/search.naver?query=" + encodeURIComponent(s.n));
     const sub = [s.sido + (s.sigungu && s.sigungu !== s.sido ? "" : ""), (s.addr.match(/^\S+\s+(\S+[시군구])/) || [])[1] || "", s.fond, s.coedu].filter(Boolean).join(" · ");
-    return `<a class="ev" href="${esc(safeUrl(link))}" target="_blank" rel="noopener" onclick="trackEvent('특목-학교')"><div class="ev-body"><div class="ev-name">${esc(s.short)}${s.n.includes("수원") || s.addr.includes("수원") ? ' <span class="pill pill-mint" style="font-size:11px;padding:3px 8px">수원</span>' : ""}</div><div class="ev-sub">${esc(sub)}</div></div></a>`; };
+    return `<a class="ev" href="${esc(safeUrl(link))}" target="_blank" rel="noopener" onclick="trackEvent('특목-학교')"><div class="ev-body"><div class="ev-name">${esc(s.short)}${s.n.includes("성남") || s.addr.includes("성남") ? ' <span class="pill pill-mint" style="font-size:11px;padding:3px 8px">성남</span>' : ""}</div><div class="ev-sub">${esc(sub)}</div></div></a>`; };
   $view.innerHTML = back + mineHtml + cal
-    + `<section class="section"><div class="sec-head"><h2>학교 목록</h2><button onclick="pickElite('near', ${!eliteF.near})">${eliteF.near ? "전국 보기" : "수원에서 지원 가능만"}</button></div>
-      <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px">${eliteF.near ? "수원 학생이 지원할 수 있는 곳: 영재학교·전국 자사고 + 경기도 과학고·외고·국제고" : "전국 모든 특목고·자사고"}</p>
+    + `<section class="section"><div class="sec-head"><h2>학교 목록</h2><button onclick="pickElite('near', ${!eliteF.near})">${eliteF.near ? "전국 보기" : "성남에서 지원 가능만"}</button></div>
+      <p style="font-size:12px;color:var(--muted);margin:-4px 0 8px">${eliteF.near ? "성남 학생이 지원할 수 있는 곳: 영재학교·전국 자사고 + 경기도 과학고·외고·국제고" : "전국 모든 특목고·자사고"}</p>
       <div style="display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px">${kinds.map(([k, l, n]) => chip(`${l} ${n}`, eliteF.kind === k, `pickElite('kind','${k}')`)).join("")}</div>
       ${groups.map(([k, label, t, arr]) => `<div class="lift card-pad" style="margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span class="tile ${t}" style="width:28px;height:28px;border-radius:9px"></span><b>${esc(label)}</b><span style="color:var(--muted);font-size:13px">${arr.length}곳</span></div>${arr.map(row).join("")}</div>`).join("") || `<div class="lift empty">조건에 맞는 학교가 없어요.</div>`}</section>
     <div class="foot">학교를 누르면 학교 홈페이지로 이동해요. 모집 인원·전형은 학교 입학요강을 확인하세요.<br>데이터 · 나이스 교육정보 개방포털 학교기본정보 (매달 갱신${ELITE.updated_at ? " · " + esc(ELITE.updated_at.slice(0, 10)) + " 기준" : ""})</div>`;
@@ -1456,35 +1456,13 @@ function viewElite() {
 // ---------- 이용 안내 · 개인정보 ----------
 // ---------- 업데이트 소식 (날짜별) ----------
 const NEWS = [
-  { d: "2026-10-13", v: "1.0.41", t: "급식 알레르기를 바로 알려 드려요", items: [
-    "🍚 급식 메뉴를 <b>누르면</b> 숫자 대신 <b>알레르기 성분 이름</b>(예: 대두, 밀, 새우)이 보여요.",
-    "⚠️ 아이 정보에서 <b>알레르기</b>를 고르면, 그 성분이 든 메뉴를 빨간색으로 표시하고 <b>오늘 아침 체크</b>에서도 알려 드려요.",
-    "🔒 알레르기 정보는 이 휴대폰에만 저장돼요."] },
-  { d: "2026-10-12", v: "1.0.39", t: "시 체육센터 강좌를 한눈에 볼 수 있어요", items: [
-    "🏊 <b>아이랑 운동교실</b>이 생겼어요. 시에서 운영하는 체육센터의 수영·헬스·요가·필라테스·댄스·사우나 강좌를 모아 보여 드려요.",
-    "🧒 <b>아이 강좌</b>와 <b>엄마·가족 강좌</b>로 나눠 보고, 종목 버튼으로 골라 볼 수 있어요.",
-    "📞 강좌마다 요일·시간, 대상, 한 달 요금과 <b>수강신청 바로가기</b>, 전화 버튼이 있어요.",
-    "🟢 강좌마다 <b>남은 자리</b>를 보여 드려요. 하루 세 번 새로 받아요."] },
-  { d: "2026-10-12", v: "1.0.37", t: "아이 일정을 직접 넣을 수 있어요", items: [
-    "📝 홈 아이 일정 아래 <b>+ 내 일정 추가</b>로 준비물, 병원, 생일, 상담 같은 일정을 직접 넣을 수 있어요.",
-    "🔁 매주 있는 일(예: 화요일 체육복)이나 매년 있는 일(생일)은 한 번만 넣으면 계속 보여 드려요.",
-    "☀️ 넣은 일정은 학교 일정과 함께 <b>오늘 아침 체크</b>의 '오늘·내일 일정'에도 나와요. 일정은 이 휴대폰에만 저장돼요."] },
-  { d: "2026-10-12", v: "1.0.36", t: "아침 체크에서 날씨·미세먼지를 볼 수 있어요", items: [
-    "🌤️ <b>오늘 아침 체크</b> 맨 위에 오늘 날씨(최저·최고 기온, 비 올 확률)와 미세먼지가 나와요. 하루 네 번 새로 받아요.",
-    "🧥 비 소식, 미세먼지, 큰 일교차가 있으면 '우산 챙기세요', '얇은 겉옷 챙기세요'처럼 한 줄로 알려 드려요.",
-    "📲 <b>앱처럼 쓰기</b> 안내를 그림으로 바꿨어요. 아이폰 크롬·사파리, 카카오톡 안에서 열었을 때 각각 누를 곳을 보여 드려요."] },
-  { d: "2026-10-12", v: "1.0.27", t: "아침마다 '오늘 아침 체크'를 볼 수 있어요", items: [
-    "☀️ 홈에 <b>오늘 아침 체크</b>가 생겼어요. 아이 오늘 급식, 오늘 갈 학원, 오늘·내일 학교 일정, 오늘 신청 마감 행사를 한 번에 보여 드려요.",
-    "🎪 새로 올라온 행사에 <b>NEW</b> 표시가 붙고, 바로가기 행사 아이콘에 새 행사 수가 떠요.",
-    "✏️ 아이 학원에 <b>수업 요일·시간</b>을 넣는 칸을 더 잘 보이게 바꿨어요. 시간을 넣으면 '오늘 학원'에 나와요."] },
-  { d: "2026-10-12", v: "1.0.26", t: "친구에게 바로 알려 줄 수 있어요", items: [
-    "홈 맨 위 <b>공유 버튼(↑)</b>을 누르면 카카오톡·문자로 아이랑 수원을 바로 보낼 수 있어요.",
-    "공유창이 뜨지 않는 휴대폰에서는 소개 글과 주소가 복사돼요. 대화창에 붙여 넣어 주세요."] },
-  { d: "2026-10-11", v: "1.0.0", t: "아이랑 수원 시범 운영을 시작했어요", items: [
-    "🏫 수원 초·중·고 <b>학교 일정과 급식</b>을 우리 아이 기준으로 모아 보여 드려요.",
-    "📚 수원시 공공도서관 <b>운영시간·휴관일</b>과 수원 아이들이 많이 빌린 <b>인기 도서</b>를 볼 수 있어요.",
-    "🧸 유치원 빈자리, ✏️ 학원 찾기·수강료 비교, 🎪 아이와 갈 공연·축제, 🎓 특목·자사고, 💼 엄마 일자리를 한곳에서 볼 수 있어요.",
-    "회원가입 없이 무료로 쓸 수 있어요."] },
+  { d: "2026-10-16", v: "1.0.45", t: "아이랑 성남 시범 운영을 시작했어요", items: [
+    "🏫 성남 초·중·고 <b>학교 일정과 급식</b>을 우리 아이 기준으로 모아 보여 드려요. 급식 <b>알레르기</b>도 알려 드려요.",
+    "📚 성남시 공공도서관 <b>운영시간·휴관일</b>과 성남 아이들이 많이 빌린 <b>인기 도서</b>를 볼 수 있어요.",
+    "🧸 <b>유치원</b> 빈자리·통학버스, 교육청에 등록된 <b>학원·교습소</b>와 수강료를 동네별로 찾아볼 수 있어요.",
+    "🏊 <b>아이랑 운동교실</b>에서 성남도시개발공사 체육센터의 수영·요가·필라테스 강좌를 모아 보여 드려요.",
+    "🎪 아이와 갈 만한 <b>공연·축제</b>와 학교·어린이집 <b>엄마 일자리</b>도 매일 모아 드려요.",
+    "🔒 이름·전화번호를 받지 않아요. 아이 정보는 이 휴대폰에만 저장돼요."] },
 ];
 function newsDate(d) { const [y, m, dd] = d.split("-").map(Number); return `${m}월 ${dd}일`; }
 // 새 버전으로 바뀐 걸 홈 맨 위에 한 번 알려 줌 (닫거나 소식을 보면 사라짐)
@@ -1532,8 +1510,8 @@ function viewAbout() {
   $view.innerHTML = `<button class="back glass" onclick="history.back()" aria-label="뒤로">${icon.back}</button>
     <h1 style="font-size:25px;font-weight:800;margin-top:14px">이용 안내</h1>
     <p style="font-size:13px;color:var(--muted);margin:6px 0 0">2026년 10월 · 시범 운영</p>
-    ${sec("이 서비스는", `수원에 사는 학부모에게 꼭 필요한 정보를 한곳에서 볼 수 있으면 좋겠다는 생각으로, 송골랩이 직접 만든 <b>학부모 통합 정보 서비스</b>예요.<br>학교 일정, 도서관, 학원, 유치원, 아이와 갈 행사, 일자리 정보를 공공 자료에서 모아 보여 드려요.`)}
-    ${sec("무료로 운영해요", li(["모든 기능을 <b>무료</b>로 제공해요. 회원가입이나 결제가 없어요.", "수원시청, 교육청 등 <b>공공기관이 운영하는 서비스가 아니에요.</b> 개인이 공공 자료를 모아 보여 드리는 서비스예요."]))}
+    ${sec("이 서비스는", `성남에 사는 학부모에게 꼭 필요한 정보를 한곳에서 볼 수 있으면 좋겠다는 생각으로, 송골랩이 직접 만든 <b>학부모 통합 정보 서비스</b>예요.<br>학교 일정, 도서관, 학원, 유치원, 아이와 갈 행사, 일자리 정보를 공공 자료에서 모아 보여 드려요.`)}
+    ${sec("무료로 운영해요", li(["모든 기능을 <b>무료</b>로 제공해요. 회원가입이나 결제가 없어요.", "성남시청, 교육청 등 <b>공공기관이 운영하는 서비스가 아니에요.</b> 개인이 공공 자료를 모아 보여 드리는 서비스예요."]))}
     ${sec("개인정보를 받지 않아요", `이름, 전화번호, 이메일, 주소처럼 <b>개인을 알아볼 수 있는 정보는 받지도, 저장하지도 않아요.</b> 회원가입도 없어요.`)}
     ${sec("어떤 정보를 어디에, 무엇에 쓰나요", [
       ["아이 별명 · 학교 · 학년 · 학원(수업 요일·시간), 관심 지역", "<b>사용하시는 분 본인의 휴대폰(또는 컴퓨터)</b> 브라우저 안. 다른 기기나 다른 브라우저에서는 보이지 않아요.", "홈 화면에 우리 아이 학교 일정, 학원, 고입 시기를 보여 주는 데만 써요. 서버로 보내지 않아서 <b>개발자도 볼 수 없어요.</b>", "직접 지우거나 앱·브라우저 데이터를 지울 때까지"]
@@ -1541,7 +1519,7 @@ function viewAbout() {
       <div style="display:grid;grid-template-columns:64px 1fr;gap:4px 10px;font-size:13px"><span style="color:var(--muted)">저장 위치</span><span>${where}</span><span style="color:var(--muted)">쓰는 곳</span><span>${why}</span><span style="color:var(--muted)">보관</span><span>${keep}</span></div></div>`).join("")
       + `<div style="padding-top:10px;font-size:13px">${li(["광고에 쓰지 않아요.", "앱 안의 링크(학교 홈페이지, 공고 원문 등)를 누르면 그 사이트의 개인정보 정책이 적용돼요."])}</div>`)}
     ${sec("정보의 출처와 정확성", li([
-      "나이스 교육정보 개방포털, 유치원 알리미, 도서관 정보나루, 수원문화재단, 경기아트센터, 공연예술통합전산망(KOPIS), 한국관광공사, 경기도교육청 구인구직, 경기육아종합지원센터 등 <b>공공 자료</b>를 하루에 한두 번 자동으로 가져와요.",
+      "나이스 교육정보 개방포털, 유치원 알리미, 도서관 정보나루, 공연예술통합전산망(KOPIS), 한국관광공사, 경기도교육청 구인구직, 경기육아종합지원센터 등 <b>공공 자료</b>를 하루에 한두 번 자동으로 가져와요.",
       "원래 자료에 늦게 반영되거나 틀린 내용이 있을 수 있어요. 학사일정, 접수 마감, 입학 전형처럼 중요한 내용은 <b>꼭 학교나 기관의 원문</b>을 함께 확인해 주세요.",
       "이 정보를 믿고 생긴 손해에 대해서는 책임지기 어려워요. 각 자료의 저작권은 해당 기관에 있어요."]))}
     ${sec("시범 운영 중이에요", `지금은 테스트 단계라 <b>버그나 틀린 정보가 있을 수 있어요.</b> 너그러이 양해 부탁드려요.<br>불편한 점이나 바라는 기능은 아래 메일로 알려 주시면 빠르게 고칠게요.<div style="margin-top:10px;font-weight:700;color:var(--indigo);user-select:all">songgollab@gmail.com</div>`)}
@@ -1549,8 +1527,8 @@ function viewAbout() {
 }
 
 // ---------- 관리자 (숨은 화면: 마이 > 버전 5번 누르기) ----------
-const GC_LOGIN = "https://yongin-edu-app.goatcounter.com/user/new";   // 용인·수원 같은 계정으로 로그인
-const GC_SITE = "https://suwon-edu-app.goatcounter.com";
+const GC_LOGIN = "https://yongin-edu-app.goatcounter.com/user/new";   // 용인·성남·성남 같은 계정으로 로그인
+const GC_SITE = "https://seongnam-edu-app.goatcounter.com";
 const KEY_ADMIN = "edu.admin";
 let adminViaTap = false;  // 관리자 화면은 버전 5번 누르기로만 열림 (링크로 받은 #admin 은 홈으로)
 let adminTaps = 0, adminTapTimer = null, ADMIN = null, adminBusy = false, adminOpen = false, pinFails = 0, pinWait = 0;
@@ -1642,7 +1620,7 @@ function viewAdmin() {
     $view.innerHTML = `${head}
       <p style="font-size:13px;color:var(--muted);margin:6px 0 16px;line-height:1.6">접속 통계를 보려면 이 휴대폰에 GoatCounter API 키를 한 번 넣어 주세요. 키는 이 휴대폰에만 저장되고, 관리자로 등록된 휴대폰의 방문은 통계에서 빠져요.</p>
       <div class="lift" style="padding:18px;font-size:14px;line-height:1.8">
-        <b>키 만드는 법</b><br>1. <a href="${GC_LOGIN}" target="_blank" rel="noopener">GoatCounter 로그인 화면</a>에서 로그인<br><span style="color:var(--muted)">(수원 통계 사이트가 아직 없으면: 톱니바퀴 → <b>Sites</b> → Code에 <b>suwon-edu-app</b> 넣고 추가)</span><br>2. 위쪽 메뉴의 내 이름(또는 톱니바퀴) → <b>API</b><br>3. 새 키를 만들 때 <b>Read statistics</b>(통계 읽기)만 체크 → 만들기<br>4. 나온 긴 글자를 복사해서 아래 칸에 붙여 넣기
+        <b>키 만드는 법</b><br>1. <a href="${GC_LOGIN}" target="_blank" rel="noopener">GoatCounter 로그인 화면</a>에서 로그인<br><span style="color:var(--muted)">(성남 통계 사이트가 아직 없으면: 톱니바퀴 → <b>Sites</b> → Code에 <b>seongnam-edu-app</b> 넣고 추가)</span><br>2. 위쪽 메뉴의 내 이름(또는 톱니바퀴) → <b>API</b><br>3. 새 키를 만들 때 <b>Read statistics</b>(통계 읽기)만 체크 → 만들기<br>4. 나온 긴 글자를 복사해서 아래 칸에 붙여 넣기
       </div>
       <label class="search lift" style="margin-top:14px"><input id="akey" type="password" autocomplete="off" placeholder="API 키 붙여 넣기" aria-label="GoatCounter API 키"></label>
       <p style="font-size:13px;font-weight:700;margin:18px 0 0">관리자 비밀번호 (숫자 4자리)</p>
@@ -1898,7 +1876,7 @@ function siteUrl() { return location.origin + location.pathname; }
 // 지인에게 알려주기: 휴대폰 공유창(카톡·문자 등), 안 되면 주소 복사
 function shareApp() {
   const url = siteUrl();
-  const data = { title: "아이랑 수원", text: "수원 아이 학교 급식·일정, 도서관, 학원, 유치원, 행사를 한곳에서 보는 무료 서비스예요.", url };
+  const data = { title: "아이랑 성남", text: "성남 아이 학교 급식·일정, 도서관, 학원, 유치원, 행사를 한곳에서 보는 무료 서비스예요.", url };
   trackEvent("지인-공유");
   if (navigator.share) { navigator.share(data).catch(() => {}); return; }
   (navigator.clipboard ? navigator.clipboard.writeText(data.text + "\n" + url) : Promise.reject()).then(() => toast("소개 글과 주소를 복사했어요. 카톡에 붙여 넣어 알려 주세요")).catch(() => toast(url));
@@ -1937,7 +1915,7 @@ function mock(k) {
     more: `<div style="display:flex;gap:4px"><div class="rb"><i>⧉</i>복사</div><div class="rb"><i>▭</i>기기로 보내기</div><div class="rb"><i>☰</i>읽기 목록</div><div class="rb"><i class="hl">⌄</i><b>더 보기</b></div></div>`,
     addHome: `<div style="border-radius:12px;overflow:hidden"><div class="li" style="opacity:.55">▦ QR 코드 만들기</div><div class="li hl" style="font-weight:800">${ICON_PLUS} 홈 화면에 추가</div><div class="li" style="opacity:.55">✎ 새로운 빠른 메모에 추가</div></div>`,
     addBtn: `<div style="display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:8px 10px"><span style="color:#1a73e8">취소</span><b>홈 화면에 추가</b><span class="hl" style="color:#1a73e8;font-weight:800;padding:2px 8px">추가</span></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><img src="icon-192.png" width="30" height="30" style="border-radius:8px" alt=""><span>아이랑 수원</span></div>`,
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><img src="icon-192.png" width="30" height="30" style="border-radius:8px" alt=""><span>아이랑 성남</span></div>`,
     safariBar: `<div class="bar" style="justify-content:space-between"><span>‹</span><span style="flex:1;text-align:center;opacity:.7">${esc(location.host)}</span><span class="hl" style="padding:2px 8px;font-weight:800">⋯</span></div><div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center">화면 맨 아래 주소창 오른쪽</div>`,
     safariShare: `<div style="border-radius:12px;overflow:hidden"><div class="li hl" style="font-weight:800">${sh} 공유</div><div class="li" style="opacity:.55">☆ 책갈피에 추가</div></div>`,
     kakao: `<div class="bar" style="justify-content:space-between"><span>✕</span><span style="flex:1;text-align:center;opacity:.7">${esc(location.host)}</span><span class="hl" style="padding:2px 8px;font-weight:800">⋮</span></div><div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center">카톡 화면 오른쪽 위 또는 아래</div>`,
@@ -1954,7 +1932,7 @@ function installSteps() {
   const chromeIos = lead(4) + step(1, `주소창 오른쪽 <b>공유 ${ICON_SHARE}</b> 버튼을 눌러요`, "chromeTop") + step(2, `아래 줄 맨 오른쪽 <b>더 보기 ⌄</b>를 눌러요`, "more") + step(3, `목록을 내려서 <b>홈 화면에 추가</b>를 눌러요`, "addHome") + step(4, `오른쪽 위 <b>추가</b>를 누르면 끝!`, "addBtn");
   const safariIos = lead(4) + step(1, `화면 맨 아래 <b>⋯</b> 버튼을 눌러요 <span style="color:var(--muted);font-size:13px">(공유 ${ICON_SHARE}가 바로 보이면 그걸 눌러요)</span>`, "safariBar") + step(2, `<b>공유</b>를 눌러요`, "safariShare") + step(3, `목록을 내려서 <b>홈 화면에 추가</b>를 눌러요 <span style="color:var(--muted);font-size:13px">(안 보이면 <b>더 보기</b>)</span>`, "addHome") + step(4, `오른쪽 위 <b>추가</b>를 누르면 끝!`, "addBtn");
   const chromeAnd = lead(3) + step(1, `오른쪽 위 <b>⋮ 메뉴</b>를 눌러요`) + step(2, `<b>홈 화면에 추가</b> 또는 <b>앱 설치</b>를 눌러요`) + step(3, `<b>설치</b>(또는 <b>추가</b>)를 누르면 끝!`);
-  if (d.standalone) return { title: "이미 앱으로 쓰고 있어요 ✓", body: `<p style="color:var(--muted);line-height:1.6">홈 화면의 <b>아이랑 수원</b> 아이콘으로 바로 열려요.</p>` };
+  if (d.standalone) return { title: "이미 앱으로 쓰고 있어요 ✓", body: `<p style="color:var(--muted);line-height:1.6">홈 화면의 <b>아이랑 성남</b> 아이콘으로 바로 열려요.</p>` };
   if (installEvt && !d.inApp) return { title: "버튼 하나로 설치돼요", body: `<p style="color:var(--muted);line-height:1.6">아래 버튼을 누르고, 뜨는 창에서 <b>설치</b>를 누르면 바탕화면에 아이콘이 생겨요.</p>${big("📲 바탕화면에 설치하기", "doInstall()")}` };
   if (d.inApp) return { title: d.ios ? "사파리나 크롬으로 열어 주세요" : "크롬으로 열어 주세요",
     body: `<p style="color:var(--muted);line-height:1.6">지금은 ${d.kakao ? "카카오톡" : "다른 앱"} 안이라 바탕화면에 추가할 수 없어요. 아래 버튼으로 열고, 열린 화면에서 다시 <b>앱처럼 쓰기</b>를 눌러 주세요.</p>
@@ -1983,7 +1961,7 @@ function openInstall(auto) {
   el.innerHTML = `<div style="background:#fff;width:min(560px,100%);border-radius:26px 26px 0 0;padding:22px 20px calc(26px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(20,26,46,.25);max-height:88vh;overflow:auto">
       <div style="display:flex;align-items:center;gap:12px">
         <img src="icon-192.png" alt="" width="44" height="44" style="border-radius:12px;box-shadow:0 3px 10px rgba(30,40,90,.15)">
-        <div style="flex:1;min-width:0"><div style="font-size:12px;color:var(--muted)">아이랑 수원 · 앱처럼 쓰기</div><div style="font-size:18px;font-weight:800;margin-top:2px">${esc(title)}</div></div>
+        <div style="flex:1;min-width:0"><div style="font-size:12px;color:var(--muted)">아이랑 성남 · 앱처럼 쓰기</div><div style="font-size:18px;font-weight:800;margin-top:2px">${esc(title)}</div></div>
         <button onclick="closeInstall()" aria-label="닫기" style="border:0;background:#EEF0F6;width:34px;height:34px;border-radius:17px;font-size:18px;color:var(--muted);cursor:pointer">×</button></div>
       ${MOCK_CSS}<div style="margin-top:6px">${body}</div>
       <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6">설치 파일을 받지 않아요. 홈 화면 아이콘은 이 사이트로 바로 가는 바로가기라 용량도 거의 안 차지해요.</div>

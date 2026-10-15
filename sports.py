@@ -1,151 +1,239 @@
-"""아이랑 운동교실(수원) 수집기
+"""아이랑 운동교실(성남) 수집기
 
-수원도시공사 강좌 예약 사이트(rsv.suwonudc.co.kr)가 누구나 볼 수 있게 보여 주는
-강좌 목록(로그인 필요 없음)에서 수영·헬스·요가·필라테스·댄스 강좌와
-모집·신청 인원(남은 자리)을 읽어 output/sports.json 으로 저장한다.
-- robots.txt 없음(제한 없음). 요청 사이 0.4초 쉬어 서버 부담을 줄인다.
-- 강사 이름은 가져오지 않는다.
-- 이번 달과 다음 달 반을 함께 본다(다음 달 반이 열려 있으면 그쪽을 먼저 보여 줌).
+성남도시개발공사 체육시설 사이트(spo.isdc.co.kr)의 센터별 '프로그램안내' 페이지
+(누구나 볼 수 있는 안내 표, 로그인 필요 없음)에서 수영·헬스·요가·필라테스·댄스 강좌의
+대상·시간·요일·요금을 읽어 output/sports.json 으로 저장한다.
+- robots.txt 없음(제한 없음). 센터마다 페이지 한 장씩, 하루 한 번만 읽는다(요청 사이 2초).
+- 실시간 남은 자리는 수강신청 화면(접속 대기열·자동화 차단 적용)에만 있어서 읽지 않는다.
+  → 앱에는 "요금·시간 안내"만 보여 주고, 신청은 공사 사이트로 연결한다.
 """
 
+import html
 import json
 import os
 import re
 import time
-import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
 KST = timezone(timedelta(hours=9))
-BASE = "https://rsv.suwonudc.co.kr"
-UA = "Mozilla/5.0 (suwon-edu-collector; +https://suwon.songgollab.co.kr)"
-APPLY = "https://rsv.suwonudc.co.kr/suwonudc/uat/uia/LoginUsr.do"
+BASE = "https://spo.isdc.co.kr"
+UA = "Mozilla/5.0 (seongnam-edu-collector; +https://seongnam.songgollab.co.kr)"
+APPLY = BASE + "/courseRegist.do"
 
 CENTERS = [
-    {"id": "20010001", "name": "광교웰빙국민체육센터", "area": "영통구 이의동", "addr": "수원시 영통구 웰빙타운로 71", "tel": "031-228-3200",
-     "hours": "센터 홈페이지 참고", "closed": "", "tags": ["수영", "헬스", "요가·필라테스", "댄스·에어로빅"],
-     "web": "https://www.suwonudc.co.kr/suwonsc3/mainPage.do", "apply": APPLY},
-    {"id": "17110001", "name": "서수원칠보체육관", "area": "권선구 금곡동", "addr": "수원시 권선구 서수원로 577", "tel": "031-228-2600",
-     "hours": "센터 홈페이지 참고", "closed": "", "tags": ["헬스", "요가·필라테스", "댄스·에어로빅", "탁구", "배드민턴"],
-     "web": "https://www.suwonudc.co.kr/suwonsc2/mainPage.do", "apply": APPLY},
-    {"id": "17110002", "name": "장안구민회관", "area": "장안구 정자동", "addr": "수원시 장안구 송원로 101", "tel": "031-228-3001",
-     "hours": "센터 홈페이지 참고", "closed": "", "tags": ["수영", "헬스"],
-     "web": "https://www.suwonudc.co.kr/jacc/mainPage.do", "apply": APPLY},
+    {"id": "tan", "name": "탄천종합운동장", "area": "분당구 야탑동", "addr": "성남시 분당구 탄천로 215", "tel": "031-725-7100",
+     "apply": APPLY, "tags": ["수영", "헬스", "요가·필라테스"], "hours": "", "closed": "", "web": BASE + "/tan_programGuide.do"},
+    {"id": "sns", "name": "성남종합운동장", "area": "중원구 성남동", "addr": "성남시 중원구 제일로 60", "tel": "031-754-3100",
+     "apply": APPLY, "tags": ["헬스", "댄스·에어로빅"], "hours": "", "closed": "", "web": BASE + "/sns_programGuide.do"},
+    {"id": "pgs", "name": "판교스포츠센터", "area": "분당구 판교동", "addr": "성남시 분당구 판교로228번길 55", "tel": "031-724-4660",
+     "apply": APPLY, "tags": ["수영", "헬스"], "hours": "", "closed": "", "web": BASE + "/pgs_programGuide.do"},
+    {"id": "spo", "name": "평생스포츠센터", "area": "분당구 정자동", "addr": "성남시 분당구 판교로 546", "tel": "031-781-1073",
+     "apply": APPLY, "tags": ["수영", "헬스"], "hours": "", "closed": "", "web": BASE + "/spo_programGuide.do"},
+    {"id": "ggp", "name": "금곡공원국민체육센터", "area": "분당구 금곡동", "addr": "성남시 분당구 금곡로 302", "tel": "031-727-9990",
+     "apply": APPLY, "tags": ["수영", "헬스"], "hours": "", "closed": "", "web": BASE + "/ggp_programGuide.do"},
 ]
 
-KID = re.compile(r"초등|어린이|유아|아동|키즈|주니어|생존수영")
-SKIP = re.compile(r"출근부|강사|대관|탁구|배드민턴|농구|골프|테니스|풋살|축구|문화|체험|사회적약자|다목적체육관|일일|미술|음악|어학|공예|서예|노래|악기|컴퓨터|요리|바둑")
-START = time.time()
-BUDGET = 15 * 60   # 최대 15분만 돌고, 받은 데까지 저장
+KID = re.compile(r"초등|어린이|유아|아동|키즈|주니어|생존수영|초\s*\d")
+SKIP = re.compile(r"자유\s*수영|자유\s*이용|대관|탁구|배드민턴|농구|골프|테니스|풋살|축구|일일|자유이용|월자유|사물함|주차|셔틀|그래비티|위탁")
 
 
-def http(url, data=None, ctype=None):
-    req = urllib.request.Request(url, data=data, headers={"User-Agent": UA, **({"Content-Type": ctype} if ctype else {})})
+def get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
     for i in range(2):
         try:
-            with urllib.request.urlopen(req, timeout=20) as r:
-                return json.loads(r.read().decode("utf-8", errors="replace"))
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read().decode("utf-8", errors="replace")
         except Exception as e:
             print("  다시 시도:", url.split("/")[-1], e)
-            time.sleep(3 * (i + 1))
-    return None
+            time.sleep(4)
+    return ""
 
 
-def codes(agent, code):
-    j = http(f"{BASE}/suwonudc/biz/com/GbCodeSelete.do?" + urllib.parse.urlencode({"agentCode": agent, "gbCode1": code}))
-    return [(r.get("code"), (r.get("name") or "").strip()) for r in (j or {}).get("rows", [])]
+def text(h):
+    h = re.sub(r"<br\s*/?>", "\n", h, flags=re.I)
+    h = re.sub(r"<[^>]+>", " ", h)
+    lines = [" ".join(html.unescape(x).split()) for x in h.split("\n")]
+    return [x for x in lines if x]
 
 
-def courses(agent, c1, c2, ym):
-    body = json.dumps({"agentcode": agent, "gbcode1": c1, "sYearMon": ym + "01", "gbcode2": c2, "sdate": f"{ym[:4]}-{ym[4:]}-01"}).encode()
-    j = http(f"{BASE}/suwonudc/biz/Ncrs/API/sukanglist.do", body, "application/json;charset=UTF-8")
-    return j if isinstance(j, list) else []
-
-
-def category(text):
-    if re.search(r"수영|아쿠아", text):
+def category(t):
+    if re.search(r"수영|아쿠아", t):
         return "수영"
-    if re.search(r"사우나|목욕", text):
-        return "사우나"
-    if re.search(r"요가|필라테스", text):
+    if re.search(r"요가|필라테스", t):
         return "요가·필라테스"
-    if re.search(r"댄스|에어로빅|로빅|줌바|발레|라인|체조|방송", text):
+    if re.search(r"댄스|에어로빅|로빅|줌바|발레|라인|체조|방송", t):
         return "댄스·에어로빅"
-    if re.search(r"헬스|근력|피트니스|PT|트레이닝|스피닝|서킷", text, re.I):
+    if re.search(r"헬스|근력|피트니스|트레이닝|스피닝|서킷", t, re.I):
         return "헬스"
     return ""
 
 
-def num(v):
-    try:
-        return int(float(str(v).replace(",", "")))
-    except ValueError:
-        return 0
+def table_rows(tbl):
+    """rowspan을 펼쳐서 [ [칸 글자 줄들] ... ] 으로 돌려준다 (rowspan="2 class=.." 같은 깨진 속성도 처리)"""
+    grid, pending = [], {}
+    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl, re.S):
+        cells = re.findall(r"<t([dh])([^>]*)>(.*?)</t[dh]>", tr, re.S)
+        row, col = [], 0
+
+        def fill():
+            nonlocal col
+            while col in pending:
+                v, left = pending[col]
+                row.append(v)
+                if left <= 1:
+                    del pending[col]
+                else:
+                    pending[col] = (v, left - 1)
+                col += 1
+        for kind, attrs, body in cells:
+            fill()
+            m = re.search(r'rowspan\s*=\s*"?\s*(\d+)', attrs)
+            span = int(m.group(1)) if m else 1
+            v = text(body)
+            row.append(v)
+            if span > 1:
+                pending[col] = (v, span - 1)
+            col += 1
+        fill()
+        if row and any(row):
+            grid.append(row)
+    return grid
+
+
+WD = "월화수목금토일"
+
+
+def clean_days(lines):
+    """요일 칸에서 '월수금', '화, 목', '월~금' 같은 요일 표기만 남긴다"""
+    out = []
+    for x in lines:
+        if x.startswith(("*", "※")):
+            continue
+        for mm in re.finditer(r"[월화수목금토일](?:\s*[,~·]?\s*\(?[월화수목금토일]\)?)*", x):
+            if re.match(r"[가-힣]", x[mm.end():mm.end() + 1]):
+                continue   # '수영', '토요일' 같은 낱말 속 글자는 요일이 아님
+            m = re.sub(r"\s+", "", mm.group(0)).replace("~(", "~").strip(",~·()")
+            if m and m not in out and not (len(m) == 1 and out):
+                out.append(m)
+    return " / ".join(out[:2])
+
+
+def n_days(days):
+    d = days.split(" / ")[0]
+    m = re.match(r"([월화수목금토일])~([월화수목금토일])", d)
+    if m:
+        return WD.index(m.group(2)) - WD.index(m.group(1)) + 1
+    return len(set(c for c in re.sub(r"\(.\)", "", d) if c in WD))
+
+
+def short_price(lines, kid, days=""):
+    """요금 칸에서 한두 줄만: 어린이 강좌면 어린이 요금 위주"""
+    pairs, who = [], ""
+    for x in lines:
+        if not re.search(r"\d[\d,]*\s*원", x):
+            who = x
+            continue
+        pairs.append((who, x))
+    if kid:
+        pk = [(w, p) for w, p in pairs if re.search(r"어린이|초등|유아", w + p)]
+        if pk:
+            pairs = pk
+    else:
+        pa = [(w, p) for w, p in pairs if not re.search(r"어린이|초등|유아|청소년", w + p)]
+        if pa:
+            pairs = pa
+    n = n_days(days) if days else 0
+    pn = [(w, p) for w, p in pairs if re.search(rf"주\s*{n}\s*회", p)] if n else []
+    if pn:
+        pairs = pn
+    out = []
+    for w, p in pairs[:2]:
+        p = re.sub(r"(어린이|일\s*반|청소년|성\s*인)\s*|\([^)]*\)\s*", "", p).strip()
+        out.append(p)
+    return " / ".join(out)
+
+
+def parse_center(c, page):
+    i = page.find('id="tabs-1"')
+    j = page.find('id="tabs-2"', i + 10)
+    part = page[i:j if j > 0 else None] if i >= 0 else page
+    progs = []
+    for head, tbl in re.findall(r"<h5[^>]*>(.*?)</h5>.*?(<table.*?</table>)", part, re.S):
+        title = " ".join(text(head))
+        title = re.sub(r"\(.*?\)|강습프로그램", "", title)
+        title = " ".join(re.split(r"[/(]", title)[0].split()) or "강좌"
+        cat = category(title)
+        if not cat or SKIP.search(title):
+            continue
+        grid = table_rows(tbl)
+        if not grid:
+            continue
+        hdr = [" ".join(x) for x in grid[0]]
+        def col(*names):
+            return next((n for n, h in enumerate(hdr) for k in names if k in h), None)
+        idx = {"대상": col("대상", "프로그램"), "시간": col("시간"), "요일": col("요일"), "이용료": col("이용료", "요금", "비고")}
+        if idx["대상"] is None or idx["시간"] is None or idx["이용료"] is None:
+            continue
+        groups = {}
+        for row in grid[1:]:
+            def g(k):
+                return row[idx[k]] if idx[k] is not None and idx[k] < len(row) else []
+            wl = [x for x in g("대상") if not re.search(r"^[※*]|주\s*\d\s*회|^\(?[월화수목금토일,\s~()]+\)?$", x)]
+            who = re.sub(r"\((?!초|만|여성|\d).*?\)", "", " ".join(wl[:2])).strip()[:30]
+            who = who.replace("일 반", "일반")
+            if not who or who == title:
+                who = "일반·청소년"
+            if not who or SKIP.search(who):
+                continue
+            days = clean_days(g("요일") or g("대상"))
+            times = " ".join(re.findall(r"\d{1,2}:\d{2}\s*~\s*\d{1,2}:\d{2}", " ".join(g("시간"))))
+            kid = 1 if KID.search(who) else 0
+            price = short_price(g("이용료"), kid, days)
+            if not times or not price:
+                continue
+            groups.setdefault((who, days, price), []).append(times)
+        for (who, days, price), ts in groups.items():
+            kid = 1 if KID.search(who) else 0
+            tl = []
+            for t in ts:
+                for x in re.findall(r"\d{1,2}:\d{2}\s*~\s*\d{1,2}:\d{2}", t):
+                    x = x.replace(" ", "")
+                    if x not in tl:
+                        tl.append(x)
+            note = ""
+            days_clean = days
+            progs.append({"c": c["id"], "cat": cat, "name": f"{title} · {who}", "who": who + (f" ({note})" if note else ""),
+                          "kid": kid, "days": days_clean,
+                          "times": ", ".join(tl[:6]) + (f" 외 {len(tl) - 6}개 반" if len(tl) > 6 else ""),
+                          "price": price, "cap": 0, "applied": 0, "room": ""})
+    return progs
 
 
 def main():
     now = datetime.now(KST)
-    this_m = now.strftime("%Y%m")
-    nxt = (now.replace(day=1) + timedelta(days=32)).strftime("%Y%m")
-    months = (nxt, this_m) if now.day >= 20 else (this_m,)   # 다음 달 반은 보통 20일 이후에 열림
-    print("조회 달:", months, flush=True)
     programs, status = [], {}
     for c in CENTERS:
-        a, got = c["id"], 0
-        try:
-            for c1, n1 in codes(a, "0000"):
-                if SKIP.search(n1):
-                    continue
-                time.sleep(0.4)
-                subs = codes(a, c1)
-                print(f" {c['name']} · {n1}: 세부 {len(subs)}개", flush=True)
-                for c2, n2 in subs:
-                    if SKIP.search(n2) or time.time() - START > BUDGET:
-                        continue
-                    for ym in months:
-                        time.sleep(0.4)
-                        for d in courses(a, c1, c2, ym):
-                            names = [d.get(k, "") for k in ("skname1", "skname2", "skname3", "skname4")]
-                            text = " ".join(names + [n1, n2])
-                            cat = category(text)
-                            if not cat or SKIP.search(text):
-                                continue
-                            cap, appl = num(d.get("sktjwcnt")), num(d.get("skcnt"))
-                            title = " · ".join(x for x in names[:3] if x)
-                            programs.append({
-                                "c": a, "cat": cat, "name": title, "who": names[1] or n2,
-                                "kid": 1 if KID.search(text) else 0,
-                                "days": (d.get("skname6") or "").replace("|", "·"), "times": d.get("skname7") or "",
-                                "price": f"{num(d.get('skamt')):,}원" + (f" ({d.get('skname5')})" if d.get("skname5") else ""),
-                                "cap": cap, "applied": appl, "month": int(ym[4:]), "ym": ym, "room": d.get("skrname") or ""})
-                            got += 1
-            status[a] = "ok" if got else "empty"
-        except Exception as e:
-            print(f" {c['name']} 실패: {e}")
-            status[a] = "fail"
-        print(f" {c['name']}: {got}개 ({int(time.time() - START)}초)", flush=True)
-    # 같은 강좌가 두 달에 다 있으면 다음 달 것만 남김
-    seen, uniq = set(), []
-    for p in sorted(programs, key=lambda p: p["ym"], reverse=True):
-        k = (p["c"], p["name"], p["days"], p["times"])
-        if k in seen:
-            continue
-        seen.add(k)
-        uniq.append(p)
-    for p in uniq:
-        p.pop("ym")
+        page = get(c["web"])
+        got = parse_center(c, page) if page else []
+        status[c["id"]] = "ok" if got else ("empty" if page else "fail")
+        print(f" {c['name']}: {len(got)}개 (아이 {sum(p['kid'] for p in got)})")
+        programs += got
+        time.sleep(2)
+    for p in programs:
         if not p["kid"]:
             p.pop("kid")
     order = ["수영", "댄스·에어로빅", "요가·필라테스", "헬스", "사우나"]
-    uniq.sort(key=lambda p: (0 if p.get("kid") else 1, order.index(p["cat"]) if p["cat"] in order else 9, p["c"], p["times"]))
-    if not uniq:
+    programs.sort(key=lambda p: (0 if p.get("kid") else 1, order.index(p["cat"]) if p["cat"] in order else 9, p["c"]))
+    if not programs:
         print("강좌를 하나도 못 읽었어요. 이전 파일을 그대로 둡니다.")
         return
-    out = {"city": "수원", "updated": now.strftime("%Y-%m-%d %H:%M"), "status": status, "live": 1, "centers": CENTERS, "programs": uniq}
+    out = {"city": "성남", "updated": now.strftime("%Y-%m-%d %H:%M"), "status": status, "live": 0,
+           "centers": CENTERS, "programs": programs}
     os.makedirs("output", exist_ok=True)
     with open("output/sports.json", "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
-    print(f"저장: 강좌 {len(uniq)}개 (아이 {sum(1 for p in uniq if p.get('kid'))}개)")
+    print(f"저장: 강좌 {len(programs)}개 (아이 {sum(1 for p in programs if p.get('kid'))}개)")
 
 
 if __name__ == "__main__":

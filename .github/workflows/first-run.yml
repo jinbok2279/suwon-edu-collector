@@ -45,6 +45,13 @@ jobs:
         run: python jobs.py || echo "일자리 실패 (계속 진행)"
       - name: 특목·자사고
         run: python elite.py || echo "특목고 실패 (계속 진행)"
+      - name: 운동교실
+        run: python sports.py || echo "운동교실 실패 (계속 진행)"
+      - name: 날씨
+        run: python weather.py || echo "날씨 실패 (WEATHER_KEY 확인)"
+        env:
+          WEATHER_KEY: ${{ secrets.WEATHER_KEY }}
+          CITY: 성남
       - name: 저장
         run: |
           git config user.name "github-actions[bot]"

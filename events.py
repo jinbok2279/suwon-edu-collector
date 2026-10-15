@@ -1,13 +1,12 @@
-"""아이와 함께 갈 만한 수원 행사 수집기
+"""아이와 함께 갈 만한 성남 행사 수집기
 
-1) 수원문화재단 행사정보 (공연·축제·전시·행사) 중 가족·어린이에게 맞는 것   → city
-2) 경기아트센터 공연·전시 일정 중 수원 공연장의 가족·어린이 공연      → city
-3) 수원문화재단 교육정보 (체험·교육 프로그램) 중 대상이 유아·초등·가족인 것  → lib
-4) (보조) 문화체육관광부 문화예술공연(통합) API 의 수원 행사 (CULTURE_KEY, 해외 서버 접속이 막히면 건너뜀)
+1) 공연예술통합전산망(KOPIS) 경기도 아동공연 중 성남 공연장 (성남아트센터·성남아트리움·성남시민회관 등)  → city
+2) 한국관광공사 국문 관광정보: 성남에서 열리는 축제·행사                                             → city
+3) (보조) 문화체육관광부 문화예술공연(통합) API 의 성남 가족 행사 (CULTURE_KEY)                         → city
 결과는 output/events.json 으로 저장한다.
 
-수원시청·수원시도서관 홈페이지는 robots.txt로 자동 수집을 막아 두어 읽지 않는다.
-수원문화재단(swcf.or.kr)은 검색 페이지만 막고 목록·상세는 허용한다.
+성남시도서관(snlib.go.kr)은 robots.txt로 전체 수집을 막아 두었고, 성남문화재단(snart.or.kr)은
+웹 방화벽이 서버 접속을 막아 읽지 않는다. (2026-10-15 확인) → 체험·교육(lib)은 아직 비어 있음.
 """
 
 import hashlib
@@ -24,16 +23,16 @@ from htmltree import Tree
 
 KST = timezone(timedelta(hours=9))
 SWCF = "https://www.swcf.or.kr/"
-UA = {"User-Agent": "Mozilla/5.0 (suwon-edu-collector; +https://suwon.songgollab.co.kr)"}
+UA = {"User-Agent": "Mozilla/5.0 (seongnam-edu-collector; +https://seongnam.songgollab.co.kr)"}
 CULTURE_API = "https://api.kcisa.kr/openapi/CNV_060/request"  # 문화체육관광부_문화예술공연(통합)
 CULTURE_KEY = os.environ.get("CULTURE_KEY", "").strip()
 HORIZON = 60  # 앞으로 며칠 안에 시작하는 행사까지
 
-SUWON = re.compile(r"수원|경기아트센터|경기도문화의전당|SK아트리움|에스케이아트리움|화성행궁|수원화성|팔달문|장안문|연무대|"
-                   r"광교호수|광교박물관|만석공원|수원올레드|수원종합운동장|수원월드컵|"
-                   r"수원시립미술관|아트스페이스광교|해우재|정조테마공연장|111CM|"
-                   r"장안구|권선구|팔달구|영통구|광교|영통|매탄|호매실|행궁동|인계동", re.I)
-NOT_SUWON = re.compile(r"화성시|오산|용인|성남|안양|의왕|군포")
+SUWON = re.compile(r"성남|성남아트센터|성남아트리움|성남시민회관|성남큐브미술관|성남종합운동장|탄천종합운동장|"
+                   r"판교|분당|정자동|서현|야탑|수내|미금|모란|위례|신흥동|태평동|단대동|"
+                   r"율동공원|중앙공원|탄천|남한산성|희망대공원|판교어린이도서관|"
+                   r"수정구|중원구|분당구", re.I)
+NOT_SUWON = re.compile(r"수원|화성시|오산|용인|안양|의왕|군포|광주시|하남|서울|과천")
 KID_WORDS = re.compile(r"가족|어린이|아이|키즈|kids|유아|아동|동화|인형|마술|매직|체험|그림책|놀이|과학|축제|페스티벌|야시장|버블|뮤지컬|"
                        r"캐릭터|만들기|숲|생태|방학|꼬마|공주|동물|공룡|로봇|야간개장|야행|미디어아트|자전거|마켓|놀이터", re.I)
 NOT_KID = re.compile(r"19세|청소년\s*관람\s*불가|성인\s*대상|성인만|어르신|시니어|트로트|스탠드업|stand-up|웰니스|미식|와인|술|막걸리|"
@@ -318,14 +317,14 @@ def xml_items(raw, tag):
 
 
 def kopis_events(today):
-    """KOPIS 공연예술통합전산망: 경기도 아동공연(kidstate=Y) 중 수원 공연장"""
+    """KOPIS 공연예술통합전산망: 경기도 아동공연(kidstate=Y) 중 성남 공연장"""
     if not KOPIS_KEY:
         print("  KOPIS_KEY 없음: 공연예술통합전산망 건너뜀")
         return []
     t0, t1 = today.strftime("%Y%m%d"), (today + timedelta(days=HORIZON)).strftime("%Y%m%d")
     rows, out, seen = [], [], set()
-    # 수원시 코드(4111)로 먼저 받고, 비어 있으면 경기도 전체에서 공연장 이름으로 거른다
-    for sub in ("4111", ""):
+    # 성남시 코드(4113)로 먼저 받고, 비어 있으면 경기도 전체에서 공연장 이름으로 거른다
+    for sub in ("4113", ""):
         got = []
         for page in range(1, 11):
             q = {"service": KOPIS_KEY, "stdate": t0, "eddate": t1, "cpage": page, "rows": 100,
@@ -348,7 +347,7 @@ def kopis_events(today):
             if len(items) < 100:
                 break
             time.sleep(0.3)
-        print(f"  KOPIS {'수원' if sub else '경기 전체'} 아동공연 {len(got)}건")
+        print(f"  KOPIS {'성남' if sub else '경기 전체'} 아동공연 {len(got)}건")
         rows = got
         if got:
             break
@@ -368,12 +367,12 @@ def kopis_events(today):
                     "time": "", "grade": "아동공연", "price": "", "free": False, "kind": d.get("genrenm", ""),
                     "src": "kopis", "link": KOPIS_VIEW + pid,
                     "img": poster.replace("http://", "https://") if poster else ""})
-    print(f"  KOPIS 수원 아동공연 {len(out)}건")
+    print(f"  KOPIS 성남 아동공연 {len(out)}건")
     return out
 
 
 def tour_festivals(today):
-    """한국관광공사 국문 관광정보: 수원에서 열리는 축제·행사"""
+    """한국관광공사 국문 관광정보: 성남에서 열리는 축제·행사"""
     if not TOUR_KEY:
         print("  TOUR_KEY 없음: 관광공사 축제 건너뜀")
         return []
@@ -381,7 +380,7 @@ def tour_festivals(today):
     key = TOUR_KEY if "%" in TOUR_KEY else urllib.parse.quote(TOUR_KEY, safe="")
     out, items = [], []
     for page in range(1, 6):
-        url = (f"{TOUR_API}?serviceKey={key}&MobileOS=ETC&MobileApp=AirangSuwon&_type=json&arrange=A"
+        url = (f"{TOUR_API}?serviceKey={key}&MobileOS=ETC&MobileApp=AirangSeongnam&_type=json&arrange=A"
                f"&eventStartDate={(today - timedelta(days=90)).strftime('%Y%m%d')}&areaCode=31&numOfRows=100&pageNo={page}")
         try:
             data = json.loads(get(url, tries=2, timeout=40))
@@ -398,7 +397,7 @@ def tour_festivals(today):
             break
     for it in items:
         addr = sp(it.get("addr1"))
-        if "수원" not in addr:
+        if "성남" not in addr:
             continue
         s, e = str(it.get("eventstartdate") or ""), str(it.get("eventenddate") or "")
         if not s or (e or s) < t0 or s > t1:
@@ -409,7 +408,7 @@ def tour_festivals(today):
                     "place": addr.replace("경기도 ", ""), "time": "", "grade": "", "price": "", "free": False,
                     "kind": "축제", "src": "tour", "img": (it.get("firstimage") or "").replace("http://", "https://"),
                     "link": "https://search.naver.com/search.naver?query=" + urllib.parse.quote(title)})
-    print(f"  관광공사 수원 축제·행사 {len(out)}건")
+    print(f"  관광공사 성남 축제·행사 {len(out)}건")
     return out
 
 
@@ -421,11 +420,11 @@ def strip_html(s):
 
 def is_suwon(title, site, contact, desc):
     where = " ".join([site, contact])
-    if SUWON.search(where) and not (NOT_SUWON.search(where) and "수원" not in where):
+    if SUWON.search(where) and not (NOT_SUWON.search(where) and "성남" not in where):
         return True
-    if not site and ("수원" in title or "수원" in desc[:300]):
+    if not site and ("성남" in title or "성남" in desc[:300]):
         return True
-    return bool(re.search(r"수원", title)) and not NOT_SUWON.search(site)
+    return bool(re.search(r"성남", title)) and not NOT_SUWON.search(site)
 
 
 def culture_events(today):
@@ -469,21 +468,17 @@ def culture_events(today):
                         "link": g("url") or "https://search.naver.com/search.naver?query=" + urllib.parse.quote(title)})
         if len(items) < rows:
             break
-    print(f"  문화포털 수원 가족 행사 {len(out)}건")
+    print(f"  문화포털 성남 가족 행사 {len(out)}건")
     return out
 
 
 def main():
     today = datetime.now(KST).date()
     city, lib = [], []
-    try:
-        city = foundation_events(today)
-    except Exception as e:
-        print("수원문화재단 행사 실패:", e)
     def norm(s):  # 같은 공연이 출처마다 조금 다르게 적혀도 하나로 보기
-        s = re.sub(r"\[[^\]]*\]|\([^)]*\)|-\s*수원$|수원|가족|뮤지컬|어린이|연극|공연", "", s)
+        s = re.sub(r"\[[^\]]*\]|\([^)]*\)|-\s*성남$|성남|가족|뮤지컬|어린이|연극|공연", "", s)
         return re.sub(r"\W", "", s)[:10]
-    for name, fn in (("KOPIS", kopis_events), ("경기아트센터", ggac_events), ("관광공사", tour_festivals)):
+    for name, fn in (("KOPIS", kopis_events), ("관광공사", tour_festivals)):
         try:
             city += [e for e in fn(today) if all(norm(e["title"]) != norm(c["title"]) for c in city)]
         except Exception as e:
@@ -492,10 +487,6 @@ def main():
         city += [e for e in culture_events(today) if all(norm(e["title"]) != norm(c["title"]) for c in city)]
     except Exception as e:
         print("문화포털 실패:", e)
-    try:
-        lib = foundation_programs(today)
-    except Exception as e:
-        print("수원문화재단 교육 실패:", e)
     old = {}
     if os.path.exists("output/events.json"):
         try:
@@ -510,7 +501,7 @@ def main():
     lib.sort(key=lambda e: (e["status"] != "접수중", e.get("applyEnd") or "9", e["start"]))
     os.makedirs("output", exist_ok=True)
     result = {"updated_at": datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S"),
-              "source": "수원문화재단 행사·교육정보", "city": city, "lib": lib}
+              "source": "공연예술통합전산망·한국관광공사·문화포털", "city": city, "lib": lib}
     with open("output/events.json", "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=1)
     print(f"공연·축제 {len(city)}건, 체험·교육 {len(lib)}건 저장")

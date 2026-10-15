@@ -1,6 +1,6 @@
-"""수원시 공공도서관 목록 수집기 (도서관 정보나루 정보공개 도서관 조회 API)
+"""성남시 공공도서관 목록 수집기 (도서관 정보나루 정보공개 도서관 조회 API)
 
-수원시는 열람실 실시간 좌석을 공개 API로 내놓지 않아서, 대신
+성남시도서관은 robots.txt로 자동 수집을 막아 열람실 실시간 좌석을 공개 API로 내놓지 않아서, 대신
 도서관별 주소·전화·운영시간·휴관일·장서 수를 output/libs.json 으로 저장한다. (LIB_KEY 필요)
 앱의 '도서관' 탭이 이 파일을 읽는다.
 """
@@ -47,10 +47,10 @@ def main():
     libs.sort(key=lambda l: (order.index(l["gu"]), l["name"]))
     os.makedirs("output", exist_ok=True)
     result = {"updated_at": datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S"),
-              "source": "도서관 정보나루 (국립중앙도서관)", "source_url": "https://www.suwonlib.go.kr", "libraries": libs}
+              "source": "도서관 정보나루 (국립중앙도서관)", "source_url": "https://www.snlib.go.kr", "libraries": libs}
     with open("output/libs.json", "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f"수원시 도서관 {len(libs)}곳 저장")
+    print(f"성남시 도서관 {len(libs)}곳 저장")
     for l in libs[:5]:
         print(f"  [{l['gu']}] {l['name']} · {l['hours'][:30]} · 휴관 {l['closed'][:30]}")
 
