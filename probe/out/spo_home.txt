@@ -1,0 +1,209 @@
+[200] https://spo.isdc.co.kr/ len=55074
+/QRGuide.do
+/centerFacGuide.do
+/checkPublicDc.do
+/completionSystemGuide.do
+/convenientFacGuide.do
+/courseCart.do
+/courseRegist.do
+/courseRegistGuide.do
+/dailyTck.do
+/discountBenefit.do
+/dlyUsagePeriod.do
+/drawRegist.do
+/drawRegistCart.do
+/drawRegistList.do
+/emailCollectDeny.do
+/ggp_QRGuide.do
+/ggp_centerFacGuide.do
+/ggp_completionSystemGuide.do
+/ggp_courseDrawGuide.do
+/ggp_courseRegistGuide.do
+/ggp_discountBenefit.do
+/ggp_greeting.do
+/ggp_history.do
+/ggp_lockerGuide.do
+/ggp_lockerRoom.do
+/ggp_memManageRule.do
+/ggp_organization.do
+/ggp_programGuide.do
+/ggp_refDelayGuide.do
+/ggp_visitWay.do
+/greeting.do
+/health.do
+/history.do
+/idVerificate.do
+/imIntHandle.do
+/images/icon_title.png
+/infoHandlingPolicy.do
+/lockerGuide.do
+/login.do
+/main.do
+/memInfoUpd.do
+/memManageRule.do
+/memStep1.do
+/myCourseList.do
+/myLockerList.do
+/notice.do
+/notice01.do
+/notice02.do
+/notice04.do
+/notice05.do
+/notice06.do
+/oderFacGuide.do
+/organization.do
+/parkingReg.do
+/pgmUsagePeriod.do
+/pgs_centerFacGuide.do
+/pgs_classGuide.do
+/pgs_dailyFreeGuide.do
+/pgs_greeting.do
+/pgs_history.do
+/pgs_lockerGuide.do
+/pgs_memManageRule.do
+/pgs_oderFacGuide.do
+/pgs_organization.do
+/pgs_parkingGuide.do
+/pgs_programGuide.do
+/pgs_refDelayGuide.do
+/pgs_visitWay.do
+/programGuide.do
+/promotion.do
+/pwUpd.do
+/qrcodeview.do
+/question.do
+/recruitment.do
+/refDelayGuide.do
+/rentalCharge.do
+/rentalInfo.do
+/rentalStep.do
+/serviceCharter.do
+/siteMap.do
+/sns_QRGuide.do
+/sns_busGuide.do
+/sns_centerFacGuide.do
+/sns_classGuide.do
+/sns_dailyFreeGuide.do
+/sns_discountBenefit.do
+/sns_greeting.do
+/sns_history.do
+/sns_lockerGuide.do
+/sns_memManageRule.do
+/sns_oderFacGuide.do
+/sns_organization.do
+/sns_parkingGuide.do
+/sns_programGuide.do
+/sns_refDelayGuide.do
+/sns_visitWay.do
+/socialContribute.do
+/spo_centerFacGuide.do
+/spo_classGuide.do
+/spo_discountBenefit.do
+/spo_greeting.do
+/spo_history.do
+/spo_lockerGuide.do
+/spo_memManageRule.do
+/spo_organization.do
+/spo_parkingGuide.do
+/spo_programGuide.do
+/spo_refDelayGuide.do
+/spo_visitWay.do
+/tan_busGuide.do
+/tan_centerFacGuide.do
+/tan_completionSystemGuide.do
+/tan_convenientFacGuide.do
+/tan_courseRegistGuide.do
+/tan_discountBenefit.do
+/tan_greeting.do
+/tan_history.do
+/tan_lockerGuide.do
+/tan_memManageRule.do
+/tan_oderFacGuide.do
+/tan_organization.do
+/tan_parkingGuide.do
+/tan_programGuide.do
+/tan_refDelayGuide.do
+/tan_visitWay.do
+/visitWay.do
+css/common1.css?ver=v3
+css/jquery-ui.css
+http://www.isdc.co.kr/board/qna/boardQnaList.asp?HiddenBbsNo=52&Category=1
+http://www.sosfo.or.kr/kspo/main/main.do
+http://www.webwatch.or.kr/Situation/WA_Situation.html?MenuCD=110
+https://res.isdc.co.kr/
+https://spo.isdc.co.kr/main.do
+https://spo.isdc.co.kr/oderFacGuide.do
+https://www.isdc.co.kr/board/praise/boardPraiseList.asp?HiddenBbsNo=23
+https://www.isdc.co.kr/board/qna/boardQnaList.asp?HiddenBbsNo=52&Category=1
+https://www.youtube.com/watch?v=2mHeSkw4yNs
+javascript:fnCenterStatusByFacility();
+sns_completionGuide.do
+
+----HEAD----
+
+
+
+
+
+
+
+
+
+
+    
+<!-- header -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html> 
+<html lang="ko">
+<head>
+    <meta name='description' content='성남도시개발공사 체육시설(탄천종합운동장, 성남종합운동장, 황새울국민체육센터, 평생스포츠센터, 판교스포츠센터) ' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="naver-site-verification" content="eefc5f30409895f30411ec5c9cf5ad792840c440" />
+    <link rel="shortcut icon" href="/images/icon_title.png">
+    <link rel="icon" href="/images/icon_title.png">
+    <title>성남도시개발공사 체육시설</title>
+    <link rel="stylesheet" href="css/common1.css?ver=v3">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script>if(!window.uVpCm){var uVpCm={"t":"b1NHb1aHb1KZa2bA2vzePRXYCmg4b1KZb1zkb1KZb1NEnyQGztoGztosxpW4xHt4XyLGztoGztzIxOtI7vz4lZtI7IksSZtI7vGhPZtI7IXjSytI7IaeSiwGzjzIPvSioytI7vaWSytI7IYAlZtI7IkfaHtI7vYIlHtI7vNcSOtI7vWfSmlGzjzJlplGzjzfSpwGzjzFC23GzjoITytI7vbdlHBsxytZzHtZoytIXHt5X3==","u":"/","d":"evfw","c":"","o":0,"k":0,"l":"b1aHb1KZwytZoyt47Ot57yt5XHtZ7ZtZoRwGohKGojLGohKGohKGoBoGohbOb1KZb1zkb1KZb1KZb1b6b1KZCZtZoyt47OtZoytZoytIX3==","oYDGI":{},"B":"b1aHb1KZtHtZoyt47OtZoRaWPiXeaZgAPvzYapGePygZS2kAwmzGxHlGoBSdwmGsniXebZBGojKGohKGzj7=","D":"b1aHb1KZtZtZoyt471LGoBoGohb5b1KZb1zkoOtZ7ZtZoilGohKGojLGohKGohKGoBoGohbGb1KZb1zkb1KZb1aLb1a6b1KjTBQIb1wfzpQIwNLGzj7GzjoJPZt5XHjGztNGliaeb1aLmHtjoL8HKm8SmNLGztX+x2tYCIQGzjXpXpqGohX5NZtjopbcb1aLb1a6b1Kj1HtIXHtI7ZWeb1aLb1a6aRrGzj7GzjztPZtIXHtI7ZWcb1aLb1a6aIrGzj7GzjoJ1HtIXHtI7Ikob1aLb1a6xRQGzj7GzjzE1HtIXHtI7ZWeb1aLb1a6tGLGzj7GzjoJTHtIXHtI7jgFb1aLb1a6xiqGzj7Gzjof1HtIXHtI7ZWcb1aLb1a6PRQGzj7GzjoJPZtIX67JtOtIXHtI7ZWcb1aLb1a6b1KjPZtIXHtI7ZtZzHtZoytZ7ZtZoiAGohKGojLGohbxtBqZttY4zBwGohKGoBoGohbwb1KZb1zkb1aHb1KZo13ZD1lfD6t5oGM2o13GojX9oHj8b1KZb1zkb1aHb1aLb1b6b1KZo178o4lfz63voNM2o13GojX9oHj8b1KZb1zkb1aHb1aLb1b6b1KZo4rID17fzhwfDEM2o13GojX9oHj8b1KZb1zkb1aHb1aLb1b6b1KZo1tZo1o5o1t425l8oHt4XEqfn1LGohKGojLGzjKGzj7GoBoGohKZz4rvo17co63c25l8oHt4XEqfn1LGohKGojLGzjKGzj7GoBoGohKZD6rjD6t8zhBv25l8oHt4XEqfn1LGohKGojLGzjKGzj7GoBoGohK4D1ocohKcD1o525l8oHt4XEqfn1LGohKGojLGzjKGzj7GoBoGohKcz6lID678D1b9N4Lfb1zL243doOtZoyt47OtI7ytIXHtZ7ZtZohwcz4tvo1ogzEM2o13GojX9oHj8b1KZb1zkb1aHb1aLb1aLb1b6b1KZtHtZoyt47Ot57yt5XHtZ7ZtZoR3GohKGojLGztKGzt7GoBoGohbbb1KZb1zkb1NHb1aHb1KZCpM4aLgYPmtGohKGojLGohb4lpqsC2zBwZghPZgVlytZoytZ7ZtZoizePRXGT0X7w2XQ1pG4aHtZoyt47Ot57ytZoytZXytZoyt5XHtZ7ZtZoiNcwvNfaLzePRXGT0X7w2XQ1pG4aHtZoyt47Ot57yt5XHtIXHt5XHtZ7ZtZoifGohKGojLGohbITLXco0YLb1KZb1b6b1KZNHtZoyt47OtZoBXBStGvmpWCwOtZoytZ7ZtZoBfGohKGojLGohKjamEC1EGboLaBwGNX1tSJahzV1RaKNGYA1jWhD0X2Sm5Ez5zO7jbQt6bkziaLCmc5N0kcP4LgOIEFT2zZSytZ7ytZXyt4XHtZoytZ7ZtZoGQGohKGojLdoh3fohrIzhLjb1b6b1KZ1ytZoyt47OtZoRzJwmffOpSAb1bHPRzyzIkJXytZ7iboO2rcP5bOXIk0wmqIb1bpXtbEz4ksw2b2TpAGoj7GohKGzj7=","F":{"c":"l"},"P":{"b":[],"o":"","A":"","x":[],"O":0,"L":""},"v":{"s":[],"a":"alert('threat detected!!!'); window.location.reload(true);"},"p":{"K":[],"A":[],"G":"du/","I":[],"n":{},"f":"dq/"},"T":{"e":"","d":0,"b":"","n":[]},"C":{"YdM6q":"","eVPvl":[],"pUT3m":[],"qSdqC":""}};}</script><script src="/?evfw=swROFwYmDaZwL2Lq" charset="utf-8"></script><script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/joinmem/login.js"></script>
+    <script src="js/devtools-detector.js"></script>
+    
+
+
+</head>
+<body>
+<div id="jump_menu">
+    <h1>건너뛰기 메뉴</h1>
+    <ul>
+        <li><a href="#section">본문 바로가기</a></li>
+        <li><a href="#topmenu">주메뉴 바로가기</a></li>
+    </ul>
+</div>
+<div id="header">
+    <button onclick="ShowMenu()" class="mobile_menu">전체메뉴</button>
+    <div onclick="HideMenu()" class="mobile_close">전체닫기</div>
+    <header>
+        <aside class="top">
+            <nav>
+                <ul>
+                    
+                    
+                        <li style="ba

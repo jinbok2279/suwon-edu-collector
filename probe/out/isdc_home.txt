@@ -1,0 +1,313 @@
+[200] https://www.isdc.co.kr/ len=63834
+/board/clear/moralsManagement01.asp
+/board/clear/moralsManagement02.asp
+/board/clear/moralsManagement03.asp
+/board/clear/moralsManagementQuarter.asp
+/board/company/bussProposList.asp?Init=true
+/board/company/contractCompanyCheck.asp?HiddenBbsNo=103
+/board/default/boardDefaultList.asp?HiddenBbsNo=1
+/board/default/boardDefaultList.asp?HiddenBbsNo=2
+/board/default/boardDefaultList.asp?HiddenBbsNo=4
+/board/default/boardDefaultList.asp?HiddenBbsNo=50
+/board/default/boardDefaultList.asp?HiddenBbsNo=6
+/board/default/boardDefaultList.asp?HiddenBbsNo=60
+/board/default/boardDefaultList.asp?HiddenBbsNo=61
+/board/default/boardDefaultList.asp?HiddenBbsNo=70
+/board/default/boardDefaultList.asp?HiddenBbsNo=71
+/board/default/boardDefaultList.asp?HiddenBbsNo=72
+/board/default/boardDefaultList.asp?HiddenBbsNo=73
+/board/default/boardDefaultList.asp?HiddenBbsNo=74
+/board/default/boardDefaultList.asp?HiddenBbsNo=76
+/board/default/boardDefaultList.asp?HiddenBbsNo=77
+/board/default/boardDefaultList.asp?HiddenBbsNo=81
+/board/default/boardDefaultList.asp?HiddenBbsNo=82
+/board/default/boardDefaultList.asp?HiddenBbsNo=99
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=11&amp;HiddenBbsNo=82
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=12&amp;HiddenBbsNo=82
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=13&amp;HiddenBbsNo=50
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=13&amp;HiddenBbsNo=82
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=14&amp;HiddenBbsNo=50
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=14&amp;HiddenBbsNo=82
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=15&amp;HiddenBbsNo=50
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=15&amp;HiddenBbsNo=82
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=16&amp;HiddenBbsNo=50
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=17&amp;HiddenBbsNo=50
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2163&amp;HiddenBbsNo=1
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2164&amp;HiddenBbsNo=1
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2165&amp;HiddenBbsNo=1
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2166&amp;HiddenBbsNo=1
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2167&amp;HiddenBbsNo=1
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2402&amp;HiddenBbsNo=2
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2403&amp;HiddenBbsNo=2
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2404&amp;HiddenBbsNo=2
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2405&amp;HiddenBbsNo=2
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=2406&amp;HiddenBbsNo=2
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=3104&amp;HiddenBbsNo=77
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=3105&amp;HiddenBbsNo=77
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=3106&amp;HiddenBbsNo=77
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=3107&amp;HiddenBbsNo=77
+/board/default/boardDefaultView.asp?HiddenState=VIEW&amp;HiddenCode=3108&amp;HiddenBbsNo=77
+/board/inform/boardInformList.asp?HiddenBbsNo=100
+/board/inform/boardInformList.asp?HiddenBbsNo=101
+/board/monitor/monitor.asp
+/board/monitor/monitor.asp?HiddenBbsNo=102
+/board/movie/boardMovieList.asp?HiddenBbsNo=58
+/board/movie/boardMovieView.asp?HiddenState=VIEW&amp;HiddenCode=96&amp;HiddenBbsNo=58
+/board/movie/boardMovieView.asp?HiddenState=VIEW&amp;HiddenCode=97&amp;HiddenBbsNo=58
+/board/movie/boardMovieView.asp?HiddenState=VIEW&amp;HiddenCode=98&amp;HiddenBbsNo=58
+/board/movie/boardMovieView.asp?HiddenState=VIEW&amp;HiddenCode=99&amp;HiddenBbsNo=58
+/board/photo/boardPhotoList.asp?HiddenBbsNo=3
+/board/photo/boardPhotoList.asp?HiddenBbsNo=65
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=1000&amp;HiddenBbsNo=4
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=1001&amp;HiddenBbsNo=4
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=1002&amp;HiddenBbsNo=4
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=2090&amp;HiddenBbsNo=3
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=2091&amp;HiddenBbsNo=3
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=2092&amp;HiddenBbsNo=3
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=2093&amp;HiddenBbsNo=3
+/board/photo/boardPhotoView.asp?HiddenState=VIEW&amp;HiddenCode=999&amp;HiddenBbsNo=4
+/board/photo/onlineSaboList.asp?HiddenBbsNo=80
+/board/praise/boardPraiseList.asp?HiddenBbsNo=23
+/board/qna/boardQnaList.asp?HiddenBbsNo=52&Category=1
+/board/qna/boardQnaList.asp?HiddenBbsNo=52&Category=2
+/board/qna/boardQnaList.asp?HiddenBbsNo=79
+/board/qna/boardQnaQuarter.asp?HiddenBbsNo=52
+/company/award.asp
+/company/ci.asp
+/company/greetings.asp
+/company/history.asp
+/company/hrd.asp
+/company/location.asp
+/company/organization.asp
+/company/rule.asp
+/company/safety.asp
+/company/stepUp.asp
+/company/vision.asp
+/customer/csCasebook.asp
+/customer/csMonitoring.asp
+/customer/faqCategory.asp
+/customer/fulfillResult.asp
+/customer/naturalDisaster01.asp
+/customer/operateManual.asp
+/customer/phoneMonitoring.asp
+/customer/satisfactionRate.asp
+/customer/service.asp
+/customer/serviceBusiness01.asp
+/customer/serviceStandard.asp
+/customer/socialDisaster01.asp
+/devWork/devWork0101.asp
+/devWork/devWork0201.asp
+/devWork/devWork0301.asp
+/devWork/devWork0401.asp
+/devWork/parcelOut0101.asp
+/devWork/parcelOut0301.asp
+/devWork/rent0101.asp
+/devWork/rent0201.asp
+/gov/board/govBoardList.asp?HiddenBbsNo=75&GovId=1
+/gov/board/govBoardList.asp?HiddenBbsNo=75&GovId=33
+/gov/infoAdvance.asp?tab_num=0
+/gov/infoClosed.asp
+/gov/infoContract01.asp
+/gov/infoContract0301.asp
+/gov/infoOpen01.asp
+/gov/openData.asp
+/gov/openDataList.asp
+/guidance/banner.asp
+/guidance/cctv.asp
+/guidance/email.asp
+/guidance/pims.asp
+/guidance/sitemap.asp
+/img/favicon.ico
+/include/css/main.css
+/index.asp
+/openBusiness/contribution01.asp
+/openBusiness/esgManagement01.asp
+/openBusiness/esgManagement02.asp
+/openBusiness/esgManagement03.asp
+/openBusiness/esgManagement04.asp
+/openBusiness/human01.asp
+/openBusiness/human02.asp
+/openBusiness/human03.asp
+/openBusiness/inovation01.asp
+/openBusiness/inovation02.asp
+/openBusiness/inovation03_2020.asp?tyear=2020
+/openBusiness/inovation04.asp
+/openBusiness/inovation05.asp
+/openBusiness/manageNotify.asp
+/openBusiness/manageNotify0101.asp
+/openBusiness/moral01.asp
+/operBusiness/dandaedong.asp
+/operBusiness/dasom.asp
+/operBusiness/garbagebag.asp
+/operBusiness/jw_award.asp
+/operBusiness/jw_history.asp
+/operBusiness/jw_strategy.asp
+/operBusiness/park_stage.asp
+/operBusiness/physicalManage.asp
+/operBusiness/public_market.asp
+/operBusiness/roadTraffic.asp
+/operBusiness/sj_award.asp
+/operBusiness/sj_history.asp
+/operBusiness/sj_strategy.asp
+/operBusiness/snus.asp
+/operBusiness/snus_bidding_info.asp
+/operBusiness/snus_environment.asp
+/operBusiness/snus_safe.asp
+/operbusiness/public_market.asp
+http://kccel.kr
+http://park.isdc.co.kr/
+http://www.2ssc.or.kr/
+http://www.cleaneye.go.kr/
+http://www.ffsb.kr
+http://www.hrdkorea.or.kr
+http://www.isdc.co.kr/operbusiness/snus.asp
+http://www.kca.go.kr
+http://www.koas.or.kr
+http://www.kosha.or.kr
+http://www.wa.or.kr/board/list.asp?BoardID=0006
+https://app.gather.town/app/b7DzGolDZAcWuygS/SDC-MATA
+https://camping.isdc.co.kr/
+https://isdc.co.kr/operBusiness/public_market.asp
+https://park.isdc.co.kr/
+https://park.isdc.co.kr/qfeeinq.do
+https://ps.isdc.co.kr/home/info
+https://res.isdc.co.kr/index.do
+https://spo.isdc.co.kr/
+https://spo.isdc.co.kr/ggp_greeting.do
+https://spo.isdc.co.kr/greeting.do
+https://spo.isdc.co.kr/pgs_greeting.do
+https://spo.isdc.co.kr/sns_greeting.do
+https://spo.isdc.co.kr/spo_greeting.do
+https://spo.isdc.co.kr/tan_greeting.do
+https://waste.isdc.co.kr
+https://waste.isdc.co.kr/main/index.php
+https://www.epeople.go.kr/
+https://www.facebook.com/isndc
+https://www.g2b.go.kr/link/FIUA006_01/single/?untySrchSeCd=BD&rowCnt=&instCd=Z003634&demaInstNm=&hghrkInstCd=&prcmBsneAreaCd=%EC%A0%84%EC%B2%B4+%EC%A1%B0070001+%EC%A1%B0070002+%EC%A1%B0070003+%EC%A1%B0070004+%EC%A1%B0070005&prcmMthoSeCd=&frcpYn=N&laseYn=N&rsrvYn=N&chkInstCd=&urlSrchSeCd=instCd&demaInstCd=IN0100000053525&prcmMaagSeCd=
+https://www.g2b.go.kr/link/FIUA006_01/single/?untySrchSeCd=DD&rowCnt=&instCd=Z003634&demaInstNm=&hghrkInstCd=&prcmBsneAreaCd=%EC%A0%84%EC%B2%B4+%EC%A1%B0070001+%EC%A1%B0070002+%EC%A1%B0070003+%EC%A1%B0070004+%EC%A1%B0070005&prcmMthoSeCd=&frcpYn=N&laseYn=N&rsrvYn=N&chkInstCd=&urlSrchSeCd=instCd&demaInstCd=IN0100000053525&prcmMaagSeCd=
+https://www.ikmr.co.kr/
+https://www.isdc.co.kr
+https://www.isdc.co.kr/board/default/boardDefaultView.asp?HiddenState=VIEW&HiddenCode=2380&HiddenBbsNo=2
+https://www.isdc.co.kr/company/organization.asp
+https://www.isdc.co.kr/operBusiness/garbagebag.asp
+https://www.isdc.co.kr/operBusiness/jw_history.asp
+https://www.isdc.co.kr/operBusiness/sj_history.asp
+https://www.kipris.or.kr/khome/main.jsp
+https://www.open.go.kr/com/main/mainView.do
+https://www.privacy.go.kr/
+https://www.seongnam.go.kr/city/1000853/10630/contents.do
+https://www.youtube.com/channel/UCeVLA0JeSHAyOxbZ6WvA3xA
+tel:031-725-9300
+tel:031-725-9400
+
+----HEAD----
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>성남도시개발공사</title>
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=yes" />
+<meta name='subject' content='성남도시개발공사'/> 
+<meta name='Keywords' content='성남도시개발공사 홈페이지'/> 
+<meta name='description' content='성남도시개발공사 메인' /> 
+<link rel="stylesheet" href="/include/css/main.css">
+<script>
+	if (document.location.protocol == 'http:') {
+		    document.location.href = document.location.href.replace('http:', 'https:');
+	    }
+</script>
+<script type="text/javascript" src="/include/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/include/js/slick.min.js"></script>
+<script type="text/javascript" src="/include/js/gnb.js"></script>
+<script type="text/javascript" src="/include/js/main_20220803bk_cak.js?ver=1"></script>
+<script type="text/javascript" src="/include/js/clientScript.js"></script>
+<script>
+$(document).ready(function() {
+	
+//	$(".slick-active > img").attr("tabindex","0");
+	this.$slideTrack.find(".slick-active > img").attr("tabindex","0");
+	
+});
+
+</script>
+</head>
+<body>
+	<!-- skip nav -->
+	<div id="skipnavigation">
+		<a href="#mainContents">본문 내용 바로가기</a>
+		<a href="#menu1">메인메뉴 바로가기</a>
+		<a href="#footer">푸터 바로가기</a>
+		<!--a href="#chatbot">챗봇 바로가기</a-->
+	</div>
+	<!-- skip nav -->
+	<div id="wrap">
+		<div id="top">
+			
+
+<header id="hdr">
+	<div class="topInner clearfix">
+		<div class="topSmallMenu">
+			<ul>
+				<li><a href="/index.asp">홈으로</a></li>
+				<li><a href="https://www.isdc.co.kr/company/organization.asp">조직도</a></li>
+				<li><a href="/guidance/sitemap.asp">사이트맵</a></li>
+			</ul>
+		</div>
+		<div class="topMenu">
+			<h1 id="logo">
+				<a href="/index.asp">
+					<img src="/img/common/logo.gif" class="logo_pc" alt="SDC 성남도시개발공사">
+					<img src="/img/common/logo_mb.gif" class="logo_mb" alt="SDC 성남도시개발공사">
+				</a>
+			</h1>
+			<div id="topSearch">
+				<a href="#searchFmOpen" id="searchOpen"><span>검색</span></a>
+				<div class="searchFm">
+					<form id="searchForm" action="/guidance/search.asp" onsubmit="return submitSchCheck(this);" target="_blank" method="post">
+						<div>
+							<input type="text" minlength="1" name="searchTxt" id="searchTxt" class="searchTxt" maxlength="20" placeholder="사이트내 검색할 단어를 입력하세요" title="검색어 입력" style="ime-mode:active;"/>
+							<input type="image" src="/img/main/search_btn01.png" class="submit" alt="검색" title="새창검색" id="search_btn"/>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+			<a href="#topNavOpen" id="mobileTopNavOpen"><span>메뉴열기</span></a>
+			<nav id="topNav">
+				<h2 class="blind"><a href="#none">상단메뉴</a></h2>
+				<ul>
+					<li class="menu1"><a id="menu1" href="/board/qna/boardQnaQuarter.asp?HiddenBbsNo=52"><span>고객광장</span></a>
+						<div id="subMenu1" class="subMenu">
+							<ul>
+								<li class="sm1">
+									<a href="#" class="smda1">고객의 소리</a>
+									<div class="smd1">
+										<ul class="smdul sh1">
+											<li class="smdli">
+												<a class="" href="/board/qna/boardQnaList.asp?HiddenBbsNo=52&Category=1"><span>시설물관리운영분야</span></a>
+											</li>
+
+											<li class="smdli">
+												<a class="" href="/board/qna/boardQnaList.asp?HiddenBbsNo=52&Category=2">개발사업분야</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="sm2">
+									<a href="#">개발사업시민제안</a>
+									<div class="smd">
+										<ul class="smdul sh1">
+											<li class="smdli">
+												<a class="" href="/board/qna/boardQnaList.asp?HiddenBbsNo=79">개발사업시민제안</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="sm3"><a>칭찬합시다</a>
+									<div class="smd">
+										<ul class="smdul sh1">
+				
