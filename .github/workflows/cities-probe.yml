@@ -1,7 +1,7 @@
-name: seongnam-probe
+name: cities-probe
 on:
   push:
-    branches: [seongnam]
+    branches: [cities]
     paths: ["probe/probe.py"]
 permissions:
   contents: write
@@ -17,7 +17,9 @@ jobs:
         env:
           LIB_KEY: ${{ secrets.LIB_KEY }}
           WEATHER_KEY: ${{ secrets.WEATHER_KEY }}
+          KINDER_KEY: ${{ secrets.KINDER_KEY }}
+          NEIS_KEY: ${{ secrets.NEIS_KEY }}
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add probe/out && git commit -m "성남 점검 결과" && git push origin HEAD:seongnam
+          git add probe/out && git commit -m "성남 점검 결과" && git push origin HEAD:cities
