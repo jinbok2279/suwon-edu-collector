@@ -1,7 +1,22 @@
 {
- "updated_at": "2026-10-16 06:47:37",
+ "updated_at": "2026-10-17 06:46:02",
  "source": "수원문화재단 행사·교육정보",
  "city": [
+  {
+   "id": "S3070",
+   "title": "2026 수원 통닭거리 축제",
+   "start": "2026-10-16",
+   "end": "2026-10-18",
+   "place": "화성행궁 광장, 통닭거리 일대",
+   "time": "",
+   "grade": "",
+   "price": "무료",
+   "free": true,
+   "kind": "축제",
+   "src": "swcf",
+   "link": "https://www.swcf.or.kr/?p=29_view&idx=3070&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
+   "book": ""
+  },
   {
    "id": "S2970",
    "title": "2026 화성행궁 야간개장",
@@ -120,21 +135,6 @@
    "kind": "행사",
    "src": "swcf",
    "link": "https://www.swcf.or.kr/?p=29_view&idx=2932&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
-   "book": ""
-  },
-  {
-   "id": "S2963",
-   "title": "한글 캘리 파우치 만들기",
-   "start": "2026-06-05",
-   "end": "2026-10-16",
-   "place": "수원전통문화관 제공헌(2층 한옥 건물)",
-   "time": "",
-   "grade": "",
-   "price": "",
-   "free": false,
-   "kind": "행사",
-   "src": "swcf",
-   "link": "https://www.swcf.or.kr/?p=29_view&idx=2963&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
    "book": ""
   },
   {
