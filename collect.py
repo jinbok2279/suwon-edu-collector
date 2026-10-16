@@ -9,7 +9,7 @@ KST = timezone(timedelta(hours=9))
 API = "https://open.neis.go.kr/hub/"
 KEY = os.environ.get("NEIS_KEY", "")
 OFFICE = "J10"            # 경기도교육청
-AREA = "성남시"            # 주소에 이 글자가 들어간 학교만 (수정구·중원구·분당구 전체, 초·중·고)
+from city import AREA, gu_of  # 주소에 이 글자가 들어간 학교만 (도시 전체, 초·중·고)
 DAYS_AHEAD = 60           # 오늘부터 며칠 뒤까지 일정을 모을지
 SKIP_EVENTS = {"토요휴업일"}
 PUBLIC_HOLIDAYS = {"한글날", "개천절", "추석", "설날", "성탄절", "기독탄신일", "신정",
@@ -75,9 +75,8 @@ def find_schools():
 
 def parse_area(address, detail):
     """주소에서 구와 읍·면·동을 뽑는다. 예) 분당구 (정자동) / 수정구 (태평동)"""
-    m = re.search(r"성남시\s+(\S+구)", address)
-    gu = m.group(1) if m else "기타"
-    rest = address.split(gu, 1)[-1].split()
+    gu = gu_of(address, detail)
+    rest = [t for t in address.split(AREA, 1)[-1].split() if t != gu]
     for t in rest[:2]:
         if re.fullmatch(r"\S+(읍|면)", t):
             return gu, RENAMED.get(t, t)

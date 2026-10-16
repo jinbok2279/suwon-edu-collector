@@ -1,0 +1,42 @@
+name: cities-build (4개 도시 시험 수집)
+on:
+  push:
+    branches: [cities]
+    paths: ["build.trigger"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - { city: 안양, d: anyang }
+          - { city: 고양, d: goyang }
+          - { city: 화성, d: hwaseong }
+          - { city: 부천, d: bucheon }
+    env:
+      CITY: ${{ matrix.city }}
+      NEIS_KEY: ${{ secrets.NEIS_KEY }}
+      KINDER_KEY: ${{ secrets.KINDER_KEY }}
+      CULTURE_KEY: ${{ secrets.CULTURE_KEY }}
+      LIB_KEY: ${{ secrets.LIB_KEY }}
+      KOPIS_KEY: ${{ secrets.KOPIS_KEY }}
+      TOUR_KEY: ${{ secrets.TOUR_KEY }}
+      WEATHER_KEY: ${{ secrets.WEATHER_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: |
+          set +e
+          rm -rf output; mkdir -p output logs/${{ matrix.d }}
+          for s in collect academies kinder meals libs books events jobs sports weather deals; do
+            timeout 1500 python -u $s.py > logs/${{ matrix.d }}/$s.txt 2>&1 || echo "실패 $s" >> logs/${{ matrix.d }}/$s.txt
+          done
+          mkdir -p data/${{ matrix.d }} && cp output/*.json data/${{ matrix.d }}/
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/${{ matrix.d }} logs/${{ matrix.d }} && git commit -m "${{ matrix.city }} 시험 수집"
+          for i in 1 2 3 4 5 6; do git pull --rebase origin cities && git push origin HEAD:cities && break; sleep $((i*7)); done

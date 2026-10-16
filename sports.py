@@ -212,6 +212,14 @@ def parse_center(c, page):
 
 def main():
     now = datetime.now(KST)
+    city = os.environ.get("CITY", "성남").strip()
+    if city != "성남":   # 다른 도시는 체육시설 사이트를 아직 연결하지 않음 → 빈 파일(앱은 '준비 중'으로 보여 줌)
+        os.makedirs("output", exist_ok=True)
+        with open("output/sports.json", "w", encoding="utf-8") as f:
+            json.dump({"city": city, "updated": now.strftime("%Y-%m-%d %H:%M"), "status": {}, "live": 0, "soon": 1,
+                       "centers": [], "programs": []}, f, ensure_ascii=False)
+        print(city, ": 운동교실 준비 중 (빈 파일)")
+        return
     programs, status = [], {}
     for c in CENTERS:
         page = get(c["web"])

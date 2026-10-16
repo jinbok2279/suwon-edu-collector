@@ -1,4 +1,4 @@
-"""성남시 유치원 정보 수집기 (유치원 알리미 공시정보 Open API)
+"""도시 유치원 정보 수집기 (유치원 알리미 공시정보 Open API)
 
 일반현황 + 통학차량 + 방과후과정을 합쳐 output/kinder.json 으로 저장한다.
 """
@@ -15,8 +15,8 @@ KST = timezone(timedelta(hours=9))
 KEY = os.environ.get("KINDER_KEY", "")
 BASE = "https://e-childschoolinfo.moe.go.kr/api/notice/"
 SIDO = 41
-# 성남시 수정구·중원구·분당구 (행정구역 코드)
-SGG = {"수정구": 41131, "중원구": 41133, "분당구": 41135}
+from city import C, AREA
+SGG = C["gus"]   # 구 → 행정구역 코드
 
 
 def call(api, sgg):
@@ -65,7 +65,7 @@ def dong_of(addr):
 
 
 def road_of(addr):
-    m = re.search(r"성남시\s*\S+구\s+(?:\S+[읍면]\s+)?(\S+?(?:로|길))(\S*)", addr)
+    m = re.search(AREA + r"\s*(?:\S+구\s+)?(?:\S+[읍면]\s+)?(\S+?(?:로|길))(\S*)", addr)
     if not m:
         return None, None
     full = m.group(1) + m.group(2)

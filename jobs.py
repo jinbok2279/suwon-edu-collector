@@ -1,10 +1,11 @@
-"""엄마 일자리 수집기 (성남)
+"""엄마 일자리 수집기 (도시 공통)
 
-1) 경기도교육청 구인구직: 성남시 학교·병설유치원의 기간제/사립교원, 초중등 시간강사(방과후 포함), 교육공무직원
-2) 경기육아종합지원센터 인력뱅크: 성남시 어린이집 구인 (구인중)
+1) 경기도교육청 구인구직: 도시 학교·병설유치원의 기간제/사립교원, 초중등 시간강사(방과후 포함), 교육공무직원
+2) 경기육아종합지원센터 인력뱅크: 도시 어린이집 구인 (구인중)
 결과는 output/jobs.json 으로 저장한다. 개인 연락처·이메일·담당자 이름은 저장하지 않는다.
 """
 
+from city import C, AREA, GU_RE, gu_of
 import json
 import os
 import re
@@ -72,7 +73,7 @@ def goe_jobs():
     for cd, kind in KINDS.items():
         n = 0
         for page in range(1, 6):
-            form = {"mi": "10500", "currPage": page, "srchEcptDl": "Y", "srchLgnNm": "성남시", "srchOcptCd": cd,
+            form = {"mi": "10500", "currPage": page, "srchEcptDl": "Y", "srchLgnNm": AREA, "srchOcptCd": cd,
                     "pageIndex": 50, "orderbyType": "", "searchType": "", "searchValue": ""}
             try:
                 html = http(GOE_LIST, form)
@@ -115,7 +116,7 @@ def goe_jobs():
 def care_jobs():
     out = []
     for page in range(0, 6):
-        form = {"flag": "SlPL", "signgu": "41130", "endYn": "N", "offset": page * 50, "limit": 50,
+        form = {"flag": "SlPL", "signgu": C["signgu"], "endYn": "N", "offset": page * 50, "limit": 50,
                 "schCrType": "", "crspec": "", "crpub": "", "schEmpGbCode": "", "crcert": "", "schCrName": "", "dong": ""}
         try:
             html = http(CARE_LIST, form)
@@ -133,9 +134,9 @@ def care_jobs():
         for jo, tds, a in rows:
             g = lambda i: sp(tds[i].all_text())
             area = g(5)
-            if "성남" not in area:
+            if AREA[:-1] not in area:
                 continue
-            gu = (re.search(r"(수정구|중원구|분당구)", area) or [None, ""])[1]
+            gu = (re.search("(" + GU_RE + ")", area) or [None, ""])[1] or (lambda g: "" if g == "기타" else g)(gu_of(AREA + " " + area))
             out.append({"id": "C" + jo, "type": g(1), "title": sp(a.attrs.get("title") or g(2)), "org": g(3),
                         "job": g(4), "gu": gu, "applyEnd": ymd(g(6)), "reg": ymd(g(7)),
                         "link": CARE_VIEW + "?" + urllib.parse.urlencode({"flag": "Sl", "JOSEQ": jo})})

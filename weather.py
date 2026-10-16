@@ -190,6 +190,13 @@ def main():
         return 0
     place = PLACES.get(CITY)
     if not place:
+        try:
+            import city as _c
+            cc = _c.CITIES.get(CITY)
+            if cc: place = {"lat": cc["lat"], "lon": cc["lon"], "stations": cc["stations"], "region": cc.get("region", "경기남부")}
+        except SystemExit:
+            pass
+    if not place:
         print("모르는 도시:", CITY)
         return 1
     now = datetime.now(KST)

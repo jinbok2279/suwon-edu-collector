@@ -1,7 +1,7 @@
 """도서관 정보나루(data4library.kr) Open API 공통 도구
 
-성남시도서관 홈페이지는 자동 수집을 막아 두어서, 국립중앙도서관이 운영하는
-'도서관 정보나루' 공식 API로 성남시 공공도서관 정보와 대출 순위를 받는다.
+시 도서관 홈페이지가 자동 수집을 막아 두어서, 국립중앙도서관이 운영하는
+'도서관 정보나루' 공식 API로 도시 공공도서관 정보와 대출 순위를 받는다.
 API 키는 저장소 Secrets 의 LIB_KEY 에 넣는다 (data4library.kr 회원가입 → 인증키 신청, 무료).
 """
 
@@ -15,8 +15,8 @@ KEY = os.environ.get("LIB_KEY", "").strip()
 API = "https://data4library.kr/api/"  # 키가 평문으로 오가지 않게 https 우선
 API_HTTP = "http://data4library.kr/api/"  # https가 막히면 예비
 REGION = 31  # 경기도
-# 성남시 3개 구 (정보나루 세부지역 코드: 행정구역 코드와 다름, 2026-10-15 libSrch로 확인)
-GU = {"수정구": 31021, "중원구": 31022, "분당구": 31023}
+from city import C
+GU = C["lib"]  # 정보나루 세부지역 코드 (행정구역 코드와 다름)
 UA = {"User-Agent": "Mozilla/5.0 (seongnam-edu-collector)"}
 
 
