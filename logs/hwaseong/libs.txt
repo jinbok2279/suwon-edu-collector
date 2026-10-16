@@ -1,0 +1,13 @@
+  libSrch 다시 시도 1/3: 1일 500건 이상 요청 시 IP 등록이 필요합니다. 등록 된 IP를 확인하시기 바랍니다.
+  libSrch 다시 시도 2/3: 1일 500건 이상 요청 시 IP 등록이 필요합니다. 등록 된 IP를 확인하시기 바랍니다.
+  libSrch 다시 시도 3/3: 1일 500건 이상 요청 시 IP 등록이 필요합니다. 등록 된 IP를 확인하시기 바랍니다.
+Traceback (most recent call last):
+  File "/home/runner/work/suwon-edu-collector/suwon-edu-collector/libs.py", line 60, in <module>
+    main()
+  File "/home/runner/work/suwon-edu-collector/suwon-edu-collector/libs.py", line 25, in main
+    resp = lib4.call("libSrch", region=lib4.REGION, dtl_region=code, pageNo=1, pageSize=200)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/suwon-edu-collector/suwon-edu-collector/lib4.py", line 41, in call
+    raise RuntimeError(f"{name} 실패: {last}")
+RuntimeError: libSrch 실패: 1일 500건 이상 요청 시 IP 등록이 필요합니다. 등록 된 IP를 확인하시기 바랍니다.
+실패 libs
