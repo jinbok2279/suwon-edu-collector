@@ -1,0 +1,39 @@
+유치원 안양 41171: 20곳 SUCCESS 예: 경기도 안양시 만안구 장내로140번길 11-10
+유치원 안양 41173: 42곳 SUCCESS 예: 경기도 안양시 동안구 비산로 8
+유치원 고양 41281: 72곳 SUCCESS 예: 경기도 고양시 덕양구 대양로285번길 45
+유치원 고양 41285: 39곳 SUCCESS 예: 경기도 고양시 일산동구 한류월드로 262-1
+유치원 고양 41287: 40곳 SUCCESS 예: 경기도 고양시 일산서구 성저로 62
+유치원 화성 41590: 0곳 SUCCESS 예: 
+유치원 화성 41591: 44곳 SUCCESS 예: 경기도 화성시 남양읍 시청로32번길 80
+유치원 화성 41593: 27곳 SUCCESS 예: 경기도 화성시 효행구 배양북길32번길 18-11
+유치원 화성 41595: 32곳 SUCCESS 예: 경기도 화성시 병점구 병점4로 97
+유치원 화성 41597: 76곳 SUCCESS 예: 경기도 화성시 동탄구 동탄대로9길 19
+유치원 부천 41190: 0곳 SUCCESS 예: 
+유치원 부천 41192: 63곳 SUCCESS 예: 경기도 부천시 원미구 부일로370번길 9
+유치원 부천 41194: 33곳 SUCCESS 예: 경기도 부천시 소사구 옥길로30번길 33
+유치원 부천 41196: 19곳 SUCCESS 예: 경기도 부천시 오정구 소사로819번길 46
+정보나루 31050: 경기도 부천시 경인옛로38번길 41 (글마루작은도서관)
+정보나루 31101: 경기도 고양시 덕양구 푸른마을로 34-8 (고양시립높빛도서관)
+정보나루 31240: 경기도 화성시 향남읍 발안로 85-10 (경기도교육청화성도서관)
+학원 안양시: 전체 1833 예: 경기도 안양시 동안구 달안로 10
+학원 고양시: 전체 3414 예: 경기도 고양시 일산서구 하이파크로 113
+학원 화성시: 전체 3535 예: 경기도 화성시 동탄순환대로14길 77
+학원 부천시: 전체 2065 예: 1
+학교 주소 화성시: {'(구 없음)': 154, '만세구': 16, '효행구': 8, '동탄구': 18, '병점구': 4}
+학교 주소 부천시: {'(구 없음)': 112, '원미구': 14, '오정구': 2, '소사구': 6}
+학교 주소 고양시: {'덕양구': 82, '일산서구': 53, '일산동구': 49}
+학교 주소 안양시: {'동안구': 50, '만안구': 39}
+robots www.auc.or.kr [0] URLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1010)'))
+robots www.ayac.or.kr [0] URLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1010)'))
+robots www.gys.or.kr [200] User-agent: * | Disallow: / | Allow: /application/ | Allow: /index.php
+robots www.artgy.or.kr [0] URLError(TimeoutError('timed out'))
+robots www.goyang.go.kr [200] User-agent: * | Allow: / | Disallow: /www/user/bbs/ | Disallow: /edu/intra/
+robots www.hscity.go.kr [200] User-agent: * | Allow:    / | Disallow: /foreign | Disallow: /html
+robots www.hsuco.or.kr [0] URLError(gaierror(-2, 'Name or service not known'))
+robots www.hcf.or.kr [200] User-agent: * | Allow: /
+robots www.bcmc.or.kr [0] URLError(gaierror(-2, 'Name or service not known'))
+robots www.bcf.or.kr [200] <br> | <br> | <center> | <h2>
+robots www.anyang.go.kr [0] URLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1010)'))
+robots www.bucheon.go.kr [0] URLError(TimeoutError('timed out'))
+robots www.gyfmc.or.kr [0] URLError(gaierror(-2, 'Name or service not known'))
+robots www.bucheon-ucc.or.kr [0] URLError(gaierror(-2, 'Name or service not known'))
