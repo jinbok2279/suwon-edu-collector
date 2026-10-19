@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-19 06:30:30",
+  "updated_at": "2026-10-20 06:36:01",
   "source": "도서관 정보나루 (국립중앙도서관)",
   "lists": [
     {
@@ -14,7 +14,7 @@
           "cover": "https://image.aladin.co.kr/product/33557/83/cover/8958070056_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6840045",
           "isbn": "9788958070054",
-          "loans": 4,
+          "loans": 5,
           "rank": 1,
           "series": 1
         },
@@ -25,7 +25,7 @@
           "cover": "https://image.aladin.co.kr/product/33085/72/cover/k192937604_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6810341",
           "isbn": "9791165021610",
-          "loans": 4,
+          "loans": 5,
           "rank": 2,
           "series": 1
         },
@@ -36,7 +36,7 @@
           "cover": "https://image.aladin.co.kr/product/23775/9/cover/k662639063_1.jpg",
           "link": "https://data4library.kr/bookV?seq=5654739",
           "isbn": "9791189734381",
-          "loans": 4,
+          "loans": 5,
           "rank": 3,
           "series": 1
         },
@@ -47,7 +47,7 @@
           "cover": "https://image.aladin.co.kr/product/24404/88/cover/k582630411_1.jpg",
           "link": "https://data4library.kr/bookV?seq=5702005",
           "isbn": "9791189734442",
-          "loans": 4,
+          "loans": 5,
           "rank": 4,
           "series": 1
         },
@@ -58,7 +58,7 @@
           "cover": "https://image.aladin.co.kr/product/25542/26/cover/k892633326_1.jpg",
           "link": "https://data4library.kr/bookV?seq=5800068",
           "isbn": "9791189734534",
-          "loans": 4,
+          "loans": 5,
           "rank": 5,
           "series": 1
         },
@@ -74,28 +74,6 @@
           "series": 1
         },
         {
-          "title": "고양이 해결사 깜냥",
-          "author": "홍민정 동화, 김재희 그림",
-          "publisher": "창비",
-          "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6378029",
-          "isbn": "9788936448134",
-          "loans": 4,
-          "rank": 7,
-          "series": 2
-        },
-        {
-          "title": "그리스 로마 신화",
-          "author": "김민희,정보 강대진",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://image.aladin.co.kr/product/31088/91/cover/8950941570_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6640171",
-          "isbn": "9788950941574",
-          "loans": 4,
-          "rank": 8,
-          "series": 1
-        },
-        {
           "title": "마법천자문 :손오공의 한자 대탐험",
           "author": "스튜디오시리얼,정수영",
           "publisher": "아울북",
@@ -103,7 +81,7 @@
           "link": "https://data4library.kr/bookV?seq=5481400",
           "isbn": "9788950982898",
           "loans": 4,
-          "rank": 9,
+          "rank": 7,
           "series": 1
         },
         {
@@ -114,18 +92,7 @@
           "link": "https://data4library.kr/bookV?seq=117298",
           "isbn": "9788952709530",
           "loans": 4,
-          "rank": 10,
-          "series": 1
-        },
-        {
-          "title": "나도 덕후가 되고 싶어",
-          "author": "최은영 글, 모차 그림",
-          "publisher": "스푼북",
-          "cover": "https://image.aladin.co.kr/product/37172/9/cover200/k812031576_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7150409",
-          "isbn": "9791165816032",
-          "loans": 4,
-          "rank": 11,
+          "rank": 8,
           "series": 1
         },
         {
@@ -136,7 +103,7 @@
           "link": "https://data4library.kr/bookV?seq=6576357",
           "isbn": "9791168413955",
           "loans": 4,
-          "rank": 12,
+          "rank": 9,
           "series": 1
         },
         {
@@ -147,7 +114,7 @@
           "link": "https://data4library.kr/bookV?seq=6569669",
           "isbn": "9791169235532",
           "loans": 4,
-          "rank": 13,
+          "rank": 10,
           "series": 1
         },
         {
@@ -158,7 +125,7 @@
           "link": "https://data4library.kr/bookV?seq=7004988",
           "isbn": "9791173470615",
           "loans": 4,
-          "rank": 14,
+          "rank": 11,
           "series": 1
         },
         {
@@ -169,7 +136,7 @@
           "link": "https://data4library.kr/bookV?seq=2966948",
           "isbn": "9780547970486",
           "loans": 3,
-          "rank": 15,
+          "rank": 12,
           "series": 1
         },
         {
@@ -180,7 +147,18 @@
           "link": "https://data4library.kr/bookV?seq=6731767",
           "isbn": "9791197578472",
           "loans": 3,
-          "rank": 16,
+          "rank": 13,
+          "series": 1
+        },
+        {
+          "title": "대온실 수리 보고서 :김금희 장편소설",
+          "author": "김금희",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/34712/24/cover200/8936439650_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=6950753",
+          "isbn": "9788936439651",
+          "loans": 3,
+          "rank": 14,
           "series": 1
         },
         {
@@ -191,7 +169,7 @@
           "link": "https://data4library.kr/bookV?seq=3424308",
           "isbn": "9788934977445",
           "loans": 3,
-          "rank": 17,
+          "rank": 15,
           "series": 1
         },
         {
@@ -202,7 +180,7 @@
           "link": "https://data4library.kr/bookV?seq=5457535",
           "isbn": "9788934996743",
           "loans": 3,
-          "rank": 18,
+          "rank": 16,
           "series": 1
         },
         {
@@ -213,8 +191,19 @@
           "link": "https://data4library.kr/bookV?seq=2646690",
           "isbn": "9788936442804",
           "loans": 3,
-          "rank": 19,
+          "rank": 17,
           "series": 2
+        },
+        {
+          "title": "고양이 해결사 깜냥",
+          "author": "홍민정 동화, 김재희 그림",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6378029",
+          "isbn": "9788936448134",
+          "loans": 3,
+          "rank": 18,
+          "series": 1
         },
         {
           "title": "내일은 발명왕 :본격 대결 과학발명 만화",
@@ -223,6 +212,17 @@
           "cover": "https://bookthumb-phinf.pstatic.net/cover/111/246/11124668.jpg?type=m1&udate=20160928",
           "link": "https://data4library.kr/bookV?seq=3353062",
           "isbn": "9788937838385",
+          "loans": 3,
+          "rank": 19,
+          "series": 2
+        },
+        {
+          "title": "꽝 없는 뽑기 기계",
+          "author": "곽유진 글, 차상미 그림",
+          "publisher": "비룡소",
+          "cover": "https://image.aladin.co.kr/product/23420/5/cover/s8949162024_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5602228",
+          "isbn": "9788949162027",
           "loans": 3,
           "rank": 20,
           "series": 1
@@ -323,17 +323,6 @@
           "series": 1
         },
         {
-          "title": "이기적 유전자",
-          "author": "리처드 도킨스 지음, 이상임 옮김",
-          "publisher": "을유문화사",
-          "cover": "https://image.aladin.co.kr/product/17048/25/cover/8932473900_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=3921678",
-          "isbn": "9788932473901",
-          "loans": 2,
-          "rank": 9,
-          "series": 1
-        },
-        {
           "title": "Zack Files 06: I'm Out of My Body...Please Leave a Message (Paperback)",
           "author": "Dan Greenburg (지은이)",
           "publisher": "Grosset & Dunlap",
@@ -341,7 +330,7 @@
           "link": "https://data4library.kr/bookV?seq=2485290",
           "isbn": "9780448413396",
           "loans": 2,
-          "rank": 10,
+          "rank": 9,
           "series": 1
         },
         {
@@ -352,7 +341,7 @@
           "link": "https://data4library.kr/bookV?seq=2497025",
           "isbn": "9780448413419",
           "loans": 2,
-          "rank": 11,
+          "rank": 10,
           "series": 1
         },
         {
@@ -362,6 +351,17 @@
           "cover": "https://image.aladin.co.kr/product/86/54/cover/0448415593_2.jpg",
           "link": "https://data4library.kr/bookV?seq=2497205",
           "isbn": "9780448415598",
+          "loans": 2,
+          "rank": 11,
+          "series": 1
+        },
+        {
+          "title": "Princess Poppy : Twinkletoes (Paperback + CD 1장)",
+          "author": "Janey Louise Jones (지은이)",
+          "publisher": "Picture Corgi",
+          "cover": "https://image.aladin.co.kr/product/99/2/cover/0552556629_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=2499769",
+          "isbn": "9780552556620",
           "loans": 2,
           "rank": 12,
           "series": 1
@@ -400,12 +400,12 @@
           "series": 1
         },
         {
-          "title": "반 고흐, 영혼의 편지",
-          "author": "빈센트 반 고흐 지음, 신성림 옮기고 엮음",
-          "publisher": "위즈덤하우스 미디어그룹",
-          "cover": "https://image.aladin.co.kr/product/11026/86/cover/8959135216_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=3443540",
-          "isbn": "9788959135219",
+          "title": "카오스, 치즈, 턱시도 :이필원 연작소설",
+          "author": "이필원",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/37506/15/cover200/8936457411_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7168803",
+          "isbn": "9788936457419",
           "loans": 2,
           "rank": 16,
           "series": 1
@@ -468,7 +468,7 @@
           "cover": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg",
           "link": "https://data4library.kr/bookV?seq=7073819",
           "isbn": "9791141602376",
-          "loans": 12,
+          "loans": 11,
           "rank": 1,
           "series": 1
         },
@@ -479,8 +479,19 @@
           "cover": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg",
           "link": "https://data4library.kr/bookV?seq=2037399",
           "isbn": "9788936434120",
-          "loans": 10,
+          "loans": 11,
           "rank": 2,
+          "series": 1
+        },
+        {
+          "title": "모순 :양귀자 장편소설",
+          "author": "양귀자",
+          "publisher": "쓰다",
+          "cover": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801",
+          "link": "https://data4library.kr/bookV?seq=1938053",
+          "isbn": "9788998441012",
+          "loans": 9,
+          "rank": 3,
           "series": 1
         },
         {
@@ -490,30 +501,52 @@
           "cover": "https://image.aladin.co.kr/product/6232/31/cover/8936442805_1.jpg",
           "link": "https://data4library.kr/bookV?seq=2646690",
           "isbn": "9788936442804",
-          "loans": 9,
-          "rank": 3,
+          "loans": 8,
+          "rank": 4,
           "series": 1
         },
         {
           "title": "고양이 해결사 깜냥",
           "author": "홍민정 동화, 김재희 그림",
           "publisher": "창비",
-          "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6378029",
-          "isbn": "9788936448134",
-          "loans": 9,
-          "rank": 4,
-          "series": 5
-        },
-        {
-          "title": "긴긴밤",
-          "author": "루리 글·그림",
-          "publisher": "문학동네",
-          "cover": "https://image.aladin.co.kr/product/26302/71/cover/8954677150_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5857188",
-          "isbn": "9788954677158",
+          "cover": "https://image.aladin.co.kr/product/25967/84/cover/8936448013_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=5996157",
+          "isbn": "9788936448011",
           "loans": 8,
           "rank": 5,
+          "series": 3
+        },
+        {
+          "title": "사고뭉치 소방관 오케이",
+          "author": "강효미 글, 김경희 그림",
+          "publisher": "길벗스쿨",
+          "cover": "https://image.aladin.co.kr/product/36243/42/cover200/k022038812_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7049819",
+          "isbn": "9791164068975",
+          "loans": 8,
+          "rank": 6,
+          "series": 2
+        },
+        {
+          "title": "(처음 읽는) 그리스 로마 신화 =First Greek mythology",
+          "author": "최설희, 한현동",
+          "publisher": "미래엔",
+          "cover": "https://image.aladin.co.kr/product/26982/8/cover/k142730513_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5966621",
+          "isbn": "9791164137893",
+          "loans": 8,
+          "rank": 7,
+          "series": 3
+        },
+        {
+          "title": "달러구트 꿈 백화점 :주문하신 꿈은 매진입니다",
+          "author": "이미예",
+          "publisher": "팩토리나인",
+          "cover": "https://image.aladin.co.kr/product/24512/70/cover/k392630952_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5707051",
+          "isbn": "9791165341909",
+          "loans": 8,
+          "rank": 8,
           "series": 1
         },
         {
@@ -524,7 +557,7 @@
           "link": "https://data4library.kr/bookV?seq=6863020",
           "isbn": "9791168418011",
           "loans": 8,
-          "rank": 6,
+          "rank": 9,
           "series": 1
         },
         {
@@ -535,19 +568,30 @@
           "link": "https://data4library.kr/bookV?seq=2372129",
           "isbn": "9788949161341",
           "loans": 7,
-          "rank": 7,
+          "rank": 10,
           "series": 1
         },
         {
           "title": "마법천자문 :손오공의 한자 대탐험",
-          "author": "스튜디오시리얼,정수영",
-          "publisher": "아울북",
-          "cover": "https://image.aladin.co.kr/product/20925/63/cover/8950982897_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5481400",
-          "isbn": "9788950982898",
+          "author": "시리얼,홍거북",
+          "publisher": "북이십일",
+          "cover": "https://image.aladin.co.kr/product/23479/9/cover/8950981645_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5613526",
+          "isbn": "9788950981648",
           "loans": 7,
-          "rank": 8,
-          "series": 5
+          "rank": 11,
+          "series": 2
+        },
+        {
+          "title": "긴긴밤",
+          "author": "루리 글·그림",
+          "publisher": "문학동네",
+          "cover": "https://image.aladin.co.kr/product/26302/71/cover/8954677150_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5857188",
+          "isbn": "9788954677158",
+          "loans": 7,
+          "rank": 12,
+          "series": 1
         },
         {
           "title": "절창 :구병모 장편소설",
@@ -557,7 +601,7 @@
           "link": "https://data4library.kr/bookV?seq=7149374",
           "isbn": "9791141602451",
           "loans": 7,
-          "rank": 9,
+          "rank": 13,
           "series": 1
         },
         {
@@ -568,30 +612,8 @@
           "link": "https://data4library.kr/bookV?seq=5466265",
           "isbn": "9791159950681",
           "loans": 7,
-          "rank": 10,
+          "rank": 14,
           "series": 1
-        },
-        {
-          "title": "사고뭉치 소방관 오케이",
-          "author": "강효미 글, 김경희 그림",
-          "publisher": "길벗스쿨",
-          "cover": "https://image.aladin.co.kr/product/33584/29/cover/k702939497_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6842145",
-          "isbn": "9791164067169",
-          "loans": 7,
-          "rank": 11,
-          "series": 2
-        },
-        {
-          "title": "(처음 읽는) 그리스 로마 신화 =First Greek mythology",
-          "author": "최설희, 한현동",
-          "publisher": "미래엔",
-          "cover": "https://image.aladin.co.kr/product/26982/8/cover/k142730513_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5966621",
-          "isbn": "9791164137893",
-          "loans": 7,
-          "rank": 12,
-          "series": 3
         },
         {
           "title": "소원 요정 춘식이 with 라이언",
@@ -601,7 +623,7 @@
           "link": "https://data4library.kr/bookV?seq=7031873",
           "isbn": "9791173570957",
           "loans": 7,
-          "rank": 13,
+          "rank": 15,
           "series": 1
         },
         {
@@ -612,8 +634,8 @@
           "link": "https://data4library.kr/bookV?seq=7251837",
           "isbn": "9791173575648",
           "loans": 7,
-          "rank": 14,
-          "series": 2
+          "rank": 16,
+          "series": 1
         },
         {
           "title": "돈의 속성 :최상위 부자가 말하는 돈에 대한 모든 것",
@@ -623,29 +645,29 @@
           "link": "https://data4library.kr/bookV?seq=5678862",
           "isbn": "9791188331796",
           "loans": 7,
-          "rank": 15,
-          "series": 1
-        },
-        {
-          "title": "꽁멍꽁멍 그림수학",
-          "author": "장경아, 김종채",
-          "publisher": "와이즈만 Books",
-          "cover": "https://image.aladin.co.kr/product/34975/39/cover200/k812934666_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6961056",
-          "isbn": "9791192936505",
-          "loans": 7,
-          "rank": 16,
-          "series": 1
-        },
-        {
-          "title": "(설민석의) 우리 고전 대모험",
-          "author": "설민석,강신영",
-          "publisher": "Dankkum i(단꿈아이)",
-          "cover": "https://image.aladin.co.kr/product/33397/43/cover/k242938510_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6831160",
-          "isbn": "9791193031414",
-          "loans": 7,
           "rank": 17,
+          "series": 1
+        },
+        {
+          "title": "똥볶이 할멈 :K-히어로 판타지",
+          "author": "강효미, 김무연",
+          "publisher": "따끈따끈책방",
+          "cover": "https://image.aladin.co.kr/product/27982/44/cover/k832734228_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6307324",
+          "isbn": "9791190409124",
+          "loans": 7,
+          "rank": 18,
+          "series": 1
+        },
+        {
+          "title": "위풍당당 여우 꼬리",
+          "author": "손원평 글, 만물상 그림",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/32509/16/cover/8936448498_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6765746",
+          "isbn": "9788936448493",
+          "loans": 6,
+          "rank": 19,
           "series": 1
         },
         {
@@ -655,28 +677,6 @@
           "cover": "https://bookthumb-phinf.pstatic.net/cover/067/600/06760061.jpg?type=m1&udate=20120223",
           "link": "https://data4library.kr/bookV?seq=2373766",
           "isbn": "9788937883286",
-          "loans": 6,
-          "rank": 18,
-          "series": 1
-        },
-        {
-          "title": "그리스 로마 신화",
-          "author": "김민희,정보 강대진",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://bookthumb-phinf.pstatic.net/cover/134/404/13440466.jpg?type=m1&udate=20180319",
-          "link": "https://data4library.kr/bookV?seq=3726870",
-          "isbn": "9788950971397",
-          "loans": 6,
-          "rank": 19,
-          "series": 3
-        },
-        {
-          "title": "밝은 밤 :최은영 장편소설",
-          "author": "최은영",
-          "publisher": "문학동네",
-          "cover": "https://image.aladin.co.kr/product/27541/91/cover/8954681174_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6045915",
-          "isbn": "9788954681179",
           "loans": 6,
           "rank": 20,
           "series": 1
