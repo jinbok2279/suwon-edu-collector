@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-20 06:46:37",
+ "updated_at": "2026-10-21 06:47:12",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -433,6 +433,21 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF295444",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF295444_260706_160303.png"
+  },
+  {
+   "id": "KPF303888",
+   "title": "코밈 [수원]",
+   "start": "2026-11-28",
+   "end": "2026-11-28",
+   "place": "수원SK아트리움",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF303888",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF303888_261020_133746.jpg"
   },
   {
    "id": "KPF299969",
