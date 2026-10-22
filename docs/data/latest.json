@@ -1,9 +1,9 @@
 {
   "region": "수원시",
-  "updated_at": "2026-10-22 18:23:30",
+  "updated_at": "2026-10-23 06:20:07",
   "period": {
-    "from": "20261022",
-    "to": "20261221"
+    "from": "20261023",
+    "to": "20261222"
   },
   "school_count": 205,
   "public_holidays": [
@@ -45,62 +45,6 @@
     }
   ],
   "highlights": [
-    {
-      "school": "곡정고등학교",
-      "level": "고등학교",
-      "gu": "권선구",
-      "date": "2026-10-22",
-      "name": "현장체험학습",
-      "holiday": false
-    },
-    {
-      "school": "망포고등학교",
-      "level": "고등학교",
-      "gu": "영통구",
-      "date": "2026-10-22",
-      "name": "주제별체험학습",
-      "holiday": false
-    },
-    {
-      "school": "매탄중학교",
-      "level": "중학교",
-      "gu": "영통구",
-      "date": "2026-10-22",
-      "name": "체육한마당",
-      "holiday": false
-    },
-    {
-      "school": "수일고등학교",
-      "level": "고등학교",
-      "gu": "장안구",
-      "date": "2026-10-22",
-      "name": "체험학습",
-      "holiday": false
-    },
-    {
-      "school": "영신중학교",
-      "level": "중학교",
-      "gu": "권선구",
-      "date": "2026-10-22",
-      "name": "한마음 축제",
-      "holiday": false
-    },
-    {
-      "school": "잠원중학교",
-      "level": "중학교",
-      "gu": "영통구",
-      "date": "2026-10-22",
-      "name": "현장체험학습",
-      "holiday": false
-    },
-    {
-      "school": "태장초등학교",
-      "level": "초등학교",
-      "gu": "영통구",
-      "date": "2026-10-22",
-      "name": "한둥지체육축제",
-      "holiday": false
-    },
     {
       "school": "곡정고등학교",
       "level": "고등학교",
@@ -2684,6 +2628,150 @@
       "date": "2026-12-21",
       "name": "겨울방학",
       "holiday": true
+    },
+    {
+      "school": "곡선초등학교",
+      "level": "초등학교",
+      "gu": "권선구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "당수초등학교",
+      "level": "초등학교",
+      "gu": "권선구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "망포고등학교",
+      "level": "고등학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "매원초등학교",
+      "level": "초등학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "매현중학교",
+      "level": "중학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "매현초등학교",
+      "level": "초등학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "명인초등학교",
+      "level": "초등학교",
+      "gu": "장안구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "서호초등학교",
+      "level": "초등학교",
+      "gu": "권선구",
+      "date": "2026-12-22",
+      "name": "유치원졸업식",
+      "holiday": false
+    },
+    {
+      "school": "송원중학교",
+      "level": "중학교",
+      "gu": "장안구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "송원초등학교",
+      "level": "초등학교",
+      "gu": "장안구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "수원금곡초등학교",
+      "level": "초등학교",
+      "gu": "권선구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "수원여자고등학교",
+      "level": "고등학교",
+      "gu": "팔달구",
+      "date": "2026-12-22",
+      "name": "졸업식",
+      "holiday": false
+    },
+    {
+      "school": "원일초등학교",
+      "level": "초등학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학 안전교육기간",
+      "holiday": false
+    },
+    {
+      "school": "율현중학교",
+      "level": "중학교",
+      "gu": "팔달구",
+      "date": "2026-12-22",
+      "name": "학년말방학",
+      "holiday": true
+    },
+    {
+      "school": "일월초등학교",
+      "level": "초등학교",
+      "gu": "권선구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "잠원초등학교",
+      "level": "초등학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "황곡초등학교",
+      "level": "초등학교",
+      "gu": "영통구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
+    },
+    {
+      "school": "효천초등학교",
+      "level": "초등학교",
+      "gu": "장안구",
+      "date": "2026-12-22",
+      "name": "겨울방학",
+      "holiday": true
     }
   ],
   "schools": [
@@ -2802,6 +2890,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -2888,6 +2981,16 @@
         },
         {
           "date": "2026-12-21",
+          "name": "방과후교실 작품 전시 주간",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "전교임원선거",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
           "name": "방과후교실 작품 전시 주간",
           "holiday": false
         }
@@ -3004,6 +3107,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -3030,11 +3138,6 @@
       "gu": "권선구",
       "dong": "금곡동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "독도 교육 주간",
-          "holiday": false
-        },
         {
           "date": "2026-10-23",
           "name": "독도 교육 주간",
@@ -3100,11 +3203,6 @@
       "dong": "서둔동",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "독도교육주간",
-          "holiday": false
-        },
-        {
           "date": "2026-10-23",
           "name": "독도교육주간",
           "holiday": false
@@ -3167,6 +3265,11 @@
         {
           "date": "2026-12-15",
           "name": "전교임원선거",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "유치원졸업식",
           "holiday": false
         }
       ]
@@ -3263,6 +3366,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "겨울방학",
+          "holiday": true
+        },
+        {
+          "date": "2026-12-22",
           "name": "겨울방학",
           "holiday": true
         }
@@ -3383,6 +3491,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -3394,11 +3507,6 @@
       "gu": "권선구",
       "dong": "입북동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "소방교육",
-          "holiday": false
-        },
         {
           "date": "2026-11-09",
           "name": "장애인식교육주간",
@@ -3452,16 +3560,6 @@
       "gu": "권선구",
       "dong": "호매실동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "스포츠클럽대회 행사",
-          "holiday": false
-        },
-        {
-          "date": "2026-10-22",
-          "name": "독도교육",
-          "holiday": false
-        },
         {
           "date": "2026-10-23",
           "name": "스포츠클럽대회 행사",
@@ -3608,6 +3706,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -3690,6 +3793,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "겨울방학",
+          "holiday": true
+        },
+        {
+          "date": "2026-12-22",
           "name": "겨울방학",
           "holiday": true
         }
@@ -3882,6 +3990,11 @@
           "date": "2026-12-21",
           "name": "겨울방학 안전교육기간",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학 안전교육기간",
+          "holiday": false
         }
       ]
     },
@@ -3940,6 +4053,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -3975,11 +4093,6 @@
       "gu": "영통구",
       "dong": "망포동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "한둥지체육축제",
-          "holiday": false
-        },
         {
           "date": "2026-10-23",
           "name": "한둥지체육축제",
@@ -4104,6 +4217,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -4193,6 +4311,11 @@
           "date": "2026-12-21",
           "name": "겨울방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -4259,6 +4382,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "겨울방학",
+          "holiday": true
+        },
+        {
+          "date": "2026-12-22",
           "name": "겨울방학",
           "holiday": true
         }
@@ -4465,6 +4593,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "겨울방학",
+          "holiday": true
+        },
+        {
+          "date": "2026-12-22",
           "name": "겨울방학",
           "holiday": true
         }
@@ -4964,11 +5097,6 @@
       "dong": "",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "한마음 축제",
-          "holiday": false
-        },
-        {
           "date": "2026-10-23",
           "name": "한마음 체육행사",
           "holiday": false
@@ -5298,11 +5426,6 @@
       "dong": "매탄동",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "체육한마당",
-          "holiday": false
-        },
-        {
           "date": "2026-10-23",
           "name": "현장체험학습",
           "holiday": false
@@ -5364,6 +5487,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "겨울방학",
+          "holiday": true
+        },
+        {
+          "date": "2026-12-22",
           "name": "겨울방학",
           "holiday": true
         }
@@ -5842,16 +5970,6 @@
       "dong": "망포동",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "현장체험학습",
-          "holiday": false
-        },
-        {
-          "date": "2026-10-22",
-          "name": "체육대회",
-          "holiday": false
-        },
-        {
           "date": "2026-11-13",
           "name": "2학기 정기시험",
           "holiday": false
@@ -6144,6 +6262,11 @@
           "date": "2026-12-21",
           "name": "졸업식 및 종업식",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -6499,16 +6622,6 @@
       "dong": "매향동",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "부서협의회",
-          "holiday": false
-        },
-        {
-          "date": "2026-10-22",
-          "name": "부흥회",
-          "holiday": false
-        },
-        {
           "date": "2026-10-23",
           "name": "학년협의회",
           "holiday": false
@@ -6784,11 +6897,6 @@
       "dong": "매교동",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "독도교육주간",
-          "holiday": false
-        },
-        {
           "date": "2026-10-23",
           "name": "믈뫼누리마당",
           "holiday": false
@@ -6992,6 +7100,11 @@
           "date": "2026-12-21",
           "name": "학년말방학",
           "holiday": true
+        },
+        {
+          "date": "2026-12-22",
+          "name": "학년말방학",
+          "holiday": true
         }
       ]
     },
@@ -7041,6 +7154,11 @@
         {
           "date": "2026-12-07",
           "name": "진로체험",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "합창제",
           "holiday": false
         }
       ]
@@ -7108,11 +7226,6 @@
       "gu": "권선구",
       "dong": "권선동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "현장체험학습",
-          "holiday": false
-        },
         {
           "date": "2026-10-23",
           "name": "현장체험학습",
@@ -7237,6 +7350,11 @@
           "date": "2026-12-15",
           "name": "2차정기시험",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "학교주도활동",
+          "holiday": false
         }
       ]
     },
@@ -7298,11 +7416,6 @@
       "gu": "권선구",
       "dong": "오목천동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "1차 정기시험",
-          "holiday": false
-        },
         {
           "date": "2026-10-23",
           "name": "1차 정기시험",
@@ -7377,6 +7490,11 @@
           "date": "2026-12-21",
           "name": "2차 정기시험",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "2차 정기시험",
+          "holiday": false
         }
       ]
     },
@@ -7425,6 +7543,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "2차 정기시험",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
           "name": "2차 정기시험",
           "holiday": false
         }
@@ -7592,6 +7715,11 @@
           "date": "2026-12-21",
           "name": "성적이의신청기간",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "성적이의신청기간",
+          "holiday": false
         }
       ]
     },
@@ -7603,11 +7731,6 @@
       "gu": "영통구",
       "dong": "망포동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "주제별체험학습",
-          "holiday": false
-        },
         {
           "date": "2026-10-23",
           "name": "주제별체험학습",
@@ -7662,6 +7785,11 @@
           "date": "2026-12-21",
           "name": "졸업식",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "겨울방학",
+          "holiday": true
         }
       ]
     },
@@ -8097,6 +8225,11 @@
           "date": "2026-12-11",
           "name": "2학기 2차 정기시험",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "동아리활동성과공유회",
+          "holiday": false
         }
       ]
     },
@@ -8432,11 +8565,6 @@
       "gu": "장안구",
       "dong": "천천동",
       "events": [
-        {
-          "date": "2026-10-22",
-          "name": "전국체육대회",
-          "holiday": false
-        },
         {
           "date": "2026-10-26",
           "name": "학교장재량휴업일",
@@ -8791,6 +8919,11 @@
           "date": "2026-12-21",
           "name": "학교주도활동(1,2학년)",
           "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "학교주도활동(1,2학년)",
+          "holiday": false
         }
       ]
     },
@@ -8898,11 +9031,6 @@
       "dong": "조원동",
       "events": [
         {
-          "date": "2026-10-22",
-          "name": "체험학습",
-          "holiday": false
-        },
-        {
           "date": "2026-10-23",
           "name": "체험학습",
           "holiday": false
@@ -8979,6 +9107,11 @@
         },
         {
           "date": "2026-11-27",
+          "name": "2차 정기시험",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
           "name": "2차 정기시험",
           "holiday": false
         }
@@ -9178,6 +9311,71 @@
       "dong": "매향동",
       "events": [
         {
+          "date": "2026-10-23",
+          "name": "SLAT(진로학업설계지도) 주간",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-23",
+          "name": "3학년 도제실습(메타,호텔,보건)",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-23",
+          "name": "성매매, 성폭력 예방교육",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-23",
+          "name": "한복스타일 일러스트 공모전",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-26",
+          "name": "2학년 도제실습(메타,호텔,보건)",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-26",
+          "name": "스포츠클럽 배구동아리 특강",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-27",
+          "name": "6, 7교시 동아리",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-27",
+          "name": "소인수 선택과목 수업",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-28",
+          "name": "학급 주관예배",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-28",
+          "name": "영상과 콘텐츠 진로특강",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-28",
+          "name": "1학년 호텔관광경영 산업 탐구 프로그램",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-29",
+          "name": "3학년 도제실습(메타,호텔)",
+          "holiday": false
+        },
+        {
+          "date": "2026-10-30",
+          "name": "3학년 도제실습(메타,호텔,보건)",
+          "holiday": false
+        },
+        {
           "date": "2026-11-19",
           "name": "대학수학능력시험(재량휴업일)",
           "holiday": true
@@ -9264,6 +9462,11 @@
         },
         {
           "date": "2026-12-21",
+          "name": "2학기 지필평가",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
           "name": "2학기 지필평가",
           "holiday": false
         }
@@ -9450,6 +9653,16 @@
         {
           "date": "2026-12-11",
           "name": "청포도축제",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "졸업식",
+          "holiday": false
+        },
+        {
+          "date": "2026-12-22",
+          "name": "종업식",
           "holiday": false
         }
       ]
