@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-19 06:42:55",
+ "updated_at": "2026-10-22 06:48:37",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -272,6 +272,21 @@
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF300454_260909_112616.jpg"
   },
   {
+   "id": "KPF304059",
+   "title": "피터팬 [수원]",
+   "start": "2026-11-08",
+   "end": "2026-11-08",
+   "place": "AK플라자 [수원]",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF304059",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF304059_261021_152006.jpg"
+  },
+  {
    "id": "GSM000152",
    "title": "2026. 가족뮤지컬 〈엄마까투리 - 유치원도,도시도 처음이야!〉 - 수원",
    "start": "2026-11-14",
@@ -435,6 +450,21 @@
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF295444_260706_160303.png"
   },
   {
+   "id": "KPF303888",
+   "title": "코밈 [수원]",
+   "start": "2026-11-28",
+   "end": "2026-11-28",
+   "place": "수원SK아트리움",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF303888",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF303888_261020_133746.jpg"
+  },
+  {
    "id": "KPF299969",
    "title": "로봇 특공대 [수원]",
    "start": "2026-11-29",
@@ -508,6 +538,36 @@
    "src": "swcf",
    "link": "https://www.swcf.or.kr/?p=29_view&idx=3061&listUrl=29&curYear=2026&curMonth=12&searchDetail_flag=",
    "book": ""
+  },
+  {
+   "id": "S3064",
+   "title": "국립합창단 <헨델 메시아>",
+   "start": "2026-12-19",
+   "end": "2026-12-19",
+   "place": "수원SK아트리움 대공연장",
+   "time": "17:00",
+   "grade": "8세 이상 관람가",
+   "price": "R석 30,000 S석 20,000 A석 10,000",
+   "free": false,
+   "kind": "공연",
+   "src": "swcf",
+   "link": "https://www.swcf.or.kr/?p=29_view&idx=3064&listUrl=29&curYear=2026&curMonth=12&searchDetail_flag=",
+   "book": "https://nol.yanolja.com/ticket/products/26014673"
+  },
+  {
+   "id": "KPF302540",
+   "title": "산타와 루돌프 [수원]",
+   "start": "2026-12-19",
+   "end": "2026-12-20",
+   "place": "장안구민회관 한누리아트홀",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF302540",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF302540_261006_142824.jpg"
   }
  ],
  "lib": [

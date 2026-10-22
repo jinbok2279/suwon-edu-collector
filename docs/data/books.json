@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-19 06:30:30",
+  "updated_at": "2026-10-22 06:37:03",
   "source": "도서관 정보나루 (국립중앙도서관)",
   "lists": [
     {
@@ -14,7 +14,7 @@
           "cover": "https://image.aladin.co.kr/product/33557/83/cover/8958070056_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6840045",
           "isbn": "9788958070054",
-          "loans": 4,
+          "loans": 5,
           "rank": 1,
           "series": 1
         },
@@ -25,7 +25,7 @@
           "cover": "https://image.aladin.co.kr/product/33085/72/cover/k192937604_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6810341",
           "isbn": "9791165021610",
-          "loans": 4,
+          "loans": 5,
           "rank": 2,
           "series": 1
         },
@@ -36,7 +36,7 @@
           "cover": "https://image.aladin.co.kr/product/23775/9/cover/k662639063_1.jpg",
           "link": "https://data4library.kr/bookV?seq=5654739",
           "isbn": "9791189734381",
-          "loans": 4,
+          "loans": 5,
           "rank": 3,
           "series": 1
         },
@@ -47,7 +47,7 @@
           "cover": "https://image.aladin.co.kr/product/24404/88/cover/k582630411_1.jpg",
           "link": "https://data4library.kr/bookV?seq=5702005",
           "isbn": "9791189734442",
-          "loans": 4,
+          "loans": 5,
           "rank": 4,
           "series": 1
         },
@@ -58,8 +58,19 @@
           "cover": "https://image.aladin.co.kr/product/25542/26/cover/k892633326_1.jpg",
           "link": "https://data4library.kr/bookV?seq=5800068",
           "isbn": "9791189734534",
-          "loans": 4,
+          "loans": 5,
           "rank": 5,
+          "series": 1
+        },
+        {
+          "title": "(동화로 읽는) 시튼 동물기",
+          "author": "어니스트 톰슨 시튼 원작, 함영연 글",
+          "publisher": "파랑새어린이",
+          "cover": "https://image.aladin.co.kr/product/422/42/cover/897057834x_3.jpg",
+          "link": "https://data4library.kr/bookV?seq=970315",
+          "isbn": "9788970578347",
+          "loans": 4,
+          "rank": 6,
           "series": 1
         },
         {
@@ -70,40 +81,7 @@
           "link": "https://data4library.kr/bookV?seq=5978984",
           "isbn": "9781338568998",
           "loans": 4,
-          "rank": 6,
-          "series": 1
-        },
-        {
-          "title": "고양이 해결사 깜냥",
-          "author": "홍민정 동화, 김재희 그림",
-          "publisher": "창비",
-          "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6378029",
-          "isbn": "9788936448134",
-          "loans": 4,
           "rank": 7,
-          "series": 2
-        },
-        {
-          "title": "그리스 로마 신화",
-          "author": "김민희,정보 강대진",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://image.aladin.co.kr/product/31088/91/cover/8950941570_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6640171",
-          "isbn": "9788950941574",
-          "loans": 4,
-          "rank": 8,
-          "series": 1
-        },
-        {
-          "title": "마법천자문 :손오공의 한자 대탐험",
-          "author": "스튜디오시리얼,정수영",
-          "publisher": "아울북",
-          "cover": "https://image.aladin.co.kr/product/20925/63/cover/8950982897_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5481400",
-          "isbn": "9788950982898",
-          "loans": 4,
-          "rank": 9,
           "series": 1
         },
         {
@@ -114,18 +92,7 @@
           "link": "https://data4library.kr/bookV?seq=117298",
           "isbn": "9788952709530",
           "loans": 4,
-          "rank": 10,
-          "series": 1
-        },
-        {
-          "title": "나도 덕후가 되고 싶어",
-          "author": "최은영 글, 모차 그림",
-          "publisher": "스푼북",
-          "cover": "https://image.aladin.co.kr/product/37172/9/cover200/k812031576_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7150409",
-          "isbn": "9791165816032",
-          "loans": 4,
-          "rank": 11,
+          "rank": 8,
           "series": 1
         },
         {
@@ -136,7 +103,7 @@
           "link": "https://data4library.kr/bookV?seq=6576357",
           "isbn": "9791168413955",
           "loans": 4,
-          "rank": 12,
+          "rank": 9,
           "series": 1
         },
         {
@@ -147,18 +114,7 @@
           "link": "https://data4library.kr/bookV?seq=6569669",
           "isbn": "9791169235532",
           "loans": 4,
-          "rank": 13,
-          "series": 1
-        },
-        {
-          "title": "(흔한남매) 별난 세계 여행",
-          "author": "흔한남매 원작, 정주연 그림",
-          "publisher": "미래엔",
-          "cover": "https://image.aladin.co.kr/product/35632/70/cover200/k142036491_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7004988",
-          "isbn": "9791173470615",
-          "loans": 4,
-          "rank": 14,
+          "rank": 10,
           "series": 1
         },
         {
@@ -169,40 +125,18 @@
           "link": "https://data4library.kr/bookV?seq=2966948",
           "isbn": "9780547970486",
           "loans": 3,
-          "rank": 15,
+          "rank": 11,
           "series": 1
         },
         {
-          "title": "채사장의 지대넓얕 :지적 대화를 위한 넓고 얕은 지식",
-          "author": "채사장,정용환",
-          "publisher": "Dolphin Books(돌핀북)",
-          "cover": "https://image.aladin.co.kr/product/32065/65/cover/k612834896_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6731767",
-          "isbn": "9791197578472",
+          "title": "(읽으면서 바로 써먹는) 어린이 속담",
+          "author": "글·한날",
+          "publisher": "파란정원",
+          "cover": "https://image.aladin.co.kr/product/25785/13/cover/k122736716_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5827110",
+          "isbn": "9791158681883",
           "loans": 3,
-          "rank": 16,
-          "series": 1
-        },
-        {
-          "title": "악당이 사는 집",
-          "author": "이꽃님 글, 조윤주 그림",
-          "publisher": "김영사",
-          "cover": "https://image.aladin.co.kr/product/10602/47/cover/8934977442_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=3424308",
-          "isbn": "9788934977445",
-          "loans": 3,
-          "rank": 17,
-          "series": 1
-        },
-        {
-          "title": "귀신 고민 해결사",
-          "author": "이꽃님 글, 고담 그림",
-          "publisher": "김영사",
-          "cover": "https://image.aladin.co.kr/product/20027/85/cover/8934996749_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5457535",
-          "isbn": "9788934996743",
-          "loans": 3,
-          "rank": 18,
+          "rank": 12,
           "series": 1
         },
         {
@@ -213,8 +147,19 @@
           "link": "https://data4library.kr/bookV?seq=2646690",
           "isbn": "9788936442804",
           "loans": 3,
-          "rank": 19,
-          "series": 2
+          "rank": 13,
+          "series": 1
+        },
+        {
+          "title": "고양이 해결사 깜냥",
+          "author": "홍민정 동화, 김재희 그림",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6378029",
+          "isbn": "9788936448134",
+          "loans": 3,
+          "rank": 14,
+          "series": 1
         },
         {
           "title": "내일은 발명왕 :본격 대결 과학발명 만화",
@@ -223,6 +168,61 @@
           "cover": "https://bookthumb-phinf.pstatic.net/cover/111/246/11124668.jpg?type=m1&udate=20160928",
           "link": "https://data4library.kr/bookV?seq=3353062",
           "isbn": "9788937838385",
+          "loans": 3,
+          "rank": 15,
+          "series": 2
+        },
+        {
+          "title": "꽝 없는 뽑기 기계",
+          "author": "곽유진 글, 차상미 그림",
+          "publisher": "비룡소",
+          "cover": "https://image.aladin.co.kr/product/23420/5/cover/s8949162024_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5602228",
+          "isbn": "9788949162027",
+          "loans": 3,
+          "rank": 16,
+          "series": 1
+        },
+        {
+          "title": "오늘도 용맹이",
+          "author": "이현 글, 국민지 그림",
+          "publisher": "비룡소",
+          "cover": "https://image.aladin.co.kr/product/30906/43/cover/8949162415_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6625623",
+          "isbn": "9788949162416",
+          "loans": 3,
+          "rank": 17,
+          "series": 1
+        },
+        {
+          "title": "꼬랑지네 떡집",
+          "author": "김리리 글, 김이랑 그림",
+          "publisher": "비룡소",
+          "cover": "https://image.aladin.co.kr/product/39117/20/cover200/8949162695_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7254667",
+          "isbn": "9788949162690",
+          "loans": 3,
+          "rank": 18,
+          "series": 1
+        },
+        {
+          "title": "그리스 로마 신화",
+          "author": "김민희,정보 강대진",
+          "publisher": "아울북(북이십일 아울북)",
+          "cover": "https://image.aladin.co.kr/product/25399/23/cover/8950971542_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5784122",
+          "isbn": "9788950971540",
+          "loans": 3,
+          "rank": 19,
+          "series": 1
+        },
+        {
+          "title": "Go go 카카오프렌즈 :세계 역사 문화 체험 학습만화",
+          "author": "김미영, 정보최은하",
+          "publisher": "아울북(북이십일 아울북)",
+          "cover": "https://image.aladin.co.kr/product/15220/17/cover/8950976110_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=3788041",
+          "isbn": "9788950976118",
           "loans": 3,
           "rank": 20,
           "series": 1
@@ -235,102 +235,25 @@
       "desc": "수원시 공공도서관 · 청소년(14~19세) 대출 · 최근 1달",
       "books": [
         {
-          "title": "(요즘 10대를 위한) 최소한의 세계사 :술술 읽다 보면 어느새 머릿속에 쏙쏙",
-          "author": "임소미 지음",
-          "publisher": "빅피시",
-          "cover": "https://image.aladin.co.kr/product/35890/85/cover200/k752037882_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7019828",
-          "isbn": "9791194033554",
+          "title": "기후 위기, 마지막 경고 :북극곰의 위기는 인류 위기의 예고편",
+          "author": "서형석 지음",
+          "publisher": "문예춘추사",
+          "cover": "https://image.aladin.co.kr/product/28121/97/cover/8976044983_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6317761",
+          "isbn": "9788976044983",
           "loans": 3,
           "rank": 1,
           "series": 1
         },
         {
-          "title": "Horrible Harry and the Purple People (Paperback)",
-          "author": "Suzy Kline (지은이)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/105/77/cover/0140382232_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482725",
-          "isbn": "9780140382235",
-          "loans": 2,
+          "title": "이상한 나라의 위험한 가짜뉴스 :가짜뉴스와 혐오, 사이버 폭력으로부터 나를 지키는 법",
+          "author": "마우로 무나포 지음, 김지우 옮김",
+          "publisher": "우리학교",
+          "cover": "https://image.aladin.co.kr/product/28757/61/cover/k982836886_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6394074",
+          "isbn": "9791167550361",
+          "loans": 3,
           "rank": 2,
-          "series": 1
-        },
-        {
-          "title": "Horrible Harry and the Green Slime (Paperback)",
-          "author": "Suzy Kline (지은이)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/117/86/cover/0140389709_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482756",
-          "isbn": "9780140389708",
-          "loans": 2,
-          "rank": 3,
-          "series": 1
-        },
-        {
-          "title": "Horrible Harry and the Kickball Wedding (Paperback)",
-          "author": "Suzy Kline (지은이)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/120/64/cover/0141303166_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482873",
-          "isbn": "9780141303161",
-          "loans": 2,
-          "rank": 4,
-          "series": 1
-        },
-        {
-          "title": "Horrible Harry and the Mud Gremlins (Paperback)",
-          "author": "Suzy Kline (지은이), 프랭크 렘키위츠 (그림)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/95/21/cover/0142401234_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482750",
-          "isbn": "9780142401231",
-          "loans": 2,
-          "rank": 5,
-          "series": 1
-        },
-        {
-          "title": "Horrible Harry and the Holidaze (Paperback)",
-          "author": "Suzy Kline (지은이)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/121/26/cover/0142402052_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482726",
-          "isbn": "9780142402054",
-          "loans": 2,
-          "rank": 6,
-          "series": 1
-        },
-        {
-          "title": "Horrible Harry and the Locked Closet (Paperback) - Horrible Harry",
-          "author": "Suzy Kline (지은이), 프랭크 렘키위츠 (그림)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/95/31/cover/0142404519_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482874",
-          "isbn": "9780142404515",
-          "loans": 2,
-          "rank": 7,
-          "series": 1
-        },
-        {
-          "title": "Horrible Harry and the Triple Revenge (Paperback)",
-          "author": "프랭크 렘키위츠, Suzy Kline (지은이)",
-          "publisher": "Puffin",
-          "cover": "https://image.aladin.co.kr/product/143/2/cover/0142410810_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=2482790",
-          "isbn": "9780142410813",
-          "loans": 2,
-          "rank": 8,
-          "series": 1
-        },
-        {
-          "title": "이기적 유전자",
-          "author": "리처드 도킨스 지음, 이상임 옮김",
-          "publisher": "을유문화사",
-          "cover": "https://image.aladin.co.kr/product/17048/25/cover/8932473900_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=3921678",
-          "isbn": "9788932473901",
-          "loans": 2,
-          "rank": 9,
           "series": 1
         },
         {
@@ -341,7 +264,7 @@
           "link": "https://data4library.kr/bookV?seq=2485290",
           "isbn": "9780448413396",
           "loans": 2,
-          "rank": 10,
+          "rank": 3,
           "series": 1
         },
         {
@@ -352,7 +275,7 @@
           "link": "https://data4library.kr/bookV?seq=2497025",
           "isbn": "9780448413419",
           "loans": 2,
-          "rank": 11,
+          "rank": 4,
           "series": 1
         },
         {
@@ -363,62 +286,40 @@
           "link": "https://data4library.kr/bookV?seq=2497205",
           "isbn": "9780448415598",
           "loans": 2,
-          "rank": 12,
+          "rank": 5,
           "series": 1
         },
         {
-          "title": "식객",
-          "author": "허영만 글·그림",
-          "publisher": "김영사",
-          "cover": "https://bookthumb-phinf.pstatic.net/cover/060/007/06000703.jpg?type=m1&udate=20150718",
-          "link": "https://data4library.kr/bookV?seq=2373203",
-          "isbn": "9788934933205",
+          "title": "Princess Poppy : Twinkletoes (Paperback + CD 1장)",
+          "author": "Janey Louise Jones (지은이)",
+          "publisher": "Picture Corgi",
+          "cover": "https://image.aladin.co.kr/product/99/2/cover/0552556629_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=2499769",
+          "isbn": "9780552556620",
           "loans": 2,
-          "rank": 13,
+          "rank": 6,
           "series": 1
         },
         {
-          "title": "아픈 당신에게 숲을 처방합니다 :질병 없는 삶을 위한 6주 숲건강 프로젝트",
-          "author": "서정아 지음",
-          "publisher": "청림출판",
-          "cover": "https://image.aladin.co.kr/product/37179/29/cover200/8935214876_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7152005",
-          "isbn": "9788935214877",
-          "loans": 2,
-          "rank": 14,
-          "series": 1
-        },
-        {
-          "title": "호수의 일 :이현 장편소설",
-          "author": "이현",
+          "title": "카오스, 치즈, 턱시도 :이필원 연작소설",
+          "author": "이필원",
           "publisher": "창비",
-          "cover": "https://image.aladin.co.kr/product/28772/90/cover/8936457098_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6397329",
-          "isbn": "9788936457099",
+          "cover": "https://image.aladin.co.kr/product/37506/15/cover200/8936457411_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7168803",
+          "isbn": "9788936457419",
           "loans": 2,
-          "rank": 15,
+          "rank": 7,
           "series": 1
         },
         {
-          "title": "반 고흐, 영혼의 편지",
-          "author": "빈센트 반 고흐 지음, 신성림 옮기고 엮음",
-          "publisher": "위즈덤하우스 미디어그룹",
-          "cover": "https://image.aladin.co.kr/product/11026/86/cover/8959135216_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=3443540",
-          "isbn": "9788959135219",
+          "title": "눈부신 안부 :백수린 장편소설",
+          "author": "백수린",
+          "publisher": "문학동네",
+          "cover": "https://image.aladin.co.kr/product/31688/62/cover/8954699375_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6694629",
+          "isbn": "9788954699372",
           "loans": 2,
-          "rank": 16,
-          "series": 1
-        },
-        {
-          "title": "기후 위기, 마지막 경고 :북극곰의 위기는 인류 위기의 예고편",
-          "author": "서형석 지음",
-          "publisher": "문예춘추사",
-          "cover": "https://image.aladin.co.kr/product/28121/97/cover/8976044983_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6317761",
-          "isbn": "9788976044983",
-          "loans": 2,
-          "rank": 17,
+          "rank": 8,
           "series": 1
         },
         {
@@ -429,7 +330,7 @@
           "link": "https://data4library.kr/bookV?seq=6555031",
           "isbn": "9791156759850",
           "loans": 2,
-          "rank": 18,
+          "rank": 9,
           "series": 1
         },
         {
@@ -440,17 +341,116 @@
           "link": "https://data4library.kr/bookV?seq=5971255",
           "isbn": "9791165215491",
           "loans": 2,
+          "rank": 10,
+          "series": 1
+        },
+        {
+          "title": "(요즘 10대를 위한) 최소한의 세계사 :술술 읽다 보면 어느새 머릿속에 쏙쏙",
+          "author": "임소미 지음",
+          "publisher": "빅피시",
+          "cover": "https://image.aladin.co.kr/product/35890/85/cover200/k752037882_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7019828",
+          "isbn": "9791194033554",
+          "loans": 2,
+          "rank": 11,
+          "series": 1
+        },
+        {
+          "title": "Sweet dreams, night animals",
+          "author": "Gianna Marino",
+          "publisher": "Philomel Books",
+          "cover": "https://image.aladin.co.kr/product/35845/26/cover200/0425290662_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=7199770",
+          "isbn": "9780425290668",
+          "loans": 1,
+          "rank": 12,
+          "series": 1
+        },
+        {
+          "title": "Sleep tight with the very hungry caterpillar :a lift-the -flap book",
+          "author": "[Eric Carle]",
+          "publisher": "World of Eric Carle",
+          "cover": "https://image.aladin.co.kr/product/24310/57/cover/0593222571_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=5837923",
+          "isbn": "9780593222577",
+          "loans": 1,
+          "rank": 13,
+          "series": 1
+        },
+        {
+          "title": "Not all sheep are boring!",
+          "author": "words by Bobby Moynihan, pictures by Julie Rowan-Zoch",
+          "publisher": "G.P. Putnam's Sons Books for Young Readers",
+          "cover": "https://image.aladin.co.kr/product/29176/47/cover/0593407032_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=6607775",
+          "isbn": "9780593407035",
+          "loans": 1,
+          "rank": 14,
+          "series": 1
+        },
+        {
+          "title": "Tigers at twilight",
+          "author": "by Mary Pope Osborne, illustrated by Sal Murdocca",
+          "publisher": "Random House",
+          "cover": "https://bookthumb-phinf.pstatic.net/cover/002/656/00265659.jpg?type=m1&udate=20170510",
+          "link": "https://data4library.kr/bookV?seq=2403864",
+          "isbn": "9780679890652",
+          "loans": 1,
+          "rank": 15,
+          "series": 1
+        },
+        {
+          "title": "Not Norman: A Goldfish Story (Paperback) - A Goldfish Story",
+          "author": "Kelly Bennett (지은이), Noah Z. Jones (그림)",
+          "publisher": "Candlewick Pr",
+          "cover": "https://image.aladin.co.kr/product/168/13/cover/0763627631_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=2644378",
+          "isbn": "9780763627638",
+          "loans": 1,
+          "rank": 16,
+          "series": 1
+        },
+        {
+          "title": "The Very Hungry Plant (Hardcover)",
+          "author": "Renato Moriconi (지은이)",
+          "publisher": "Eerdmans Pub Co",
+          "cover": "https://image.aladin.co.kr/product/26537/98/cover/0802855768_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=6305970",
+          "isbn": "9780802855763",
+          "loans": 1,
+          "rank": 17,
+          "series": 1
+        },
+        {
+          "title": "Seeds of change",
+          "author": "written by Nina Laden, illustrated by Sawyer Cloud",
+          "publisher": "Roaring Brook Press",
+          "cover": "https://image.aladin.co.kr/product/28911/86/cover200/1250810078_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=6880838",
+          "isbn": "9781250810076",
+          "loans": 1,
+          "rank": 18,
+          "series": 1
+        },
+        {
+          "title": "Mabel and Sam at home",
+          "author": "by Linda Urban, illustrated by Hadley Hooper",
+          "publisher": "Chronicle Books Llc",
+          "cover": "https://image.aladin.co.kr/product/11718/60/cover/1452139962_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=3837665",
+          "isbn": "9781452139968",
+          "loans": 1,
           "rank": 19,
           "series": 1
         },
         {
-          "title": "이상한 나라의 위험한 가짜뉴스 :가짜뉴스와 혐오, 사이버 폭력으로부터 나를 지키는 법",
-          "author": "마우로 무나포 지음, 김지우 옮김",
-          "publisher": "우리학교",
-          "cover": "https://image.aladin.co.kr/product/28757/61/cover/k982836886_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6394074",
-          "isbn": "9791167550361",
-          "loans": 2,
+          "title": "Forget-Me-Not Lake",
+          "author": "by Poppy Green, illustrated by Jennifer A. Bell",
+          "publisher": "Little Simon",
+          "cover": "https://image.aladin.co.kr/product/4761/91/cover/148142999x_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=3104751",
+          "isbn": "9781481429993",
+          "loans": 1,
           "rank": 20,
           "series": 1
         }
@@ -484,37 +484,70 @@
           "series": 1
         },
         {
-          "title": "푸른 사자 와니니 :이현 장편동화",
-          "author": "이현, 그린이: 오윤화",
-          "publisher": "창비",
-          "cover": "https://image.aladin.co.kr/product/6232/31/cover/8936442805_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=2646690",
-          "isbn": "9788936442804",
-          "loans": 9,
-          "rank": 3,
-          "series": 1
-        },
-        {
           "title": "고양이 해결사 깜냥",
           "author": "홍민정 동화, 김재희 그림",
           "publisher": "창비",
           "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6378029",
           "isbn": "9788936448134",
-          "loans": 9,
-          "rank": 4,
-          "series": 5
+          "loans": 10,
+          "rank": 3,
+          "series": 3
         },
         {
-          "title": "긴긴밤",
-          "author": "루리 글·그림",
-          "publisher": "문학동네",
-          "cover": "https://image.aladin.co.kr/product/26302/71/cover/8954677150_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5857188",
-          "isbn": "9788954677158",
-          "loans": 8,
+          "title": "모순 :양귀자 장편소설",
+          "author": "양귀자",
+          "publisher": "쓰다",
+          "cover": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801",
+          "link": "https://data4library.kr/bookV?seq=1938053",
+          "isbn": "9788998441012",
+          "loans": 9,
+          "rank": 4,
+          "series": 1
+        },
+        {
+          "title": "똥볶이 할멈 :K-히어로 판타지",
+          "author": "강효미, 김무연",
+          "publisher": "따끈따끈책방",
+          "cover": "https://image.aladin.co.kr/product/27982/44/cover/k832734228_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6307324",
+          "isbn": "9791190409124",
+          "loans": 9,
           "rank": 5,
           "series": 1
+        },
+        {
+          "title": "푸른 사자 와니니 :이현 장편동화",
+          "author": "이현, 그린이: 오윤화",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/6232/31/cover/8936442805_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=2646690",
+          "isbn": "9788936442804",
+          "loans": 8,
+          "rank": 6,
+          "series": 1
+        },
+        {
+          "title": "사고뭉치 소방관 오케이",
+          "author": "강효미 글, 김경희 그림",
+          "publisher": "길벗스쿨",
+          "cover": "https://image.aladin.co.kr/product/36243/42/cover200/k022038812_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7049819",
+          "isbn": "9791164068975",
+          "loans": 8,
+          "rank": 7,
+          "series": 2
+        },
+        {
+          "title": "(처음 읽는) 그리스 로마 신화 =First Greek mythology",
+          "author": "최설희, 한현동",
+          "publisher": "미래엔",
+          "cover": "https://image.aladin.co.kr/product/26982/8/cover/k142730513_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5966621",
+          "isbn": "9791164137893",
+          "loans": 8,
+          "rank": 8,
+          "series": 3
         },
         {
           "title": "흔한남매",
@@ -524,7 +557,7 @@
           "link": "https://data4library.kr/bookV?seq=6863020",
           "isbn": "9791168418011",
           "loans": 8,
-          "rank": 6,
+          "rank": 9,
           "series": 1
         },
         {
@@ -535,19 +568,41 @@
           "link": "https://data4library.kr/bookV?seq=2372129",
           "isbn": "9788949161341",
           "loans": 7,
-          "rank": 7,
+          "rank": 10,
+          "series": 1
+        },
+        {
+          "title": "그리스 로마 신화",
+          "author": "김민희,정보 강대진",
+          "publisher": "아울북(북이십일 아울북)",
+          "cover": "https://image.aladin.co.kr/product/25399/23/cover/8950971542_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5784122",
+          "isbn": "9788950971540",
+          "loans": 7,
+          "rank": 11,
           "series": 1
         },
         {
           "title": "마법천자문 :손오공의 한자 대탐험",
-          "author": "스튜디오시리얼,정수영",
-          "publisher": "아울북",
-          "cover": "https://image.aladin.co.kr/product/20925/63/cover/8950982897_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5481400",
-          "isbn": "9788950982898",
+          "author": "시리얼,홍거북",
+          "publisher": "북이십일",
+          "cover": "https://image.aladin.co.kr/product/23479/9/cover/8950981645_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5613526",
+          "isbn": "9788950981648",
           "loans": 7,
-          "rank": 8,
-          "series": 5
+          "rank": 12,
+          "series": 1
+        },
+        {
+          "title": "여름을 한 입 베어 물었더니 :이꽃님 장편소설",
+          "author": "글쓴이: 이꽃님",
+          "publisher": "문학동네",
+          "cover": "https://image.aladin.co.kr/product/32294/5/cover/8954694578_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6749899",
+          "isbn": "9788954694575",
+          "loans": 7,
+          "rank": 13,
+          "series": 1
         },
         {
           "title": "절창 :구병모 장편소설",
@@ -557,63 +612,30 @@
           "link": "https://data4library.kr/bookV?seq=7149374",
           "isbn": "9791141602451",
           "loans": 7,
-          "rank": 9,
-          "series": 1
-        },
-        {
-          "title": "엄마 자판기",
-          "author": "글·조경희",
-          "publisher": "노란돼지",
-          "cover": "https://image.aladin.co.kr/product/20406/91/cover/k432635253_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5466265",
-          "isbn": "9791159950681",
-          "loans": 7,
-          "rank": 10,
-          "series": 1
-        },
-        {
-          "title": "사고뭉치 소방관 오케이",
-          "author": "강효미 글, 김경희 그림",
-          "publisher": "길벗스쿨",
-          "cover": "https://image.aladin.co.kr/product/33584/29/cover/k702939497_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6842145",
-          "isbn": "9791164067169",
-          "loans": 7,
-          "rank": 11,
-          "series": 2
-        },
-        {
-          "title": "(처음 읽는) 그리스 로마 신화 =First Greek mythology",
-          "author": "최설희, 한현동",
-          "publisher": "미래엔",
-          "cover": "https://image.aladin.co.kr/product/26982/8/cover/k142730513_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5966621",
-          "isbn": "9791164137893",
-          "loans": 7,
-          "rank": 12,
-          "series": 3
-        },
-        {
-          "title": "소원 요정 춘식이 with 라이언",
-          "author": "글·김나경",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://shopping-phinf.pstatic.net/main_5363013/53630138511.20250318201755.jpg",
-          "link": "https://data4library.kr/bookV?seq=7031873",
-          "isbn": "9791173570957",
-          "loans": 7,
-          "rank": 13,
-          "series": 1
-        },
-        {
-          "title": "Go go 카카오프렌즈 :자연탐사",
-          "author": "조주희, 이혜림",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://image.aladin.co.kr/product/39065/96/cover200/k112137754_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7251837",
-          "isbn": "9791173575648",
-          "loans": 7,
           "rank": 14,
-          "series": 2
+          "series": 1
+        },
+        {
+          "title": "불편한 편의점 :김호연 장편소설",
+          "author": "김호연",
+          "publisher": "나무옆의자",
+          "cover": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5962217",
+          "isbn": "9791161571188",
+          "loans": 7,
+          "rank": 15,
+          "series": 1
+        },
+        {
+          "title": "달러구트 꿈 백화점 :주문하신 꿈은 매진입니다",
+          "author": "이미예",
+          "publisher": "팩토리나인",
+          "cover": "https://image.aladin.co.kr/product/24512/70/cover/k392630952_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5707051",
+          "isbn": "9791165341909",
+          "loans": 7,
+          "rank": 16,
+          "series": 1
         },
         {
           "title": "돈의 속성 :최상위 부자가 말하는 돈에 대한 모든 것",
@@ -623,60 +645,38 @@
           "link": "https://data4library.kr/bookV?seq=5678862",
           "isbn": "9791188331796",
           "loans": 7,
-          "rank": 15,
-          "series": 1
-        },
-        {
-          "title": "꽁멍꽁멍 그림수학",
-          "author": "장경아, 김종채",
-          "publisher": "와이즈만 Books",
-          "cover": "https://image.aladin.co.kr/product/34975/39/cover200/k812934666_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6961056",
-          "isbn": "9791192936505",
-          "loans": 7,
-          "rank": 16,
-          "series": 1
-        },
-        {
-          "title": "(설민석의) 우리 고전 대모험",
-          "author": "설민석,강신영",
-          "publisher": "Dankkum i(단꿈아이)",
-          "cover": "https://image.aladin.co.kr/product/33397/43/cover/k242938510_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6831160",
-          "isbn": "9791193031414",
-          "loans": 7,
           "rank": 17,
           "series": 1
         },
         {
-          "title": "내일은 발명왕 :본격 대결 과학발명 만화",
-          "author": "곰돌이 co., 홍종현",
-          "publisher": "Mirae N 아이세움",
-          "cover": "https://bookthumb-phinf.pstatic.net/cover/067/600/06760061.jpg?type=m1&udate=20120223",
-          "link": "https://data4library.kr/bookV?seq=2373766",
-          "isbn": "9788937883286",
-          "loans": 6,
+          "title": "지구 끝의 온실 :김초엽 장편소설",
+          "author": "김초엽",
+          "publisher": "Giant Books(자이언트북스)",
+          "cover": "https://image.aladin.co.kr/product/27692/63/cover/k082733434_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6065686",
+          "isbn": "9791191824001",
+          "loans": 7,
           "rank": 18,
           "series": 1
         },
         {
-          "title": "그리스 로마 신화",
-          "author": "김민희,정보 강대진",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://bookthumb-phinf.pstatic.net/cover/134/404/13440466.jpg?type=m1&udate=20180319",
-          "link": "https://data4library.kr/bookV?seq=3726870",
-          "isbn": "9788950971397",
-          "loans": 6,
+          "title": "크리스마스 날 하늘 마을에서 온 택배",
+          "author": "김경미, 김무연",
+          "publisher": "따끈따끈책방",
+          "cover": "https://image.aladin.co.kr/product/35218/45/cover200/k172934526_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6974425",
+          "isbn": "9791198511591",
+          "loans": 7,
           "rank": 19,
-          "series": 3
+          "series": 1
         },
         {
-          "title": "밝은 밤 :최은영 장편소설",
-          "author": "최은영",
-          "publisher": "문학동네",
-          "cover": "https://image.aladin.co.kr/product/27541/91/cover/8954681174_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6045915",
-          "isbn": "9788954681179",
+          "title": "알로하, 나의 엄마들 :이금이 장편소설",
+          "author": "이금이",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/23646/69/cover/8936477935_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5642568",
+          "isbn": "9788936477936",
           "loans": 6,
           "rank": 20,
           "series": 1
