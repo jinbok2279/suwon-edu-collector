@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-23 06:45:22",
+ "updated_at": "2026-10-24 06:46:12",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -48,6 +48,21 @@
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299059_260821_130659.jpg"
   },
   {
+   "id": "KPF299678",
+   "title": "뽀로로와 타요: 올스타 어드벤처 [수원]",
+   "start": "2026-10-24",
+   "end": "2026-10-25",
+   "place": "경기아트센터(구. 경기도문화의전당)",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299678",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299678_260831_105919.gif"
+  },
+  {
    "id": "S3011",
    "title": "수문장 마켓 페스티벌",
    "start": "2026-07-11",
@@ -93,21 +108,6 @@
    "book": ""
   },
   {
-   "id": "S3035",
-   "title": "수원SK아트리움 하우스콘서트 (브로콜리너마저, 요조)",
-   "start": "2026-09-11",
-   "end": "2026-10-23",
-   "place": "수원SK아트리움 소공연장",
-   "time": "19:30",
-   "grade": "8세 이상 관람가",
-   "price": "전석 30,000원",
-   "free": false,
-   "kind": "공연",
-   "src": "swcf",
-   "link": "https://www.swcf.or.kr/?p=29_view&idx=3035&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
-   "book": "https://tickets.interpark.com/goods/26011399"
-  },
-  {
    "id": "S2932",
    "title": "정조테마공연장 2026 마당놀이터",
    "start": "2026-03-21",
@@ -121,21 +121,6 @@
    "src": "swcf",
    "link": "https://www.swcf.or.kr/?p=29_view&idx=2932&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
    "book": ""
-  },
-  {
-   "id": "KPF299678",
-   "title": "뽀로로와 타요: 올스타 어드벤처 [수원]",
-   "start": "2026-10-24",
-   "end": "2026-10-25",
-   "place": "경기아트센터(구. 경기도문화의전당)",
-   "time": "",
-   "grade": "아동공연",
-   "price": "",
-   "free": false,
-   "kind": "뮤지컬",
-   "src": "kopis",
-   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299678",
-   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299678_260831_105919.gif"
   },
   {
    "id": "KPF293566",
@@ -210,6 +195,20 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF300868",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF300868_260914_153154.gif"
+  },
+  {
+   "id": "GSM000217",
+   "title": "ASSA 재즈페스티벌",
+   "start": "2026-11-04",
+   "end": "2026-11-04",
+   "place": "경기아트센터 소극장",
+   "time": "",
+   "grade": "7세 이상 관람가",
+   "price": "전석 무료",
+   "free": true,
+   "kind": "기획공연",
+   "src": "ggac",
+   "link": "https://www.ggac.or.kr/ggac/M0000155/show/view.do?idx=SM000217"
   },
   {
    "id": "KPF300275",
@@ -510,6 +509,21 @@
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF301870_260928_163327.png"
   },
   {
+   "id": "KPF304269",
+   "title": "스노우 버블 매직쇼 [수원]",
+   "start": "2026-12-06",
+   "end": "2026-12-06",
+   "place": "수원청소년문화센터",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "서커스/마술",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF304269",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF304269_261023_113318.gif"
+  },
+  {
    "id": "KPF302701",
    "title": "메리크리스마스 산타할아버지 [수원]",
    "start": "2026-12-12",
@@ -586,25 +600,6 @@
   }
  ],
  "lib": [
-  {
-   "id": "E3037",
-   "title": "예절교육관 주말체험 <민요, 우리 소리를 만나다>",
-   "lib": "수원전통문화관 예절교육관",
-   "target": "초등학교 1학년(2019년생) 이상 ~ 성인 (회차별 12명)",
-   "place": "수원전통문화관 예절교육관",
-   "start": "2026-09-05",
-   "end": "2026-10-24",
-   "period": "2026-09-05 ~ 2026-10-24",
-   "applyStart": "2026-08-10",
-   "applyEnd": "2026-10-23",
-   "apply": "2026-08-10(월) ~ 2026-10-23(금)",
-   "count": "",
-   "status": "접수중",
-   "price": "10,000원",
-   "free": false,
-   "src": "swcf",
-   "link": "https://m.booking.naver.com/booking/12/bizes/1599297/items/7912266"
-  },
   {
    "id": "E2977",
    "title": "국악 놀이터",
