@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24 06:35:47",
+  "updated_at": "2026-10-25 06:31:28",
   "source": "도서관 정보나루 (국립중앙도서관)",
   "lists": [
     {
@@ -85,17 +85,6 @@
           "series": 1
         },
         {
-          "title": "(비마이펫) 멍냥연구소 :온 세상 반려가족 필수 반려동물 교양만화",
-          "author": "원작: 비마이펫, 박지영",
-          "publisher": "서울문화사",
-          "cover": "https://image.aladin.co.kr/product/30214/96/cover/k032839493_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6569669",
-          "isbn": "9791169235532",
-          "loans": 4,
-          "rank": 8,
-          "series": 1
-        },
-        {
           "title": "The Little Prince [With CD (Audio)] (Hardcover, 70, Anniversary)",
           "author": "리차드 하워드, Antoine De Saint-Exupery (지은이)",
           "publisher": "Houghton Mifflin Harcourt",
@@ -103,7 +92,7 @@
           "link": "https://data4library.kr/bookV?seq=2966948",
           "isbn": "9780547970486",
           "loans": 3,
-          "rank": 9,
+          "rank": 8,
           "series": 1
         },
         {
@@ -114,7 +103,7 @@
           "link": "https://data4library.kr/bookV?seq=5827110",
           "isbn": "9791158681883",
           "loans": 3,
-          "rank": 10,
+          "rank": 9,
           "series": 1
         },
         {
@@ -125,7 +114,7 @@
           "link": "https://data4library.kr/bookV?seq=7280707",
           "isbn": "9788925569284",
           "loans": 3,
-          "rank": 11,
+          "rank": 10,
           "series": 1
         },
         {
@@ -136,18 +125,7 @@
           "link": "https://data4library.kr/bookV?seq=2646690",
           "isbn": "9788936442804",
           "loans": 3,
-          "rank": 12,
-          "series": 1
-        },
-        {
-          "title": "고양이 해결사 깜냥",
-          "author": "홍민정 동화, 김재희 그림",
-          "publisher": "창비",
-          "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6378029",
-          "isbn": "9788936448134",
-          "loans": 3,
-          "rank": 13,
+          "rank": 11,
           "series": 1
         },
         {
@@ -158,7 +136,7 @@
           "link": "https://data4library.kr/bookV?seq=6693041",
           "isbn": "9788949162539",
           "loans": 3,
-          "rank": 14,
+          "rank": 12,
           "series": 1
         },
         {
@@ -169,19 +147,19 @@
           "link": "https://data4library.kr/bookV?seq=7254667",
           "isbn": "9788949162690",
           "loans": 3,
-          "rank": 15,
+          "rank": 13,
           "series": 1
         },
         {
           "title": "그리스 로마 신화",
           "author": "김민희,정보 강대진",
           "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://image.aladin.co.kr/product/25399/23/cover/8950971542_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5784122",
-          "isbn": "9788950971540",
+          "cover": "https://image.aladin.co.kr/product/29057/0/cover/8950971623_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6420979",
+          "isbn": "9788950971625",
           "loans": 3,
-          "rank": 16,
-          "series": 2
+          "rank": 14,
+          "series": 1
         },
         {
           "title": "마법천자문 :손오공의 한자 대탐험",
@@ -191,30 +169,8 @@
           "link": "https://data4library.kr/bookV?seq=5450962",
           "isbn": "9788950980047",
           "loans": 3,
-          "rank": 17,
+          "rank": 15,
           "series": 4
-        },
-        {
-          "title": "정재승의 인간 탐구 보고서",
-          "author": "정재은,특대호 원고: 오경은",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://shopping-phinf.pstatic.net/main_5497298/54972980093.20250526201517.jpg",
-          "link": "https://data4library.kr/bookV?seq=7069756",
-          "isbn": "9788950983499",
-          "loans": 3,
-          "rank": 18,
-          "series": 1
-        },
-        {
-          "title": "리보와 앤 :아무도 오지 않는 도서관의 두 로봇",
-          "author": "어윤정 글, 해마 그림",
-          "publisher": "문학동네",
-          "cover": "https://image.aladin.co.kr/product/30986/85/cover/8954690696_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6630275",
-          "isbn": "9788954690690",
-          "loans": 3,
-          "rank": 19,
-          "series": 1
         },
         {
           "title": "여름을 한 입 베어 물었더니 :이꽃님 장편소설",
@@ -223,6 +179,50 @@
           "cover": "https://image.aladin.co.kr/product/32294/5/cover/8954694578_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6749899",
           "isbn": "9788954694575",
+          "loans": 3,
+          "rank": 16,
+          "series": 1
+        },
+        {
+          "title": "수상한 지하실",
+          "author": "박현숙 글, 장서영 그림",
+          "publisher": "북멘토",
+          "cover": "https://image.aladin.co.kr/product/30201/36/cover/896319485x_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6566534",
+          "isbn": "9788963194851",
+          "loans": 3,
+          "rank": 17,
+          "series": 1
+        },
+        {
+          "title": "흥부전",
+          "author": "양태석, 안선형",
+          "publisher": "은하수미디어",
+          "cover": "https://image.aladin.co.kr/product/36898/35/cover200/8965796148_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7105268",
+          "isbn": "9788965796145",
+          "loans": 3,
+          "rank": 18,
+          "series": 1
+        },
+        {
+          "title": "어린 임금의 눈물",
+          "author": "이규희 글, 이정규 그림",
+          "publisher": "파랑새어린이",
+          "cover": "https://image.aladin.co.kr/product/47/41/cover/8970577165_2.jpg",
+          "link": "https://data4library.kr/bookV?seq=352053",
+          "isbn": "9788970577166",
+          "loans": 3,
+          "rank": 19,
+          "series": 1
+        },
+        {
+          "title": "(최재천의) 동물대탐험 :지구를 사랑하는 어린이를 위한 생물학 동화",
+          "author": "황혜영 글, 안선영 해설",
+          "publisher": "다산북스",
+          "cover": "https://image.aladin.co.kr/product/38585/42/cover200/k542135350_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7219691",
+          "isbn": "9791130674773",
           "loans": 3,
           "rank": 20,
           "series": 1
@@ -246,17 +246,6 @@
           "series": 1
         },
         {
-          "title": "기후 위기, 마지막 경고 :북극곰의 위기는 인류 위기의 예고편",
-          "author": "서형석 지음",
-          "publisher": "문예춘추사",
-          "cover": "https://image.aladin.co.kr/product/28121/97/cover/8976044983_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6317761",
-          "isbn": "9788976044983",
-          "loans": 3,
-          "rank": 2,
-          "series": 1
-        },
-        {
           "title": "미적분의 쓸모 :미래를 예측하는 새로운 언어",
           "author": "한화택 지음",
           "publisher": "길벗",
@@ -264,18 +253,7 @@
           "link": "https://data4library.kr/bookV?seq=5971255",
           "isbn": "9791165215491",
           "loans": 3,
-          "rank": 3,
-          "series": 1
-        },
-        {
-          "title": "이상한 나라의 위험한 가짜뉴스 :가짜뉴스와 혐오, 사이버 폭력으로부터 나를 지키는 법",
-          "author": "마우로 무나포 지음, 김지우 옮김",
-          "publisher": "우리학교",
-          "cover": "https://image.aladin.co.kr/product/28757/61/cover/k982836886_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6394074",
-          "isbn": "9791167550361",
-          "loans": 3,
-          "rank": 4,
+          "rank": 2,
           "series": 1
         },
         {
@@ -286,7 +264,7 @@
           "link": "https://data4library.kr/bookV?seq=2485290",
           "isbn": "9780448413396",
           "loans": 2,
-          "rank": 5,
+          "rank": 3,
           "series": 1
         },
         {
@@ -297,7 +275,7 @@
           "link": "https://data4library.kr/bookV?seq=2497025",
           "isbn": "9780448413419",
           "loans": 2,
-          "rank": 6,
+          "rank": 4,
           "series": 1
         },
         {
@@ -308,7 +286,7 @@
           "link": "https://data4library.kr/bookV?seq=2497205",
           "isbn": "9780448415598",
           "loans": 2,
-          "rank": 7,
+          "rank": 5,
           "series": 1
         },
         {
@@ -319,7 +297,18 @@
           "link": "https://data4library.kr/bookV?seq=2499769",
           "isbn": "9780552556620",
           "loans": 2,
-          "rank": 8,
+          "rank": 6,
+          "series": 1
+        },
+        {
+          "title": "율의 시선 :김민서 장편소설",
+          "author": "김민서",
+          "publisher": "창비",
+          "cover": "https://image.aladin.co.kr/product/33858/83/cover200/893645725x_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6869283",
+          "isbn": "9788936457259",
+          "loans": 2,
+          "rank": 7,
           "series": 1
         },
         {
@@ -330,7 +319,7 @@
           "link": "https://data4library.kr/bookV?seq=7168803",
           "isbn": "9788936457419",
           "loans": 2,
-          "rank": 9,
+          "rank": 8,
           "series": 1
         },
         {
@@ -340,6 +329,17 @@
           "cover": "https://image.aladin.co.kr/product/31688/62/cover/8954699375_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6694629",
           "isbn": "9788954699372",
+          "loans": 2,
+          "rank": 9,
+          "series": 1
+        },
+        {
+          "title": "기후 위기, 마지막 경고 :북극곰의 위기는 인류 위기의 예고편",
+          "author": "서형석 지음",
+          "publisher": "문예춘추사",
+          "cover": "https://image.aladin.co.kr/product/28121/97/cover/8976044983_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6317761",
+          "isbn": "9788976044983",
           "loans": 2,
           "rank": 10,
           "series": 1
@@ -367,6 +367,17 @@
           "series": 1
         },
         {
+          "title": "이상한 나라의 위험한 가짜뉴스 :가짜뉴스와 혐오, 사이버 폭력으로부터 나를 지키는 법",
+          "author": "마우로 무나포 지음, 김지우 옮김",
+          "publisher": "우리학교",
+          "cover": "https://image.aladin.co.kr/product/28757/61/cover/k982836886_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6394074",
+          "isbn": "9791167550361",
+          "loans": 2,
+          "rank": 13,
+          "series": 1
+        },
+        {
           "title": "칵테일, 러브, 좀비 (10만 부 기념 특별판)",
           "author": "조예은 (지은이)",
           "publisher": "안전가옥",
@@ -374,7 +385,7 @@
           "link": "https://data4library.kr/bookV?seq=6921003",
           "isbn": "9791193024782",
           "loans": 2,
-          "rank": 13,
+          "rank": 14,
           "series": 1
         },
         {
@@ -385,7 +396,7 @@
           "link": "https://data4library.kr/bookV?seq=7019828",
           "isbn": "9791194033554",
           "loans": 2,
-          "rank": 14,
+          "rank": 15,
           "series": 1
         },
         {
@@ -396,7 +407,7 @@
           "link": "https://data4library.kr/bookV?seq=7199770",
           "isbn": "9780425290668",
           "loans": 1,
-          "rank": 15,
+          "rank": 16,
           "series": 1
         },
         {
@@ -407,7 +418,7 @@
           "link": "https://data4library.kr/bookV?seq=5837923",
           "isbn": "9780593222577",
           "loans": 1,
-          "rank": 16,
+          "rank": 17,
           "series": 1
         },
         {
@@ -418,7 +429,7 @@
           "link": "https://data4library.kr/bookV?seq=6607775",
           "isbn": "9780593407035",
           "loans": 1,
-          "rank": 17,
+          "rank": 18,
           "series": 1
         },
         {
@@ -429,7 +440,7 @@
           "link": "https://data4library.kr/bookV?seq=2403864",
           "isbn": "9780679890652",
           "loans": 1,
-          "rank": 18,
+          "rank": 19,
           "series": 1
         },
         {
@@ -439,17 +450,6 @@
           "cover": "https://image.aladin.co.kr/product/168/13/cover/0763627631_1.jpg",
           "link": "https://data4library.kr/bookV?seq=2644378",
           "isbn": "9780763627638",
-          "loans": 1,
-          "rank": 19,
-          "series": 1
-        },
-        {
-          "title": "The Very Hungry Plant (Hardcover)",
-          "author": "Renato Moriconi (지은이)",
-          "publisher": "Eerdmans Pub Co",
-          "cover": "https://image.aladin.co.kr/product/26537/98/cover/0802855768_2.jpg",
-          "link": "https://data4library.kr/bookV?seq=6305970",
-          "isbn": "9780802855763",
           "loans": 1,
           "rank": 20,
           "series": 1
@@ -512,30 +512,8 @@
           "cover": "https://image.aladin.co.kr/product/28612/9/cover/8936448137_1.jpg",
           "link": "https://data4library.kr/bookV?seq=6378029",
           "isbn": "9788936448134",
-          "loans": 10,
+          "loans": 9,
           "rank": 5,
-          "series": 2
-        },
-        {
-          "title": "절창 :구병모 장편소설",
-          "author": "구병모",
-          "publisher": "문학동네",
-          "cover": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=7149374",
-          "isbn": "9791141602451",
-          "loans": 9,
-          "rank": 6,
-          "series": 1
-        },
-        {
-          "title": "(처음 읽는) 그리스 로마 신화 =First Greek mythology",
-          "author": "최설희, 한현동",
-          "publisher": "미래엔",
-          "cover": "https://image.aladin.co.kr/product/27861/10/cover/k712734796_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6087581",
-          "isbn": "9791164138920",
-          "loans": 9,
-          "rank": 7,
           "series": 3
         },
         {
@@ -546,7 +524,7 @@
           "link": "https://data4library.kr/bookV?seq=6307324",
           "isbn": "9791190409124",
           "loans": 9,
-          "rank": 8,
+          "rank": 6,
           "series": 1
         },
         {
@@ -557,41 +535,41 @@
           "link": "https://data4library.kr/bookV?seq=2646690",
           "isbn": "9788936442804",
           "loans": 8,
+          "rank": 7,
+          "series": 2
+        },
+        {
+          "title": "흔한남매 불꽃 튀는 우리말 :초등 국어 고수 되기 프로젝트",
+          "author": "원작: 흔한남매, 유희석",
+          "publisher": "다산북스",
+          "cover": "https://image.aladin.co.kr/product/27833/74/cover/k162734674_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6084991",
+          "isbn": "9791130640280",
+          "loans": 8,
+          "rank": 8,
+          "series": 1
+        },
+        {
+          "title": "절창 :구병모 장편소설",
+          "author": "구병모",
+          "publisher": "문학동네",
+          "cover": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=7149374",
+          "isbn": "9791141602451",
+          "loans": 8,
           "rank": 9,
           "series": 1
         },
         {
-          "title": "그리스 로마 신화",
-          "author": "김민희,정보 강대진",
-          "publisher": "아울북(북이십일 아울북)",
-          "cover": "https://image.aladin.co.kr/product/25399/23/cover/8950971542_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=5784122",
-          "isbn": "9788950971540",
+          "title": "(처음 읽는) 그리스 로마 신화 =First Greek mythology",
+          "author": "최설희, 한현동",
+          "publisher": "미래엔",
+          "cover": "https://image.aladin.co.kr/product/28618/82/cover/k572835059_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6384893",
+          "isbn": "9791164139927",
           "loans": 8,
           "rank": 10,
-          "series": 1
-        },
-        {
-          "title": "사고뭉치 소방관 오케이",
-          "author": "강효미 글, 김경희 그림",
-          "publisher": "길벗스쿨",
-          "cover": "https://image.aladin.co.kr/product/33584/29/cover/k702939497_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6842145",
-          "isbn": "9791164067169",
-          "loans": 8,
-          "rank": 11,
-          "series": 1
-        },
-        {
-          "title": "만복이네 떡집",
-          "author": "김리리 글, 이승현 그림",
-          "publisher": "비룡소",
-          "cover": "https://bookthumb-phinf.pstatic.net/cover/062/895/06289560.jpg?type=m1&udate=20180324",
-          "link": "https://data4library.kr/bookV?seq=2372129",
-          "isbn": "9788949161341",
-          "loans": 7,
-          "rank": 12,
-          "series": 1
+          "series": 3
         },
         {
           "title": "마법천자문 :손오공의 한자 대탐험",
@@ -601,7 +579,7 @@
           "link": "https://data4library.kr/bookV?seq=5613526",
           "isbn": "9788950981648",
           "loans": 7,
-          "rank": 13,
+          "rank": 11,
           "series": 3
         },
         {
@@ -612,7 +590,7 @@
           "link": "https://data4library.kr/bookV?seq=5857188",
           "isbn": "9788954677158",
           "loans": 7,
-          "rank": 14,
+          "rank": 12,
           "series": 1
         },
         {
@@ -623,7 +601,7 @@
           "link": "https://data4library.kr/bookV?seq=6086446",
           "isbn": "9788954682152",
           "loans": 7,
-          "rank": 15,
+          "rank": 13,
           "series": 1
         },
         {
@@ -634,19 +612,19 @@
           "link": "https://data4library.kr/bookV?seq=6749899",
           "isbn": "9788954694575",
           "loans": 7,
-          "rank": 16,
+          "rank": 14,
           "series": 1
         },
         {
-          "title": "흔한남매 불꽃 튀는 우리말 :초등 국어 고수 되기 프로젝트",
-          "author": "원작: 흔한남매, 유희석",
-          "publisher": "다산북스",
-          "cover": "https://image.aladin.co.kr/product/27833/74/cover/k162734674_1.jpg",
-          "link": "https://data4library.kr/bookV?seq=6084991",
-          "isbn": "9791130640280",
+          "title": "사고뭉치 소방관 오케이",
+          "author": "강효미 글, 김경희 그림",
+          "publisher": "길벗스쿨",
+          "cover": "https://image.aladin.co.kr/product/33584/29/cover/k702939497_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6842145",
+          "isbn": "9791164067169",
           "loans": 7,
-          "rank": 17,
-          "series": 1
+          "rank": 15,
+          "series": 2
         },
         {
           "title": "달러구트 꿈 백화점 :주문하신 꿈은 매진입니다",
@@ -656,7 +634,7 @@
           "link": "https://data4library.kr/bookV?seq=5707051",
           "isbn": "9791165341909",
           "loans": 7,
-          "rank": 18,
+          "rank": 16,
           "series": 1
         },
         {
@@ -667,7 +645,7 @@
           "link": "https://data4library.kr/bookV?seq=6863020",
           "isbn": "9791168418011",
           "loans": 7,
-          "rank": 19,
+          "rank": 17,
           "series": 1
         },
         {
@@ -678,6 +656,28 @@
           "link": "https://data4library.kr/bookV?seq=5678862",
           "isbn": "9791188331796",
           "loans": 7,
+          "rank": 18,
+          "series": 1
+        },
+        {
+          "title": "세금 내는 아이들",
+          "author": "옥효진 글, 김미연 그림",
+          "publisher": "한경BP",
+          "cover": "https://image.aladin.co.kr/product/27324/68/cover/8947547263_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=6002590",
+          "isbn": "9788947547260",
+          "loans": 6,
+          "rank": 19,
+          "series": 1
+        },
+        {
+          "title": "그리스 로마 신화",
+          "author": "김민희,정보 강대진",
+          "publisher": "아울북(북이십일 아울북)",
+          "cover": "https://image.aladin.co.kr/product/25399/23/cover/8950971542_1.jpg",
+          "link": "https://data4library.kr/bookV?seq=5784122",
+          "isbn": "9788950971540",
+          "loans": 6,
           "rank": 20,
           "series": 1
         }
