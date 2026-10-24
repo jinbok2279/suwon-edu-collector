@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-24 06:46:12",
+ "updated_at": "2026-10-25 06:44:11",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -46,6 +46,21 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299059",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299059_260821_130659.jpg"
+  },
+  {
+   "id": "KPF293566",
+   "title": "라푼젤 [수원]",
+   "start": "2026-10-25",
+   "end": "2026-10-25",
+   "place": "수원청소년문화센터",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293566",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF293566_260612_140110.jpg"
   },
   {
    "id": "KPF299678",
@@ -121,21 +136,6 @@
    "src": "swcf",
    "link": "https://www.swcf.or.kr/?p=29_view&idx=2932&listUrl=29&curYear=2026&curMonth=10&searchDetail_flag=",
    "book": ""
-  },
-  {
-   "id": "KPF293566",
-   "title": "라푼젤 [수원]",
-   "start": "2026-10-25",
-   "end": "2026-10-25",
-   "place": "수원청소년문화센터",
-   "time": "",
-   "grade": "아동공연",
-   "price": "",
-   "free": false,
-   "kind": "뮤지컬",
-   "src": "kopis",
-   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293566",
-   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF293566_260612_140110.jpg"
   },
   {
    "id": "GSM000198",
