@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-25 06:44:11",
+ "updated_at": "2026-10-26 06:44:15",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -46,36 +46,6 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299059",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299059_260821_130659.jpg"
-  },
-  {
-   "id": "KPF293566",
-   "title": "라푼젤 [수원]",
-   "start": "2026-10-25",
-   "end": "2026-10-25",
-   "place": "수원청소년문화센터",
-   "time": "",
-   "grade": "아동공연",
-   "price": "",
-   "free": false,
-   "kind": "뮤지컬",
-   "src": "kopis",
-   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF293566",
-   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF293566_260612_140110.jpg"
-  },
-  {
-   "id": "KPF299678",
-   "title": "뽀로로와 타요: 올스타 어드벤처 [수원]",
-   "start": "2026-10-24",
-   "end": "2026-10-25",
-   "place": "경기아트센터(구. 경기도문화의전당)",
-   "time": "",
-   "grade": "아동공연",
-   "price": "",
-   "free": false,
-   "kind": "뮤지컬",
-   "src": "kopis",
-   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF299678",
-   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF299678_260831_105919.gif"
   },
   {
    "id": "S3011",
@@ -597,6 +567,21 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF302540",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF302540_261006_142824.jpg"
+  },
+  {
+   "id": "KPF290130",
+   "title": "백설공주 [수원]",
+   "start": "2026-12-25",
+   "end": "2026-12-26",
+   "place": "장안구민회관 한누리아트홀",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF290130",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF290130_260427_105009.jpg"
   }
  ],
  "lib": [
