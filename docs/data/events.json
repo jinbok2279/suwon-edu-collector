@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-27 06:47:05",
+ "updated_at": "2026-10-28 06:48:04",
  "source": "수원문화재단 행사·교육정보",
  "city": [
   {
@@ -612,6 +612,36 @@
    "src": "kopis",
    "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF298218",
    "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF298218_260811_131031.jpg"
+  },
+  {
+   "id": "KPF302839",
+   "title": "성냥팔이 소녀 [수원]",
+   "start": "2026-12-27",
+   "end": "2026-12-27",
+   "place": "장안구민회관 한누리아트홀",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF302839",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF302839_261008_143152.png"
+  },
+  {
+   "id": "KPF303577",
+   "title": "호두까기 인형 [수원]",
+   "start": "2026-12-27",
+   "end": "2026-12-27",
+   "place": "AK플라자 [수원]",
+   "time": "",
+   "grade": "아동공연",
+   "price": "",
+   "free": false,
+   "kind": "뮤지컬",
+   "src": "kopis",
+   "link": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?menuId=MNU_00020&mt20Id=PF303577",
+   "img": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF303577_261016_131204.png"
   }
  ],
  "lib": [
